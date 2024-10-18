@@ -7,9 +7,10 @@
     "build": "next build",
     "build:production": "next build",
     "start": "next start",
-    "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "format": "prettier --write src",
+    "lint": "eslint --fix src/**/*.{tsx,ts,jsx,js} --no-error-on-unmatched-pattern && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input"
   },
   "dependencies": {
     "@fontsource/inter": "^5.1.0",
@@ -28,6 +29,9 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "1.9.0",
+    "@it-incubator/eslint-config": "^1.0.3",
+    "@it-incubator/prettier-config": "^0.1.2",
+    "@it-incubator/stylelint-config": "^2.0.0",
     "@storybook/addon-essentials": "8.3.5",
     "@storybook/addon-interactions": "8.3.5",
     "@storybook/addon-links": "8.3.5",
@@ -44,6 +48,7 @@
     "eslint-plugin-storybook": "^0.9.0",
     "prettier": "^3.3.3",
     "storybook": "8.3.5",
+    "stylelint": "^16.10.0",
     "typescript": "^5"
   }
 }
