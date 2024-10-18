@@ -3,7 +3,7 @@
 export default function Checkbox() {
   return (
     <div>
-      <main>Checkbox</main>
+      <main>Checkbox with some changes</main>
     </div>
   )
 }
