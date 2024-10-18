@@ -16,3 +16,9 @@ export const Empty: Story = {
     children: 'Hello, World!',
   },
 }
+
+export const H1: Story = {
+  args: {
+    children: 'Carosserie Test Zürich Stauffacherstrasse 31 8004 Zürich, ZH, CH',
+  },
+}
