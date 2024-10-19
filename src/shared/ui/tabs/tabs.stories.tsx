@@ -12,8 +12,13 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Empty: Story = {
+export const DefaultTabs: Story = {
   args: {
-    children: 'afwf',
+    tabs: [
+      { title: 'Switcher', value: 'Switcher' },
+      { title: 'Switcher', value: 'Switcher' },
+      { title: 'Switcher', value: 'Switcher' },
+    ],
+    value: 'Switcher',
   },
 }

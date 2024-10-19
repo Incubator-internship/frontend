@@ -21,6 +21,9 @@ const preview: Preview = {
           name: 'dark',
           value: '#000000',
         },
+        { name: 'Light', 
+          value: '#F7F9F2' 
+        },
       ],
     },
     controls: {

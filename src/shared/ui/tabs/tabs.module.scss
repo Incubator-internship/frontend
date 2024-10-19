@@ -1,0 +1,13 @@
+@import '../../styles/colors.scss';
+.tabs{
+    display: flex;
+}
+.tabsList{
+    border-radius: 1px solid var(--color-dark-100);
+}
+.tabsTrigger{
+    padding: 6px 24px;
+    border-radius: 1px solid var(--color-dark-100);
+    color: var(--light-100);
+    line-height: 24px;
+}
