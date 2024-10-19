@@ -10,7 +10,7 @@ export type TypographyProps<T extends ElementType = 'a' | 'p' | 'span'> = {
   as?: T extends HeadingElements ? T : 'a' | 'p' | 'span'
   children?: React.ReactNode
   className?: string
-  color?: 'black' | 'white'
+  color?: 'black' | 'link' | 'white'
   variant?:
     | 'body1'
     | 'body2'
@@ -31,7 +31,7 @@ export const Typography = <T extends ElementType = 'p'>(props: TypographyProps<T
     as: Component = 'p',
     children,
     className,
-    color = 'black',
+    color = 'white',
     variant = 'h1',
     ...rest
   } = props
