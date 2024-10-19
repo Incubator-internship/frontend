@@ -4,30 +4,40 @@ import clsx from 'clsx'
 
 import s from './typography.module.scss'
 
-type TypographyProps<T extends ElementType = 'p' | 'span'> = {
-  as?: T
+type HeadingElements = 'h1' | 'h2' | 'h3' | 'h4'
+
+export type TypographyProps<T extends ElementType = 'a' | 'p' | 'span'> = {
+  as?: T extends HeadingElements ? T : 'a' | 'p' | 'span'
   children?: React.ReactNode
-  className: string
-  variant:
-    | 'Body1'
-    | 'Body2'
-    | 'Caption'
-    | 'Link1'
-    | 'Link2'
-    | 'Overline'
-    | 'Subtitle1'
-    | 'Subtitle2 '
+  className?: string
+  color?: 'black' | 'white'
+  variant?:
+    | 'body1'
+    | 'body2'
+    | 'caption'
     | 'h1'
     | 'h2'
     | 'h3'
     | 'h4'
+    | 'link1'
+    | 'link2'
+    | 'overline'
+    | 'subtitle1'
+    | 'subtitle2'
 } & ComponentPropsWithoutRef<T>
 
 export const Typography = <T extends ElementType = 'p'>(props: TypographyProps<T>) => {
-  const { as: Component = 'p', children, className, variant = 'h1', ...rest } = props
+  const {
+    as: Component = 'p',
+    children,
+    className,
+    color = 'black',
+    variant = 'h1',
+    ...rest
+  } = props
 
   return (
-    <Component className={clsx(s[variant], className)} {...rest}>
+    <Component className={clsx(s[variant], s[color], className)} {...rest}>
       {children}
     </Component>
   )
