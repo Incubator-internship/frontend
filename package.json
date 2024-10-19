@@ -10,7 +10,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "format": "prettier --write src",
-    "lint": "eslint --fix src/**/*.{tsx,ts,jsx,js} --no-error-on-unmatched-pattern && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input"
+    "lint": "eslint src --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input"
   },
   "dependencies": {
     "@fontsource/inter": "^5.1.0",
@@ -37,9 +37,11 @@
     "@storybook/addon-links": "8.3.5",
     "@storybook/addon-onboarding": "8.3.5",
     "@storybook/blocks": "8.3.5",
+    "@storybook/manager-api": "^8.3.6",
     "@storybook/nextjs": "8.3.5",
     "@storybook/react": "8.3.5",
     "@storybook/test": "8.3.5",
+    "@storybook/theming": "^8.3.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -47,9 +49,10 @@
     "eslint-config-next": "14.2.15",
     "eslint-plugin-storybook": "^0.9.0",
     "prettier": "^3.3.3",
-    "sass": "^1.80.2",
+    "sass": "^1.80.3",
     "storybook": "8.3.5",
     "stylelint": "^16.10.0",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
 }
