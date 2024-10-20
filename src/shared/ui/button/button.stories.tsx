@@ -1,5 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import Image from 'next/image'
+
+import russianFlag from '../../assets/svg/Flag Russia.svg'
 import { Button } from './'
 
 const meta = {
@@ -38,6 +41,25 @@ export const Transparent: Story = {
     children: 'Button',
     disabled: false,
     variant: 'transparent',
+  },
+}
+
+export const ButtonWithIcon: Story = {
+  args: {
+    children: (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Image
+          alt={'English Flag'}
+          height={24}
+          src={russianFlag}
+          style={{ marginRight: '8px' }}
+          width={24}
+        />
+        English
+      </div>
+    ),
+    disabled: false,
+    variant: 'secondary',
   },
 }
 
