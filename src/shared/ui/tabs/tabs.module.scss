@@ -2,12 +2,30 @@
 .tabs{
     display: flex;
 }
-.tabsList{
-    border-radius: 1px solid var(--color-dark-100);
-}
 .tabsTrigger{
     padding: 6px 24px;
-    border-radius: 1px solid var(--color-dark-100);
+    border: 1px solid var(--color-dark-100);
     color: var(--light-100);
     line-height: 24px;
+    &[data-state='active']{
+        background-color: var(--color-active-tab-100);
+        cursor: pointer;
+    }
+    &:hover{
+        background-color: var(--color-dark-100);
+        color: var(--color-light-900);
+        cursor: pointer;
+    }
+    &:disabled {
+        cursor: default;
+        border: 1px solid var(--color-dark-300);
+        background-color: var(--color-dark-700);
+        color: var(--color-dark-300);
+      }
+    &:first-child {
+        border-radius: 2px 0 0 2px;
+    }
+    &:last-child {
+        border-radius: 0 2px 2px 0;
+    }
 }
