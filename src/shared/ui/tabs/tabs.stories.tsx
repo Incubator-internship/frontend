@@ -22,31 +22,52 @@ export const TabSwitcher: Story = {
     title: 'default',
   },
   render: () => {
-    const tabs = [
+    const tabsDefault = [
       { title: 'Switcher', value: 'tab1' },
       { title: 'Switcher', value: 'active' },
       { title: 'Switcher', value: 'tab3' },
-      { disabled: true, title: 'Switcher', value: 'tab3' },
       { title: 'Switcher', value: 'tab3' },
+      { title: 'Switcher', value: 'tab3' },
+    ]
+    const tabsActive = [
+      { title: 'Switcher', value: 'tab1' },
+      { title: 'Switcher', value: 'active' },
+      { title: 'Switcher', value: 'tab3' },
+      { title: 'Switcher', value: 'tab3' },
+      { title: 'Switcher', value: 'tab3' },
+    ]
+    const tabsHover = [
+      { title: 'Switcher', value: 'tab1' },
+      { title: 'Switcher', value: 'active' },
+      { title: 'Switcher', value: 'tab3' },
+      { title: 'Switcher', value: 'tab3' },
+      { title: 'Switcher', value: 'tab3' },
+    ]
+    const tabsDisabled = [
+      { disabled: true, title: 'Switcher', value: 'tab1' },
+      { disabled: true, title: 'Switcher', value: 'active' },
+      { disabled: true, title: 'Switcher', value: 'tab3' },
+      { disabled: true, title: 'Switcher', value: 'tab3' },
+      { disabled: true, title: 'Switcher', value: 'tab3' },
     ]
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
           <h2 style={{ marginBottom: '10px' }}>Default</h2>
-          <Tabs tabs={tabs} value={'null'} />
+          <Tabs tabs={tabsDefault} value={'default'} />
         </div>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
           <h2 style={{ marginBottom: '10px' }}>Active</h2>
-          <Tabs tabs={tabs} value={'active'} />
+          <Tabs tabs={tabsActive} value={'active'} />
         </div>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
           <h2 style={{ marginBottom: '10px' }}>Hover</h2>
-          <Tabs tabs={tabs} value={''} />
+          <Tabs tabs={tabsHover} value={'hover'} />
         </div>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
           <h2 style={{ marginBottom: '10px' }}>Disabled</h2>
-          <Tabs tabs={tabs} value={'null'} />
+          <Tabs tabs={tabsDisabled} value={'disabled'} />
         </div>
       </div>
     )
