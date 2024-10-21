@@ -4,10 +4,8 @@ import clsx from 'clsx'
 
 import s from './typography.module.scss'
 
-type HeadingElements = 'h1' | 'h2' | 'h3' | 'h4'
-
-export type TypographyProps<T extends ElementType = 'a' | 'p' | 'span'> = {
-  as?: T extends HeadingElements ? T : 'a' | 'p' | 'span'
+export type TypographyProps<T extends ElementType = 'p'> = {
+  as?: T
   children?: React.ReactNode
   className?: string
   color?: 'black' | 'link' | 'white'

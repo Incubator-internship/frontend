@@ -3,7 +3,7 @@ import clsx from 'clsx'
 
 import s from './typography.module.scss'
 
-import { Typography } from './typography'
+import { Typography } from './'
 
 const meta: Meta<typeof Typography> = {
   argTypes: {
