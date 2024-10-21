@@ -1,12 +1,11 @@
-'use client'
 import { ReactNode } from 'react'
 
 import s from './card.module.scss'
 
 type Props = {
-  children: ReactNode
+  children?: ReactNode
 }
 
-export default function Card({ children }: Props) {
+export const Card = ({ children }: Props) => {
   return <div className={s.card}>{children}</div>
 }
