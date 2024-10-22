@@ -3,7 +3,7 @@
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
 
 import { CheckmarkOutlineIcon } from '@/shared/ui/icons'
-import { Typography } from '@/shared/ui/typography/typography'
+import { Typography } from '@/shared/ui/typography/Typography'
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import { clsx } from 'clsx'
 
@@ -44,8 +44,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
         )}
       </div>
       {error && (
-        //TODO:  variant 'error'
-        <Typography as={'span'} variant={'caption'}>
+        <Typography as={'span'} color={'red'} variant={'caption'}>
           {error}
         </Typography>
       )}
