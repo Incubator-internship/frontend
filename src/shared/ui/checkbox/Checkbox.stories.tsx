@@ -37,7 +37,15 @@ export const DefaultStory: Story = {
     isRequired: true,
     label: 'CheckBox label',
   },
-  name: 'Checkbox',
+  name: 'Default Checkbox',
+}
+
+export const ActiveStory: Story = {
+  args: {
+    checked: true,
+    label: 'CheckBox label',
+  },
+  name: 'Active Checkbox',
 }
 
 export const DisabledStory: Story = {
@@ -51,9 +59,8 @@ export const DisabledStory: Story = {
 
 export const ErrorStory: Story = {
   args: {
-    checked: true,
     error: 'Some error occurred',
     label: 'Checkbox label',
   },
-  name: 'Checkbox with Error',
+  name: 'Checkbox Error',
 }

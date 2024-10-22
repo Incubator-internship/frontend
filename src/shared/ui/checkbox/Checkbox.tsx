@@ -1,6 +1,6 @@
 'use client'
 
-import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef } from 'react'
+import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef, useId } from 'react'
 
 import { CheckmarkOutlineIcon } from '@/shared/ui/icons'
 import { Typography } from '@/shared/ui/typography/Typography'
@@ -18,6 +18,7 @@ export type CheckboxProps = {
 type CheckboxRef = ElementRef<typeof RadixCheckbox.Root>
 
 export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
+  const id = useId()
   const { className, disabled, error, isRequired, label, ...rest } = props
 
   return (
@@ -26,6 +27,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
         <RadixCheckbox.Root
           className={clsx(s.root, error && s.error, className)}
           disabled={disabled}
+          id={id}
           ref={ref}
           {...rest}
         >
