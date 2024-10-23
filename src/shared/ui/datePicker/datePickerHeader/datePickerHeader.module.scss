@@ -1,0 +1,18 @@
+.dataPickerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 6px 12px;
+
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+
+  span {
+    margin-right: 24px;
+  }
+}
