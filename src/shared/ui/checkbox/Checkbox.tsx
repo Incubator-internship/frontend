@@ -2,7 +2,7 @@
 
 import { ComponentPropsWithoutRef, ElementRef, ReactNode, forwardRef, useId } from 'react'
 
-import { CheckmarkOutlineIcon } from '@/shared/ui/icons'
+import { CheckmarkOutlineIcon } from '@/shared/assets/icons'
 import { Typography } from '@/shared/ui/typography/Typography'
 import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import { clsx } from 'clsx'
