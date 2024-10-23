@@ -15,4 +15,30 @@
   span {
     margin-right: 24px;
   }
+
+  &:disabled {
+    color: var(--color-light-900);
+    background-color: var(--color-dark-500);
+    border-color: var(--color-dark-300);
+  }
+
+  &:focus {
+    border-color: transparent;
+    outline: 2px solid var(--color-accent-700);
+  }
+
+  &:hover {
+    background-color: var(--color-dark-500);
+  }
+}
+
+.error {
+  color: var(--color-danger-500);
+  border-color: var(--color-danger-500);
+
+  svg {
+    path {
+      fill: var(--color-danger-500);
+    }
+  }
 }
