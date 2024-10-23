@@ -37,8 +37,9 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
         </RadixCheckbox.Root>
         {label && (
           <Typography
-            as={'span'}
+            as={'label'}
             className={clsx(s.label, disabled && s.disabled)}
+            htmlFor={id}
             variant={'caption'}
           >
             {label}
@@ -46,7 +47,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
         )}
       </div>
       {error && (
-        <Typography as={'span'} color={'red'} variant={'caption'}>
+        <Typography as={'label'} color={'red'} variant={'caption'}>
           {error}
         </Typography>
       )}
