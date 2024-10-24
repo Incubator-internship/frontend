@@ -1,7 +1,7 @@
-import React, { ComponentPropsWithoutRef, useState } from 'react'
+import React, { ComponentPropsWithoutRef } from 'react'
 import DatePicker from 'react-datepicker'
 
-import { DataPickerHeader } from '@/shared/ui/datePicker/datePickerHeader/DatePickerHeader'
+import { DataPickerInput } from '@/shared/ui/datePicker/datePickerInput/DatePickerInput'
 import { Typography } from '@/shared/ui/typography'
 import clsx from 'clsx'
 
@@ -11,18 +11,40 @@ import './datePicker.scss'
 import s from './datePicker.module.scss'
 
 type CustomDatePickerProps = {
+  endDate?: Date | null
   error?: string
   label?: string
+  setEndDate?: (date: Date | null) => void
+  setStartDate: (date: Date | null) => void
+  startDate: Date | null
 } & ComponentPropsWithoutRef<typeof DatePicker>
 
 export const CustomDatePicker = ({
   className,
   disabled,
+  endDate,
   error,
   label,
+  setEndDate,
+  setStartDate,
+  startDate,
   ...restProps
 }: CustomDatePickerProps) => {
-  const [startDate, setStartDate] = useState(new Date())
+  const isRange = !!endDate
+
+  const handleChange = (
+    date: [Date | null, Date | null] | Date | null,
+    e?: React.KeyboardEvent<HTMLElement> | React.MouseEvent<HTMLElement, MouseEvent> | undefined
+  ) => {
+    if (Array.isArray(date)) {
+      const [start, end] = date
+
+      setStartDate(start)
+      setEndDate?.(end)
+    } else {
+      setStartDate(date)
+    }
+  }
 
   return (
     <div className={clsx(className, disabled ? s.disabled : '')}>
@@ -32,12 +54,18 @@ export const CustomDatePicker = ({
         </Typography>
       )}
       <DatePicker
-        customInput={<DataPickerHeader error={error} />}
+        calendarStartDay={1}
+        customInput={<DataPickerInput error={error} />}
         dateFormat={'dd/MM/yyyy'}
         disabled={disabled}
-        onChange={date => date && setStartDate(date)}
+        endDate={endDate}
+        onChange={handleChange}
         popperPlacement={'top-start'}
         selected={startDate}
+        selectsRange={isRange}
+        showPopperArrow={false}
+        startDate={startDate}
+        {...restProps}
       />
       {error && (
         <Typography as={'span'} className={s.error} variant={'caption'}>
