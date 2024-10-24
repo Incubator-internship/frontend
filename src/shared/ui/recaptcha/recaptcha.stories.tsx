@@ -1,35 +1,30 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import RecaptchaComponent from './Recaptcha'
+import Recaptcha from './Recaptcha'
 
-const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || 'your-default-site-key'
+const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 
-const meta: Meta<typeof RecaptchaComponent> = {
+const meta: Meta<typeof Recaptcha> = {
   argTypes: {
     error: {
       control: 'text',
       description: 'Error message to display',
     },
-    onChange: {
-      action: 'changed',
-      description: 'Callback triggered on reCAPTCHA value change',
-    },
     siteKey: {
       control: 'text',
-      description: 'Google reCAPTCHA site key',
+      description: 'site key',
     },
   },
-  component: RecaptchaComponent,
+  component: Recaptcha,
   tags: ['autodocs'],
   title: 'Components/Recaptcha',
 }
 
 export default meta
-type Story = StoryObj<typeof RecaptchaComponent>
+type Story = StoryObj<typeof Recaptcha>
 
 export const Default: Story = {
   args: {
-    error: '',
     siteKey: siteKey,
   },
   name: 'ReCaptcha Default',
@@ -40,5 +35,5 @@ export const ErrorStory: Story = {
     error: 'Verification failed',
     siteKey: siteKey,
   },
-  name: 'ReCaptcha with Error',
+  name: 'ReCaptcha Error',
 }
