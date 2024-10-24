@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { CustomDatePicker } from '@/shared/ui/datePicker/DatePicker'
+import { DatePicker } from '@/shared/ui/datePicker/DatePicker'
 
 const meta = {
   argTypes: {
@@ -8,9 +8,9 @@ const meta = {
     error: { control: 'text' },
     label: { control: 'text' },
   },
-  component: CustomDatePicker,
+  component: DatePicker,
   title: 'Components/DatePicker',
-} satisfies Meta<typeof CustomDatePicker>
+} satisfies Meta<typeof DatePicker>
 
 export default meta
 

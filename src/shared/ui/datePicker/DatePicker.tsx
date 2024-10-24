@@ -1,5 +1,5 @@
 import React, { ComponentPropsWithoutRef } from 'react'
-import DatePicker from 'react-datepicker'
+import ReactDatePicker from 'react-datepicker'
 
 import { DataPickerInput } from '@/shared/ui/datePicker/datePickerInput/DatePickerInput'
 import { Typography } from '@/shared/ui/typography'
@@ -10,16 +10,16 @@ import './datePicker.scss'
 
 import s from './datePicker.module.scss'
 
-type CustomDatePickerProps = {
+type DatePickerProps = {
   endDate?: Date | null
   error?: string
   label?: string
   setEndDate?: (date: Date | null) => void
   setStartDate: (date: Date | null) => void
   startDate: Date | null
-} & ComponentPropsWithoutRef<typeof DatePicker>
+} & ComponentPropsWithoutRef<typeof ReactDatePicker>
 
-export const CustomDatePicker = ({
+export const DatePicker = ({
   className,
   disabled,
   endDate,
@@ -29,7 +29,7 @@ export const CustomDatePicker = ({
   setStartDate,
   startDate,
   ...restProps
-}: CustomDatePickerProps) => {
+}: DatePickerProps) => {
   const isRange = !!endDate
 
   const handleChange = (
@@ -53,7 +53,7 @@ export const CustomDatePicker = ({
           {label}
         </Typography>
       )}
-      <DatePicker
+      <ReactDatePicker
         calendarStartDay={1}
         customInput={<DataPickerInput error={error} />}
         dateFormat={'dd/MM/yyyy'}
