@@ -1,30 +1,29 @@
-.SelectItemText {
-    font-family: var(--font-family-primary);
-    font-size: 16px; // no work
-    font-weight: var(--font-weight-regular);
-    line-height: var(--line-height-m);
-    color: var(--color-light-100); // no work
-    text-align: left;
-    letter-spacing: 0;
-
-}
-
 .SelectItem {
     padding: 7px 12px;
     width: 208px;
     background-color: var(--color-dark-500);
+    font-size: var(--font-size-m);
+    border: none;
+
+    .SelectItemText {
+        display: inline;
+        font-family: var(--font-family-primary);
+        color: var(--color-light-100);
+        text-align: left;
+        letter-spacing: 0;
     
+    }
 
     &:hover {
         background-color: var(--color-dark-300);
-
+        
         .SelectItemText {
             color: var(--color-accent-500);
-            font-size: 6px;
         }
     }
 
 }
+
 
 
 

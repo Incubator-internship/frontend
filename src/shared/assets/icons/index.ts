@@ -1,1 +1,4 @@
-export { default as CheckmarkOutlineIcon } from './CheckmarkOutlineIcon'
+import Arrow from './ArrowDown'
+import CheckmarkOutlineIcon from './CheckmarkOutlineIcon'
+
+export { Arrow, CheckmarkOutlineIcon }

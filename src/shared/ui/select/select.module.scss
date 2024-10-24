@@ -3,6 +3,12 @@
     flex-direction: column;
 }
 
+.ArrowIcon {
+    display: flex;
+    
+} 
+
+
 .SelectTrigger {
         display: inline-flex;
         align-items: center;
@@ -17,32 +23,39 @@
         border-radius: 2px;
         cursor: pointer;
 
-        &[data-disabled] {
-            color: var(--color-dark-100);
-            cursor: not-allowed;
-        }
-    
+
         &[data-state='open'] {
             background-color: var(--color-dark-500); 
             border-color: var(--color-light-100);
+
+            .ArrowIcon {
+                transform: scale(1, -1)
+            } 
+        }
+
+        &[data-placeholder] {
+            font-size: var(--font-size-m);
+            color: var(--color-light-100);
+            cursor: pointer;
+        
+            &:hover {
+                color: var(--color-light-900);
+            }
+        
+            &:focus {
+                border-color: var(--color-accent-500);
+                color: var(--color-light-900);
+            }
+
+            &[data-disabled] {
+                color: var(--color-dark-100);
+                cursor: not-allowed;
+                
+            }
+            
+        }
+
         } 
-
-}
-
-.SelectTrigger[data-placeholder] {
-    font-size: 16px;
-    color: var(--color-light-100);
-    cursor: pointer;
-
-    &:hover, :focus {
-        color: var(--color-light-900);
-    }
-
-    &:focus {
-        border-color: var(--color-accent-500);
-    }
-    
-}
 
 .SelectViewport {
     border: 1px solid;
@@ -51,9 +64,6 @@
 }
 
 .SelectLabel {
-    font-size: 16px;
+    font-size: var(--font-size-m);
 }
 
-.SelectGroup {
-    border: none;
-}

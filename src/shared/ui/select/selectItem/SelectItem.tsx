@@ -22,7 +22,7 @@ export const SelectItem = React.forwardRef(
     return (
       <RadixSelect.Item className={clsx(sItem.SelectItem, className)} ref={ref} {...rest}>
         <RadixSelect.ItemText>
-          <Typography as={'div'} className={sItem.SelectItemText}>
+          <Typography as={'span'} className={sItem.SelectItemText} variant={'body1'}>
             {children}
           </Typography>
         </RadixSelect.ItemText>

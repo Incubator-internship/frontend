@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useId } from 'react'
 
+import { Arrow } from '@/shared/assets/icons'
 import { SelectItem } from '@/shared/ui/select/selectItem/SelectItem'
 import * as RadixSelect from '@radix-ui/react-select'
 import clsx from 'clsx'
@@ -8,8 +9,6 @@ import clsx from 'clsx'
 import s from './select.module.scss'
 
 import { Typography } from '../typography'
-
-
 type selectItem = {
   title: string
   value: string
@@ -40,14 +39,15 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
         )}
         <RadixSelect.Root disabled={disabled} {...rest}>
           <RadixSelect.Trigger className={clsx(s.SelectTrigger, className)} id={id}>
-            <RadixSelect.Value className={className} placeholder={'Hello'} />
-            <RadixSelect.Icon />
-            {/* <ArrowDown/> */}
+            <RadixSelect.Value className={s.Value} placeholder={'Hello'} />
+            <RadixSelect.Icon className={s.ArrowIcon}>
+              <Arrow />
+            </RadixSelect.Icon>
           </RadixSelect.Trigger>
           <RadixSelect.Portal>
             <RadixSelect.Content position={'popper'} sideOffset={0}>
               <RadixSelect.Viewport className={s.SelectViewport}>
-                <RadixSelect.Group className={s.SelectGroup}>
+                <RadixSelect.Group>
                   {items.map((item, index) => (
                     <SelectItem
                       className={className}
@@ -60,7 +60,6 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
                   ))}
                 </RadixSelect.Group>
               </RadixSelect.Viewport>
-              {/* <ArrowUp /> */}
             </RadixSelect.Content>
           </RadixSelect.Portal>
         </RadixSelect.Root>
