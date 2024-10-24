@@ -4,6 +4,7 @@ import { Header } from '@/shared/ui/header/Header'
 
 const meta: Meta<typeof Header> = {
   component: Header,
+  title: 'components/Header',
 }
 
 export default meta
