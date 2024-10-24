@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import ReCAPTCHA, { ReCAPTCHAProps } from 'react-google-recaptcha'
+import { ReCAPTCHA, ReCAPTCHAProps } from 'react-google-recaptcha'
 
 import clsx from 'clsx'
 
