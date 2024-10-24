@@ -5,8 +5,15 @@ button {
 
 .RadioGroupRoot {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 44px;
+
+  &.vertical {
+    flex-direction: column;
+  }
+
+  &.horizontal {
+    flex-direction: row;
+  }
 }
 
 .RadioGroupItem {
@@ -28,7 +35,6 @@ button {
   }
 
   &:disabled {
-    color: var(--color-light-900);
     border-color: var(--color-light-900);
   }
 }
@@ -54,11 +60,19 @@ button {
     background-color: var(--color-light-100);
     border-radius: 50%;
   }
+
+  .disabled &::after {
+    background-color: var(--color-light-900);
+  }
 }
 
 .Label {
-  padding-left: 15px;
+  padding-left: 8px;
   font-size: 15px;
   line-height: 1;
   color: var(--color-light-100);
+
+  &.disabled {
+    color: var(--color-light-900);
+  }
 }
