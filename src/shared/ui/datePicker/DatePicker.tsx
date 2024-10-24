@@ -11,38 +11,18 @@ import './datePicker.scss'
 import s from './datePicker.module.scss'
 
 type DatePickerProps = {
-  endDate?: Date | null
   error?: string
   label?: string
-  setEndDate?: (date: Date | null) => void
-  setStartDate: (date: Date | null) => void
-  startDate: Date | null
 } & ComponentPropsWithoutRef<typeof ReactDatePicker>
 
 export const DatePicker = ({
   className,
   disabled,
-  endDate,
   error,
   label,
-  setEndDate,
-  setStartDate,
   startDate,
   ...restProps
 }: DatePickerProps) => {
-  const isRange = !!endDate
-
-  const handleChange = (date: [Date | null, Date | null] | Date | null) => {
-    if (Array.isArray(date)) {
-      const [start, end] = date
-
-      setStartDate(start)
-      setEndDate?.(end)
-    } else {
-      setStartDate(date)
-    }
-  }
-
   return (
     <div className={clsx(className, disabled ? s.disabled : '')}>
       {label && (
@@ -55,11 +35,8 @@ export const DatePicker = ({
         customInput={<DataPickerInput error={error} />}
         dateFormat={'dd/MM/yyyy'}
         disabled={disabled}
-        endDate={endDate}
-        onChange={handleChange}
         popperPlacement={'top-start'}
         selected={startDate}
-        selectsRange={isRange ? true : undefined}
         showPopperArrow={false}
         startDate={startDate}
         {...restProps}
