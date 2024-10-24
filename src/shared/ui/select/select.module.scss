@@ -1,0 +1,59 @@
+.SelectWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.SelectTrigger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 auto;
+        width: 210px;
+        height: var(--line-height-l);
+        padding: 6px 12px;
+        background-color: var(--color-dark-900);
+        border: 1px solid;
+        border-color: var(--color-dark-100);
+        border-radius: 2px;
+        cursor: pointer;
+
+        &[data-disabled] {
+            color: var(--color-dark-100);
+            cursor: not-allowed;
+        }
+    
+        &[data-state='open'] {
+            background-color: var(--color-dark-500); 
+            border-color: var(--color-light-100);
+        } 
+
+}
+
+.SelectTrigger[data-placeholder] {
+    font-size: 16px;
+    color: var(--color-light-100);
+    cursor: pointer;
+
+    &:hover, :focus {
+        color: var(--color-light-900);
+    }
+
+    &:focus {
+        border-color: var(--color-accent-500);
+    }
+    
+}
+
+.SelectViewport {
+    border: 1px solid;
+    border-color: var(--color-light-100);
+
+}
+
+.SelectLabel {
+    font-size: 16px;
+}
+
+.SelectGroup {
+    border: none;
+}

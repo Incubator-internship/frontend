@@ -35,11 +35,14 @@ importers:
       next:
         specifier: 14.2.15
         version: 14.2.15(@babel/core@7.25.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.80.3)
+      radix:
+        specifier: ^0.0.0
+        version: 0.0.0
       react:
-        specifier: ^18
+        specifier: ^18.3.1
         version: 18.3.1
       react-dom:
-        specifier: ^18
+        specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       react-hook-form:
         specifier: ^7.53.0
@@ -4235,6 +4238,9 @@ packages:
 
   queue@6.0.2:
     resolution: {integrity: sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==}
+
+  radix@0.0.0:
+    resolution: {integrity: sha512-7hNRr3nbJH3vMepLpg5Je0B6ezlW8PdZuaPI79vVE2BslBKOOpP5/q9GILJ9JFFlhqNorDe4EFMwTkzlskyUUg==}
 
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
@@ -9859,6 +9865,8 @@ snapshots:
   queue@6.0.2:
     dependencies:
       inherits: 2.0.4
+
+  radix@0.0.0: {}
 
   randombytes@2.1.0:
     dependencies:
