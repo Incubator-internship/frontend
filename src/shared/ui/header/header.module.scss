@@ -29,4 +29,27 @@
       gap: 1rem;
     }
   }
+
+  .ball{
+    cursor: pointer;
+    display: flex;
+    margin-right: 40px;
+
+    .count {
+      position: relative;
+      right: 13px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 13px;
+      height: 13px;
+
+      font-size: 8px;
+
+      background: red;
+      border-radius: 50%;
+    }
+  }
 }
