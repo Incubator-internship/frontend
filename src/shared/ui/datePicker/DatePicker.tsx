@@ -32,10 +32,7 @@ export const DatePicker = ({
 }: DatePickerProps) => {
   const isRange = !!endDate
 
-  const handleChange = (
-    date: [Date | null, Date | null] | Date | null,
-    e?: React.KeyboardEvent<HTMLElement> | React.MouseEvent<HTMLElement, MouseEvent> | undefined
-  ) => {
+  const handleChange = (date: [Date | null, Date | null] | Date | null) => {
     if (Array.isArray(date)) {
       const [start, end] = date
 
@@ -62,7 +59,7 @@ export const DatePicker = ({
         onChange={handleChange}
         popperPlacement={'top-start'}
         selected={startDate}
-        selectsRange={isRange}
+        selectsRange={isRange ? true : undefined}
         showPopperArrow={false}
         startDate={startDate}
         {...restProps}
