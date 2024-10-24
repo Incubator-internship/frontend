@@ -25,9 +25,10 @@ export const FormRadioGroup = ({
   <form>
     <RadioGroup.Root
       aria-label={'View density'}
-      className={`${s.RadioGroupRoot} ${s.orientation}}`}
+      className={s.RadioGroupRoot}
       defaultValue={defaultValue}
       orientation={orientation}
+      style={{ flexDirection: orientation === 'horizontal' ? 'row' : 'column' }}
       {...rest}
     >
       {options.map(option => (
