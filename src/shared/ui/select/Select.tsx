@@ -13,16 +13,32 @@ type selectItem = {
   title: string
   value: string
 }
+type variant = 'narrow' | 'wide'
 
 export type SelectProps = {
   className?: string
   disabled?: boolean
+  icon?: React.ReactNode
   items: selectItem[]
   label?: string
   placeholder?: string
+  variant?: variant
 } & ComponentPropsWithoutRef<typeof RadixSelect.Root>
+
 export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProps>(
-  ({ className, disabled, items, label, placeholder, ...rest }: SelectProps, ref) => {
+  (
+    {
+      className,
+      disabled,
+      icon,
+      items,
+      label,
+      placeholder,
+      variant = 'narrow',
+      ...rest
+    }: SelectProps,
+    ref
+  ) => {
     const id = useId()
 
     return (
@@ -30,7 +46,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
         {label && (
           <Typography
             as={'label'}
-            className={clsx(s.SelectLabel, disabled ? s.SelectLabelDisabled : '')}
+            className={clsx(disabled ? s.SelectLabelDisabled : '')}
             htmlFor={id}
             variant={'body1'}
           >
@@ -38,9 +54,16 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
           </Typography>
         )}
         <RadixSelect.Root disabled={disabled} {...rest}>
-          <RadixSelect.Trigger className={clsx(s.SelectTrigger, className)} id={id}>
-            <RadixSelect.Value className={s.Value} placeholder={'Hello'} />
-            <RadixSelect.Icon className={s.ArrowIcon}>
+          <RadixSelect.Trigger
+            className={clsx(
+              s.SelectTrigger,
+              variant === 'narrow' ? s.SelectVariantNarrow : '',
+              className
+            )}
+            id={id}
+          >
+            <RadixSelect.Value placeholder={placeholder || 'Placeholder'} />
+            <RadixSelect.Icon className={s.SelectArrowIcon}>
               <Arrow />
             </RadixSelect.Icon>
           </RadixSelect.Trigger>
@@ -51,9 +74,11 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
                   {items.map((item, index) => (
                     <SelectItem
                       className={className}
+                      icon={variant === 'narrow' && <Arrow />}
                       key={`${item.value}-${index}`}
                       ref={ref}
                       value={item.value}
+                      variant={variant}
                     >
                       {item.title}
                     </SelectItem>

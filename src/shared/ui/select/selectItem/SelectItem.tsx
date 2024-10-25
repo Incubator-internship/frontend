@@ -12,16 +12,27 @@ export type SelectItemProps = {
   children: React.ReactNode
   className?: string
   disabled?: boolean
+  icon?: React.ReactNode
   value: string
+  variant?: string
 }
 export const SelectItem = React.forwardRef(
   (
-    { children, className, disabled, ...rest }: SelectItemProps,
+    { children, className, disabled, icon, variant, ...rest }: SelectItemProps,
     ref: ForwardedRef<HTMLDivElement>
   ) => {
     return (
-      <RadixSelect.Item className={clsx(sItem.SelectItem, className)} ref={ref} {...rest}>
+      <RadixSelect.Item
+        className={clsx(
+          sItem.SelectItem,
+          variant === 'narrow' ? sItem.SelectItemVariantNarrow : '',
+          className
+        )}
+        ref={ref}
+        {...rest}
+      >
         <RadixSelect.ItemText>
+          {icon && <span className={sItem.SelectItemIconLanguage}>{icon}</span>}
           <Typography as={'span'} className={sItem.SelectItemText} variant={'body1'}>
             {children}
           </Typography>

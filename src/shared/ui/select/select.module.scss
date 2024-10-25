@@ -3,11 +3,10 @@
     flex-direction: column;
 }
 
-.ArrowIcon {
+.SelectArrowIcon {
     display: flex;
     
 } 
-
 
 .SelectTrigger {
         display: inline-flex;
@@ -28,7 +27,7 @@
             background-color: var(--color-dark-500); 
             border-color: var(--color-light-100);
 
-            .ArrowIcon {
+            .SelectArrowIcon {
                 transform: scale(1, -1)
             } 
         }
@@ -63,7 +62,8 @@
 
 }
 
-.SelectLabel {
-    font-size: var(--font-size-m);
+.SelectVariantNarrow {
+    width: 163px;
 }
+
 
