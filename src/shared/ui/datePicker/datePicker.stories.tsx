@@ -11,6 +11,7 @@ const meta = {
     label: { control: 'text' },
   },
   component: DatePicker,
+  tags: ['autodocs'],
   title: 'Components/DatePicker',
 } satisfies Meta<typeof DatePicker>
 
