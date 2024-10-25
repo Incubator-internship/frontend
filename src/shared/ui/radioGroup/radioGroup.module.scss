@@ -27,6 +27,7 @@ button {
   }
 
   &:disabled {
+    pointer-events: none;
     border-color: var(--color-light-900);
   }
 }
