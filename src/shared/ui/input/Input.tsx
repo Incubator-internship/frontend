@@ -1,9 +1,10 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, ReactNode, useId, useState } from 'react'
 
-import Close from '@/assets/icons/Close'
-import Eye from '@/assets/icons/Eye'
-import EyeClose from '@/assets/icons/EyeClose'
-import Search from '@/assets/icons/Search'
+import Close from '@/shared/assets/icons/Close'
+import Eye from '@/shared/assets/icons/Eye'
+import EyeClose from '@/shared/assets/icons/EyeClose'
+import Search from '@/shared/assets/icons/Search'
+import { Typography } from '@/shared/ui/typography'
 import clsx from 'clsx'
 
 import s from './input.module.scss'
@@ -39,10 +40,14 @@ export const Input = React.forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <div className={className}>
         {label && (
-          // use the Typography component when it is created
-          <label className={clsx(s.label, disabled ? s.labelDisabled : '')} htmlFor={id}>
+          <Typography
+            as={'label'}
+            className={clsx(s.label, disabled ? s.labelDisabled : '')}
+            htmlFor={id}
+            variant={'body2'}
+          >
             {label}
-          </label>
+          </Typography>
         )}
         <div className={clsx(s.inputWrapper, s[variant], error ? s.inputError : '')}>
           {variant === 'search' && (
@@ -73,8 +78,9 @@ export const Input = React.forwardRef<HTMLInputElement, TextFieldProps>(
           )}
         </div>
         {error && (
-          // use the Typography component when it is created
-          <div className={s.error}>{error}</div>
+          <Typography as={'span'} className={s.error} variant={'body2'}>
+            {error}
+          </Typography>
         )}
       </div>
     )
