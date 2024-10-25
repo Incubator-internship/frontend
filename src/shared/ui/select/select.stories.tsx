@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
 
+import FlagRus from '../../assets/svg/Flag Russia.svg'
 import { Select } from './Select'
 
 const meta = {

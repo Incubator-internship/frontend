@@ -8,6 +8,7 @@ import clsx from 'clsx'
 
 import s from './select.module.scss'
 
+import FlagUk from '../../assets/icons/FlagUK'
 import FlagRus from '../../assets/svg/Flag Russia.svg'
 import { Typography } from '../typography'
 type selectItem = {
@@ -31,7 +32,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
     {
       className,
       disabled,
-      icon,
+      //icon,
       items,
       label,
       placeholder,
@@ -41,6 +42,10 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
     ref
   ) => {
     const id = useId()
+    const languages = [
+      { icon: FlagRus, title: 'Russian', value: '1' },
+      { icon: FlagUk, title: 'English', value: '2' },
+    ]
 
     return (
       <div className={clsx(s.SelectWrapper, className)}>
@@ -75,8 +80,9 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
                   {items.map((item, index) => (
                     <SelectItem
                       className={className}
-                      icon={variant === 'narrow' && <Arrow />}
+                      //icon={variant === 'narrow' && icon}
                       key={`${item.value}-${index}`}
+                      languages={variant === 'narrow' && languages}
                       ref={ref}
                       value={item.value}
                       variant={variant}
