@@ -8,6 +8,7 @@ import clsx from 'clsx'
 
 import s from './select.module.scss'
 
+import FlagRus from '../../assets/svg/Flag Russia.svg'
 import { Typography } from '../typography'
 type selectItem = {
   title: string

@@ -8,6 +8,7 @@ import sItem from './selectItem.module.scss'
 
 import { Typography } from '../../typography/Typography'
 
+
 export type SelectItemProps = {
   children: React.ReactNode
   className?: string
@@ -16,6 +17,7 @@ export type SelectItemProps = {
   value: string
   variant?: string
 }
+
 export const SelectItem = React.forwardRef(
   (
     { children, className, disabled, icon, variant, ...rest }: SelectItemProps,

@@ -1,0 +1,17 @@
+.recaptchaContainer {
+  padding: 10px;
+  display: inline-block;
+  font-size: 10px;
+
+  &.error {
+    box-sizing: content-box;
+    width: 300px;
+    padding: 8px;
+    outline: 1px solid #f00;
+    color: #f00;
+  }
+
+  &.errorMessage {
+    color: #f00;
+  }
+}
