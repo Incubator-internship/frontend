@@ -7,9 +7,10 @@ import * as RadixSelect from '@radix-ui/react-select'
 import clsx from 'clsx'
 
 import s from './select.module.scss'
+import sItem from './selectItem/selectItem.module.scss'
 
-import FlagUk from '../../assets/icons/FlagUK'
 import FlagRus from '../../assets/svg/Flag Russia.svg'
+import FlagUk from '../../assets/svg/Flag United Kingdom.svg'
 import { Typography } from '../typography'
 type selectItem = {
   title: string
@@ -29,16 +30,7 @@ export type SelectProps = {
 
 export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProps>(
   (
-    {
-      className,
-      disabled,
-      //icon,
-      items,
-      label,
-      placeholder,
-      variant = 'narrow',
-      ...rest
-    }: SelectProps,
+    { className, disabled, items, label, placeholder, variant = 'narrow', ...rest }: SelectProps,
     ref
   ) => {
     const id = useId()
@@ -77,19 +69,32 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
             <RadixSelect.Content position={'popper'} sideOffset={0}>
               <RadixSelect.Viewport className={s.SelectViewport}>
                 <RadixSelect.Group>
-                  {items.map((item, index) => (
-                    <SelectItem
-                      className={className}
-                      //icon={variant === 'narrow' && icon}
-                      key={`${item.value}-${index}`}
-                      languages={variant === 'narrow' && languages}
-                      ref={ref}
-                      value={item.value}
-                      variant={variant}
-                    >
-                      {item.title}
-                    </SelectItem>
-                  ))}
+                  {variant === 'narrow'
+                    ? languages.map((language, index) => (
+                        <SelectItem
+                          className={className}
+                          key={`${language.value}-${index}`}
+                          ref={ref}
+                          value={language.value}
+                          variant={variant}
+                        >
+                          <span className={sItem.SelectItemIconLanguage}>
+                            <img src={language.icon.src} />
+                          </span>
+                          {language.title}
+                        </SelectItem>
+                      ))
+                    : items.map((item, index) => (
+                        <SelectItem
+                          className={className}
+                          key={`${item.value}-${index}`}
+                          ref={ref}
+                          value={item.value}
+                          variant={variant}
+                        >
+                          {item.title}
+                        </SelectItem>
+                      ))}
                 </RadixSelect.Group>
               </RadixSelect.Viewport>
             </RadixSelect.Content>

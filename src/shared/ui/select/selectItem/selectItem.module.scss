@@ -3,10 +3,10 @@
     width: 208px;
     background-color: var(--color-dark-500);
     font-size: var(--font-size-m);
-    border: none;
 
     .SelectItemText {
-        display: inline;
+        display: flex;
+        align-items: center;
         font-family: var(--font-family-primary);
         color: var(--color-light-100);
         text-align: left;
