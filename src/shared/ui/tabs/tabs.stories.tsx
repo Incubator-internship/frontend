@@ -12,7 +12,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const TabSwitcher: Story = {
+export const AllStateTabs: Story = {
   args: {
     tabs: [],
     value: '',
@@ -22,51 +22,32 @@ export const TabSwitcher: Story = {
     title: 'default',
   },
   render: () => {
-    const tabsDefault = [
-      { title: 'Switcher', value: 'tab1' },
-      { title: 'Switcher', value: 'active' },
-      { title: 'Switcher', value: 'tab3' },
-      { title: 'Switcher', value: 'tab3' },
-      { title: 'Switcher', value: 'tab3' },
-    ]
-    const tabsActive = [
-      { title: 'Switcher', value: 'tab1' },
-      { title: 'Switcher', value: 'active' },
-      { title: 'Switcher', value: 'tab3' },
-      { title: 'Switcher', value: 'tab3' },
-      { title: 'Switcher', value: 'tab3' },
-    ]
-    const tabsHover = [
-      { title: 'Switcher', value: 'tab1' },
-      { title: 'Switcher', value: 'active' },
-      { title: 'Switcher', value: 'tab3' },
-      { title: 'Switcher', value: 'tab3' },
-      { title: 'Switcher', value: 'tab3' },
-    ]
-    const tabsDisabled = [
-      { disabled: true, title: 'Switcher', value: 'tab1' },
-      { disabled: true, title: 'Switcher', value: 'active' },
-      { disabled: true, title: 'Switcher', value: 'tab3' },
-      { disabled: true, title: 'Switcher', value: 'tab3' },
-      { disabled: true, title: 'Switcher', value: 'tab3' },
-    ]
+    const tabsDefault = [{ title: 'Tab', value: 'tab1' }]
+    const tabsActive = [{ title: 'Tab', value: 'active' }]
+    const tabsHover = [{ title: 'Tab', value: 'tab1' }]
+    const tabsFocus = [{ title: 'Tab', value: 'tab1' }]
+    const tabsDisabled = [{ disabled: true, title: 'Tab', value: 'tab1' }]
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-          <h2 style={{ marginBottom: '10px' }}>Default</h2>
+          <h2 style={{ fontWeight: '400', marginBottom: '10px' }}>Default</h2>
           <Tabs tabs={tabsDefault} value={'default'} />
         </div>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-          <h2 style={{ marginBottom: '10px' }}>Active</h2>
+          <h2 style={{ fontWeight: '400', marginBottom: '10px' }}>Active</h2>
           <Tabs tabs={tabsActive} value={'active'} />
         </div>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-          <h2 style={{ marginBottom: '10px' }}>Hover</h2>
+          <h2 style={{ fontWeight: '400', marginBottom: '10px' }}>Hover</h2>
           <Tabs tabs={tabsHover} value={'hover'} />
         </div>
         <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-          <h2 style={{ marginBottom: '10px' }}>Disabled</h2>
+          <h2 style={{ fontWeight: '400', marginBottom: '10px' }}>Focus</h2>
+          <Tabs tabs={tabsFocus} value={'focus'} />
+        </div>
+        <div style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
+          <h2 style={{ fontWeight: '400', marginBottom: '10px' }}>Disabled</h2>
           <Tabs tabs={tabsDisabled} value={'disabled'} />
         </div>
       </div>
@@ -101,6 +82,19 @@ export const TabActive: Story = {
 }
 
 export const TabHover: Story = {
+  args: {
+    tabs: [
+      { title: 'Switcher', value: '1' },
+      { title: 'Switcher', value: '2' },
+      { title: 'Switcher', value: '3' },
+      { title: 'Switcher', value: '4' },
+      { title: 'Switcher', value: '4' },
+    ],
+    value: 'active',
+  },
+}
+
+export const TabFocus: Story = {
   args: {
     tabs: [
       { title: 'Switcher', value: '1' },
