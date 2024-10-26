@@ -1,3 +1,6 @@
-.Alert{
-    font-size: large;
+.alert{
+    padding: 24px 12px;
+    color: var(--color-light-100);
+    background-color: var(--color-success-500);
+    border: 1px solid var(--color-danger-500)
 }
