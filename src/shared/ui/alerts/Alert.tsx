@@ -8,7 +8,6 @@ import s from './alert.module.scss'
 type AlertProps = {
   children?: React.ReactNode
   className?: string
-  onClose?: (isClosed: boolean) => void
   style?: React.CSSProperties
   title?: string
   type?: 'error' | 'success'
