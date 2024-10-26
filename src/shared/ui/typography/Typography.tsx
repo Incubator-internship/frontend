@@ -21,6 +21,7 @@ export type TypographyProps<T extends ElementType = 'p'> = {
     | 'h4'
     | 'link1'
     | 'link2'
+    | 'mediumText14'
     | 'overline'
     | 'subtitle1'
     | 'subtitle2'
