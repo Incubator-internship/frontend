@@ -1,13 +1,9 @@
-.error {
-  font-size: var(--font-size-s);
-  line-height: var(--line-height-m);
-  color: var(--color-danger-500);
+.label {
+  color: var(--color-light-900);
 }
 
-.label {
-  font-size: var(--font-size-s);
-  line-height: var(--line-height-m);
-  color: var(--color-light-900);
+.error {
+  color: var(--color-danger-500);
 }
 
 .labelDisabled {

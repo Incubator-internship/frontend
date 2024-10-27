@@ -1,0 +1,15 @@
+.error {
+  color: var(--color-danger-500);
+}
+
+.label {
+  color: var(--color-light-900);
+}
+
+.disabled {
+  pointer-events: none;
+
+  .label {
+    color: var(--color-dark-100);
+  }
+}

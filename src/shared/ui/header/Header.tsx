@@ -19,7 +19,7 @@ export const Header = ({ count, isAuth = false }: Props) => {
         {isAuth && (
           <div className={s.ball}>
             <BellOutline />
-            <div className={s.count}>{count}</div>
+            {count > 0 && <div className={s.count}>{count}</div>}
           </div>
         )}
         {!isAuth && (

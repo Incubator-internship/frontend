@@ -1,5 +1,6 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, useId } from 'react'
 
+import { Typography } from '@/shared/ui/typography'
 import clsx from 'clsx'
 
 import s from './textarea.module.scss'
@@ -20,10 +21,14 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className={className}>
         {label && (
-          // use the Typography component when it is created
-          <label className={clsx(s.label, disabled ? s.labelDisabled : '')} htmlFor={id}>
+          <Typography
+            as={'label'}
+            className={clsx(s.label, disabled ? s.labelDisabled : '')}
+            htmlFor={id}
+            variant={'body2'}
+          >
             {label}
-          </label>
+          </Typography>
         )}
         <textarea
           {...restProps}
@@ -34,8 +39,9 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
         />
         {error && (
-          // use the Typography component when it is created
-          <div className={s.error}>{error}</div>
+          <Typography as={'div'} className={s.error} variant={'body2'}>
+            {error}
+          </Typography>
         )}
       </div>
     )
