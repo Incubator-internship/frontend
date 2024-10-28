@@ -72,15 +72,23 @@ const menuItems = [
 export type ItemProps = {
   Icon: ComponentType<{}>
   IconOutline: ComponentType<{}>
+  disabled?: boolean
   isSelected: boolean
   label?: string
 }
 
-export const Item = ({ Icon, IconOutline, isSelected, label }: ItemProps) => {
+export const Item = ({
+  Icon,
+  IconOutline,
+  disabled = false,
+  isSelected = false,
+  label,
+}: ItemProps) => {
   return (
     <Typography
       as={Link}
       className={s.item}
+      data-disabled={disabled}
       data-selected={isSelected}
       href={''}
       variant={'mediumText14'}
@@ -95,7 +103,7 @@ type SidebarProps = ComponentPropsWithoutRef<'nav'>
 type SidebarRef = ElementRef<'nav'>
 
 export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...rest }, ref) => {
-  //TODO: path via useRouter to isSelected(path=router)
+  //TODO: path via useRouter to isSelected(path===router.path)
 
   return (
     <nav className={clsx(s.nav, className)} ref={ref} {...rest}>
@@ -105,6 +113,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
             <Item
               Icon={Icon}
               IconOutline={IconOutline}
+              disabled={label === 'Messenger'}
               isSelected={false}
               key={label}
               label={label}
@@ -118,7 +127,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
             <Item
               Icon={Icon}
               IconOutline={IconOutline}
-              isSelected={false}
+              isSelected={label === 'Favourites'}
               key={label}
               label={label}
             />

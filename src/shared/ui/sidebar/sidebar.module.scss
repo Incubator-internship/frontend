@@ -17,7 +17,7 @@
   }
 
   &:last-child {
-    margin-top: 180px;
+    margin-top: 170px;
   }
 }
 
@@ -27,7 +27,23 @@
   align-items: center;
   width: fit-content;
 
+  &:focus {
+    border-radius: 2px;
+    outline: 1px solid var(--color-accent-700);
+  }
+
   &:hover {
     color: var(--color-accent-100);
+  }
+
+  &[data-disabled='true'] {
+    pointer-events: none;
+    color: var(--color-dark-100);
+  }
+
+  &[data-selected='true'] {
+    pointer-events: none;
+    font-weight: var(--font-weight-700);
+    color: var(--color-accent-700);
   }
 }
