@@ -70,8 +70,8 @@ const menuItems = [
 ]
 
 export type ItemProps = {
-  Icon: ComponentType<{ className: string }>
-  IconOutline: ComponentType<{ className: string }>
+  Icon: ComponentType<{}>
+  IconOutline: ComponentType<{}>
   isSelected: boolean
   label?: string
 }
@@ -80,42 +80,64 @@ export const Item = ({ Icon, IconOutline, isSelected, label }: ItemProps) => {
   return (
     <Typography
       as={Link}
-      className={s.title}
-      data-active={isSelected}
+      className={s.item}
+      data-selected={isSelected}
       href={''}
       variant={'mediumText14'}
     >
-      {isSelected ? <Icon className={s.icon} /> : <IconOutline className={s.icon} />}
+      {isSelected ? <Icon /> : <IconOutline />}
       {label}
     </Typography>
   )
 }
 
-export const Sidebar = () => {
+type SidebarProps = ComponentPropsWithoutRef<'nav'>
+type SidebarRef = ElementRef<'nav'>
+
+export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...rest }, ref) => {
   return (
-    <nav className={clsx(s.sidebar)}>
-      {menuItems.map(({ Icon, IconOutline, label }, index) => {
-        return (
-          <>
+    <nav className={clsx(s.nav, className)} ref={ref} {...rest}>
+      <div className={s.nav_items}>
+        {menuItems.slice(0, 5).map(({ Icon, IconOutline, label }, index) => {
+          return (
             <Item
-              Icon={menuItems[index].Icon}
-              IconOutline={menuItems[index].IconOutline}
+              Icon={Icon}
+              IconOutline={IconOutline}
               isSelected={false}
-              key={'o' + index}
-              label={menuItems[index].label + 'Outline'}
-            />
-            <Item
-              Icon={menuItems[index].Icon}
-              IconOutline={menuItems[index].IconOutline}
-              isSelected
               key={index}
-              label={menuItems[index].label}
+              label={label}
             />
-          </>
-        )
-      })}
+          )
+        })}
+      </div>
+      <div className={s.nav_items}>
+        {menuItems.slice(5, 7).map(({ Icon, IconOutline, label }, index) => {
+          return (
+            <Item
+              Icon={Icon}
+              IconOutline={IconOutline}
+              isSelected={false}
+              key={label + index}
+              label={label}
+            />
+          )
+        })}
+      </div>
+      <div className={s.nav_items}>
+        {menuItems.slice(7).map(({ Icon, IconOutline, label }, index) => {
+          return (
+            <Item
+              Icon={Icon}
+              IconOutline={IconOutline}
+              isSelected={false}
+              key={label + index}
+              label={label}
+            />
+          )
+        })}
+      </div>
     </nav>
   )
-}
+})
 
 export default Sidebar
