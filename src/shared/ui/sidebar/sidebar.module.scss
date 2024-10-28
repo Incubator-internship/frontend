@@ -1,3 +1,16 @@
-div {
-  background-color: grey;
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.title {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  width: fit-content;
+
+  &:hover {
+    color: var(--color-accent-100);
+  }
 }

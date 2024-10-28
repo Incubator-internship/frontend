@@ -6,6 +6,8 @@ import {
   BookmarkOutlineIcon,
   HomeIcon,
   HomeOutlineIcon,
+  LogOutIcon,
+  LogOutOutlineIcon,
   MessageCircleIcon,
   MessageCircleOutlineIcon,
   PersonIcon,
@@ -17,6 +19,7 @@ import {
   TrendingUpIcon,
   TrendingUpOutlineIcon,
 } from '@/shared/assets/icons'
+import clsx from 'clsx'
 import Link from 'next/link'
 
 import s from './sidebar.module.scss'
@@ -59,9 +62,14 @@ const menuItems = [
     IconOutline: BookmarkOutlineIcon,
     label: 'Favourites',
   },
+  {
+    Icon: LogOutIcon,
+    IconOutline: LogOutOutlineIcon,
+    label: 'LogOut',
+  },
 ]
 
-type ItemProps = {
+export type ItemProps = {
   Icon: ComponentType<{ className: string }>
   IconOutline: ComponentType<{ className: string }>
   isSelected: boolean
@@ -85,14 +93,28 @@ export const Item = ({ Icon, IconOutline, isSelected, label }: ItemProps) => {
 
 export const Sidebar = () => {
   return (
-    <>
-      <Item
-        Icon={menuItems[0].Icon}
-        IconOutline={menuItems[0].IconOutline}
-        isSelected={false}
-        label={menuItems[0].label}
-      />
-    </>
+    <nav className={clsx(s.sidebar)}>
+      {menuItems.map(({ Icon, IconOutline, label }, index) => {
+        return (
+          <>
+            <Item
+              Icon={menuItems[index].Icon}
+              IconOutline={menuItems[index].IconOutline}
+              isSelected={false}
+              key={'o' + index}
+              label={menuItems[index].label + 'Outline'}
+            />
+            <Item
+              Icon={menuItems[index].Icon}
+              IconOutline={menuItems[index].IconOutline}
+              isSelected
+              key={index}
+              label={menuItems[index].label}
+            />
+          </>
+        )
+      })}
+    </nav>
   )
 }
 
