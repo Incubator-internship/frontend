@@ -95,42 +95,44 @@ type SidebarProps = ComponentPropsWithoutRef<'nav'>
 type SidebarRef = ElementRef<'nav'>
 
 export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...rest }, ref) => {
+  //TODO: path via useRouter to isSelected(path=router)
+
   return (
     <nav className={clsx(s.nav, className)} ref={ref} {...rest}>
       <div className={s.nav_items}>
-        {menuItems.slice(0, 5).map(({ Icon, IconOutline, label }, index) => {
+        {menuItems.slice(0, 5).map(({ Icon, IconOutline, label }) => {
           return (
             <Item
               Icon={Icon}
               IconOutline={IconOutline}
               isSelected={false}
-              key={index}
+              key={label}
               label={label}
             />
           )
         })}
       </div>
       <div className={s.nav_items}>
-        {menuItems.slice(5, 7).map(({ Icon, IconOutline, label }, index) => {
+        {menuItems.slice(5, 7).map(({ Icon, IconOutline, label }) => {
           return (
             <Item
               Icon={Icon}
               IconOutline={IconOutline}
               isSelected={false}
-              key={label + index}
+              key={label}
               label={label}
             />
           )
         })}
       </div>
       <div className={s.nav_items}>
-        {menuItems.slice(7).map(({ Icon, IconOutline, label }, index) => {
+        {menuItems.slice(7).map(({ Icon, IconOutline, label }) => {
           return (
             <Item
               Icon={Icon}
               IconOutline={IconOutline}
               isSelected={false}
-              key={label + index}
+              key={label}
               label={label}
             />
           )
