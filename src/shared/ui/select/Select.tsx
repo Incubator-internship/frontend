@@ -41,7 +41,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
       onValueChange,
       placeholder,
       value,
-      variant = 'wide',
+      variant = 'narrow',
       ...rest
     }: SelectProps,
     ref
