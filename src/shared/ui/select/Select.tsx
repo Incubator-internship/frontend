@@ -12,28 +12,48 @@ import sItem from './selectItem/selectItem.module.scss'
 import FlagRus from '../../assets/svg/Flag Russia.svg'
 import FlagUk from '../../assets/svg/Flag United Kingdom.svg'
 import { Typography } from '../typography'
+
 type selectItem = {
   title: string
   value: string
 }
+
 type variant = 'narrow' | 'wide'
 
 export type SelectProps = {
   className?: string
   disabled?: boolean
-  icon?: React.ReactNode
   items: selectItem[]
   label?: string
+  onValueChange?: (value: string) => void
   placeholder?: string
+  value?: string
   variant?: variant
 } & ComponentPropsWithoutRef<typeof RadixSelect.Root>
 
 export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProps>(
   (
-    { className, disabled, items, label, placeholder, variant = 'narrow', ...rest }: SelectProps,
+    {
+      className,
+      disabled,
+      items,
+      label,
+      onValueChange,
+      placeholder,
+      value,
+      variant = 'wide',
+      ...rest
+    }: SelectProps,
     ref
   ) => {
     const id = useId()
+    const [selectValue, setSelectValue] = React.useState(value || '')
+
+    const onChangeSelect = (newValue: string) => {
+      setSelectValue(newValue)
+      onValueChange && onValueChange(newValue)
+    }
+
     const languages = [
       { icon: FlagRus, title: 'Russian', value: '1' },
       { icon: FlagUk, title: 'English', value: '2' },
@@ -51,7 +71,12 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
             {label}
           </Typography>
         )}
-        <RadixSelect.Root disabled={disabled} {...rest}>
+        <RadixSelect.Root
+          disabled={disabled}
+          onValueChange={onChangeSelect}
+          value={selectValue}
+          {...rest}
+        >
           <RadixSelect.Trigger
             className={clsx(
               s.SelectTrigger,
