@@ -62,11 +62,6 @@ const menuItems = [
     IconOutline: BookmarkOutlineIcon,
     label: 'Favourites',
   },
-  {
-    Icon: LogOutIcon,
-    IconOutline: LogOutOutlineIcon,
-    label: 'LogOut',
-  },
 ]
 
 export type ItemProps = {
@@ -107,7 +102,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
 
   return (
     <nav className={clsx(s.nav, className)} ref={ref} {...rest}>
-      <div className={s.nav_items}>
+      <div className={s.navItems}>
         {menuItems.slice(0, 5).map(({ Icon, IconOutline, label }) => {
           return (
             <Item
@@ -121,7 +116,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
           )
         })}
       </div>
-      <div className={s.nav_items}>
+      <div className={s.navItems}>
         {menuItems.slice(5, 7).map(({ Icon, IconOutline, label }) => {
           return (
             <Item
@@ -134,18 +129,11 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
           )
         })}
       </div>
-      <div className={s.nav_items}>
-        {menuItems.slice(7).map(({ Icon, IconOutline, label }) => {
-          return (
-            <Item
-              Icon={Icon}
-              IconOutline={IconOutline}
-              isSelected={false}
-              key={label}
-              label={label}
-            />
-          )
-        })}
+      <div className={s.navItems}>
+        <Typography as={'button'} className={s.item} onClick={() => {}} variant={'mediumText14'}>
+          <LogOutOutlineIcon />
+          Log Out
+        </Typography>
       </div>
     </nav>
   )
