@@ -23,13 +23,25 @@ export type SelectProps = {
   disabled?: boolean
   items: selectItem[]
   label?: string
+  onChange?: (value: string) => void
   placeholder?: string
+  value?: string
   variant?: 'narrow' | 'wide'
 } & ComponentPropsWithoutRef<typeof RadixSelect.Root>
 
 export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProps>(
   (
-    { className, disabled, items, label, placeholder, variant = 'narrow', ...rest }: SelectProps,
+    {
+      className,
+      disabled,
+      items,
+      label,
+      onChange,
+      placeholder,
+      value,
+      variant = 'narrow',
+      ...rest
+    }: SelectProps,
     ref
   ) => {
     const id = useId()
@@ -38,7 +50,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
       { icon: FlagUk, title: 'English', value: '2' },
     ]
 
-    const variantSelect = () => (variant === 'narrow' ? languages : items)
+    const variantsSelect = () => (variant === 'narrow' ? languages : items)
 
     return (
       <div className={clsx(s.SelectWrapper, className)}>
@@ -52,7 +64,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
             {label}
           </Typography>
         )}
-        <RadixSelect.Root disabled={disabled} {...rest}>
+        <RadixSelect.Root disabled={disabled} onValueChange={onChange} value={value} {...rest}>
           <RadixSelect.Trigger
             className={clsx(
               s.SelectTrigger,
@@ -70,12 +82,12 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
             <RadixSelect.Content position={'popper'} sideOffset={0}>
               <RadixSelect.Viewport className={s.SelectViewport}>
                 <RadixSelect.Group>
-                  {variantSelect().map((varS, index) => (
+                  {variantsSelect().map((variantSelect, index) => (
                     <SelectItem
                       className={className}
-                      key={`${varS.value}-${index}`}
+                      key={`${variantSelect.value}-${index}`}
                       ref={ref}
-                      value={varS.value}
+                      value={variantSelect.value}
                       variant={variant}
                     >
                       {variant === 'narrow' && (
@@ -83,7 +95,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
                           <img src={languages[index].icon.src} />
                         </span>
                       )}
-                      {varS.title}
+                      {variantSelect.title}
                     </SelectItem>
                   ))}
                 </RadixSelect.Group>
