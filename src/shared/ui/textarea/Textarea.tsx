@@ -1,27 +1,51 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, useId } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useController, useForm } from 'react-hook-form'
 
 import { Typography } from '@/shared/ui/typography'
 import clsx from 'clsx'
 
 import s from './textarea.module.scss'
 
+import { Button } from '../button'
+
+type FormValues = {
+  textarea: string
+}
+
 type TextareaProps = {
   error?: string
   label?: string
+  onSubmit?: SubmitHandler<FormValues>
 } & ComponentPropsWithoutRef<'textarea'>
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, disabled, error, label, onChange, ...restProps }, ref) => {
+  ({ className, disabled, error, label, onChange, onSubmit, ...restProps }, ref) => {
     const id = useId()
 
+    const {
+      control,
+      formState: { errors },
+      handleSubmit,
+    } = useForm<FormValues>({
+      mode: 'all',
+    })
+
+    const { field } = useController({
+      control,
+      name: 'textarea',
+      rules: {
+        minLength: { message: 'Error text: Minimum length should be 10 characters', value: 10 },
+        required: 'The field message is required',
+      },
+    })
+
     const changeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+      field.onChange(e)
       onChange?.(e)
     }
-    const { handleSubmit, register } = useForm()
 
     return (
-      <form className={className}>
+      <form className={className} onSubmit={onSubmit ? handleSubmit(onSubmit) : undefined}>
         {label && (
           <Typography
             as={'label'}
@@ -34,17 +58,19 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
         <textarea
           {...restProps}
-          className={clsx(s.textarea, error ? s.textareaError : '')}
+          {...field}
+          className={clsx(s.textarea, error || errors.textarea ? s.textareaError : '')}
           disabled={disabled}
           id={id}
           onChange={changeHandler}
           ref={ref}
         />
-        {error && (
+        {(error || errors.textarea) && (
           <Typography as={'div'} className={s.error} variant={'body2'}>
-            {error}
+            {errors.textarea?.message}
           </Typography>
         )}
+        <Button type={'submit'}>Submit</Button>
       </form>
     )
   }
