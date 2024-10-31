@@ -36,18 +36,6 @@ export default meta
 type Story = StoryObj<typeof Checkbox>
 type StoryControl = StoryObj<typeof CheckboxControl>
 
-export const ControlStory: StoryControl = {
-  args: {
-    label: 'Checkbox Controlled',
-  },
-  name: 'Checkbox With Control',
-  // render: () => {
-  //   const { control } = useForm()
-
-  //   return <CheckboxControl control={control} label={'Checkbox Control'} name={'checkboxControl'} />
-  // },
-}
-
 export const DefaultStory: Story = {
   args: {
     isRequired: true,
@@ -79,4 +67,16 @@ export const ErrorStory: Story = {
     label: 'Checkbox label',
   },
   name: 'Checkbox Error',
+}
+
+export const ControlStory: StoryControl = {
+  args: {
+    label: 'Checkbox Controlled',
+  },
+  name: 'Checkbox With Control',
+  // render: () => {
+  //   const { control } = useForm()
+
+  //   return <CheckboxControl control={control} label={'Checkbox Control'} name={'checkboxControl'} />
+  // },
 }
