@@ -1,4 +1,7 @@
+import { useForm } from 'react-hook-form'
+
 import { Checkbox } from '@/shared/ui/checkbox/Checkbox'
+import { CheckboxControl } from '@/shared/ui/checkboxControl/CheckboxControl'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof Checkbox> = {
@@ -31,6 +34,19 @@ const meta: Meta<typeof Checkbox> = {
 
 export default meta
 type Story = StoryObj<typeof Checkbox>
+type StoryControl = StoryObj<typeof CheckboxControl>
+
+export const ControlStory: StoryControl = {
+  args: {
+    label: 'Checkbox Controlled',
+  },
+  name: 'Checkbox With Control',
+  // render: () => {
+  //   const { control } = useForm()
+
+  //   return <CheckboxControl control={control} label={'Checkbox Control'} name={'checkboxControl'} />
+  // },
+}
 
 export const DefaultStory: Story = {
   args: {
