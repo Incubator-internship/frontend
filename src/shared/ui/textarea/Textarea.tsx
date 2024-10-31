@@ -6,8 +6,6 @@ import clsx from 'clsx'
 
 import s from './textarea.module.scss'
 
-import { Button } from '../button'
-
 type FormValues = {
   textarea: string
 }
@@ -70,7 +68,6 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             {errors.textarea?.message}
           </Typography>
         )}
-        <Button type={'submit'}>Submit</Button>
       </form>
     )
   }
