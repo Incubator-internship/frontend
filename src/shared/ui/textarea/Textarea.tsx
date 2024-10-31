@@ -1,4 +1,5 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, useId } from 'react'
+import { useForm } from 'react-hook-form'
 
 import { Typography } from '@/shared/ui/typography'
 import clsx from 'clsx'
@@ -17,9 +18,10 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const changeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
       onChange?.(e)
     }
+    const { handleSubmit, register } = useForm()
 
     return (
-      <div className={className}>
+      <form className={className}>
         {label && (
           <Typography
             as={'label'}
@@ -43,7 +45,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
             {error}
           </Typography>
         )}
-      </div>
+      </form>
     )
   }
 )
