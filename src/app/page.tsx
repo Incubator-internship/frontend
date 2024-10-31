@@ -11,9 +11,6 @@ export default function Home() {
           <Link href={'/signup'}>Signup</Link>
           <Link href={'/signin'}>Signin</Link>
           <Link href={'/profile'}>Profile</Link>
-          <div style={{ margin: '0 auto', maxWidth: '560px' }}>
-            <Textarea label={'textarea'} />
-          </div>
         </div>
       </main>
     </div>
