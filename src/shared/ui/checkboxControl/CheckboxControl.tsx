@@ -5,7 +5,7 @@ import { Checkbox, CheckboxProps } from '../checkbox/Checkbox'
 
 export type CheckboxControlProps<TFieldValues extends FieldValues> = Omit<
   CheckboxProps,
-  'checked' | 'id' | 'onChange'
+  'checked' | 'id' | 'onChange' | 'ref'
 > &
   UseControllerProps<TFieldValues>
 
@@ -24,6 +24,7 @@ export const CheckboxControl = <TFieldValues extends FieldValues>({
   } = useController({
     control,
     defaultValue,
+    disabled,
     name,
     rules,
     shouldUnregister,
