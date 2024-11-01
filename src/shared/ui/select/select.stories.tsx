@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 import { Meta, StoryObj } from '@storybook/react'
 
 import { Select } from './Select'
-import { SelectController } from './SelectController'
 
 const meta = {
   component: Select,
@@ -57,43 +56,5 @@ export const SelectNarrowDisabled: Story = {
     items: SelectItemsNarrow,
     placeholder: 'Language',
     variant: 'narrow',
-  },
-}
-
-export const SelectControllerDefault: Story = {
-  args: {
-    items: SelectItems,
-  },
-  render: () => {
-    const { control } = useForm()
-
-    return (
-      <SelectController
-        control={control}
-        items={SelectItems}
-        name={'selectControllerDefault'}
-        placeholder={'Select an option'}
-        variant={'wide'}
-      />
-    )
-  },
-}
-
-export const SelectControllerNarrow: Story = {
-  args: {
-    items: SelectItemsNarrow,
-  },
-  render: () => {
-    const { control } = useForm()
-
-    return (
-      <SelectController
-        control={control}
-        items={SelectItemsNarrow}
-        name={'selectControllerNarrow'}
-        placeholder={'Language'}
-        variant={'narrow'}
-      />
-    )
   },
 }

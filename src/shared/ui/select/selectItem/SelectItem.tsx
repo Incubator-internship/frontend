@@ -25,15 +25,15 @@ export const SelectItem = React.forwardRef(
     return (
       <RadixSelect.Item
         className={clsx(
-          sItem.SelectItem,
-          variant === 'narrow' ? sItem.SelectItemVariantNarrow : '',
+          sItem.selectItem,
+          variant === 'narrow' ? sItem.selectItemVariantNarrow : '',
           className
         )}
         ref={ref}
         {...rest}
       >
         <RadixSelect.ItemText>
-          <Typography as={'span'} className={sItem.SelectItemText} variant={'body1'}>
+          <Typography as={'span'} className={sItem.selectItemText} variant={'body1'}>
             {children}
           </Typography>
         </RadixSelect.ItemText>

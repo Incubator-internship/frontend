@@ -53,11 +53,11 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
     const variantsSelect = () => (variant === 'narrow' ? languages : items)
 
     return (
-      <div className={clsx(s.SelectWrapper, className)}>
+      <div className={clsx(s.selectWrapper, className)}>
         {label && (
           <Typography
             as={'label'}
-            className={clsx(disabled ? s.SelectLabelDisabled : '')}
+            className={clsx(disabled ? s.selectLabelDisabled : '')}
             htmlFor={id}
             variant={'body1'}
           >
@@ -67,20 +67,20 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
         <RadixSelect.Root disabled={disabled} onValueChange={onChange} value={value} {...rest}>
           <RadixSelect.Trigger
             className={clsx(
-              s.SelectTrigger,
-              variant === 'narrow' ? s.SelectVariantNarrow : '',
+              s.selectTrigger,
+              variant === 'narrow' ? s.selectVariantNarrow : '',
               className
             )}
             id={id}
           >
             <RadixSelect.Value placeholder={placeholder || 'Placeholder'} />
-            <RadixSelect.Icon className={s.SelectArrowIcon}>
+            <RadixSelect.Icon className={s.selectArrowIcon}>
               <Arrow />
             </RadixSelect.Icon>
           </RadixSelect.Trigger>
           <RadixSelect.Portal>
             <RadixSelect.Content position={'popper'} sideOffset={0}>
-              <RadixSelect.Viewport className={s.SelectViewport}>
+              <RadixSelect.Viewport className={s.selectViewport}>
                 <RadixSelect.Group>
                   {variantsSelect().map((variantSelect, index) => (
                     <SelectItem
@@ -91,7 +91,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
                       variant={variant}
                     >
                       {variant === 'narrow' && (
-                        <span className={sItem.SelectItemIconLanguage}>
+                        <span className={sItem.selectItemIconLanguage}>
                           <img src={languages[index].icon.src} />
                         </span>
                       )}

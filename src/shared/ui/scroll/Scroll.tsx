@@ -26,21 +26,21 @@ export const Scroll = ({
 }: ScrollProps) => {
   return (
     <RadixScrollArea.Root
-      className={clsx(s.Root, orientation === 'horizontal' ? s.horizontal : s.vertical)}
+      className={clsx(s.root, orientation === 'horizontal' ? s.horizontal : s.vertical)}
       style={{ height, width }}
     >
-      <RadixScrollArea.Viewport className={s.Viewport}>{children}</RadixScrollArea.Viewport>
+      <RadixScrollArea.Viewport className={s.viewport}>{children}</RadixScrollArea.Viewport>
       {orientation === 'horizontal' ? (
-        <RadixScrollArea.Scrollbar className={s.Scrollbar} orientation={'horizontal'}>
-          <RadixScrollArea.Thumb className={s.Thumb} />
+        <RadixScrollArea.Scrollbar className={s.scrollbar} orientation={'horizontal'}>
+          <RadixScrollArea.Thumb className={s.thumb} />
         </RadixScrollArea.Scrollbar>
       ) : (
-        <RadixScrollArea.Scrollbar className={s.Scrollbar} orientation={'vertical'}>
-          <RadixScrollArea.Thumb className={s.Thumb} />
+        <RadixScrollArea.Scrollbar className={s.scrollbar} orientation={'vertical'}>
+          <RadixScrollArea.Thumb className={s.thumb} />
         </RadixScrollArea.Scrollbar>
       )}
 
-      <RadixScrollArea.Corner className={s.Corner} />
+      <RadixScrollArea.Corner className={s.corner} />
     </RadixScrollArea.Root>
   )
 }

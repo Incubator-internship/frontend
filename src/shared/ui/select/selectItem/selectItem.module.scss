@@ -1,10 +1,10 @@
-.SelectItem {
+.selectItem {
     padding: 7px 12px;
     width: 208px;
     background-color: var(--color-dark-500);
     font-size: var(--font-size-m);
 
-    .SelectItemText {
+    .selectItemText {
         display: flex;
         align-items: center;
         font-family: var(--font-family-primary);
@@ -17,18 +17,18 @@
     &:hover {
         background-color: var(--color-dark-300);
         
-        .SelectItemText {
+        .selectItemText {
             color: var(--color-accent-500);
         }
     }
 
 }
 
-.SelectItemVariantNarrow {
+.selectItemVariantNarrow {
     width: 161px;
 }
 
-.SelectItemIconLanguage {
+.selectItemIconLanguage {
     margin-right: 12px;
     height: 20px;
     width: 20px;

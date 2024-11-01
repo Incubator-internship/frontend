@@ -1,15 +1,15 @@
-.SelectWrapper {
+.selectWrapper {
     display: flex;
     flex-direction: column;
     border: none;
 }
 
-.SelectArrowIcon {
+.selectArrowIcon {
     display: flex;
     
 } 
 
-.SelectTrigger {
+.selectTrigger {
         display: inline-flex;
         align-items: center;
         justify-content: space-between;
@@ -57,13 +57,13 @@
 
         } 
 
-.SelectViewport {
+.selectViewport {
     border: 1px solid;
     border-color: var(--color-light-100);
 
 }
 
-.SelectVariantNarrow {
+.selectVariantNarrow {
     width: 163px;
 }
 

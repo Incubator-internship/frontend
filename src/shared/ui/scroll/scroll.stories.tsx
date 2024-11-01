@@ -16,7 +16,7 @@ const meta = {
   component: Scroll,
   tags: ['autodocs'],
   title: 'Components/Scroll',
-}
+} satisfies Meta<typeof Scroll>
 
 export default meta
 
@@ -36,11 +36,11 @@ const ScrollItems = [
   { title: 'Option 11', value: '11' },
 ]
 
-const Template: Story<ScrollProps> = args => (
+const Template: Story = (args: ScrollProps) => (
   <div>
     <Scroll {...args}>
-      {args.items.map((item, index) => (
-        <Typography as={'div'} className={s.ItemScroll} key={`${item.value}-${index}`}>
+      {args.items.map((item: { title: string; value: string }, index: number) => (
+        <Typography as={'div'} className={s.itemScroll} key={`${item.value}-${index}`}>
           {item.title}
         </Typography>
       ))}
@@ -55,7 +55,7 @@ export const ScrollVertical: Story = {
     orientation: 'vertical',
     width: '200px',
   },
-  render: args => <Template {...args} />,
+  render: (args: ScrollProps) => <Template {...args} />,
 }
 
 export const ScrollHorizontal: Story = {
@@ -65,5 +65,5 @@ export const ScrollHorizontal: Story = {
     orientation: 'horizontal',
     width: '200px',
   },
-  render: args => <Template {...args} />,
+  render: (args: ScrollProps) => <Template {...args} />,
 }
