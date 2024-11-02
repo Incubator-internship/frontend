@@ -1,4 +1,4 @@
-import { Controller, FieldValues, UseControllerProps, useController } from 'react-hook-form'
+import { FieldValues, UseControllerProps, useController } from 'react-hook-form'
 
 import { FormRadioGroup, RadioGroupProps } from '@/shared/ui/radioGroup/RadioGroup'
 
@@ -8,7 +8,7 @@ type Props<TFieldValues extends FieldValues> = Omit<
 > &
   UseControllerProps<TFieldValues>
 
-export const ControlledRadioGroup = <TFieldValues extends FieldValues>({
+export const RadioGroupControl = <TFieldValues extends FieldValues>({
   control,
   defaultValue,
   disabled,

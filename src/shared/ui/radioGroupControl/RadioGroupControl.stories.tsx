@@ -3,14 +3,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 import { Button } from '@/shared/ui/button'
-import { ControlledRadioGroup } from '@/shared/ui/radioGroupControl/ControlledRadioGroup'
+import { RadioGroupControl } from '@/shared/ui/radioGroupControl/RadioGroupControl'
 
 type FormValues = {
   gender: string
 }
 
 const meta = {
-  component: ControlledRadioGroup,
+  component: RadioGroupControl,
   decorators: Story => {
     const methods = useForm<FormValues>({
       defaultValues: {
@@ -32,8 +32,8 @@ const meta = {
     )
   },
   tags: ['autodocs'],
-  title: 'Components/ControlledRadioGroup',
-} satisfies Meta<typeof ControlledRadioGroup>
+  title: 'Components/RadioGroupControl',
+} satisfies Meta<typeof RadioGroupControl>
 
 export default meta
 type Story = StoryObj<typeof meta>
