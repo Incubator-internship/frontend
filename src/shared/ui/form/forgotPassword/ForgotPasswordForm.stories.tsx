@@ -2,7 +2,6 @@ import ForgotPasswordForm from '@/shared/ui/form/forgotPassword/ForgotPasswordFo
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof ForgotPasswordForm> = {
-  argTypes: {},
   component: ForgotPasswordForm,
   tags: ['autodocs'],
   title: 'forms/ForgotPasswordForm',
@@ -12,9 +11,7 @@ export default meta
 type Story = StoryObj<typeof ForgotPasswordForm>
 
 export const DefaultStory: Story = {
-  args: {
-    isRequired: true,
-    label: 'ForgotPasswordForm label',
+  render: () => {
+    return <ForgotPasswordForm />
   },
-  name: 'Default ForgotPasswordForm',
 }

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react'
 
 import Recaptcha from './Recaptcha'
 
-const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 
 const meta: Meta<typeof Recaptcha> = {
   argTypes: {
@@ -10,7 +10,7 @@ const meta: Meta<typeof Recaptcha> = {
       control: 'text',
       description: 'Error message to display',
     },
-    siteKey: {
+    sitekey: {
       control: 'text',
       description: 'site key',
     },
@@ -25,7 +25,7 @@ type Story = StoryObj<typeof Recaptcha>
 
 export const Default: Story = {
   args: {
-    siteKey: siteKey,
+    sitekey: sitekey,
   },
   name: 'ReCaptcha Default',
 }
@@ -33,7 +33,7 @@ export const Default: Story = {
 export const ErrorStory: Story = {
   args: {
     error: 'Verification failed',
-    siteKey: siteKey,
+    sitekey: sitekey,
   },
   name: 'ReCaptcha Error',
 }
