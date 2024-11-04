@@ -41,7 +41,7 @@ export const Default: Story = {
 export const ModalState: Story = {
   parameters: {
     group: 'Modal',
-    title: 'Modal',
+    title: 'ModalState',
   },
   render: () => {
     const [state, setState] = useState<boolean>(false)
