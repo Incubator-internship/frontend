@@ -10,19 +10,28 @@ export type TypographyProps<T extends ElementType = 'p'> = {
   as?: T
   children?: React.ReactNode
   className?: string
-  color?: 'black' | 'danger' | 'link' | 'red'
+  color?: 'black' | 'danger' | 'grey' | 'link' | 'red' | 'white'
   variant?:
     | 'body1'
     | 'body2'
+    | 'boldText14'
+    | 'boldText16'
     | 'caption'
     | 'h1'
     | 'h2'
     | 'h3'
     | 'h4'
+    | 'large'
     | 'link1'
     | 'link2'
     | 'mediumText14'
     | 'overline'
+    | 'regularLink'
+    | 'regularText14'
+    | 'regularText16'
+    | 'semiBoldSmallText'
+    | 'smallLink'
+    | 'smallText'
     | 'subtitle1'
     | 'subtitle2'
 } & ComponentPropsWithoutRef<T>
