@@ -12,8 +12,11 @@ export type TypographyProps<T extends ElementType = 'p'> = {
   className?: string
   color?: 'black' | 'danger' | 'link' | 'red'
   variant?:
+    | 'Large'
     | 'body1'
     | 'body2'
+    | 'boldText14'
+    | 'boldText16'
     | 'caption'
     | 'h1'
     | 'h2'
@@ -23,6 +26,11 @@ export type TypographyProps<T extends ElementType = 'p'> = {
     | 'link2'
     | 'mediumText14'
     | 'overline'
+    | 'regularLink'
+    | 'regularText16'
+    | 'semiBoldSmallText'
+    | 'smallLink'
+    | 'smallText'
     | 'subtitle1'
     | 'subtitle2'
 } & ComponentPropsWithoutRef<T>
