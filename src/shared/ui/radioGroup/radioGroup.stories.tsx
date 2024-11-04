@@ -14,7 +14,7 @@ type Story = StoryObj<typeof FormRadioGroup>
 
 export const CustomFormRadioGroup: Story = {
   args: {
-    defaultValue: 'Value One',
+    defaultValue: 'Value Two',
     options: [
       { label: 'Value One', value: 'Value One' },
       { label: 'Value Two', value: 'Value Two' },
