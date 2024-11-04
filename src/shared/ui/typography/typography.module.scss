@@ -136,10 +136,10 @@
 
 .regularLink {
   @include typography(var(--font-size-s), var(--font-weight-400), var(--line-height-m));
-  color: var(--color-primary-500);
+  color: var(--color-accent-500);
 }
 
 .smallLink {
   @include typography(var(--font-size-xs), var(--font-weight-400), var(--line-height-s));
-  color: var(--color-primary-500);
+  color: var(--color-accent-500);
 }
