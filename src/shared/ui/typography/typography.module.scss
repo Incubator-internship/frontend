@@ -1,3 +1,9 @@
+@mixin typography($font-size, $font-weight, $line-height) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
 .typography {
   font-family: Roboto, sans-serif;
 }
@@ -103,7 +109,9 @@
 }
 
 .mediumText14 {
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-500);
-  line-height: var(--line-height-m);
+  @include typography(var(--font-size-s), var(--font-weight-500), var(--line-height-m));
+}
+
+.regularText14 {
+  @include typography(var(--font-size-s), var(--font-weight-400), var(--line-height-m));
 }
