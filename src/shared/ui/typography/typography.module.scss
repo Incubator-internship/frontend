@@ -29,21 +29,15 @@
 }
 
 .h1 {
-  font-size: var(--font-size-xxl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-l);
+  @include typography(var(--font-size-xl), var(--font-weight-700), var(--line-height-l));
 }
 
 .h2 {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-l);
+  @include typography(var(--font-size-l), var(--font-weight-700), var(--line-height-m));
 }
 
 .h3 {
-  font-size: var(--font-size-l);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-m);
+  @include typography(var(--font-size-m), var(--font-weight-600), var(--line-height-m));
 }
 
 .h4 {
@@ -108,10 +102,44 @@
   text-decoration: underline;
 }
 
-.mediumText14 {
-  @include typography(var(--font-size-s), var(--font-weight-500), var(--line-height-m));
+.large {
+  @include typography(var(--font-size-ssl), var(--font-weight-600), var(--line-height-l));
+}
+
+.regularText16 {
+  @include typography(var(--font-size-m), var(--font-weight-400), var(--line-height-m));
+}
+
+.boldText16 {
+  @include typography(var(--font-size-m), var(--font-weight-700), var(--line-height-m));
 }
 
 .regularText14 {
   @include typography(var(--font-size-s), var(--font-weight-400), var(--line-height-m));
+}
+
+.mediumText14 {
+  @include typography(var(--font-size-s), var(--font-weight-500), var(--line-height-m));
+}
+
+.boldText14 {
+  @include typography(var(--font-size-s), var(--font-weight-700), var(--line-height-m));
+}
+
+.smallText {
+  @include typography(var(--font-size-xs), var(--font-weight-400), var(--line-height-s));
+}
+
+.semiBoldSmallText {
+  @include typography(var(--font-size-xs), var(--font-weight-600), var(--line-height-s));
+}
+
+.regularLink {
+  @include typography(var(--font-size-s), var(--font-weight-400), var(--line-height-m));
+  color: var(--color-primary-500);
+}
+
+.smallLink {
+  @include typography(var(--font-size-xs), var(--font-weight-400), var(--line-height-s));
+  color: var(--color-primary-500);
 }
