@@ -10,7 +10,7 @@ export type TypographyProps<T extends ElementType = 'p'> = {
   as?: T
   children?: React.ReactNode
   className?: string
-  color?: 'black' | 'danger' | 'link' | 'red'
+  color?: 'black' | 'danger' | 'grey' | 'link' | 'red'
   variant?:
     | 'body1'
     | 'body2'
