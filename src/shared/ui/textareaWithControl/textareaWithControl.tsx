@@ -6,6 +6,8 @@ import clsx from 'clsx'
 
 import s from './textareaWithControl.module.scss'
 
+import { Textarea } from '../textarea/Textarea'
+
 type FormValues = {
   textarea: string
 }
@@ -23,7 +25,6 @@ export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, Textare
     const {
       control,
       formState: { errors },
-      handleSubmit,
     } = useForm<FormValues>({
       mode: 'all',
     })
@@ -43,7 +44,7 @@ export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, Textare
     }
 
     return (
-      <form className={className} onSubmit={onSubmit ? handleSubmit(onSubmit) : undefined}>
+      <div className={className}>
         {label && (
           <Typography
             as={'label'}
@@ -54,12 +55,12 @@ export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, Textare
             {label}
           </Typography>
         )}
-        <textarea
+        <Textarea
           {...restProps}
           {...field}
-          className={clsx(s.textarea, error || errors.textarea ? s.textareaError : '')}
+          className={clsx(s.textarea, error || errors.textarea, disabled ? s.textareaDisabled : '')}
           disabled={disabled}
-          id={id}
+          error={errors.textarea?.message}
           onChange={changeHandler}
           ref={ref}
         />
@@ -68,7 +69,7 @@ export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, Textare
             {errors.textarea?.message}
           </Typography>
         )}
-      </form>
+      </div>
     )
   }
 )
