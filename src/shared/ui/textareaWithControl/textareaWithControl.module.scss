@@ -1,0 +1,54 @@
+// .textarea {
+//   &::placeholder {
+//     color: var(--color-light-900);
+//     transition: all var(--transition);
+//   }
+
+//   &:active {
+//     border-color: var(--color-light-100);
+
+//     &::placeholder {
+//       color: var(--color-light-100);
+//     }
+//   }
+
+//   &:hover {
+//     border-color: var(--color-light-900);
+
+//     &::placeholder {
+//       color: var(--color-light-900);
+//     }
+//   }
+
+//   &:focus {
+//     border-color: transparent;
+//     outline: 2px solid var(--color-accent-500);
+//   }
+
+//   &:disabled {
+//     pointer-events: none;
+//     border-color: var(--color-dark-100);
+
+//     &::placeholder {
+//       color: var(--color-dark-100);
+//     }
+//   }
+// }
+
+// .textareaError {
+//   border-color: var(--color-danger-500);
+//   outline: none;
+// }
+
+// .error {
+//   color: var(--color-danger-500);
+// }
+
+// .label {
+//   color: var(--color-light-900);
+// }
+
+// .labelDisabled {
+//   pointer-events: none;
+//   color: var(--color-dark-100);
+// }

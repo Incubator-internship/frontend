@@ -31,11 +31,6 @@ export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, Textare
       },
     })
 
-    const changeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-      field.onChange(e)
-      onChange?.(e)
-    }
-
     return (
       <div className={className}>
         <Textarea
@@ -44,7 +39,6 @@ export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, Textare
           className={className}
           disabled={disabled}
           error={errors.textarea?.message}
-          onChange={changeHandler}
           ref={ref}
         />
       </div>
