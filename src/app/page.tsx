@@ -12,9 +12,6 @@ export default function Home() {
           <Link href={'/signin'}>Signin</Link>
           <Link href={'/profile'}>Profile</Link>
         </div>
-        <div style={{ margin: '40px', maxWidth: '480px' }}>
-          <TextareaWithControl />
-        </div>
       </main>
     </div>
   )
