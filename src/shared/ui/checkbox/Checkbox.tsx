@@ -22,10 +22,10 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => {
   const { className, disabled, error, isRequired, label, ...rest } = props
 
   return (
-    <div>
+    <div className={className}>
       <div className={s.container}>
         <RadixCheckbox.Root
-          className={clsx(s.root, error && s.error, className)}
+          className={clsx(s.root, error && s.error)}
           disabled={disabled}
           id={id}
           ref={ref}
