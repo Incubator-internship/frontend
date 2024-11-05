@@ -1,4 +1,4 @@
-import ForgotPasswordForm from '@/shared/ui/form/forgotPassword/ForgotPasswordForm'
+import { ForgotPasswordForm } from '@/shared/ui/form/forgotPassword/ForgotPasswordForm'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof ForgotPasswordForm> = {
