@@ -4,17 +4,16 @@ import Close from '@/shared/assets/icons/Close'
 
 import s from './modal.module.scss'
 
-import { Button } from '../button'
 import { Typography } from '../typography'
 
 export type ModalProps = {
+  children?: React.ReactNode
   isOpen?: boolean
-  message?: string
   onClose?: () => void
   title?: string
 }
 
-export const Modal = ({ isOpen = true, message, onClose, title }: ModalProps) => {
+export const Modal = ({ children, isOpen = true, onClose, title }: ModalProps) => {
   if (!isOpen) {
     return null
   }
@@ -27,14 +26,7 @@ export const Modal = ({ isOpen = true, message, onClose, title }: ModalProps) =>
           <Close className={s.close}></Close>
         </button>
       </div>
-      <div className={s.body}>
-        <Typography as={'p'} className={s.text}>
-          {message}
-        </Typography>
-        <Button className={s.button} onClick={onClose}>
-          OK
-        </Button>
-      </div>
+      <div className={s.body}>{children}</div>
     </div>
   )
 }

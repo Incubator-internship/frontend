@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 
 import { Button } from '../button'
+import { Typography } from '../typography'
 import { Modal } from './modal'
 
 const meta = {
@@ -31,42 +32,82 @@ export default meta
 export type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
-  args: {
-    isOpen: true,
-    message: 'We have sent a link to confirm your email to epam@epam.com',
-    title: 'Email sent',
+  parameters: {
+    group: 'Modal',
+    title: 'Default',
+  },
+  render: () => {
+    return (
+      <div style={{ maxWidth: '380px' }}>
+        <Modal title={'Email sent'}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography as={'p'} style={{}} variant={'body1'}>
+              We have sent a link to confirm your email to epam@epam.com
+            </Typography>
+            <Button style={{ alignSelf: 'end', marginTop: '20px', padding: '6px 36px' }}>OK</Button>
+          </div>
+        </Modal>
+      </div>
+    )
+  },
+}
+
+export const SuccessVariant: Story = {
+  parameters: {
+    group: 'Modal',
+    title: 'Default',
+  },
+  render: () => {
+    return (
+      <div style={{ maxWidth: '380px' }}>
+        <Modal title={'Success'}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <Typography as={'p'} style={{}} variant={'body1'}>
+              Payment was successfull
+            </Typography>
+            <Button style={{ marginTop: '50px' }}>OK</Button>
+          </div>
+        </Modal>
+      </div>
+    )
   },
 }
 
 export const ModalState: Story = {
   parameters: {
     group: 'Modal',
-    title: 'ModalState',
+    title: 'Default',
   },
   render: () => {
-    const [state, setState] = useState<boolean>(false)
+    const [state, setState] = useState<boolean>(true)
 
     return (
-      <>
-        <div
-          style={{
-            alignItems: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '30px',
-          }}
-        >
-          <Button onClick={() => setState(!state)} style={{ maxWidth: '200px' }} type={'button'}>
-            Open modal
-          </Button>
-          <Modal
-            isOpen={state}
-            message={'We have sent a link to confirm your email to epam@epam.com'}
-            onClose={() => setState(!state)}
-            title={'Email sent'}
-          />
-        </div>
-      </>
+      <div style={{ maxWidth: '380px' }}>
+        <Modal isOpen={state} onClose={() => setState(!state)} title={'Unfollow'}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ alignItems: 'center', display: 'flex' }}>
+              <img
+                alt={'ava'}
+                src={
+                  'https://media.istockphoto.com/id/1361394182/photo/funny-british-shorthair-cat-portrait-looking-shocked-or-surprised.jpg?s=612x612&w=0&k=20&c=6yvVxdufrNvkmc50nCLCd8OFGhoJd6vPTNotl90L-vo='
+                }
+                style={{ borderRadius: '50%', display: 'inline', height: '40px', width: '40px' }}
+              />
+              <Typography as={'p'} style={{ marginLeft: '15px' }} variant={'body1'}>
+                Do you really want to unfollow from this user?
+              </Typography>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '15px' }}>
+              <Button style={{ marginTop: '20px', padding: '6px 36px' }} variant={'transparent'}>
+                Yes
+              </Button>
+              <Button style={{ marginLeft: '15px', marginTop: '20px', padding: '6px 36px' }}>
+                No
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      </div>
     )
   },
 }
