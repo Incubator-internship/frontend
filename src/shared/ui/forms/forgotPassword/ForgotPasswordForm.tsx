@@ -42,6 +42,11 @@ export const ForgotPasswordForm = () => {
     setIsModalOpen(true)
   })
 
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setIsSent(true)
+  }
+
   return (
     <form className={s.forgotPasswordForm} onSubmit={onSubmit}>
       <Typography className={s.title} color={'grey'} variant={'h1'}>
@@ -60,13 +65,18 @@ export const ForgotPasswordForm = () => {
       <Typography color={'grey'} variant={'regularText14'}>
         Enter your email address and we will send you further instructions{' '}
       </Typography>
+      {isSent && (
+        <Typography color={'white'} variant={'regularText14'}>
+          The link has been sent by email. If you don’t receive an email send link again
+        </Typography>
+      )}
       <Button fullWidth type={'submit'} variant={'primary'}>
-        Send Link
+        {`Send Link${isSent ? ' Again' : ''}`}
       </Button>
       <Button as={Link} fullWidth href={'/signin'} variant={'transparent'}>
         Back to Sign In
       </Button>
-      <Recaptcha sitekey={sitekey} />
+      {!isSent && <Recaptcha sitekey={sitekey} />}
       {isModalOpen && (
         <div
           style={{
@@ -83,7 +93,7 @@ export const ForgotPasswordForm = () => {
           }}
         >
           MODAL
-          <Button onClick={() => setIsModalOpen(false)}>Close</Button>
+          <Button onClick={() => closeModal()}>Close</Button>
         </div>
       )}
     </form>
