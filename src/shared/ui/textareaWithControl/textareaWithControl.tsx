@@ -1,11 +1,6 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, useId } from 'react'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 
-import { Typography } from '@/shared/ui/typography'
-import clsx from 'clsx'
-
-import s from './textareaWithControl.module.scss'
-
 import { Textarea } from '../textarea/Textarea'
 
 type FormValues = {
@@ -20,8 +15,6 @@ type TextareaProps = {
 
 export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, disabled, error, label, onChange, onSubmit, ...restProps }, ref) => {
-    const id = useId()
-
     const {
       control,
       formState: { errors },
@@ -45,30 +38,15 @@ export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, Textare
 
     return (
       <div className={className}>
-        {label && (
-          <Typography
-            as={'label'}
-            className={clsx(s.label, disabled ? s.labelDisabled : '')}
-            htmlFor={id}
-            variant={'body2'}
-          >
-            {label}
-          </Typography>
-        )}
         <Textarea
           {...restProps}
           {...field}
-          className={clsx(s.textarea, error || errors.textarea, disabled ? s.textareaDisabled : '')}
+          className={className}
           disabled={disabled}
           error={errors.textarea?.message}
           onChange={changeHandler}
           ref={ref}
         />
-        {(error || errors.textarea) && (
-          <Typography as={'div'} className={s.error} variant={'body2'}>
-            {errors.textarea?.message}
-          </Typography>
-        )}
       </div>
     )
   }

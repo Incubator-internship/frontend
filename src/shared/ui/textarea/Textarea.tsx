@@ -4,6 +4,8 @@ import clsx from 'clsx'
 
 import s from './textarea.module.scss'
 
+import { Typography } from '../typography'
+
 type TextareaProps = {
   error?: string
   label?: string
@@ -19,6 +21,16 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     return (
       <div className={className}>
+        {label && (
+          <Typography
+            as={'label'}
+            className={clsx(s.label, disabled ? s.labelDisabled : '')}
+            htmlFor={id}
+            variant={'body2'}
+          >
+            {label}
+          </Typography>
+        )}
         <textarea
           {...restProps}
           className={clsx(s.textarea, error ? s.textareaError : '')}
@@ -27,6 +39,11 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           onChange={changeHandler}
           ref={ref}
         />
+        {error && (
+          <Typography as={'div'} color={'red'} variant={'body2'}>
+            {error}
+          </Typography>
+        )}
       </div>
     )
   }
