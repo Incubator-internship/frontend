@@ -36,7 +36,7 @@ export const CheckboxControl = <TFieldValues extends FieldValues>({
       checked={value}
       error={error?.message}
       id={name}
-      onChange={onChange}
+      onCheckedChange={onChange}
       ref={ref}
     />
   )

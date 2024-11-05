@@ -33,7 +33,7 @@ export const Header = ({ count, isAuth }: Props) => {
             </Button>
           </div>
         )}
-        <Select defaultValue={'1'} variant={'narrow'} />
+        <Select defaultValue={'2'} items={[]} variant={'narrow'} />
       </div>
     </header>
   )
