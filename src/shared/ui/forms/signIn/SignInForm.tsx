@@ -1,6 +1,4 @@
-import EyeClose from '@/shared/assets/icons/EyeClose'
 import GithubIcon from '@/shared/assets/icons/GithubIcon'
-import githubIcon from '@/shared/assets/icons/GithubIcon'
 import GoogleIcon from '@/shared/assets/icons/GoogleIcon'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
