@@ -1,10 +1,12 @@
 'use client'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from '@/shared/ui/button'
 import { InputControl } from '@/shared/ui/inputControl'
 import Recaptcha from '@/shared/ui/recaptcha/Recaptcha'
 import { Typography } from '@/shared/ui/typography'
+import Link from 'next/link'
 
 import s from './ForgotPasswordForm.module.scss'
 
@@ -18,6 +20,9 @@ export const ForgotPasswordForm = () => {
   const sitekey =
     process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LeYP3QqAAAAAESr4XvYoiQ40gZHerd5UIpp1oFR'
 
+  const [isSent, setIsSent] = useState<boolean>(false)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+
   const {
     control,
     formState: { errors },
@@ -30,8 +35,11 @@ export const ForgotPasswordForm = () => {
 
   const emailRegex =
     /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
+
   const onSubmit = handleSubmit(data => {
     console.log(data)
+    setIsSent(true)
+    setIsModalOpen(true)
   })
 
   return (
@@ -55,10 +63,29 @@ export const ForgotPasswordForm = () => {
       <Button fullWidth type={'submit'} variant={'primary'}>
         Send Link
       </Button>
-      <Button fullWidth variant={'transparent'}>
+      <Button as={Link} fullWidth href={'/signin'} variant={'transparent'}>
         Back to Sign In
       </Button>
       <Recaptcha sitekey={sitekey} />
+      {isModalOpen && (
+        <div
+          style={{
+            alignItems: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            display: 'flex',
+            height: '100%',
+            justifyContent: 'center',
+            left: 0,
+            position: 'fixed',
+            top: 0,
+            width: '100%',
+            zIndex: 10,
+          }}
+        >
+          MODAL
+          <Button onClick={() => setIsModalOpen(false)}>Close</Button>
+        </div>
+      )}
     </form>
   )
 }
