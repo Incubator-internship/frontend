@@ -1,6 +1,6 @@
 'use client'
 
-import { TextareaWithControl } from '@/shared/ui/textareaWithControl'
+import { TextareaWithControl } from '@/shared/ui/textareaControl'
 import Link from 'next/link'
 
 export default function Home() {
