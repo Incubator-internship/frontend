@@ -32,16 +32,14 @@ export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, Textare
     })
 
     return (
-      <div className={className}>
-        <Textarea
-          {...restProps}
-          {...field}
-          className={className}
-          disabled={disabled}
-          error={errors.textarea?.message}
-          ref={ref}
-        />
-      </div>
+      <Textarea
+        {...restProps}
+        {...field}
+        className={className}
+        disabled={disabled}
+        error={errors.textarea?.message}
+        ref={ref}
+      />
     )
   }
 )
