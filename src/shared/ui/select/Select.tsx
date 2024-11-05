@@ -66,11 +66,7 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
         )}
         <RadixSelect.Root disabled={disabled} onValueChange={onChange} value={value} {...rest}>
           <RadixSelect.Trigger
-            className={clsx(
-              s.selectTrigger,
-              variant === 'narrow' ? s.selectVariantNarrow : '',
-              className
-            )}
+            className={clsx(s.selectTrigger, variant === 'narrow' ? s.selectVariantNarrow : '')}
             id={id}
           >
             <RadixSelect.Value placeholder={placeholder || 'Placeholder'} />
