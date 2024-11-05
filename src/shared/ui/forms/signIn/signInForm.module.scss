@@ -1,0 +1,29 @@
+.cardWrapper {
+  width: 378px;
+  height: 504px;
+}
+
+.iconsWrapper {
+  display: flex;
+  gap: 60px;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+}
+
+.typography {
+  margin-bottom: 13px;
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+}
+
+.link {
+  color: var(--color-light-900);
+  text-decoration: none;
+}
