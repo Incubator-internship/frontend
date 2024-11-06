@@ -11,4 +11,8 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {}
+export const SignIn: Story = {
+  args: {
+    onSubmit: data => console.log('onSubmit', data),
+  },
+}
