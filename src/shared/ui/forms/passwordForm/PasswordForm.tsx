@@ -58,14 +58,16 @@ export const PasswordForm = () => {
       <Typography className={s.createNewPasswordTitle} variant={'h2'}>
         Create new password
       </Typography>
-      <PasswordFormItem control={control} onSubmit={onSubmit} />
-      <Typography color={'red'} variant={'body2'}></Typography>
-      <Typography className={s.createNewPasswordHelper} color={'grey'} variant={'body2'}>
-        Your password must be between 6 and 20 characters
-      </Typography>
-      <Button disabled={!isDirty || !isValid} fullWidth type={'submit'}>
-        <Typography variant={'body1'}>Create new password</Typography>
-      </Button>
+      <form onSubmit={onSubmit}>
+        <PasswordFormItem control={control} onSubmit={onSubmit} />
+        <Typography color={'red'} variant={'body2'}></Typography>
+        <Typography className={s.createNewPasswordHelper} color={'grey'} variant={'body2'}>
+          Your password must be between 6 and 20 characters
+        </Typography>
+        <Button disabled={!isDirty || !isValid} fullWidth type={'submit'}>
+          <Typography variant={'body1'}>Create new password</Typography>
+        </Button>
+      </form>
     </Card>
   )
 }
