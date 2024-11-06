@@ -1,8 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import { error } from 'console'
-
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { z } from 'zod'
@@ -29,7 +27,7 @@ export type FormValues = z.infer<typeof passwordSchema>
 export const PasswordForm = () => {
   const {
     control,
-    formState: { isDirty, isValid },
+    formState: { errors, isDirty, isValid },
     handleSubmit,
   } = useForm<FormValues>({
     defaultValues: {
@@ -47,8 +45,16 @@ export const PasswordForm = () => {
     }
   })
 
+  const errorCount = Object.keys(errors).length
+
   return (
-    <Card className={s.createNewPasswordForm}>
+    <Card
+      className={clsx(
+        s.createNewPasswordForm,
+        errorCount === 1 && s.createNewPasswordFormWithOneError,
+        errorCount >= 2 && s.createNewPasswordFormWithTwoErrors
+      )}
+    >
       <Typography className={s.createNewPasswordTitle} variant={'h2'}>
         Create new password
       </Typography>
