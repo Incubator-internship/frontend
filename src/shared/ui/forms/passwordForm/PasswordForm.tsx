@@ -65,7 +65,7 @@ export const PasswordForm = () => {
           Your password must be between 6 and 20 characters
         </Typography>
         <Button disabled={!isDirty || !isValid} fullWidth type={'submit'}>
-          <Typography variant={'body1'}>Create new password</Typography>
+          Create new password
         </Button>
       </form>
     </Card>
