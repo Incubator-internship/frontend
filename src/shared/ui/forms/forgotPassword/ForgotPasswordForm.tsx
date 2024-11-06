@@ -27,8 +27,7 @@ export type ForgotPasswordFormProps = {
 }
 
 export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
-  const sitekey =
-    process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LeYP3QqAAAAAESr4XvYoiQ40gZHerd5UIpp1oFR'
+  const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
 
   const [isSent, setIsSent] = useState<boolean>(false)
 
