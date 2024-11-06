@@ -5,7 +5,7 @@ import { PoliciesWrapper } from '@/shared/ui/policiesWrapper/PoliciesWrapper'
 const meta = {
   component: PoliciesWrapper,
   tags: ['autodocs'],
-  title: 'Components/policiesWrapper/policiesWrapper',
+  title: 'Components/PoliciesWrapper',
 } satisfies Meta<typeof PoliciesWrapper>
 
 export default meta
