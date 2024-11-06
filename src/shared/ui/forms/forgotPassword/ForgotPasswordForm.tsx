@@ -31,7 +31,6 @@ export const ForgotPasswordForm = () => {
     process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LeYP3QqAAAAAESr4XvYoiQ40gZHerd5UIpp1oFR'
 
   const [isSent, setIsSent] = useState<boolean>(false)
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   const {
     control,
@@ -48,11 +47,9 @@ export const ForgotPasswordForm = () => {
   const onSubmit = handleSubmit(data => {
     console.log(data)
     setIsSent(true)
-    setIsModalOpen(true)
   })
 
   const closeModal = () => {
-    setIsModalOpen(false)
     setIsSent(true)
   }
 
@@ -82,26 +79,6 @@ export const ForgotPasswordForm = () => {
         Back to Sign In
       </Button>
       {!isSent && <Recaptcha sitekey={sitekey} />}
-      {/* FIX: */}
-      {isModalOpen && (
-        <div
-          style={{
-            alignItems: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            display: 'flex',
-            height: '100%',
-            justifyContent: 'center',
-            left: 0,
-            position: 'fixed',
-            top: 0,
-            width: '100%',
-            zIndex: 10,
-          }}
-        >
-          TEMPORARY_MODAL
-          <Button onClick={() => closeModal()}>Close</Button>
-        </div>
-      )}
     </form>
   )
 }
