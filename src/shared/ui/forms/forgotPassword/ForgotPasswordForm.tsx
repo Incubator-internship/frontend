@@ -16,17 +16,17 @@ import s from './ForgotPasswordForm.module.scss'
 const ForgotPasswordSchema = z
   .object({
     email: emailSchema,
+    token: z.string().min(1),
   })
-  .refine(data => data.email, {
-    message: 'Invalid email address',
-    path: ['email'],
-  })
+  .required()
 
 type ForgotPasswordFields = z.infer<typeof ForgotPasswordSchema>
 
-export type ForgotPasswordFormProps = {}
+export type ForgotPasswordFormProps = {
+  onSubmit: (data: ForgotPasswordFields) => void
+}
 
-export const ForgotPasswordForm = () => {
+export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
   const sitekey =
     process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || '6LeYP3QqAAAAAESr4XvYoiQ40gZHerd5UIpp1oFR'
 
@@ -36,25 +36,37 @@ export const ForgotPasswordForm = () => {
     control,
     formState: { errors },
     handleSubmit,
+    reset,
+    setValue,
+    trigger,
   } = useForm<ForgotPasswordFields>({
     defaultValues: {
       email: '',
+      token: '',
     },
     mode: 'onBlur',
     resolver: zodResolver(ForgotPasswordSchema),
   })
 
-  const onSubmit = handleSubmit(data => {
-    console.log(data)
+  const onSubmitForm = handleSubmit(data => {
+    onSubmit({
+      email: data.email,
+      token: data.token,
+    })
     setIsSent(true)
+    reset({ email: '' })
   })
 
-  const closeModal = () => {
-    setIsSent(true)
+  const onChangeToken = (token: null | string) => {
+    if (token) {
+      setValue('token', token)
+    }
+
+    trigger('token')
   }
 
   return (
-    <form className={s.forgotPasswordForm} onSubmit={onSubmit}>
+    <form className={s.forgotPasswordForm} onSubmit={onSubmitForm}>
       <Typography className={s.title} color={'grey'} variant={'h1'}>
         Forgot Password
       </Typography>
@@ -65,7 +77,7 @@ export const ForgotPasswordForm = () => {
         placeholder={'Epam@epam.com'}
       />
       <Typography color={'grey'} variant={'regularText14'}>
-        Enter your email address and we will send you further instructions{' '}
+        Enter your email address and we will send you further instructions
       </Typography>
       {isSent && (
         <Typography color={'white'} variant={'regularText14'}>
@@ -78,7 +90,13 @@ export const ForgotPasswordForm = () => {
       <Button as={Link} fullWidth href={'/signin'} variant={'transparent'}>
         Back to Sign In
       </Button>
-      {!isSent && <Recaptcha sitekey={sitekey} />}
+      {!isSent && (
+        <Recaptcha
+          error={errors.token ? errors.token.message : undefined}
+          onChange={onChangeToken}
+          sitekey={sitekey}
+        />
+      )}
     </form>
   )
 }

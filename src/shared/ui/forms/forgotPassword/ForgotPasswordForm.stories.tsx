@@ -11,7 +11,7 @@ export default meta
 type Story = StoryObj<typeof ForgotPasswordForm>
 
 export const DefaultPasswordForm: Story = {
-  render: () => {
-    return <ForgotPasswordForm />
+  args: {
+    onSubmit: data => console.log('onSubmit', data),
   },
 }
