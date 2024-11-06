@@ -2,17 +2,27 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { emailSchema } from '@/shared/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { InputControl } from '@/shared/ui/inputControl'
 import Recaptcha from '@/shared/ui/recaptcha/Recaptcha'
 import { Typography } from '@/shared/ui/typography'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
+import { z } from 'zod'
 
 import s from './ForgotPasswordForm.module.scss'
 
-type ForgotPasswordFields = {
-  email: string
-}
+const ForgotPasswordSchema = z
+  .object({
+    email: emailSchema,
+  })
+  .refine(data => data.email, {
+    message: 'Invalid email address',
+    path: ['email'],
+  })
+
+type ForgotPasswordFields = z.infer<typeof ForgotPasswordSchema>
 
 export type ForgotPasswordFormProps = {}
 
@@ -31,10 +41,9 @@ export const ForgotPasswordForm = () => {
     defaultValues: {
       email: '',
     },
+    mode: 'onBlur',
+    resolver: zodResolver(ForgotPasswordSchema),
   })
-
-  const emailRegex =
-    /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
 
   const onSubmit = handleSubmit(data => {
     console.log(data)
@@ -52,15 +61,11 @@ export const ForgotPasswordForm = () => {
       <Typography className={s.title} color={'grey'} variant={'h1'}>
         Forgot Password
       </Typography>
-      <InputControl<ForgotPasswordFields>
+      <InputControl
         control={control}
         label={'Email'}
         name={'email'}
         placeholder={'Epam@epam.com'}
-        rules={{
-          pattern: { message: 'Invalid email address', value: emailRegex },
-          required: 'Email is required',
-        }}
       />
       <Typography color={'grey'} variant={'regularText14'}>
         Enter your email address and we will send you further instructions{' '}
@@ -77,11 +82,12 @@ export const ForgotPasswordForm = () => {
         Back to Sign In
       </Button>
       {!isSent && <Recaptcha sitekey={sitekey} />}
+      {/* FIX: */}
       {isModalOpen && (
         <div
           style={{
             alignItems: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            backgroundColor: 'rgba(0, 0, 0, 0.9)',
             display: 'flex',
             height: '100%',
             justifyContent: 'center',
@@ -92,7 +98,7 @@ export const ForgotPasswordForm = () => {
             zIndex: 10,
           }}
         >
-          MODAL
+          TEMPORARY_MODAL
           <Button onClick={() => closeModal()}>Close</Button>
         </div>
       )}

@@ -10,7 +10,7 @@ const meta: Meta<typeof ForgotPasswordForm> = {
 export default meta
 type Story = StoryObj<typeof ForgotPasswordForm>
 
-export const DefaultStory: Story = {
+export const DefaultPasswordForm: Story = {
   render: () => {
     return <ForgotPasswordForm />
   },
