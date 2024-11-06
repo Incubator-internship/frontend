@@ -43,10 +43,10 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
       email: '',
       token: '',
     },
-    mode: 'onBlur',
+    mode: 'onSubmit',
     resolver: zodResolver(ForgotPasswordSchema),
   })
-
+  //FIX: отправляет при просроченной рекапче
   const onSubmitForm = handleSubmit(data => {
     onSubmit({
       email: data.email,
@@ -57,10 +57,10 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
   })
 
   const onChangeToken = (token: null | string) => {
+    console.log('token', token)
     if (token) {
       setValue('token', token)
     }
-
     trigger('token')
   }
 
