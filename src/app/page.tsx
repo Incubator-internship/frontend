@@ -1,7 +1,7 @@
 'use client'
 
 import { Alert } from '@/shared/ui/alerts'
-import { PasswordForm } from '@/shared/ui/form/passwordForm'
+import { PasswordForm } from '@/shared/ui/forms/passwordForm'
 import Link from 'next/link'
 
 export default function Home() {
