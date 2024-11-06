@@ -1,6 +1,5 @@
 'use client'
 
-import { PasswordForm } from '@/shared/ui/forms/passwordForm'
 import Link from 'next/link'
 
 export default function Home() {
@@ -8,10 +7,9 @@ export default function Home() {
     <div>
       <main>
         <div>
-          {/* <Link href={'/signup'}>Signup</Link>
+          <Link href={'/signup'}>Signup</Link>
           <Link href={'/signin'}>Signin</Link>
-          <Link href={'/profile'}>Profile</Link> */}
-          <PasswordForm />
+          <Link href={'/profile'}>Profile</Link>
         </div>
       </main>
     </div>
