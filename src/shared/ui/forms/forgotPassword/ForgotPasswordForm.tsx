@@ -16,7 +16,7 @@ import s from './ForgotPasswordForm.module.scss'
 const ForgotPasswordSchema = z
   .object({
     email: emailSchema,
-    token: z.string().min(1),
+    token: z.string().min(1, { message: 'Required reCAPTCHA' }),
   })
   .required()
 
@@ -46,22 +46,27 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
     mode: 'onSubmit',
     resolver: zodResolver(ForgotPasswordSchema),
   })
-  //FIX: отправляет при просроченной рекапче
+
   const onSubmitForm = handleSubmit(data => {
-    onSubmit({
-      email: data.email,
-      token: data.token,
-    })
+    if (!data.token) {
+      trigger('token')
+
+      return
+    }
+    onSubmit(data)
     setIsSent(true)
-    reset({ email: '' })
+    reset({ email: '', token: '' })
   })
 
   const onChangeToken = (token: null | string) => {
     console.log('token', token)
     if (token) {
       setValue('token', token)
+      trigger('token')
+    } else {
+      setValue('token', '')
+      trigger('token')
     }
-    trigger('token')
   }
 
   return (
