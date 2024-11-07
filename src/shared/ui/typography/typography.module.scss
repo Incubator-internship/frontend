@@ -4,12 +4,6 @@
   line-height: $line-height;
 }
 
-@mixin typography($font-size, $font-weight, $line-height) {
-  font-size: $font-size;
-  font-weight: $font-weight;
-  line-height: $line-height;
-}
-
 .typography {
   font-family: Roboto, sans-serif;
 }
@@ -28,10 +22,6 @@
 
 .red {
   color: var(--color-danger-500);
-}
-
-.grey {
-  color: var(--color-light-900);
 }
 
 .link {
