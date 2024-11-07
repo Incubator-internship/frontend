@@ -2,8 +2,7 @@ import { Meta, StoryObj } from '@storybook/react'
 
 import Recaptcha from './Recaptcha'
 
-// в Storybook тк сторибук не имеет доступ к .env
-const defaultSitekey = '6LeYP3QqAAAAAESr4XvYoiQ40gZHerd5UIpp1oFR'
+const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
 
 const meta: Meta<typeof Recaptcha> = {
   argTypes: {
@@ -26,7 +25,7 @@ type Story = StoryObj<typeof Recaptcha>
 
 export const Default: Story = {
   args: {
-    sitekey: defaultSitekey,
+    sitekey: sitekey,
   },
   name: 'ReCaptcha Default',
 }
@@ -34,7 +33,7 @@ export const Default: Story = {
 export const ErrorStory: Story = {
   args: {
     error: 'Verification failed',
-    sitekey: defaultSitekey,
+    sitekey: sitekey,
   },
   name: 'ReCaptcha Error',
 }
