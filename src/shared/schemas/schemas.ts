@@ -35,3 +35,8 @@ export const passwordSchema = z
 export const agreeSchema = z.boolean().refine(val => val, {
   message: 'You must agree to the terms',
 })
+
+export const passwordLengthSchema = z
+  .string()
+  .min(6, { message: 'Invalid password' })
+  .max(20, { message: 'Invalid password' })

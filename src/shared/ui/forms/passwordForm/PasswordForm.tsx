@@ -1,6 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
+import { passwordLengthSchema } from '@/shared/schemas/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { z } from 'zod'
@@ -12,17 +13,17 @@ import { Card } from '../../card'
 import { Typography } from '../../typography'
 import { PasswordFormItem } from './passwordFormItem'
 
-const passwordSchema = z
+const passwordFormSchema = z
   .object({
-    newPassword: z.string().min(6).max(20),
-    passwordConfirmation: z.string().min(6).max(20),
+    newPassword: passwordLengthSchema,
+    passwordConfirmation: passwordLengthSchema,
   })
   .refine(data => data.newPassword === data.passwordConfirmation, {
     message: 'The passwords must match',
     path: ['passwordConfirmation'],
   })
 
-export type FormValues = z.infer<typeof passwordSchema>
+export type FormValues = z.infer<typeof passwordFormSchema>
 
 export const PasswordForm = () => {
   const {
@@ -35,7 +36,7 @@ export const PasswordForm = () => {
       passwordConfirmation: '',
     },
     mode: 'onBlur',
-    resolver: zodResolver(passwordSchema),
+    resolver: zodResolver(passwordFormSchema),
   })
 
   const onSubmit = handleSubmit(data => {
