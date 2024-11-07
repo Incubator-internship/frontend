@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import { passwordLengthSchema } from '@/shared/schemas/schemas'
+import { passwordSchema } from '@/shared/schemas/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { z } from 'zod'
@@ -15,8 +15,8 @@ import { PasswordFormItem } from './passwordFormItem'
 
 const passwordFormSchema = z
   .object({
-    newPassword: passwordLengthSchema,
-    passwordConfirmation: passwordLengthSchema,
+    newPassword: passwordSchema,
+    passwordConfirmation: passwordSchema,
   })
   .refine(data => data.newPassword === data.passwordConfirmation, {
     message: 'The passwords must match',
@@ -49,13 +49,7 @@ export const PasswordForm = () => {
   const errorCount = Object.keys(errors).length
 
   return (
-    <Card
-      className={clsx(
-        s.createNewPasswordForm,
-        errorCount === 1 && s.createNewPasswordFormWithOneError,
-        errorCount >= 2 && s.createNewPasswordFormWithTwoErrors
-      )}
-    >
+    <Card className={s.createNewPasswordForm}>
       <Typography className={s.createNewPasswordTitle} variant={'h2'}>
         Create new password
       </Typography>
