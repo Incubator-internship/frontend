@@ -33,7 +33,7 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
 
   const {
     control,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
     reset,
     setValue,
@@ -43,7 +43,7 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
       email: '',
       token: '',
     },
-    mode: 'onSubmit',
+    mode: 'onChange',
     resolver: zodResolver(ForgotPasswordSchema),
   })
 
@@ -88,7 +88,7 @@ export const ForgotPasswordForm = ({ onSubmit }: ForgotPasswordFormProps) => {
           The link has been sent by email. If you don’t receive an email send link again
         </Typography>
       )}
-      <Button fullWidth type={'submit'} variant={'primary'}>
+      <Button disabled={!isValid} fullWidth type={'submit'} variant={'primary'}>
         {`Send Link${isSent ? ' Again' : ''}`}
       </Button>
       <Button as={Link} fullWidth href={'/signin'} variant={'transparent'}>
