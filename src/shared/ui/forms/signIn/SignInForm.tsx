@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 
 import GithubIcon from '@/shared/assets/icons/GithubIcon'
 import GoogleIcon from '@/shared/assets/icons/GoogleIcon'
-import { emailSchema, passwordSchema } from '@/shared/schemas/schemas'
+import { emailSchema, passwordSchema } from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { InputControl } from '@/shared/ui/inputControl'
