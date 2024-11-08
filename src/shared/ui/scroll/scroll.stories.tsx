@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryFn, StoryObj } from '@storybook/react'
 
 import s from './scroll.module.scss'
 
 import { Typography } from '../typography'
-import { Scroll, ScrollProps } from './Scroll'
+import { Scroll, ScrollProps, itemsArray } from './Scroll'
 
 const meta = {
   argTypes: {
@@ -22,7 +22,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-const ScrollItems = [
+const ScrollItems: itemsArray[] = [
   { title: 'Option 1', value: '1' },
   { title: 'Option 2', value: '2' },
   { title: 'Option 3', value: '3' },
@@ -36,10 +36,10 @@ const ScrollItems = [
   { title: 'Option 11', value: '11' },
 ]
 
-const Template: Story = (args: ScrollProps) => (
+const ScrollStories: StoryFn<ScrollProps> = (args: ScrollProps) => (
   <div>
     <Scroll {...args}>
-      {args.items.map((item: { title: string; value: string }, index: number) => (
+      {args.items.map((item: itemsArray, index: number) => (
         <Typography as={'div'} className={s.itemScroll} key={`${item.value}-${index}`}>
           {item.title}
         </Typography>
@@ -55,7 +55,7 @@ export const ScrollVertical: Story = {
     orientation: 'vertical',
     width: '200px',
   },
-  render: (args: ScrollProps) => <Template {...args} />,
+  render: ScrollStories,
 }
 
 export const ScrollHorizontal: Story = {
@@ -65,5 +65,5 @@ export const ScrollHorizontal: Story = {
     orientation: 'horizontal',
     width: '200px',
   },
-  render: (args: ScrollProps) => <Template {...args} />,
+  render: ScrollStories,
 }
