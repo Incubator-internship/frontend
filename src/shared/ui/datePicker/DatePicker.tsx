@@ -1,5 +1,5 @@
-import React, { ComponentPropsWithoutRef, ElementRef } from 'react'
-import ReactDatePicker from 'react-datepicker'
+import React, { ForwardedRef } from 'react'
+import ReactDatePicker, { DatePickerProps as ReactDatePickerProps } from 'react-datepicker'
 
 import { DataPickerInput } from '@/shared/ui/datePicker/datePickerInput/DatePickerInput'
 import { Typography } from '@/shared/ui/typography'
@@ -13,10 +13,13 @@ import s from './datePicker.module.scss'
 export type DatePickerProps = {
   error?: string
   label?: string
-} & ComponentPropsWithoutRef<typeof ReactDatePicker>
+} & ReactDatePickerProps
 
-export const DatePicker = React.forwardRef<ElementRef<typeof ReactDatePicker>, DatePickerProps>(
-  ({ className, disabled, error, label, startDate, ...restProps }, ref) => {
+export const DatePicker = React.forwardRef(
+  (
+    { className, disabled, error, label, startDate, ...restProps }: DatePickerProps,
+    ref: ForwardedRef<ReactDatePicker> | undefined
+  ) => {
     return (
       <div className={clsx(className, disabled ? s.disabled : '')}>
         {label && (

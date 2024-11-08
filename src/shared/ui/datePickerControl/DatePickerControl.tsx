@@ -29,7 +29,12 @@ export const DatePickerControl = <T extends FieldValues>({
     shouldUnregister,
   })
 
-  debugger
-
-  return <DatePicker {...restProps} error={error?.message} selected={value} {...restField} />
+  return (
+    <DatePicker
+      {...(restProps as DatePickerProps)}
+      error={error?.message}
+      selected={value}
+      {...restField}
+    />
+  )
 }

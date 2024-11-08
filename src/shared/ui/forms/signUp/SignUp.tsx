@@ -6,11 +6,12 @@ import { agreeSchema, emailSchema, passwordSchema, usernameSchema } from '@/shar
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { CheckboxControl } from '@/shared/ui/checkboxControl/CheckboxControl'
+import { DatePickerControl } from '@/shared/ui/datePickerControl'
 import { InputControl } from '@/shared/ui/inputControl'
 import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { z } from 'zod'
+import { any, z } from 'zod'
 
 import s from './signUp.module.scss'
 
@@ -18,6 +19,7 @@ const signUpSchema = z
   .object({
     agree: agreeSchema,
     confirmPassword: passwordSchema,
+    date: any(),
     email: emailSchema,
     password: passwordSchema,
     username: usernameSchema,
@@ -53,6 +55,7 @@ export const SignUp = ({ onSubmit }: Props) => {
   const onSubmitForm = handleSubmit(data => {
     onSubmit({
       agree: data.agree,
+      date: data.date,
       email: data.email,
       password: data.password,
       username: data.username,
@@ -74,6 +77,7 @@ export const SignUp = ({ onSubmit }: Props) => {
           </button>
         </div>
         <form className={s.form} onSubmit={onSubmitForm}>
+          <DatePickerControl control={control} name={'date'} selectsRange />
           <InputControl
             className={s.input}
             control={control}
