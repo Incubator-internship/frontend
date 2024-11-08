@@ -18,9 +18,7 @@ export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, Textare
     const {
       control,
       formState: { errors },
-    } = useForm<FormValues>({
-      mode: 'all',
-    })
+    } = useForm<FormValues>()
 
     const { field } = useController({
       control,
