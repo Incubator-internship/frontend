@@ -2,7 +2,12 @@ import { useForm } from 'react-hook-form'
 
 import GitHub from '@/shared/assets/icons/GitHub'
 import Google from '@/shared/assets/icons/Google'
-import { agreeSchema, emailSchema, passwordSchema, usernameSchema } from '@/shared/schemas/schemas'
+import {
+  agreeSchema,
+  emailSchema,
+  passwordSchema,
+  usernameSchema,
+} from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { CheckboxControl } from '@/shared/ui/checkboxControl/CheckboxControl'

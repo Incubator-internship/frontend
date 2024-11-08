@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import { passwordSchema } from '@/shared/schemas/schemas'
+import { passwordSchema } from '@/shared/model/schemas/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { z } from 'zod'
