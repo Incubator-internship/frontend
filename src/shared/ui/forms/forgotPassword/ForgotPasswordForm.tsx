@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { emailSchema } from '@/shared/schemas/schemas'
+import { emailSchema } from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { InputControl } from '@/shared/ui/inputControl'
 import Recaptcha from '@/shared/ui/recaptcha/Recaptcha'
