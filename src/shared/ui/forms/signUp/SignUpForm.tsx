@@ -17,9 +17,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { z } from 'zod'
 
-import s from './signUp.module.scss'
+import s from './signUpForm.module.scss'
 
-const signUpSchema = z
+const signUpFormSchema = z
   .object({
     agree: agreeSchema,
     confirmPassword: passwordSchema,
@@ -32,13 +32,13 @@ const signUpSchema = z
     path: ['confirmPassword'],
   })
 
-export type FormValues = z.infer<typeof signUpSchema>
+export type FormValues = z.infer<typeof signUpFormSchema>
 
 type Props = {
   onSubmit: (data: Omit<FormValues, 'confirmPassword'>) => void
 }
 
-export const SignUp = ({ onSubmit }: Props) => {
+export const SignUpForm = ({ onSubmit }: Props) => {
   const {
     control,
     formState: { isDirty, isValid },
@@ -52,7 +52,7 @@ export const SignUp = ({ onSubmit }: Props) => {
       username: '',
     },
     mode: 'onBlur',
-    resolver: zodResolver(signUpSchema),
+    resolver: zodResolver(signUpFormSchema),
   })
 
   const onSubmitForm = handleSubmit(data => {

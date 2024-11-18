@@ -1,6 +1,6 @@
 'use client'
 
-export default function Home() {
+export default function SignUp() {
   return (
     <div>
       <main>Signup Page</main>
