@@ -11,7 +11,7 @@ const mutex = new Mutex()
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://excubator.xyz/api',
-  // credentials: 'include',
+  credentials: 'include',
   prepareHeaders: headers => {
     const token = localStorage.getItem('accessToken')
 
