@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 
 import { passwordSchema } from '@/shared/model/schemas/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
-import clsx from 'clsx'
 import { z } from 'zod'
 
 import s from './passwordForm.module.scss'
@@ -46,7 +45,6 @@ export const PasswordForm = () => {
     }
   })
 
-  const errorCount = Object.keys(errors).length
 
   return (
     <Card className={s.createNewPasswordForm}>
