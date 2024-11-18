@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import StoreProvider from '@/app/store/storeProvider'
+import StoreProvider from '@/app/config/store/storeProvider'
 import { Header } from '@/shared/ui/header'
 
 import '@/shared/styles/index.scss'
