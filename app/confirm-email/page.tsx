@@ -1,1 +1,1 @@
-export { default } from '@/pages/confirmEmail/ui/confirmEmail'
+export { default } from '@/pages/confirmEmail/ui/ConfirmEmail'

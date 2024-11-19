@@ -1,4 +1,5 @@
-import { useRegistrationConfirmationMutation } from '@/app/api/inctagramApi'
+'use client'
+
 import ConfirmEmailSuccess from '@/shared/assets/icons/confirmEmailSuccess'
 import { Button } from '@/shared/ui/button'
 import { Typography } from '@/shared/ui/typography'
@@ -6,7 +7,7 @@ import Link from 'next/link'
 
 import s from './confirmEmail.module.scss'
 
-export default function confirmEmail() {
+export default function ConfirmEmail() {
   return (
     <div className={s.page}>
       <Typography as={'h1'} className={s.title} variant={'h1'}>
