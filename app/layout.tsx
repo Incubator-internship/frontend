@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 
+import StoreProvider from '@/app/config/store/storeProvider'
 import { Header } from '@/shared/ui/header'
 
 import '@/shared/styles/index.scss'
@@ -21,10 +22,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={'en'}>
-      <body>
-        <Header count={0} isAuth={false} />
-        <main>{children}</main>
-      </body>
+      <StoreProvider>
+        <body>
+          <Header count={0} isAuth={false} />
+          <main>{children}</main>
+        </body>
+      </StoreProvider>
     </html>
   )
 }
