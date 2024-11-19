@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 
 import { passwordSchema } from '@/shared/model/schemas/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import s from './passwordForm.module.scss'
@@ -23,11 +24,14 @@ const passwordFormSchema = z
   })
 
 export type FormValues = z.infer<typeof passwordFormSchema>
+type PasswordFormProps = {
+  onSubmit: (data: Omit<FormValues, 'passwordConfirmation'>) => void
+}
 
-export const PasswordForm = () => {
+export const PasswordForm = ({ onSubmit }: PasswordFormProps) => {
   const {
     control,
-    formState: { errors, isDirty, isValid },
+    formState: { isDirty, isValid },
     handleSubmit,
   } = useForm<FormValues>({
     defaultValues: {
@@ -38,26 +42,34 @@ export const PasswordForm = () => {
     resolver: zodResolver(passwordFormSchema),
   })
 
-  const onSubmit = handleSubmit(data => {
-    return {
-      newPassword: data.newPassword,
-      passwordConfirmation: data.passwordConfirmation,
-    }
-  })
+  const router = useRouter()
+  const handleTransition = () => {
+    router.push('/signin')
+  }
 
+  const onSubmitForm = handleSubmit(data => {
+    onSubmit({
+      newPassword: data.newPassword,
+      //passwordConfirmation: data.passwordConfirmation,
+    })
+  })
 
   return (
     <Card className={s.createNewPasswordForm}>
       <Typography className={s.createNewPasswordTitle} variant={'h2'}>
         Create new password
       </Typography>
-      <form onSubmit={onSubmit}>
-        <PasswordFormItem control={control} onSubmit={onSubmit} />
-        <Typography color={'red'} variant={'body2'}></Typography>
+      <form onSubmit={onSubmitForm}>
+        <PasswordFormItem control={control} onSubmit={onSubmitForm} />
         <Typography className={s.createNewPasswordHelper} color={'grey'} variant={'body2'}>
           Your password must be between 6 and 20 characters
         </Typography>
-        <Button disabled={!isDirty || !isValid} fullWidth type={'submit'}>
+        <Button
+          disabled={!isDirty || !isValid}
+          fullWidth
+          onClick={handleTransition}
+          type={'submit'}
+        >
           Create new password
         </Button>
       </form>
