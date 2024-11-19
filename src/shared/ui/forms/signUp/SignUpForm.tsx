@@ -32,10 +32,10 @@ const signUpFormSchema = z
     path: ['confirmPassword'],
   })
 
-export type FormValues = z.infer<typeof signUpFormSchema>
+export type SignUpFormValues = z.infer<typeof signUpFormSchema>
 
 type Props = {
-  onSubmit: (data: Omit<FormValues, 'confirmPassword'>) => void
+  onSubmit: (data: Omit<SignUpFormValues, 'confirmPassword'>) => void
 }
 
 export const SignUpForm = ({ onSubmit }: Props) => {
@@ -43,7 +43,8 @@ export const SignUpForm = ({ onSubmit }: Props) => {
     control,
     formState: { isDirty, isValid },
     handleSubmit,
-  } = useForm<FormValues>({
+    reset,
+  } = useForm<SignUpFormValues>({
     defaultValues: {
       agree: true,
       confirmPassword: '',
@@ -62,6 +63,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
       password: data.password,
       username: data.username,
     })
+    reset()
   })
 
   return (

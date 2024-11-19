@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { FormValues, SignUpForm } from '@/shared/ui/forms/signUp/SignUpForm'
+import { SignUpForm, SignUpFormValues } from '@/shared/ui/forms/signUp/SignUpForm'
 
 const meta = {
   component: SignUpForm,
@@ -10,7 +10,7 @@ const meta = {
 
 export default meta
 type Story = StoryObj<typeof meta>
-const handleSignUp = (data: Omit<FormValues, 'confirmPassword'>) => {
+const handleSignUp = (data: Omit<SignUpFormValues, 'confirmPassword'>) => {
   console.log('Form Data:', data)
 }
 
