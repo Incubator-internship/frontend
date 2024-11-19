@@ -3,3 +3,7 @@ export type registrationArgs = {
   password: string
   userName: string
 }
+
+export type registrationConfirmationArgs = {
+  code: string
+}

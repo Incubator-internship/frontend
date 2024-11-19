@@ -1,3 +1,4 @@
+import { useRegistrationConfirmationMutation } from '@/app/api/inctagramApi'
 import ConfirmEmailSuccess from '@/shared/assets/icons/confirmEmailSuccess'
 import { Button } from '@/shared/ui/button'
 import { Typography } from '@/shared/ui/typography'
