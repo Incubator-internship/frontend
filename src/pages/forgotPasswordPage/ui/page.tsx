@@ -4,16 +4,16 @@ import { ForgotPasswordForm } from '@/shared/ui/forms/forgotPassword'
 
 import s from './page.module.scss'
 
-export default function Home() {
+export default function Page() {
   return (
     <div>
       <main>
         <div className={s.page}>
-          <ForgotPasswordForm onSubmit={() => {}} />
+          <ForgotPasswordForm />
         </div>
       </main>
     </div>
   )
 }
 
-// http://localhost:3000/forgotPasswordPage
+// http://localhost:3000/forgotpassword
