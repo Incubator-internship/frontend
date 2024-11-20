@@ -19,7 +19,7 @@ const signInSchema = z.object({
   password: passwordSchema,
 })
 
-type Schema = z.infer<typeof signInSchema>
+export type Schema = z.infer<typeof signInSchema>
 
 type Props = {
   onSubmit: (data: Schema) => void
