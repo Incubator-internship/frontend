@@ -1,16 +1,7 @@
 import { inctagramApi } from '@/app/api/inctagramApi'
 
-type GoodLoginAnswer = {
+type LoginAnswer = {
   accessToken: string
-}
-
-type BadLoginAnswer = {
-  errorsMessages: [Error]
-}
-
-type Error = {
-  field: string
-  message: string
 }
 
 export type LoginData = {
@@ -21,7 +12,7 @@ export type LoginData = {
 const loginApi = inctagramApi.injectEndpoints({
   endpoints(builder) {
     return {
-      login: builder.mutation<BadLoginAnswer | GoodLoginAnswer, LoginData>({
+      login: builder.mutation<LoginAnswer, LoginData>({
         query: loginInfo => ({
           body: loginInfo,
           method: 'POST',

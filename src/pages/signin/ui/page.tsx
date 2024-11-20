@@ -1,30 +1,43 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import { LoginData, useLoginMutation } from '@/app/api/signInApi'
 import { Schema, SignInForm } from '@/shared/ui/forms/signIn'
 import { clsx } from 'clsx'
+import { useRouter } from 'next/navigation'
 
 import s from './signInPage.module.scss'
 
 export default function SignInPage() {
   const [login, { data, isError, isLoading, isSuccess }] = useLoginMutation()
+  const router = useRouter()
 
   const handleSubmit = (data: Schema) => {
-    console.log('signInData', data)
-
-    const userDataForRequest: LoginData = {
+    const loginDataForRequest: LoginData = {
       loginOrEmail: data.email,
       password: data.password,
     }
 
-    login(userDataForRequest)
+    login(loginDataForRequest)
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem('accessToken', data.accessToken)
+      router.push('/profile')
+    }
+  }, [data, isSuccess, router])
 
   return (
     <main className={clsx(s.pageContainer)}>
-      <div className={clsx(s.formWrapper)}>
-        <SignInForm onSubmit={handleSubmit} />
-      </div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className={clsx(s.formWrapper)}>
+          <SignInForm isError={isError} onSubmit={handleSubmit} />
+        </div>
+      )}
     </main>
   )
 }

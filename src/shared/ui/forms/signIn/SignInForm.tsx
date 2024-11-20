@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import GithubIcon from '@/shared/assets/icons/GithubIcon'
@@ -14,7 +15,7 @@ import { z } from 'zod'
 
 import s from './signInForm.module.scss'
 
-const signInSchema = z.object({
+export const signInSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
 })
@@ -22,14 +23,16 @@ const signInSchema = z.object({
 export type Schema = z.infer<typeof signInSchema>
 
 type Props = {
+  isError: boolean
   onSubmit: (data: Schema) => void
 }
 
-export const SignInForm = ({ onSubmit }: Props) => {
+export const SignInForm = ({ isError, onSubmit }: Props) => {
   const {
     control,
     formState: { isDirty, isSubmitting, isValid },
     handleSubmit,
+    setError,
   } = useForm<Schema>({
     defaultValues: {
       email: '',
@@ -41,6 +44,15 @@ export const SignInForm = ({ onSubmit }: Props) => {
   const onSubmitForm = (data: Schema) => {
     onSubmit(data)
   }
+
+  useEffect(() => {
+    if (isError) {
+      setError('password', {
+        message: 'The email or password are incorrect. Try again please',
+        type: 'manual',
+      })
+    }
+  }, [isError, setError])
 
   return (
     <Card className={clsx(s.cardWrapper)}>
