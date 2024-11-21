@@ -15,7 +15,7 @@ const resendVerificationFormSchema = z.object({
 export type ResendVerificationFormValues = z.infer<typeof resendVerificationFormSchema>
 
 type Props = {
-  onSubmit: (data: Omit<ResendVerificationFormValues, 'confirmPassword'>) => void
+  onSubmit: (data: ResendVerificationFormValues) => void
 }
 
 export const ResendVerificationForm = ({ onSubmit }: Props) => {

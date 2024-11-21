@@ -1,4 +1,8 @@
-import { registrationArgs, registrationConfirmationArgs } from '@/app/api/inctagramApi.types'
+import {
+  registrationArgs,
+  registrationConfirmationArgs,
+  registrationResendingArgs,
+} from '@/app/api/inctagramApi.types'
 import { baseQueryWithReauth } from '@/app/api/inctagramBaseQuery'
 import { createApi } from '@reduxjs/toolkit/query/react'
 
@@ -30,6 +34,13 @@ export const inctagramApi = createApi({
         url: `/v1/auth/registration-confirmation`,
       }),
     }),
+    registrationResending: builder.mutation<void, registrationResendingArgs>({
+      query: args => ({
+        body: args,
+        method: 'POST',
+        url: `/v1/auth/registration-email-resending`,
+      }),
+    }),
   }),
   reducerPath: 'inctagramApi',
 })
@@ -39,4 +50,5 @@ export const {
   usePasswordRecoveryMutation,
   useRegistrationConfirmationMutation,
   useRegistrationMutation,
+  useRegistrationResendingMutation,
 } = inctagramApi

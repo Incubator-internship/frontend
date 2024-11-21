@@ -2,10 +2,17 @@
 
 import { useEffect, useLayoutEffect, useState } from 'react'
 
-import { useRegistrationConfirmationMutation } from '@/app/api/inctagramApi'
+import {
+  useRegistrationConfirmationMutation,
+  useRegistrationResendingMutation,
+} from '@/app/api/inctagramApi'
 import ConfirmEmailError from '@/shared/assets/icons/ConfirmEmailError'
 import ConfirmEmailSuccess from '@/shared/assets/icons/ConfirmEmailSuccess'
 import { Button } from '@/shared/ui/button'
+import {
+  ResendVerificationForm,
+  ResendVerificationFormValues,
+} from '@/shared/ui/forms/resendVerification'
 import { Typography } from '@/shared/ui/typography'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
@@ -15,6 +22,7 @@ import s from './confirmEmail.module.scss'
 export default function ConfirmEmail() {
   const [initialLoading, setInitialLoading] = useState(true)
   const [confirmEmail, { isError, isLoading }] = useRegistrationConfirmationMutation()
+  const [registrationResending] = useRegistrationResendingMutation()
 
   const searchParams = useSearchParams()
   const code = searchParams?.get('code')
@@ -24,6 +32,10 @@ export default function ConfirmEmail() {
       confirmEmail({ code }).finally(() => setInitialLoading(false))
     }
   }, [code, initialLoading])
+
+  const onSubmit = (data: ResendVerificationFormValues) => {
+    registrationResending(data)
+  }
 
   if (initialLoading || isLoading) {
     return <>Loading...</>
@@ -40,7 +52,9 @@ export default function ConfirmEmail() {
           : 'Your email has been confirmed'}
       </Typography>
       {isError ? (
-        ''
+        <div className={s.form}>
+          <ResendVerificationForm onSubmit={onSubmit} />
+        </div>
       ) : (
         <Button as={Link} className={s.button} href={'/signin'}>
           Sign In

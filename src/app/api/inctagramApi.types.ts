@@ -7,3 +7,7 @@ export type registrationArgs = {
 export type registrationConfirmationArgs = {
   code: string
 }
+
+export type registrationResendingArgs = {
+  email: string
+}
