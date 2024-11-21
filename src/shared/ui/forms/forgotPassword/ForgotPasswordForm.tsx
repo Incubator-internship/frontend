@@ -88,6 +88,12 @@ export const ForgotPasswordForm = () => {
         placeholder={'Epam@epam.com'}
       />
 
+      {serverError && (
+        <Typography color={'red'} variant={'regularText14'}>
+          {serverError}
+        </Typography>
+      )}
+
       <Typography color={'grey'} variant={'regularText14'}>
         Enter your email address and we will send you further instructions
       </Typography>
@@ -95,12 +101,6 @@ export const ForgotPasswordForm = () => {
       {isSent && (
         <Typography color={'white'} variant={'regularText14'}>
           The link has been sent by email. If you don’t receive an email, try again.
-        </Typography>
-      )}
-
-      {serverError && (
-        <Typography color={'red'} variant={'regularText14'}>
-          {serverError}
         </Typography>
       )}
 
