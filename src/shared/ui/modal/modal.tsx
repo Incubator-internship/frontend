@@ -20,13 +20,15 @@ export const Modal = ({ children, isOpen = true, onClose, title }: ModalProps) =
 
   return (
     <div className={s.modal}>
-      <div className={s.head}>
-        <Typography as={'h2'}>{title}</Typography>
-        <button onClick={onClose} type={'button'}>
-          <Close className={s.close}></Close>
-        </button>
+      <div className={s.modalContent}>
+        <div className={s.head}>
+          <Typography as={'h2'}>{title}</Typography>
+          <button onClick={onClose} type={'button'}>
+            <Close className={s.close}></Close>
+          </button>
+        </div>
+        <div className={s.body}>{children}</div>
       </div>
-      <div className={s.body}>{children}</div>
     </div>
   )
 }

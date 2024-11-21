@@ -1,58 +1,71 @@
 .modal{
-    overflow-y: auto;
-    
-    width: 100%;
-    min-height: 230px;
+    position: fixed;
+    top: 0;
+    left: 0;
 
-    font-family: var(--font-family-primary);
-    color: var(--color-light-100);
-    
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    background-color: var(--color-dark-300);
-    border: 1px solid var(--color-dark-100);
-    border-radius: var(--border-radius-xs);
+    width: 100vw;
+    height: 100vh;
 
-    
+    background-color: rgba($color: var(--color-dark-900), $alpha: 40%);
 
-    .head{
-        display: flex;
-        justify-content: space-between;
+    .modalContent{
+        overflow-y: auto;
 
-        max-width: 100%;
-        padding: 12px 24px;
+        padding: 20px;
 
-        font-size: var( --font-size-xl);
-        font-weight: var(--font-weight-bold);
-        line-height: var(--line-height-l);
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-        
+        font-family: var(--font-family-primary);
+        color: var(--color-light-100);
 
-        border-bottom: 1px solid var(--color-dark-100);
-        
-        h2{
-            max-width: 80%; 
+        background-color: var(--color-dark-300);
+        border: 1px solid var(--color-dark-100);
+        border-radius: var(--border-radius-xs);
+
+        .head{
+            display: flex;
+            justify-content: space-between;
+            
+            padding: 12px 24px;
+            
+            font-size: var( --font-size-xl);
+            font-weight: var(--font-weight-bold);
+            line-height: var(--line-height-l);
             word-wrap: break-word;
             overflow-wrap: break-word;
+            white-space: normal;
+                    
+            
+            border-bottom: 1px solid var(--color-dark-100);
+                    
+            h2{
+                max-width: 80%; 
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+                    
+            .close{
+                cursor: pointer;
+                transform: translateY(5px);
+                width: 24px;
+                height: 24px;
+            }
         }
-        
-        .close{
-            cursor: pointer;
-            transform: translateY(5px);
-            width: 24px;
-            height: 24px;
+
+        .body{
+            overflow-x: hidden;
+
+            margin-top: 10px;
+            padding: 12px 24px;
+
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
         }
     }
 
-    .body{
-        overflow-x: hidden;
-
-        margin-top: 10px;
-        padding: 12px 24px;
-
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-    }
+    
 }
+
