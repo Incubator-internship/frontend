@@ -1,0 +1,58 @@
+.card {
+  max-width: 378px;
+  padding: 24px;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+
+  > * {
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 60px;
+    }
+  }
+}
+
+.form {
+  width: 100%;
+}
+
+.title {
+  margin-bottom: 13px;
+}
+
+.input {
+  &:not(:last-child) {
+    margin-bottom: 24px;
+  }
+}
+
+.checkbox {
+  margin-bottom: 24px;
+
+  label {
+    cursor: pointer;
+  }
+
+  a {
+    color: var(--color-accent-300);
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.button {
+  margin-bottom: 18px;
+}
+
+.caption {
+  margin-top: 6px;
+}
