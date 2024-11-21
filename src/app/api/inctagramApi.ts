@@ -34,5 +34,9 @@ export const inctagramApi = createApi({
   reducerPath: 'inctagramApi',
 })
 
-export const { useGetUsersQuery, useRegistrationConfirmationMutation, useRegistrationMutation, usePasswordRecoveryMutation } =
-  inctagramApi
+export const {
+  useGetUsersQuery,
+  usePasswordRecoveryMutation,
+  useRegistrationConfirmationMutation,
+  useRegistrationMutation,
+} = inctagramApi

@@ -8,6 +8,7 @@ import ConfirmEmailSuccess from '@/shared/assets/icons/ConfirmEmailSuccess'
 import { Button } from '@/shared/ui/button'
 import { Typography } from '@/shared/ui/typography'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 import s from './confirmEmail.module.scss'
 
@@ -15,9 +16,14 @@ export default function ConfirmEmail() {
   const [initialLoading, setInitialLoading] = useState(true)
   const [confirmEmail, { isError, isLoading }] = useRegistrationConfirmationMutation()
 
+  const searchParams = useSearchParams()
+  const code = searchParams?.get('code')
+
   useEffect(() => {
-    confirmEmail({ code: '' }).finally(() => setInitialLoading(false))
-  }, [confirmEmail])
+    if (code && initialLoading) {
+      confirmEmail({ code }).finally(() => setInitialLoading(false))
+    }
+  }, [code, initialLoading])
 
   if (initialLoading || isLoading) {
     return <>Loading...</>
