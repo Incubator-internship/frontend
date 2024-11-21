@@ -26,6 +26,7 @@ export default function SignInPage() {
   useEffect(() => {
     if (isSuccess) {
       localStorage.setItem('accessToken', data.accessToken)
+      router.push('/profile')
     }
   }, [data, isSuccess, router])
 
