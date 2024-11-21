@@ -1,1 +1,1 @@
-export * from './ResendVerification'
+export * from './ResendVerificationForm'

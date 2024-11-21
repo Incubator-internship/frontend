@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import {
   ResendVerificationForm,
   ResendVerificationFormValues,
-} from '@/shared/ui/forms/resendVerification/ResendVerification'
+} from '@/shared/ui/forms/resendVerification/ResendVerificationForm'
 
 const meta = {
   component: ResendVerificationForm,

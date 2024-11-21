@@ -6,7 +6,7 @@ import { InputControl } from '@/shared/ui/inputControl'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 
-import s from './resendVerification.module.scss'
+import s from './resendVerificationForm.module.scss'
 
 const resendVerificationFormSchema = z.object({
   email: emailSchema,
