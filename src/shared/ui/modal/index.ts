@@ -1,1 +1,1 @@
-export * from './renamedModal'
+export * from './Modal'

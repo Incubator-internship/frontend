@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { Button } from '../button'
 import { Typography } from '../typography'
-import { Modal } from './renamedModal'
+import { Modal } from './Modal'
 
 const meta = {
   argTypes: {
