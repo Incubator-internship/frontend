@@ -18,15 +18,23 @@ export const Modal = ({ children, isOpen = true, onClose, title }: ModalProps) =
     return null
   }
 
+  const handleBackdropClick = (event: React.MouseEvent) => {
+    if (event.target === event.currentTarget) {
+      onClose?.()
+    }
+  }
+
   return (
-    <div className={s.modal}>
-      <div className={s.head}>
-        <Typography as={'h2'}>{title}</Typography>
-        <button onClick={onClose} type={'button'}>
-          <Close className={s.close}></Close>
-        </button>
+    <div className={s.backdrop} onClick={handleBackdropClick}>
+      <div className={s.modal}>
+        <div className={s.head}>
+          <Typography as={'h2'}>{title}</Typography>
+          <button onClick={onClose} type={'button'}>
+            <Close className={s.close}></Close>
+          </button>
+        </div>
+        <div className={s.body}>{children}</div>
       </div>
-      <div className={s.body}>{children}</div>
     </div>
   )
 }
