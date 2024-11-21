@@ -29,7 +29,6 @@ export const ForgotPasswordForm = () => {
   const router = useRouter()
 
   const [isSent, setIsSent] = useState(false)
-  const [serverError, setServerError] = useState<null | string>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [submittedEmail, setSubmittedEmail] = useState('')
 
@@ -57,20 +56,17 @@ export const ForgotPasswordForm = () => {
     }
 
     try {
-      setServerError(null)
       await passwordRecovery({ email: data.email }).unwrap()
       setIsSent(true)
       setSubmittedEmail(data.email)
       setIsModalOpen(true)
     } catch (error: any) {
-      if (error?.status === 400 && error?.data?.errorsMessages) {
-        const emailError = error.data.errorsMessages.find((err: any) => err.field === 'email')
-
-        if (emailError) {
-          setError('email', { message: emailError.message, type: 'server' })
-        }
+      if (error?.status === 400) {
+        setError('email', { message: "User with this email doesn't exist." })
       } else if (error?.status === 429) {
-        setServerError('You have exceeded the maximum number of attempts. Please try again later.')
+        setError('email', {
+          message: 'You have exceeded the maximum number of attempts. Please try again later.',
+        })
       } else {
         console.error('Password recovery error:', error)
       }
@@ -85,6 +81,7 @@ export const ForgotPasswordForm = () => {
   const handleModalClose = () => {
     setIsModalOpen(false)
     router.push('/createnewpassword')
+    setIsSent(false)
   }
 
   return (
@@ -99,12 +96,6 @@ export const ForgotPasswordForm = () => {
         name={'email'}
         placeholder={'Epam@epam.com'}
       />
-
-      {serverError && (
-        <Typography color={'red'} variant={'regularText14'}>
-          {serverError}
-        </Typography>
-      )}
 
       <Typography color={'grey'} variant={'regularText14'}>
         Enter your email address and we will send you further instructions
