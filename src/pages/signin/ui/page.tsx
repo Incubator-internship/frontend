@@ -32,6 +32,7 @@ export default function SignInPage() {
   return (
     <main className={clsx(s.pageContainer)}>
       {isLoading ? (
+        //TODO add the loading component when it's ready
         <div>Loading...</div>
       ) : (
         <div className={clsx(s.formWrapper)}>

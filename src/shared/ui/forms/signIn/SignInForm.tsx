@@ -71,7 +71,13 @@ export const SignInForm = ({ isError, onSubmit }: Props) => {
 
       <form className={clsx(s.formWrapper)} onSubmit={handleSubmit(onSubmitForm)}>
         <div className={clsx(s.inputsWrapper)}>
-          <InputControl control={control} label={'Email'} name={'email'} type={'email'} />
+          <InputControl
+            autoComplete={'email'}
+            control={control}
+            label={'Email'}
+            name={'email'}
+            type={'email'}
+          />
           <InputControl
             control={control}
             label={'Password'}
@@ -80,7 +86,12 @@ export const SignInForm = ({ isError, onSubmit }: Props) => {
           />
         </div>
 
-        <Typography as={'a'} className={clsx(s.link)} variant={'smallLink'}>
+        <Typography
+          as={Link}
+          className={clsx(s.link)}
+          href={'./forgotpassword'}
+          variant={'smallLink'}
+        >
           Forgot Password
         </Typography>
 
