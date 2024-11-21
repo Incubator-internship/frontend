@@ -7,8 +7,14 @@ export const inctagramApi = createApi({
     getUsers: builder.query({
       query: name => `v1/users`,
     }),
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        method: 'POST',
+        url: 'v1/auth/logout',
+      }),
+    }),
   }),
   reducerPath: 'inctagramApi',
 })
 
-export const { useGetUsersQuery } = inctagramApi
+export const { useGetUsersQuery, useLogoutMutation } = inctagramApi
