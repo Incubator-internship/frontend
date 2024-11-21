@@ -5,7 +5,7 @@ import { SignInForm } from '@/shared/ui/forms/signIn/SignInForm'
 const meta = {
   component: SignInForm,
   tags: ['autodocs'],
-  title: 'Components/Forms/SignInForm',
+  title: 'forms/SignInForm',
 } satisfies Meta<typeof SignInForm>
 
 export default meta

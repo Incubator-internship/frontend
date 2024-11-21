@@ -8,6 +8,7 @@ export default function Home() {
       <Link href={'/signup'}>Signup</Link>
       <Link href={'/signin'}>Signin</Link>
       <Link href={'/profile'}>Profile</Link>
+      <Link href={'/forgotpassword'}>ForgotPass</Link>
     </div>
   )
 }

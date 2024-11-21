@@ -1,58 +1,56 @@
-.modal{
-    overflow-y: auto;
-    
-    width: 100%;
-    min-height: 230px;
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-    font-family: var(--font-family-primary);
-    color: var(--color-light-100);
-    
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 378px;
+  min-height: 230px;
+  background-color: var(--color-dark-300);
+  border: 1px solid var(--color-dark-100);
+  border-radius: var(--border-radius-xs);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 1001;
+  overflow: hidden;
+}
 
-    background-color: var(--color-dark-300);
-    border: 1px solid var(--color-dark-100);
-    border-radius: var(--border-radius-xs);
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--color-dark-100);
+}
 
-    
+.head h2 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-light-100);
+}
 
-    .head{
-        display: flex;
-        justify-content: space-between;
+.head .close {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+}
 
-        max-width: 100%;
-        padding: 12px 24px;
-
-        font-size: var( --font-size-xl);
-        font-weight: var(--font-weight-bold);
-        line-height: var(--line-height-l);
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-        
-
-        border-bottom: 1px solid var(--color-dark-100);
-        
-        h2{
-            max-width: 80%; 
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        
-        .close{
-            cursor: pointer;
-            transform: translateY(5px);
-            width: 24px;
-            height: 24px;
-        }
-    }
-
-    .body{
-        overflow-x: hidden;
-
-        margin-top: 10px;
-        padding: 12px 24px;
-
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-    }
+.body {
+  padding: 12px 24px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  color: var(--color-light-100);
 }

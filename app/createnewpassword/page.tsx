@@ -1,1 +1,1 @@
-export { default } from '@/pages/createNewPassword/ui/CreateNewPassword'
+export { default } from '@/pages/createNewPassword/ui/page'
