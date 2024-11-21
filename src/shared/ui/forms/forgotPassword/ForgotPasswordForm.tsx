@@ -7,10 +7,12 @@ import { usePasswordRecoveryMutation } from '@/app/api/inctagramApi'
 import { emailSchema } from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { InputControl } from '@/shared/ui/inputControl'
+import { Modal } from '@/shared/ui/modal/modal'
 import Recaptcha from '@/shared/ui/recaptcha/Recaptcha'
 import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import s from './ForgotPasswordForm.module.scss'
@@ -24,9 +26,12 @@ type ForgotPasswordFields = z.infer<typeof ForgotPasswordSchema>
 
 export const ForgotPasswordForm = () => {
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
+  const router = useRouter()
 
   const [isSent, setIsSent] = useState(false)
   const [serverError, setServerError] = useState<null | string>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [submittedEmail, setSubmittedEmail] = useState('')
 
   const {
     control,
@@ -55,6 +60,8 @@ export const ForgotPasswordForm = () => {
       setServerError(null)
       await passwordRecovery({ email: data.email }).unwrap()
       setIsSent(true)
+      setSubmittedEmail(data.email)
+      setIsModalOpen(true)
     } catch (error: any) {
       if (error?.status === 400 && error?.data?.errorsMessages) {
         const emailError = error.data.errorsMessages.find((err: any) => err.field === 'email')
@@ -73,6 +80,11 @@ export const ForgotPasswordForm = () => {
   const handleRecaptchaChange = (token: null | string) => {
     setValue('token', token || '')
     trigger('token')
+  }
+
+  const handleModalClose = () => {
+    setIsModalOpen(false)
+    router.push('/createnewpassword')
   }
 
   return (
@@ -119,6 +131,15 @@ export const ForgotPasswordForm = () => {
           sitekey={sitekey}
         />
       )}
+
+      <Modal isOpen={isModalOpen} onClose={handleModalClose} title={'Email Sent Successfully'}>
+        <Typography color={'grey'} variant={'regularText14'}>
+          We have sent a link to confirm your email to <strong>{submittedEmail}</strong>.
+        </Typography>
+        <Button fullWidth onClick={handleModalClose} variant={'primary'}>
+          OK
+        </Button>
+      </Modal>
     </form>
   )
 }
