@@ -132,13 +132,15 @@ export const ForgotPasswordForm = () => {
         />
       )}
 
-      <Modal isOpen={isModalOpen} onClose={handleModalClose} title={'Email Sent Successfully'}>
+      <Modal isOpen={isModalOpen} onClose={handleModalClose} title={'Email Sent'}>
         <Typography color={'grey'} variant={'regularText14'}>
           We have sent a link to confirm your email to <strong>{submittedEmail}</strong>.
         </Typography>
-        <Button fullWidth onClick={handleModalClose} variant={'primary'}>
-          OK
-        </Button>
+        <div className={s.buttonWrapper}>
+          <Button onClick={handleModalClose} variant={'primary'}>
+            OK
+          </Button>
+        </div>
       </Modal>
     </form>
   )
