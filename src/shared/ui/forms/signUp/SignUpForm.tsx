@@ -2,7 +2,12 @@ import { useForm } from 'react-hook-form'
 
 import GitHub from '@/shared/assets/icons/GitHub'
 import Google from '@/shared/assets/icons/Google'
-import { agreeSchema, emailSchema, passwordSchema, usernameSchema } from '@/shared/schemas/schemas'
+import {
+  agreeSchema,
+  emailSchema,
+  passwordSchema,
+  usernameSchema,
+} from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { CheckboxControl } from '@/shared/ui/checkboxControl/CheckboxControl'
@@ -12,9 +17,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { any, z } from 'zod'
 
-import s from './signUp.module.scss'
+import s from './signUpForm.module.scss'
 
-const signUpSchema = z
+const signUpFormSchema = z
   .object({
     agree: agreeSchema,
     confirmPassword: passwordSchema,
@@ -27,13 +32,13 @@ const signUpSchema = z
     path: ['confirmPassword'],
   })
 
-export type FormValues = z.infer<typeof signUpSchema>
+export type FormValues = z.infer<typeof signUpFormSchema>
 
 type Props = {
   onSubmit: (data: Omit<FormValues, 'confirmPassword'>) => void
 }
 
-export const SignUp = ({ onSubmit }: Props) => {
+export const SignUpForm = ({ onSubmit }: Props) => {
   const {
     control,
     formState: { isDirty, isValid },
@@ -47,7 +52,7 @@ export const SignUp = ({ onSubmit }: Props) => {
       username: '',
     },
     mode: 'onBlur',
-    resolver: zodResolver(signUpSchema),
+    resolver: zodResolver(signUpFormSchema),
   })
 
   const onSubmitForm = handleSubmit(data => {

@@ -1,9 +1,10 @@
 import React, { ChangeEvent, ComponentPropsWithoutRef, useId } from 'react'
 
-import { Typography } from '@/shared/ui/typography'
 import clsx from 'clsx'
 
 import s from './textarea.module.scss'
+
+import { Typography } from '../typography'
 
 type TextareaProps = {
   error?: string
@@ -39,7 +40,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
         />
         {error && (
-          <Typography as={'div'} className={s.error} variant={'body2'}>
+          <Typography as={'div'} color={'red'} variant={'body2'}>
             {error}
           </Typography>
         )}
