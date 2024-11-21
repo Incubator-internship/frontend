@@ -6,7 +6,15 @@ export const inctagramApi = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({
     getUsers: builder.query({
-      query: name => `v1/users`,
+      query: () => '/v1/users',
+    }),
+
+    passwordRecovery: builder.mutation<void, { email: string }>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: '/v1/auth/password-recovery',
+      }),
     }),
     registration: builder.mutation<void, registrationArgs>({
       query: args => ({
@@ -26,5 +34,5 @@ export const inctagramApi = createApi({
   reducerPath: 'inctagramApi',
 })
 
-export const { useGetUsersQuery, useRegistrationConfirmationMutation, useRegistrationMutation } =
+export const { useGetUsersQuery, useRegistrationConfirmationMutation, useRegistrationMutation, usePasswordRecoveryMutation } =
   inctagramApi
