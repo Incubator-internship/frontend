@@ -7,8 +7,15 @@ export const inctagramApi = createApi({
     getUsers: builder.query({
       query: name => `v1/users`,
     }),
+    newPassword: builder.mutation<void, { newPassword: string; recoveryCode: string }>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: `/v1/auth/new-password`,
+      }),
+    }),
   }),
   reducerPath: 'inctagramApi',
 })
 
-export const { useGetUsersQuery } = inctagramApi
+export const { useGetUsersQuery, useNewPasswordMutation } = inctagramApi
