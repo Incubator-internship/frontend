@@ -33,7 +33,7 @@ export const ForgotPasswordForm = () => {
   const [submittedEmail, setSubmittedEmail] = useState('')
   const [isRecoveryCodeValid, setIsRecoveryCodeValid] = useState(true)
 
-  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const {
     control,
