@@ -12,7 +12,6 @@ import Recaptcha from '@/shared/ui/recaptcha/Recaptcha'
 import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import s from './ForgotPasswordForm.module.scss'
@@ -26,7 +25,6 @@ type ForgotPasswordFields = z.infer<typeof ForgotPasswordSchema>
 
 export const ForgotPasswordForm = () => {
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
-  const router = useRouter()
 
   const [isSent, setIsSent] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -80,8 +78,8 @@ export const ForgotPasswordForm = () => {
 
   const handleModalClose = () => {
     setIsModalOpen(false)
-    router.push('/createnewpassword')
-    setIsSent(false)
+
+    setIsSent(true)
   }
 
   return (
