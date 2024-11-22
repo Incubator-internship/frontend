@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { usePasswordRecoveryMutation } from '@/app/api/inctagramApi'
+import rafikiImage from '@/shared/assets/images/rafiki.png'
 import { emailSchema } from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { InputControl } from '@/shared/ui/inputControl'
@@ -11,8 +12,8 @@ import { Modal } from '@/shared/ui/modal/Modal'
 import Recaptcha from '@/shared/ui/recaptcha/Recaptcha'
 import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import s from './ForgotPasswordForm.module.scss'
@@ -26,12 +27,13 @@ type ForgotPasswordFields = z.infer<typeof ForgotPasswordSchema>
 
 export const ForgotPasswordForm = () => {
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
-  const router = useRouter()
 
   const [isSent, setIsSent] = useState(false)
-  const [serverError, setServerError] = useState<null | string>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [submittedEmail, setSubmittedEmail] = useState('')
+  const [isRecoveryCodeValid, setIsRecoveryCodeValid] = useState(true)
+
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const {
     control,
@@ -49,6 +51,35 @@ export const ForgotPasswordForm = () => {
 
   const [passwordRecovery] = usePasswordRecoveryMutation()
 
+  const startTimer = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+    }
+    timerRef.current = setTimeout(
+      () => {
+        setIsRecoveryCodeValid(false)
+      },
+      5 * 60 * 1000
+    ) // 5minutes
+  }
+
+  interface ApiError {
+    errorsMessages?: Array<{
+      field: string
+      message: string
+    }>
+    status: number
+  }
+
+  function isApiError(error: unknown): error is ApiError {
+    return (
+      typeof error === 'object' &&
+      error !== null &&
+      'status' in error &&
+      typeof (error as ApiError).status === 'number'
+    )
+  }
+
   const onSubmitForm = handleSubmit(async data => {
     if (!data.token) {
       trigger('token')
@@ -57,22 +88,21 @@ export const ForgotPasswordForm = () => {
     }
 
     try {
-      setServerError(null)
       await passwordRecovery({ email: data.email }).unwrap()
       setIsSent(true)
       setSubmittedEmail(data.email)
       setIsModalOpen(true)
-    } catch (error: any) {
-      if (error?.status === 400 && error?.data?.errorsMessages) {
-        const emailError = error.data.errorsMessages.find((err: any) => err.field === 'email')
-
-        if (emailError) {
-          setError('email', { message: emailError.message, type: 'server' })
+    } catch (error: unknown) {
+      if (isApiError(error)) {
+        if (error.status === 400) {
+          setError('email', { message: "User with this email doesn't exist." })
+        } else if (error.status === 429) {
+          setError('email', {
+            message: 'You have exceeded the maximum number of attempts. Please try again later.',
+          })
         }
-      } else if (error?.status === 429) {
-        setServerError('You have exceeded the maximum number of attempts. Please try again later.')
       } else {
-        console.error('Password recovery error:', error)
+        console.error('Unknown error:', error)
       }
     }
   })
@@ -84,52 +114,77 @@ export const ForgotPasswordForm = () => {
 
   const handleModalClose = () => {
     setIsModalOpen(false)
-    router.push('/createnewpassword')
+
+    setIsSent(true)
+    startTimer()
   }
+
+  //NOTE: Clear timer on unmount
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
+      }
+    }
+  }, [])
 
   return (
     <form className={s.forgotPasswordForm} onSubmit={onSubmitForm}>
-      <Typography className={s.title} color={'grey'} variant={'h1'}>
-        Forgot Password
-      </Typography>
+      {isRecoveryCodeValid && (
+        <>
+          <Typography className={s.title} color={'white'} variant={'h1'}>
+            Forgot Password
+          </Typography>
 
-      <InputControl
-        control={control}
-        label={'Email'}
-        name={'email'}
-        placeholder={'Epam@epam.com'}
-      />
+          <InputControl
+            control={control}
+            label={'Email'}
+            name={'email'}
+            placeholder={'Epam@epam.com'}
+          />
 
-      {serverError && (
-        <Typography color={'red'} variant={'regularText14'}>
-          {serverError}
-        </Typography>
+          <Typography color={'grey'} variant={'regularText14'}>
+            Enter your email address and we will send you further instructions
+          </Typography>
+
+          {isSent && (
+            <Typography color={'white'} variant={'regularText14'}>
+              The link has been sent by email. If you don’t receive an email, try again.
+            </Typography>
+          )}
+
+          <Button disabled={!isValid} fullWidth type={'submit'} variant={'primary'}>
+            {isSent ? 'Send Link Again' : 'Send Link'}
+          </Button>
+
+          <Button as={Link} fullWidth href={'/signin'} variant={'transparent'}>
+            Back to Sign In
+          </Button>
+
+          {!isSent && (
+            <Recaptcha
+              error={errors.token?.message}
+              onChange={handleRecaptchaChange}
+              sitekey={sitekey}
+            />
+          )}
+        </>
       )}
+      {!isRecoveryCodeValid && (
+        <>
+          <Typography className={s.title} color={'white'} variant={'h1'}>
+            Email verification link expired
+          </Typography>
 
-      <Typography color={'grey'} variant={'regularText14'}>
-        Enter your email address and we will send you further instructions
-      </Typography>
+          <Typography color={'white'} variant={'regularText14'}>
+            Looks like the verification link has expired. Not to worry, we can send the link again
+          </Typography>
 
-      {isSent && (
-        <Typography color={'white'} variant={'regularText14'}>
-          The link has been sent by email. If you don’t receive an email, try again.
-        </Typography>
-      )}
-
-      <Button disabled={!isValid} fullWidth type={'submit'} variant={'primary'}>
-        {isSent ? 'Send Link Again' : 'Send Link'}
-      </Button>
-
-      <Button as={Link} fullWidth href={'/signin'} variant={'transparent'}>
-        Back to Sign In
-      </Button>
-
-      {!isSent && (
-        <Recaptcha
-          error={errors.token?.message}
-          onChange={handleRecaptchaChange}
-          sitekey={sitekey}
-        />
+          <Button fullWidth type={'submit'} variant={'primary'}>
+            Resend link
+          </Button>
+          <Image alt={'illustration'} src={rafikiImage} width={360} />
+        </>
       )}
 
       <Modal isOpen={isModalOpen} onClose={handleModalClose} title={'Email Sent'}>

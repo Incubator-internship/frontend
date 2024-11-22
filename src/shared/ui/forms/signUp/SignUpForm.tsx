@@ -105,8 +105,8 @@ export const SignUpForm = ({ onSubmit }: Props) => {
             control={control}
             label={
               <label htmlFor={'agree'}>
-                I agree to the <Link href={'/terms-service'}>Terms of Service</Link> and{' '}
-                <Link href={'/privacy-policy'}>Privacy Policy</Link>
+                I agree to the <Link href={'/policies/termsOfService'}>Terms of Service</Link> and{' '}
+                <Link href={'/policies/privacyPolicy'}>Privacy Policy</Link>
               </label>
             }
             name={'agree'}
@@ -118,7 +118,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
         <Typography as={'div'} className={s.caption} variant={'regularText16'}>
           Do you have an account?
         </Typography>
-        <Button as={Link} className={s.signIn} href={'/login'} variant={'transparent'}>
+        <Button as={Link} className={s.signIn} href={'/signin'} variant={'transparent'}>
           Sign In
         </Button>
       </Card>
