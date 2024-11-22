@@ -26,15 +26,13 @@ const passwordFormSchema = z
   })
 
 export type FormValues = z.infer<typeof passwordFormSchema>
-type PasswordFormProps = {
-  onSubmit: (data: Omit<FormValues, 'passwordConfirmation'>) => void
-}
 
-export const PasswordForm = ({ onSubmit }: PasswordFormProps) => {
+export const PasswordForm = () => {
   const {
     control,
-    formState: { isDirty, isValid },
+    formState: { errors, isDirty, isValid },
     handleSubmit,
+    setError,
   } = useForm<FormValues>({
     defaultValues: {
       newPassword: '',
@@ -46,24 +44,27 @@ export const PasswordForm = ({ onSubmit }: PasswordFormProps) => {
   })
 
   const router = useRouter()
-  const [newPasswordMutation, { error, isLoading }] = useNewPasswordMutation()
+  const [newPasswordMutation] = useNewPasswordMutation()
 
   const searchParams = useSearchParams()
-  const recoveryCode = searchParams!.get('code') || ''
-
-  const handleTransition = () => {
-    router.push('/signin')
-  }
+  const recoveryCode = searchParams ? searchParams.get('code') : null
 
   const onSubmitForm = handleSubmit(async data => {
     try {
       await newPasswordMutation({
         newPassword: data.newPassword,
-        recoveryCode: recoveryCode,
+        recoveryCode: recoveryCode || '',
       }).unwrap()
-      handleTransition()
-    } catch (error) {
-      console.error('Error changing password:', error)
+      router.push('/signin')
+    } catch (error: any) {
+      if (error.status === 400) {
+        setError('recoveryCode', { message: 'Invalid recovery code' })
+        router.push('/forgotpassword')
+      } else if (error.status === 429) {
+        setError('root', {
+          message: 'More than 5 attempts from one IP-address during 10 seconds',
+        })
+      }
     }
   })
 
@@ -73,7 +74,7 @@ export const PasswordForm = ({ onSubmit }: PasswordFormProps) => {
         Create new password
       </Typography>
       <form onSubmit={onSubmitForm}>
-        <PasswordFormItem control={control} onSubmit={onSubmitForm} />
+        <PasswordFormItem control={control} errors={errors} />
         <Typography className={s.createNewPasswordHelper} color={'grey'} variant={'body2'}>
           Your password must be between 6 and 20 characters
         </Typography>
