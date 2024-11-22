@@ -113,7 +113,7 @@ export const ForgotPasswordForm = () => {
     <form className={s.forgotPasswordForm} onSubmit={onSubmitForm}>
       {isRecoveryCodeValid && (
         <>
-          <Typography className={s.title} color={'grey'} variant={'h1'}>
+          <Typography className={s.title} color={'white'} variant={'h1'}>
             Forgot Password
           </Typography>
 
@@ -153,7 +153,7 @@ export const ForgotPasswordForm = () => {
       )}
       {!isRecoveryCodeValid && (
         <>
-          <Typography className={s.title} color={'grey'} variant={'h1'}>
+          <Typography className={s.title} color={'white'} variant={'h1'}>
             Email verification link expired
           </Typography>
 
