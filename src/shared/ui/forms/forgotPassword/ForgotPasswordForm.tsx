@@ -63,6 +63,23 @@ export const ForgotPasswordForm = () => {
     ) // 5minutes
   }
 
+  interface ApiError {
+    errorsMessages?: Array<{
+      field: string
+      message: string
+    }>
+    status: number
+  }
+
+  function isApiError(error: unknown): error is ApiError {
+    return (
+      typeof error === 'object' &&
+      error !== null &&
+      'status' in error &&
+      typeof (error as ApiError).status === 'number'
+    )
+  }
+
   const onSubmitForm = handleSubmit(async data => {
     if (!data.token) {
       trigger('token')
@@ -75,15 +92,17 @@ export const ForgotPasswordForm = () => {
       setIsSent(true)
       setSubmittedEmail(data.email)
       setIsModalOpen(true)
-    } catch (error: any) {
-      if (error?.status === 400) {
-        setError('email', { message: "User with this email doesn't exist." })
-      } else if (error?.status === 429) {
-        setError('email', {
-          message: 'You have exceeded the maximum number of attempts. Please try again later.',
-        })
+    } catch (error: unknown) {
+      if (isApiError(error)) {
+        if (error.status === 400) {
+          setError('email', { message: "User with this email doesn't exist." })
+        } else if (error.status === 429) {
+          setError('email', {
+            message: 'You have exceeded the maximum number of attempts. Please try again later.',
+          })
+        }
       } else {
-        console.error('Password recovery error:', error)
+        console.error('Unknown error:', error)
       }
     }
   })
