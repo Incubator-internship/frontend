@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { usePasswordRecoveryMutation } from '@/app/api/inctagramApi'
+import rafikiImage from '@/shared/assets/images/rafiki.png'
 import { emailSchema } from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { InputControl } from '@/shared/ui/inputControl'
@@ -11,6 +12,7 @@ import { Modal } from '@/shared/ui/modal/Modal'
 import Recaptcha from '@/shared/ui/recaptcha/Recaptcha'
 import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Image from 'next/image'
 import Link from 'next/link'
 import { z } from 'zod'
 
@@ -29,6 +31,9 @@ export const ForgotPasswordForm = () => {
   const [isSent, setIsSent] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [submittedEmail, setSubmittedEmail] = useState('')
+  const [isRecoveryCodeValid, setIsRecoveryCodeValid] = useState(true)
+
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
 
   const {
     control,
@@ -45,6 +50,18 @@ export const ForgotPasswordForm = () => {
   })
 
   const [passwordRecovery] = usePasswordRecoveryMutation()
+
+  const startTimer = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+    }
+    timerRef.current = setTimeout(
+      () => {
+        setIsRecoveryCodeValid(false)
+      },
+      5 * 60 * 1000
+    ) // 5minutes
+  }
 
   const onSubmitForm = handleSubmit(async data => {
     if (!data.token) {
@@ -80,45 +97,75 @@ export const ForgotPasswordForm = () => {
     setIsModalOpen(false)
 
     setIsSent(true)
+    startTimer()
   }
+
+  //NOTE: Clear timer on unmount
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current)
+      }
+    }
+  }, [])
 
   return (
     <form className={s.forgotPasswordForm} onSubmit={onSubmitForm}>
-      <Typography className={s.title} color={'grey'} variant={'h1'}>
-        Forgot Password
-      </Typography>
+      {isRecoveryCodeValid && (
+        <>
+          <Typography className={s.title} color={'grey'} variant={'h1'}>
+            Forgot Password
+          </Typography>
 
-      <InputControl
-        control={control}
-        label={'Email'}
-        name={'email'}
-        placeholder={'Epam@epam.com'}
-      />
+          <InputControl
+            control={control}
+            label={'Email'}
+            name={'email'}
+            placeholder={'Epam@epam.com'}
+          />
 
-      <Typography color={'grey'} variant={'regularText14'}>
-        Enter your email address and we will send you further instructions
-      </Typography>
+          <Typography color={'grey'} variant={'regularText14'}>
+            Enter your email address and we will send you further instructions
+          </Typography>
 
-      {isSent && (
-        <Typography color={'white'} variant={'regularText14'}>
-          The link has been sent by email. If you don’t receive an email, try again.
-        </Typography>
+          {isSent && (
+            <Typography color={'white'} variant={'regularText14'}>
+              The link has been sent by email. If you don’t receive an email, try again.
+            </Typography>
+          )}
+
+          <Button disabled={!isValid} fullWidth type={'submit'} variant={'primary'}>
+            {isSent ? 'Send Link Again' : 'Send Link'}
+          </Button>
+
+          <Button as={Link} fullWidth href={'/signin'} variant={'transparent'}>
+            Back to Sign In
+          </Button>
+
+          {!isSent && (
+            <Recaptcha
+              error={errors.token?.message}
+              onChange={handleRecaptchaChange}
+              sitekey={sitekey}
+            />
+          )}
+        </>
       )}
+      {!isRecoveryCodeValid && (
+        <>
+          <Typography className={s.title} color={'grey'} variant={'h1'}>
+            Email verification link expired
+          </Typography>
 
-      <Button disabled={!isValid} fullWidth type={'submit'} variant={'primary'}>
-        {isSent ? 'Send Link Again' : 'Send Link'}
-      </Button>
+          <Typography color={'white'} variant={'regularText14'}>
+            Looks like the verification link has expired. Not to worry, we can send the link again
+          </Typography>
 
-      <Button as={Link} fullWidth href={'/signin'} variant={'transparent'}>
-        Back to Sign In
-      </Button>
-
-      {!isSent && (
-        <Recaptcha
-          error={errors.token?.message}
-          onChange={handleRecaptchaChange}
-          sitekey={sitekey}
-        />
+          <Button fullWidth type={'submit'} variant={'primary'}>
+            Resend link
+          </Button>
+          <Image alt={'illustration'} src={rafikiImage} width={360} />
+        </>
       )}
 
       <Modal isOpen={isModalOpen} onClose={handleModalClose} title={'Email Sent'}>
