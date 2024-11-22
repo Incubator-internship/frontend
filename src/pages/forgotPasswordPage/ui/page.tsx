@@ -15,5 +15,3 @@ export default function Page() {
     </div>
   )
 }
-
-// http://localhost:3000/forgotpassword
