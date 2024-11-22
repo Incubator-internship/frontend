@@ -15,7 +15,7 @@ import { InputControl } from '@/shared/ui/inputControl'
 import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { z } from 'zod'
+import { any, z } from 'zod'
 
 import s from './signUpForm.module.scss'
 
