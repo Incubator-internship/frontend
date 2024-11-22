@@ -14,6 +14,17 @@ import { Card } from '../../card'
 import { Typography } from '../../typography'
 import { PasswordFormItem } from './passwordFormItem'
 
+interface ApiError {
+  errorMessages?: ErrorMessage[]
+  message?: string
+  status: number
+}
+
+interface ErrorMessage {
+  field: string
+  message: string
+}
+
 const passwordFormSchema = z
   .object({
     newPassword: passwordSchema,
@@ -49,6 +60,15 @@ export const PasswordForm = () => {
   const searchParams = useSearchParams()
   const recoveryCode = searchParams ? searchParams.get('code') : null
 
+  function isApiError(error: unknown): error is ApiError {
+    return (
+      typeof error === 'object' &&
+      error !== null &&
+      'status' in error &&
+      typeof (error as ApiError).status === 'number'
+    )
+  }
+
   const onSubmitForm = handleSubmit(async data => {
     try {
       await newPasswordMutation({
@@ -56,14 +76,16 @@ export const PasswordForm = () => {
         recoveryCode: recoveryCode || '',
       }).unwrap()
       router.push('/signin')
-    } catch (error: any) {
-      if (error.status === 400) {
-        setError('recoveryCode', { message: 'Invalid recovery code' })
-        router.push('/forgotpassword')
-      } else if (error.status === 429) {
-        setError('root', {
-          message: 'More than 5 attempts from one IP-address during 10 seconds',
-        })
+    } catch (error: unknown) {
+      if (isApiError(error)) {
+        if (error.status === 400) {
+          setError('recoveryCode', { message: 'Invalid recovery code' })
+          router.push('/forgotpassword')
+        } else if (error.status === 429) {
+          setError('root', {
+            message: 'More than 5 attempts from one IP-address during 10 seconds',
+          })
+        }
       }
     }
   })
