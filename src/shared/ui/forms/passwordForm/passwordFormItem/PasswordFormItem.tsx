@@ -1,4 +1,4 @@
-import { Control } from 'react-hook-form'
+import { Control, FieldErrors } from 'react-hook-form'
 
 import { InputControl } from '@/shared/ui/inputControl'
 
@@ -8,12 +8,12 @@ import { FormValues } from '../PasswordForm'
 
 type PasswordFormItemProps = {
   control: Control<FormValues>
-  onSubmit: (e: React.FormEvent) => void
+  errors: FieldErrors<FormValues>
 }
 
-export const PasswordFormItem = ({ control, onSubmit }: PasswordFormItemProps) => {
+export const PasswordFormItem = ({ control, errors }: PasswordFormItemProps) => {
   return (
-    <form className={s.passwordForm} onSubmit={onSubmit}>
+    <div className={s.passwordForm}>
       <InputControl
         className={s.passwordFormItemInput}
         control={control}
@@ -28,6 +28,8 @@ export const PasswordFormItem = ({ control, onSubmit }: PasswordFormItemProps) =
         name={'passwordConfirmation'}
         variant={'password'}
       />
-    </form>
+      {errors.recoveryCode && <span className={s.inputError}>{errors.recoveryCode.message}</span>}
+      {errors.root && <span className={s.inputError}>{errors.root.message}</span>}
+    </div>
   )
 }
