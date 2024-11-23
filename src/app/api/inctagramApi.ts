@@ -8,6 +8,12 @@ export const inctagramApi = createApi({
       query: () => '/v1/users',
     }),
 
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        method: 'POST',
+        url: 'v1/auth/logout',
+      }),
+    }),
     newPassword: builder.mutation<void, { newPassword: string; recoveryCode: string }>({
       query: body => ({
         body,
@@ -22,19 +28,13 @@ export const inctagramApi = createApi({
         url: '/v1/auth/password-recovery',
       }),
     }),
-    logout: builder.mutation<void, void>({
-      query: () => ({
-        method: 'POST',
-        url: 'v1/auth/logout',
-      }),
-    }),
   }),
   reducerPath: 'inctagramApi',
 })
 
-<<<<<<< HEAD
-export const { useGetUsersQuery, useLogoutMutation } = inctagramApi
-=======
-export const { useGetUsersQuery, useNewPasswordMutation, usePasswordRecoveryMutation } =
-  inctagramApi
->>>>>>> 5ec0e52e64ce914d5cba09f71fd39b24dec899ed
+export const {
+  useGetUsersQuery,
+  useLogoutMutation,
+  useNewPasswordMutation,
+  usePasswordRecoveryMutation,
+} = inctagramApi
