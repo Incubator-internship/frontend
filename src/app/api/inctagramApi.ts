@@ -13,6 +13,19 @@ export const inctagramApi = createApi({
       query: () => '/v1/users',
     }),
 
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        method: 'POST',
+        url: 'v1/auth/logout',
+      }),
+    }),
+    newPassword: builder.mutation<void, { newPassword: string; recoveryCode: string }>({
+      query: body => ({
+        body,
+        method: 'POST',
+        url: `/v1/auth/new-password`,
+      }),
+    }),
     passwordRecovery: builder.mutation<void, { email: string }>({
       query: body => ({
         body,
@@ -47,6 +60,8 @@ export const inctagramApi = createApi({
 
 export const {
   useGetUsersQuery,
+    useLogoutMutation,
+    useNewPasswordMutation,
   usePasswordRecoveryMutation,
   useRegistrationConfirmationMutation,
   useRegistrationMutation,
