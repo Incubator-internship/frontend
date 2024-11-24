@@ -1,6 +1,13 @@
 'use client'
-import React, { ComponentPropsWithoutRef, ComponentType, ElementRef, forwardRef } from 'react'
+import React, {
+  ComponentPropsWithoutRef,
+  ComponentType,
+  ElementRef,
+  forwardRef,
+  useState,
+} from 'react'
 
+import { useLogoutMutation } from '@/app/api/inctagramApi'
 import {
   BookmarkIcon,
   BookmarkOutlineIcon,
@@ -21,9 +28,12 @@ import {
 } from '@/shared/assets/icons'
 import clsx from 'clsx'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import s from './sidebar.module.scss'
 
+import { Button } from '../button'
+import { Modal } from '../modal'
 import { Typography } from '../typography'
 
 const menuItems = [
@@ -99,6 +109,16 @@ type SidebarRef = ElementRef<'nav'>
 
 export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...rest }, ref) => {
   //TODO: path via useRouter to isSelected(path===router.path)
+  const router = useRouter()
+  const [isModalOpen, setModalOpen] = useState<boolean>(false)
+  const [logout] = useLogoutMutation()
+
+  const toggleModal = () => setModalOpen(prevState => !prevState)
+  const handleLogoutConfirm = () => {
+    logout()
+    toggleModal()
+    router.push('/signin')
+  }
 
   return (
     <nav className={clsx(s.nav, className)} ref={ref} {...rest}>
@@ -130,11 +150,29 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
         })}
       </div>
       <div className={s.navItems}>
-        <Typography as={'button'} className={s.item} onClick={() => {}} variant={'mediumText14'}>
+        <Typography
+          as={'button'}
+          className={s.item}
+          onClick={() => setModalOpen(prevState => !prevState)}
+          variant={'mediumText14'}
+        >
           <LogOutOutlineIcon />
           Log Out
         </Typography>
       </div>
+      <Modal isOpen={isModalOpen} onClose={toggleModal} title={'Log Out'}>
+        <Typography as={'p'} className={s.sidebarModalText} variant={'body1'}>
+          Are you really want to log out of your account “Epam@epam.com”?
+        </Typography>
+        <div className={s.buttonWrapper}>
+          <Button as={'button'} className={s.sidebarModalButton} onClick={handleLogoutConfirm}>
+            Yes
+          </Button>
+          <Button as={'button'} className={s.sidebarModalButton} onClick={toggleModal}>
+            No
+          </Button>
+        </div>
+      </Modal>
     </nav>
   )
 })
