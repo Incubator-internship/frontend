@@ -11,3 +11,10 @@ export type registrationConfirmationArgs = {
 export type registrationResendingArgs = {
   email: string
 }
+
+export type User = {
+  createdAt: string
+  email: string
+  id: string
+  name: string
+}

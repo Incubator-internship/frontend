@@ -1,4 +1,5 @@
 import {
+  User,
   registrationArgs,
   registrationConfirmationArgs,
   registrationResendingArgs,
@@ -9,10 +10,9 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 export const inctagramApi = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: builder => ({
-    getUsers: builder.query({
+    getUsers: builder.query<User[], void>({
       query: () => '/v1/users',
     }),
-
     logout: builder.mutation<void, void>({
       query: () => ({
         method: 'POST',
@@ -60,8 +60,8 @@ export const inctagramApi = createApi({
 
 export const {
   useGetUsersQuery,
-    useLogoutMutation,
-    useNewPasswordMutation,
+  useLogoutMutation,
+  useNewPasswordMutation,
   usePasswordRecoveryMutation,
   useRegistrationConfirmationMutation,
   useRegistrationMutation,
