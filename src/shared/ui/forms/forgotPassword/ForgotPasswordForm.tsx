@@ -23,7 +23,7 @@ const ForgotPasswordSchema = z.object({
   token: z.string().min(1, { message: 'Required reCAPTCHA' }),
 })
 
-type ForgotPasswordFields = z.infer<typeof ForgotPasswordSchema>
+export type ForgotPasswordFields = z.infer<typeof ForgotPasswordSchema>
 
 export const ForgotPasswordForm = () => {
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string

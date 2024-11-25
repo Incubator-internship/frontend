@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { Suspense } from 'react'
+
 import StoreProvider from '@/app/config/store/storeProvider'
 import { Header } from '@/shared/ui/header'
 
@@ -23,10 +25,12 @@ export default function RootLayout({
   return (
     <html lang={'en'}>
       <StoreProvider>
-        <body>
-          <Header count={0} isAuth={false} />
-          <main>{children}</main>
-        </body>
+        <Suspense>
+          <body>
+            <Header count={0} isAuth={false} />
+            <main>{children}</main>
+          </body>
+        </Suspense>
       </StoreProvider>
     </html>
   )

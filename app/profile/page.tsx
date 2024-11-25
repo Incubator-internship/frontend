@@ -1,1 +1,1 @@
-export { default } from '@/pages/profile/ui/Profile'
+export { default } from '@/views/profile/ui/Profile'

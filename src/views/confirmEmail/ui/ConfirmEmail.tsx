@@ -6,14 +6,15 @@ import {
   useRegistrationConfirmationMutation,
   useRegistrationResendingMutation,
 } from '@/app/api/auth/authApi'
-import ConfirmEmailError from '@/shared/assets/icons/ConfirmEmailError'
-import ConfirmEmailSuccess from '@/shared/assets/icons/ConfirmEmailSuccess'
+import rafikiImage from '@/shared/assets/images/rafiki.png'
+import successImage from '@/shared/assets/images/success.png'
 import { Button } from '@/shared/ui/button'
 import {
   ResendVerificationForm,
   ResendVerificationFormValues,
 } from '@/shared/ui/forms/resendVerification'
 import { Typography } from '@/shared/ui/typography'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
@@ -61,9 +62,9 @@ export default function ConfirmEmail() {
         </Button>
       )}
       {isError ? (
-        <ConfirmEmailError className={s.image} />
+        <Image alt={'illustration'} className={s.image} src={rafikiImage} width={420} />
       ) : (
-        <ConfirmEmailSuccess className={s.image} />
+        <Image alt={'illustration'} className={s.image} src={successImage} width={420} />
       )}
     </div>
   )

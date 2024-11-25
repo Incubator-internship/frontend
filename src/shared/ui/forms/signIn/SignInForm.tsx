@@ -23,7 +23,7 @@ export const signInSchema = z.object({
 export type Schema = z.infer<typeof signInSchema>
 
 type Props = {
-  isError: boolean
+  isError?: boolean
   onSubmit: (data: Schema) => void
 }
 
