@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { usePasswordRecoveryMutation } from '@/app/api/inctagramApi'
+import { usePasswordRecoveryMutation } from '@/app/api/auth/authApi'
 import rafikiImage from '@/shared/assets/images/rafiki.png'
 import { emailSchema } from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'

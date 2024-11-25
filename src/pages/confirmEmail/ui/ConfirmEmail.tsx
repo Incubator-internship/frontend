@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   useRegistrationConfirmationMutation,
   useRegistrationResendingMutation,
-} from '@/app/api/inctagramApi'
+} from '@/app/api/auth/authApi'
 import ConfirmEmailError from '@/shared/assets/icons/ConfirmEmailError'
 import ConfirmEmailSuccess from '@/shared/assets/icons/ConfirmEmailSuccess'
 import { Button } from '@/shared/ui/button'

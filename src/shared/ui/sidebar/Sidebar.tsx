@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react'
 
-import { useLogoutMutation } from '@/app/api/inctagramApi'
+import { useLogoutMutation } from '@/app/api/auth/authApi'
 import {
   BookmarkIcon,
   BookmarkOutlineIcon,

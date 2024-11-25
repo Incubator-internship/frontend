@@ -1,1 +1,1 @@
-export { default } from '@/pages/signin/ui/page'
+export { default } from '@/pages/signin/ui/SignInPage'

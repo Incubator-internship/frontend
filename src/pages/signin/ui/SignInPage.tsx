@@ -2,7 +2,8 @@
 
 import { useEffect } from 'react'
 
-import { LoginData, useLoginMutation } from '@/app/api/signInApi'
+import { useLoginMutation } from '@/app/api/auth/authApi'
+import { LoginData } from '@/app/api/auth/authApi.types'
 import { Schema, SignInForm } from '@/shared/ui/forms/signIn'
 import { clsx } from 'clsx'
 import Link from 'next/link'
