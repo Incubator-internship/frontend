@@ -13,17 +13,7 @@ import { Button } from '../../button'
 import { Card } from '../../card'
 import { Typography } from '../../typography'
 import { PasswordFormItem } from './passwordFormItem'
-
-interface ApiError {
-  errorMessages?: ErrorMessage[]
-  message?: string
-  status: number
-}
-
-interface ErrorMessage {
-  field: string
-  message: string
-}
+import { ApiError } from './types'
 
 const passwordFormSchema = z
   .object({
