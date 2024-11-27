@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { usePasswordRecoveryMutation } from '@/app/api/inctagramApi'
+import { usePasswordRecoveryMutation } from '@/app/api/auth/authApi'
 import rafikiImage from '@/shared/assets/images/rafiki.png'
 import { emailSchema } from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
@@ -23,7 +23,7 @@ const ForgotPasswordSchema = z.object({
   token: z.string().min(1, { message: 'Required reCAPTCHA' }),
 })
 
-type ForgotPasswordFields = z.infer<typeof ForgotPasswordSchema>
+export type ForgotPasswordFields = z.infer<typeof ForgotPasswordSchema>
 
 export const ForgotPasswordForm = () => {
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string

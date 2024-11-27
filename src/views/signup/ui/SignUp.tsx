@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { useRegistrationMutation } from '@/app/api/inctagramApi'
+import { useRegistrationMutation } from '@/app/api/auth/authApi'
 import { Button } from '@/shared/ui/button'
 import { SignUpForm, SignUpFormValues } from '@/shared/ui/forms/signUp'
 import { Modal } from '@/shared/ui/modal'

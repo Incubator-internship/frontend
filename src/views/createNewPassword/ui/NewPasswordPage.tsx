@@ -1,7 +1,7 @@
 'use client'
 import { PasswordForm } from '@/shared/ui/forms/passwordForm'
 
-import s from './page.module.scss'
+import s from './newPasswordPage.module.scss'
 
 export default function NewPasswordPage() {
   const onSubmit = () => {}

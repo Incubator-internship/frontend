@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useNewPasswordMutation } from '@/app/api/inctagramApi'
+import { useNewPasswordMutation } from '@/app/api/auth/authApi'
 import { passwordSchema } from '@/shared/model/schemas/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
