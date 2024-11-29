@@ -34,10 +34,6 @@ export default function ConfirmEmail() {
     }
   }, [code, initialLoading])
 
-  const onSubmit = (data: ResendVerificationFormValues) => {
-    registrationResending(data)
-  }
-
   if (initialLoading || isLoading) {
     return <>Loading...</>
   }
@@ -54,18 +50,21 @@ export default function ConfirmEmail() {
       </Typography>
       {isError ? (
         <div className={s.form}>
-          <ResendVerificationForm onSubmit={onSubmit} />
+          <ResendVerificationForm
+            onSubmit={(data: ResendVerificationFormValues) => registrationResending(data)}
+          />
         </div>
       ) : (
         <Button as={Link} className={s.button} href={'/signin'}>
           Sign In
         </Button>
       )}
-      {isError ? (
-        <Image alt={'illustration'} className={s.image} src={rafikiImage} width={420} />
-      ) : (
-        <Image alt={'illustration'} className={s.image} src={successImage} width={420} />
-      )}
+      <Image
+        alt={'illustration'}
+        className={s.image}
+        src={isError ? rafikiImage : successImage}
+        width={420}
+      />
     </div>
   )
 }
