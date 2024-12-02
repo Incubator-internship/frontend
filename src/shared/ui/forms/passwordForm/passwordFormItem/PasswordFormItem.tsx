@@ -1,15 +1,8 @@
-import { Control, FieldErrors } from 'react-hook-form'
-
 import { InputControl } from '@/shared/ui/inputControl'
 
 import s from './passwordFormItem.module.scss'
 
-import { FormValues } from '../PasswordForm'
-
-type PasswordFormItemProps = {
-  control: Control<FormValues>
-  errors: FieldErrors<FormValues>
-}
+import { PasswordFormItemProps } from '../types'
 
 export const PasswordFormItem = ({ control, errors }: PasswordFormItemProps) => {
   return (
