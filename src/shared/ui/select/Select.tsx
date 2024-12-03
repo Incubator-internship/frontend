@@ -5,6 +5,7 @@ import Arrow from '@/shared/assets/icons/Arrow'
 import { SelectItem } from '@/shared/ui/select/selectItem/SelectItem'
 import * as RadixSelect from '@radix-ui/react-select'
 import clsx from 'clsx'
+import { useTranslations } from 'next-intl'
 
 import s from './select.module.scss'
 import sItem from './selectItem/selectItem.module.scss'
@@ -45,9 +46,10 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
     ref
   ) => {
     const id = useId()
+    const t = useTranslations('SelectLanguage')
     const languages = [
-      { icon: FlagRus, title: 'Russian', value: '1' },
-      { icon: FlagUk, title: 'English', value: '2' },
+      { icon: FlagRus, title: t('Russian'), value: '1' },
+      { icon: FlagUk, title: t('English'), value: '2' },
     ]
 
     const variantsSelect = () => (variant === 'narrow' ? languages : items)

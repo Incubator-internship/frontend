@@ -1,0 +1,13 @@
+{
+    "SelectLanguage": {
+    "English": "English",
+    "Russian": "Russian"
+    },
+    "NewPasswordPage": {
+      "createNewPasswordTitle": "Create new password",
+      "New password": "New password",
+      "Password confirmation": "Password confirmation",
+      "createNewPasswordHelper": "Your password must be between 6 and 20 characters",
+      "createNewPasswordButton": "Create new password"
+    }
+  }

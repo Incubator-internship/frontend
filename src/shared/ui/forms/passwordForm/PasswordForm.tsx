@@ -5,6 +5,7 @@ import { useNewPasswordMutation } from '@/app/api/auth/authApi'
 import { passwordSchema } from '@/shared/model/schemas/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { z } from 'zod'
 
 import s from './passwordForm.module.scss'
@@ -46,6 +47,7 @@ export const PasswordForm = () => {
 
   const router = useRouter()
   const [newPasswordMutation] = useNewPasswordMutation()
+  const t = useTranslations('NewPasswordPage')
 
   const searchParams = useSearchParams()
   const recoveryCode = searchParams ? searchParams.get('code') : null
@@ -83,15 +85,15 @@ export const PasswordForm = () => {
   return (
     <Card className={s.createNewPasswordForm}>
       <Typography className={s.createNewPasswordTitle} variant={'h2'}>
-        Create new password
+        {t('createNewPasswordTitle')}
       </Typography>
       <form onSubmit={onSubmitForm}>
         <PasswordFormItem control={control} errors={errors} />
         <Typography className={s.createNewPasswordHelper} color={'grey'} variant={'body2'}>
-          Your password must be between 6 and 20 characters
+          {t('createNewPasswordHelper')}
         </Typography>
         <Button disabled={!isDirty || !isValid} fullWidth type={'submit'}>
-          Create new password
+          {t('createNewPasswordButton')}
         </Button>
       </form>
     </Card>

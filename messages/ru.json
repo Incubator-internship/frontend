@@ -1,0 +1,13 @@
+{
+    "SelectLanguage": {
+    "English": "Английский",
+    "Russian": "Русский"
+    },
+    "NewPasswordPage": {
+      "createNewPasswordTitle": "Создать новый пароль",
+      "New password": "Новый пароль",
+      "Password confirmation": "Подтверждение пароля",
+      "createNewPasswordHelper": "Ваш пароль должен содержать от 6 до 20 символов",
+      "createNewPasswordButton": "Создать новый пароль"
+    }
+  }

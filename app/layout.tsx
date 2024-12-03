@@ -4,6 +4,8 @@ import { Suspense } from 'react'
 
 import StoreProvider from '@/app/config/store/storeProvider'
 import { Header } from '@/shared/ui/header'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 
 import '@/shared/styles/index.scss'
 import '@fontsource/inter/300.css'
@@ -17,18 +19,23 @@ export const metadata: Metadata = {
   title: 'Inctagram',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const locale = await getLocale()
+  const messages = await getMessages()
+
   return (
-    <html lang={'en'}>
+    <html lang={locale}>
       <StoreProvider>
         <Suspense>
           <body>
             <Header count={0} isAuth={false} />
-            <main>{children}</main>
+            <main>
+              <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+            </main>
           </body>
         </Suspense>
       </StoreProvider>
