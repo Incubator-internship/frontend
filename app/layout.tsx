@@ -28,17 +28,17 @@ export default async function RootLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale}>
-      <StoreProvider>
-        <Suspense>
-          <body>
-            <Header count={0} isAuth={false} />
-            <main>
-              <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
-            </main>
-          </body>
-        </Suspense>
-      </StoreProvider>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <html lang={locale}>
+        <StoreProvider>
+          <Suspense>
+            <body>
+              <Header count={0} isAuth={false} />
+              <main>{children}</main>
+            </body>
+          </Suspense>
+        </StoreProvider>
+      </html>
+    </NextIntlClientProvider>
   )
 }
