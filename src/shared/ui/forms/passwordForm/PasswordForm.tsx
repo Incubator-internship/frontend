@@ -48,6 +48,7 @@ export const PasswordForm = () => {
   const router = useRouter()
   const [newPasswordMutation] = useNewPasswordMutation()
   const t = useTranslations('NewPasswordPage')
+  const tError = useTranslations('Error')
 
   const searchParams = useSearchParams()
   const recoveryCode = searchParams ? searchParams.get('code') : null
@@ -71,11 +72,11 @@ export const PasswordForm = () => {
     } catch (error: unknown) {
       if (isApiError(error)) {
         if (error.status === 400) {
-          setError('recoveryCode', { message: 'Invalid recovery code' })
+          setError('recoveryCode', { message: tError('ErrorRecoveryCode') })
           router.push('/forgotpassword')
         } else if (error.status === 429) {
           setError('root', {
-            message: 'More than 5 attempts from one IP-address during 10 seconds',
+            message: tError('Error429'),
           })
         }
       }
@@ -85,15 +86,15 @@ export const PasswordForm = () => {
   return (
     <Card className={s.createNewPasswordForm}>
       <Typography className={s.createNewPasswordTitle} variant={'h2'}>
-        {t('createNewPasswordTitle')}
+        {t('CreateNewPasswordTitle')}
       </Typography>
       <form onSubmit={onSubmitForm}>
         <PasswordFormItem control={control} errors={errors} />
         <Typography className={s.createNewPasswordHelper} color={'grey'} variant={'body2'}>
-          {t('createNewPasswordHelper')}
+          {t('CreateNewPasswordHelper')}
         </Typography>
         <Button disabled={!isDirty || !isValid} fullWidth type={'submit'}>
-          {t('createNewPasswordButton')}
+          {t('CreateNewPasswordButton')}
         </Button>
       </form>
     </Card>

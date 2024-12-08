@@ -13,14 +13,14 @@ export const PasswordFormItem = ({ control, errors }: PasswordFormItemProps) => 
       <InputControl
         className={s.passwordFormItemInput}
         control={control}
-        label={t('New password')}
+        label={t('NewPassword')}
         name={'newPassword'}
         variant={'password'}
       />
       <InputControl
         className={s.passwordFormItemInput}
         control={control}
-        label={t('Password confirmation')}
+        label={t('PasswordConfirmation')}
         name={'passwordConfirmation'}
         variant={'password'}
       />
