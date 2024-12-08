@@ -6,7 +6,7 @@ import StoreProvider from '@/app/config/store/storeProvider'
 import { Header } from '@/shared/ui/header'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
-import { getLocale, getMessages } from 'next-intl/server'
+import { getMessages } from 'next-intl/server'
 
 import '@/shared/styles/index.scss'
 import '@fontsource/inter/300.css'

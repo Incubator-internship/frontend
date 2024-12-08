@@ -5,7 +5,7 @@ import { useNewPasswordMutation } from '@/app/api/auth/authApi'
 import { passwordSchema } from '@/shared/model/schemas/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { z } from 'zod'
 
 import s from './passwordForm.module.scss'
@@ -46,6 +46,7 @@ export const PasswordForm = () => {
   })
 
   const router = useRouter()
+  const locale = useLocale()
   const [newPasswordMutation] = useNewPasswordMutation()
   const t = useTranslations('NewPasswordPage')
   const tError = useTranslations('Error')
@@ -68,12 +69,12 @@ export const PasswordForm = () => {
         newPassword: data.newPassword,
         recoveryCode: recoveryCode || '',
       }).unwrap()
-      router.push('/signin')
+      router.push(`/${locale}/signup`)
     } catch (error: unknown) {
       if (isApiError(error)) {
         if (error.status === 400) {
           setError('recoveryCode', { message: tError('ErrorRecoveryCode') })
-          router.push('/forgotpassword')
+          router.push(`/${locale}/forgotpassword`)
         } else if (error.status === 429) {
           setError('root', {
             message: tError('Error429'),

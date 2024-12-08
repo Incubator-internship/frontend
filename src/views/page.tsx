@@ -1,16 +1,19 @@
 'use client'
 
-import React, { Suspense } from 'react'
+import React from 'react'
 
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 
 export default function Home() {
+  const locale = useLocale()
+
   return (
     <div>
-      <Link href={'/signup'}>Signup</Link>
-      <Link href={'/signin'}>Signin</Link>
-      <Link href={'/profile'}>Profile</Link>
-      <Link href={'/forgotpassword'}>ForgotPass</Link>
+      <Link href={`/${locale}/signup`}>Signup</Link>
+      <Link href={`/${locale}/signin`}>Signin</Link>
+      <Link href={`/${locale}/profile`}>Profile</Link>
+      <Link href={`/${locale}/forgotpassword`}>ForgotPass</Link>
     </div>
   )
 }
