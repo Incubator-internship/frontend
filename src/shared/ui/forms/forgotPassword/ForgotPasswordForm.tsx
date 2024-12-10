@@ -14,7 +14,7 @@ import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { z } from 'zod'
 
 import s from './ForgotPasswordForm.module.scss'
@@ -34,6 +34,7 @@ export const ForgotPasswordForm = () => {
   const [submittedEmail, setSubmittedEmail] = useState('')
   const [isRecoveryCodeValid, setIsRecoveryCodeValid] = useState(true)
   const t = useTranslations('ForgotPasswordPage')
+  const locale = useLocale()
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -159,7 +160,7 @@ export const ForgotPasswordForm = () => {
             {isSent ? t('Send Link Again') : t('Send Link')}
           </Button>
 
-          <Button as={Link} fullWidth href={'/signin'} variant={'transparent'}>
+          <Button as={Link} fullWidth href={`/${locale}/signin`} variant={'transparent'}>
             {t('Back to Sign In')}
           </Button>
 
