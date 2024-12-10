@@ -1,0 +1,27 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 35px 0;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.form {
+  width: 100%;
+  max-width: 230px;
+  margin-bottom: 40px;
+}
+
+.subtitle {
+  max-width: 295px;
+  margin-bottom: 55px;
+  text-align: center;
+}
+
+.button {
+  width: 182px;
+  margin-bottom: 70px;
+}

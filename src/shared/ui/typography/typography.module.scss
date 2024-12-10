@@ -1,0 +1,147 @@
+@mixin typography($font-size, $font-weight, $line-height) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
+.typography {
+  font-family: Roboto, sans-serif;
+}
+
+.grey {
+  color: var(--color-light-900);
+}
+
+.black {
+  color: var(--color-dark-900);
+}
+
+.white {
+  color: var(--color-light-100);
+}
+
+.red {
+  color: var(--color-danger-500);
+}
+
+.link {
+  color: var(--color-accent-500);
+}
+
+.h1 {
+  @include typography(var(--font-size-xl), var(--font-weight-bold), var(--line-height-l));
+}
+
+.h2 {
+  @include typography(var(--font-size-l), var(--font-weight-bold), var(--line-height-m));
+}
+
+.h3 {
+  @include typography(var(--font-size-m), var(--font-weight-semi-bold), var(--line-height-m));
+}
+
+.h4 {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: 24px;
+}
+
+.body1 {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+}
+
+.subtitle1 {
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+}
+
+.body2 {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-m);
+}
+
+.subtitle2 {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+}
+
+.caption {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
+}
+
+.overline {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-s);
+}
+
+.link1 {
+  cursor: pointer;
+
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
+  color: var(--color-accent-500);
+  text-decoration: underline;
+}
+
+.link2 {
+  cursor: pointer;
+
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-s);
+  color: var(--color-accent-500);
+  text-decoration: underline;
+}
+
+.large {
+  @include typography(var(--font-size-xxl), var(--font-weight-semi-bold), var(--line-height-l));
+}
+
+.regularText16 {
+  @include typography(var(--font-size-m), var(--font-weight-regular), var(--line-height-m));
+}
+
+.boldText16 {
+  @include typography(var(--font-size-m), var(--font-weight-bold), var(--line-height-m));
+}
+
+.regularText14 {
+  @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
+}
+
+.mediumText14 {
+  @include typography(var(--font-size-s), var(--font-weight-medium), var(--line-height-m));
+}
+
+.boldText14 {
+  @include typography(var(--font-size-s), var(--font-weight-bold), var(--line-height-m));
+}
+
+.smallText {
+  @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-s));
+}
+
+.semiBoldSmallText {
+  @include typography(var(--font-size-xs), var(--font-weight-semi-bold), var(--line-height-s));
+}
+
+.regularLink {
+  @include typography(var(--font-size-s), var(--font-weight-regular), var(--line-height-m));
+  color: var(--color-accent-500);
+  text-decoration: underline;
+}
+
+.smallLink {
+  @include typography(var(--font-size-xs), var(--font-weight-regular), var(--line-height-s));
+  color: var(--color-accent-500);
+  text-decoration: underline;
+}
