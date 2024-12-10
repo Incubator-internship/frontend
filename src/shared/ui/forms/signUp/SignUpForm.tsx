@@ -47,7 +47,7 @@ export type SignUpResponse =
   | { data?: undefined; error: FetchBaseQueryErrorWithDetails | SerializedError }
 
 type Props = {
-  onSubmit: (data: Omit<SignUpFormValues, 'confirmPassword'>) => Promise<SignUpResponse>
+  onSubmit: (data: Omit<SignUpFormValues, 'confirmPassword'>) => Promise<SignUpResponse> | void
 }
 
 export const SignUpForm = ({ onSubmit }: Props) => {
@@ -77,7 +77,7 @@ export const SignUpForm = ({ onSubmit }: Props) => {
       username: data.username,
     })
 
-    if (result.error) {
+    if (result?.error) {
       if ('status' in result.error) {
         if (result.error.status === 400) {
           const errorMessage = result.error.data?.errorsMessages?.[0] || ''
