@@ -11,6 +11,7 @@ import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import s from './signInForm.module.scss'
@@ -28,6 +29,7 @@ type Props = {
 }
 
 export const SignInForm = ({ isError, onSubmit }: Props) => {
+  const router = useRouter()
   const {
     control,
     formState: { isDirty, isSubmitting, isValid },
@@ -61,8 +63,8 @@ export const SignInForm = ({ isError, onSubmit }: Props) => {
       </Typography>
 
       <div className={clsx(s.iconsWrapper)}>
-        <button type={'button'}>
-          <GoogleIcon className={clsx(s.icon)} />
+        <button onClick={() => router.push('/api/v1/auth/google')} type={'button'}>
+          <GoogleIcon className={s.icon} />
         </button>
         <button type={'button'}>
           <GithubIcon className={clsx(s.icon)} fill={'white'} />
