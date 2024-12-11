@@ -1,0 +1,31 @@
+{
+    "SelectLanguage": {
+    "English": "Английский",
+    "Russian": "Русский"
+    },
+    "Error": {
+      "ErrorPasswordConfirmation": "Пароли должны совпадать",
+      "ErrorRecoveryCode": "Неверный код восстановления",
+      "Error429": "Более 5 попыток с одного IP-адреса в течение 10 секунд"
+    },
+    "NewPasswordPage": {
+      "CreateNewPasswordTitle": "Создать новый пароль",
+      "NewPassword": "Новый пароль",
+      "PasswordConfirmation": "Подтверждение пароля",
+      "CreateNewPasswordHelper": "Ваш пароль должен содержать от 6 до 20 символов",
+      "CreateNewPasswordButton": "Создать новый пароль"
+    },
+    "ForgotPasswordPage": {
+      "ForgotPassword": "Забыли пароль",
+      "Email": "Адрес электронной почты",
+      "Enter your email address and we will send you further instructions": "Введите свой адрес электронной почты и мы вышлем вам дальнейшие инструкции",
+      "Link": "Ссылка отправлена ​​по электронной почте; Если вы не получили электронное письмо, попробуйте еще раз",
+      "Send Link Again": "Отправить ссылку еще раз",
+      "Send Link": "Отправить ссылку",
+      "Back to Sign In": "Вернуться к входу",
+      "Email verification link expired": "Срок действия ссылки для подтверждения электронной почты истек",
+      "Looks like the verification link has expired; Not to worry, we can send the link again": "Похоже, срок действия ссылки для подтверждения истек; Не волнуйтесь, мы можем отправить ссылку еще раз",
+      "Resend link": "Отправить ссылку повторно",
+      "We have sent a link to confirm your email to": "Мы отправили ссылку для подтверждения вашего электронного письма на"
+    }
+  }

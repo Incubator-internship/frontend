@@ -5,6 +5,7 @@ import { useNewPasswordMutation } from '@/app/api/auth/authApi'
 import { passwordSchema } from '@/shared/model/schemas/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { z } from 'zod'
 
 import s from './passwordForm.module.scss'
@@ -45,7 +46,10 @@ export const PasswordForm = () => {
   })
 
   const router = useRouter()
+  const locale = useLocale()
   const [newPasswordMutation] = useNewPasswordMutation()
+  const t = useTranslations('NewPasswordPage')
+  const tError = useTranslations('Error')
 
   const searchParams = useSearchParams()
   const recoveryCode = searchParams ? searchParams.get('code') : null
@@ -65,15 +69,15 @@ export const PasswordForm = () => {
         newPassword: data.newPassword,
         recoveryCode: recoveryCode || '',
       }).unwrap()
-      router.push('/signin')
+      router.push(`/${locale}/signup`)
     } catch (error: unknown) {
       if (isApiError(error)) {
         if (error.status === 400) {
-          setError('recoveryCode', { message: 'Invalid recovery code' })
-          router.push('/forgotpassword')
+          setError('recoveryCode', { message: tError('ErrorRecoveryCode') })
+          router.push(`/${locale}/forgotpassword`)
         } else if (error.status === 429) {
           setError('root', {
-            message: 'More than 5 attempts from one IP-address during 10 seconds',
+            message: tError('Error429'),
           })
         }
       }
@@ -83,15 +87,15 @@ export const PasswordForm = () => {
   return (
     <Card className={s.createNewPasswordForm}>
       <Typography className={s.createNewPasswordTitle} variant={'h2'}>
-        Create new password
+        {t('CreateNewPasswordTitle')}
       </Typography>
       <form onSubmit={onSubmitForm}>
         <PasswordFormItem control={control} errors={errors} />
         <Typography className={s.createNewPasswordHelper} color={'grey'} variant={'body2'}>
-          Your password must be between 6 and 20 characters
+          {t('CreateNewPasswordHelper')}
         </Typography>
         <Button disabled={!isDirty || !isValid} fullWidth type={'submit'}>
-          Create new password
+          {t('CreateNewPasswordButton')}
         </Button>
       </form>
     </Card>
