@@ -24,7 +24,7 @@
       "Send Link": "Send Link",
       "Back to Sign In": "Back to Sign In",
       "Email verification link expired": "Email verification link expired",
-      "Looks like the verification link has expired. Not to worry, we can send the link again": "Looks like the verification link has expired. Not to worry, we can send the link again",
+      "Looks like the verification link has expired; Not to worry, we can send the link again": "Looks like the verification link has expired. Not to worry, we can send the link again",
       "Resend link": "Resend link",
       "We have sent a link to confirm your email to": "We have sent a link to confirm your email to"
     }
