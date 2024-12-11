@@ -1,12 +1,15 @@
 'use client'
 
-import React, { Suspense } from 'react'
+import React from 'react'
 
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 
 import { PublicPageModal } from '../shared/ui/publicPageModal/PublicPageModal'
 
 export default function Home() {
+  const locale = useLocale()
+
   return (
     <div>
       <Link href={'/signup'}>Signup</Link>

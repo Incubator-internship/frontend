@@ -14,6 +14,7 @@ import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { z } from 'zod'
 
 import s from './ForgotPasswordForm.module.scss'
@@ -32,6 +33,8 @@ export const ForgotPasswordForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [submittedEmail, setSubmittedEmail] = useState('')
   const [isRecoveryCodeValid, setIsRecoveryCodeValid] = useState(true)
+  const t = useTranslations('ForgotPasswordPage')
+  const locale = useLocale()
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -133,32 +136,32 @@ export const ForgotPasswordForm = () => {
       {isRecoveryCodeValid && (
         <>
           <Typography className={s.title} color={'white'} variant={'h1'}>
-            Forgot Password
+            {t('ForgotPassword')}
           </Typography>
 
           <InputControl
             control={control}
-            label={'Email'}
+            label={t('Email')}
             name={'email'}
             placeholder={'Epam@epam.com'}
           />
 
           <Typography color={'grey'} variant={'regularText14'}>
-            Enter your email address and we will send you further instructions
+            {t('Enter your email address and we will send you further instructions')}
           </Typography>
 
           {isSent && (
             <Typography color={'white'} variant={'regularText14'}>
-              The link has been sent by email. If you don’t receive an email, try again.
+              {t('Link')}
             </Typography>
           )}
 
           <Button disabled={!isValid} fullWidth type={'submit'} variant={'primary'}>
-            {isSent ? 'Send Link Again' : 'Send Link'}
+            {isSent ? t('Send Link Again') : t('Send Link')}
           </Button>
 
-          <Button as={Link} fullWidth href={'/signin'} variant={'transparent'}>
-            Back to Sign In
+          <Button as={Link} fullWidth href={`/${locale}/signin`} variant={'transparent'}>
+            {t('Back to Sign In')}
           </Button>
 
           {!isSent && (
@@ -173,15 +176,17 @@ export const ForgotPasswordForm = () => {
       {!isRecoveryCodeValid && (
         <>
           <Typography className={s.title} color={'white'} variant={'h1'}>
-            Email verification link expired
+            {t('Email verification link expired')}
           </Typography>
 
           <Typography color={'white'} variant={'regularText14'}>
-            Looks like the verification link has expired. Not to worry, we can send the link again
+            {t(
+              'Looks like the verification link has expired. Not to worry, we can send the link again'
+            )}
           </Typography>
 
           <Button fullWidth type={'submit'} variant={'primary'}>
-            Resend link
+            {t('Resend link')}
           </Button>
           <Image alt={'illustration'} src={rafikiImage} width={360} />
         </>
@@ -189,7 +194,7 @@ export const ForgotPasswordForm = () => {
 
       <Modal isOpen={isModalOpen} onClose={handleModalClose} title={'Email Sent'}>
         <Typography color={'grey'} variant={'regularText14'}>
-          We have sent a link to confirm your email to <strong>{submittedEmail}</strong>.
+          {t('We have sent a link to confirm your email to')} <strong>{submittedEmail}</strong>.
         </Typography>
         <div className={s.buttonWrapper}>
           <Button onClick={handleModalClose} variant={'primary'}>

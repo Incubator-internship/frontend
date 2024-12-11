@@ -2,6 +2,7 @@ import BellOutline from '@/shared/assets/icons/BellOutline'
 import { Button } from '@/shared/ui/button'
 import { Select } from '@/shared/ui/select'
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 
 import s from './header.module.scss'
 
@@ -11,6 +12,8 @@ type Props = {
 }
 
 export const Header = ({ count, isAuth }: Props) => {
+  const locale = useLocale()
+
   return (
     <header className={s.header}>
       <Link className={s.logo} href={'/'}>
@@ -25,10 +28,10 @@ export const Header = ({ count, isAuth }: Props) => {
         )}
         {!isAuth && (
           <div className={s.buttons}>
-            <Button as={Link} href={'/signin'} variant={'transparent'}>
+            <Button as={Link} href={`/${locale}/signin`} variant={'transparent'}>
               Log in
             </Button>
-            <Button as={Link} href={'/signup'} variant={'primary'}>
+            <Button as={Link} href={`/${locale}/signup`} variant={'primary'}>
               Sign up
             </Button>
           </div>
