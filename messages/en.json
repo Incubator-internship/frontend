@@ -1,0 +1,31 @@
+{
+    "SelectLanguage": {
+      "English": "English",
+      "Russian": "Russian"
+    },
+    "Error": {
+      "ErrorPasswordConfirmation": "The passwords must match",
+      "ErrorRecoveryCode": "Invalid recovery code",
+      "Error429": "More than 5 attempts from one IP-address during 10 seconds"
+    },
+    "NewPasswordPage": {
+      "CreateNewPasswordTitle": "Create new password",
+      "NewPassword": "New password",
+      "PasswordConfirmation": "Password confirmation",
+      "CreateNewPasswordHelper": "Your password must be between 6 and 20 characters",
+      "CreateNewPasswordButton": "Create new password"
+    },
+    "ForgotPasswordPage": {
+      "ForgotPassword": "Forgot Password",
+      "Email": "Email",
+      "Enter your email address and we will send you further instructions": "Enter your email address and we will send you further instructions",
+      "Link": "The link has been sent by email. If you don’t receive an email, try again",
+      "Send Link Again": "Send Link Again",
+      "Send Link": "Send Link",
+      "Back to Sign In": "Back to Sign In",
+      "Email verification link expired": "Email verification link expired",
+      "Looks like the verification link has expired; Not to worry, we can send the link again": "Looks like the verification link has expired. Not to worry, we can send the link again",
+      "Resend link": "Resend link",
+      "We have sent a link to confirm your email to": "We have sent a link to confirm your email to"
+    }
+  }

@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useId } from 'react'
 
@@ -5,6 +6,8 @@ import Arrow from '@/shared/assets/icons/Arrow'
 import { SelectItem } from '@/shared/ui/select/selectItem/SelectItem'
 import * as RadixSelect from '@radix-ui/react-select'
 import clsx from 'clsx'
+import { usePathname, useRouter } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 
 import s from './select.module.scss'
 import sItem from './selectItem/selectItem.module.scss'
@@ -45,12 +48,27 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
     ref
   ) => {
     const id = useId()
+    const t = useTranslations('SelectLanguage')
+    const locale = useLocale()
+    const router = useRouter()
+    const pathname = usePathname()
+
     const languages = [
-      { icon: FlagRus, title: 'Russian', value: '1' },
-      { icon: FlagUk, title: 'English', value: '2' },
+      { icon: FlagRus, title: t('Russian'), value: 'ru' },
+      { icon: FlagUk, title: t('English'), value: 'en' },
     ]
 
     const variantsSelect = () => (variant === 'narrow' ? languages : items)
+
+    const handleLanguageChange = (value: string) => {
+      const newLang = languages.find(lang => lang.value === value)?.value
+
+      if (newLang) {
+        const newPath = pathname.replace(`/${locale}`, `/${newLang}`)
+
+        router.replace(newPath)
+      }
+    }
 
     return (
       <div className={clsx(s.selectWrapper, className)}>
@@ -64,7 +82,12 @@ export const Select = forwardRef<ElementRef<typeof RadixSelect.Root>, SelectProp
             {label}
           </Typography>
         )}
-        <RadixSelect.Root disabled={disabled} onValueChange={onChange} value={value} {...rest}>
+        <RadixSelect.Root
+          disabled={disabled}
+          onValueChange={handleLanguageChange}
+          value={locale}
+          {...rest}
+        >
           <RadixSelect.Trigger
             className={clsx(s.selectTrigger, variant === 'narrow' ? s.selectVariantNarrow : '')}
             id={id}
