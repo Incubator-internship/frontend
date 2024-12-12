@@ -16,10 +16,6 @@ type Props = {
 }
 
 const DropdownMenuDemo = ({ content }: Props) => {
-  const [bookmarksChecked, setBookmarksChecked] = React.useState(true)
-  const [urlsChecked, setUrlsChecked] = React.useState(false)
-  const [person, setPerson] = React.useState('pedro')
-
   const contentItems = content.map(item => {
     return (
       <DropdownMenu.Item className={styles.Item} key={item.label} onSelect={item.onSelect}>
