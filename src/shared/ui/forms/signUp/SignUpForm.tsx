@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 
-import GitHub from '@/shared/assets/icons/GitHub'
-import Google from '@/shared/assets/icons/Google'
+import GithubIcon from '@/shared/assets/icons/GithubIcon'
+import GoogleIcon from '@/shared/assets/icons/GoogleIcon'
 import {
   agreeSchema,
   emailSchema,
@@ -16,6 +16,7 @@ import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SerializedError } from '@reduxjs/toolkit'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import s from './signUpForm.module.scss'
@@ -51,6 +52,7 @@ type Props = {
 }
 
 export const SignUpForm = ({ onSubmit }: Props) => {
+  const router = useRouter()
   const {
     control,
     formState: { errors, isDirty, isValid },
@@ -107,11 +109,11 @@ export const SignUpForm = ({ onSubmit }: Props) => {
           Sign Up
         </Typography>
         <div className={s.cardTop}>
-          <button type={'button'}>
-            <Google />
+          <button onClick={() => router.push('/api/v1/auth/google')} type={'button'}>
+            <GoogleIcon className={s.icon} />
           </button>
           <button type={'button'}>
-            <GitHub />
+            <GithubIcon className={s.icon} fill={'white'} />
           </button>
         </div>
         <form className={s.form} onSubmit={onSubmitForm}>
