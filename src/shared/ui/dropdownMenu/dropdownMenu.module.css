@@ -47,14 +47,17 @@
   border-radius: 3px;
   outline: none;
 
+  fill: var(--color-light-100);
+
   &[data-disabled] {
     pointer-events: none;
-    color: var(--mauve-8);
+    color: var(--color-accent-100);
   }
 
   &[data-highlighted] {
-    color: var(--violet-1);
-    background-color: var(--violet-9);
+    cursor: pointer;
+    color: var(--color-accent-500);
+    fill: var(--color-accent-500);
   }
 }
 
@@ -85,10 +88,10 @@
 
 .LeftSlot {
   padding-right: 12px;
-  color: var(--mauve-11);
 
   [data-highlighted] > & {
-    color: white;
+    color: var(--color-accent-500);
+    fill: var(--color-accent-500);
   }
 
   [data-disabled] & {
