@@ -6,7 +6,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { login, logout, selectAuthState } from '@/app/config/store/authSlice'
+import { loginStore, logoutStore, selectAuthState } from '@/app/config/store/authSlice'
 
 export default function TestAuthComponent() {
   //управление состояния авторизации
@@ -15,11 +15,11 @@ export default function TestAuthComponent() {
   const isAuth = useSelector(selectAuthState)
 
   const handleLogin = () => {
-    dispatch(login()) // авторизоваться
+    dispatch(loginStore()) // авторизоваться
   }
 
   const handleLogout = () => {
-    dispatch(logout()) // выйти
+    dispatch(logoutStore()) // выйти
   }
 
   return (
