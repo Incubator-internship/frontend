@@ -8,12 +8,14 @@ import { Schema, SignInForm } from '@/shared/ui/forms/signIn'
 import { clsx } from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useLocale } from 'next-intl'
 
 import s from './signInPage.module.scss'
 
 export default function SignInPage() {
   const [login, { data, isError, isLoading, isSuccess }] = useLoginMutation()
   const router = useRouter()
+  const locale = useLocale()
 
   const handleSubmit = (data: Schema) => {
     const loginDataForRequest: LoginData = {
@@ -27,16 +29,16 @@ export default function SignInPage() {
   useEffect(() => {
     if (isSuccess) {
       localStorage.setItem('accessToken', data.accessToken)
-      router.push('/profile')
+      router.push(`${locale}/profile`)
     }
-  }, [data, isSuccess, router])
+  }, [data, isSuccess, router, locale])
 
   const renderContent = () => {
     if (isLoading) {
       return <div className={clsx(s.loading)}>Loading...</div>
     }
     if (isSuccess) {
-      return <Link href={'/profile'} />
+      return <Link href={`${locale}/profile`} />
     } else {
       return (
         <div className={clsx(s.formWrapper)}>

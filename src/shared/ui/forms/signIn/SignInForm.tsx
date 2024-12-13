@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 
 import GithubIcon from '@/shared/assets/icons/GithubIcon'
 import GoogleIcon from '@/shared/assets/icons/GoogleIcon'
-import { emailSchema, passwordSchema } from '@/shared/model/schemas/schemas'
+import { createEmailSchema, createPasswordSchema } from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
 import { InputControl } from '@/shared/ui/inputControl'
@@ -11,16 +11,18 @@ import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { z } from 'zod'
 
 import s from './signInForm.module.scss'
 
-export const signInSchema = z.object({
-  email: emailSchema,
-  password: passwordSchema,
-})
+const createSignInSchema = (t: (key: string) => string) =>
+  z.object({
+    email: createEmailSchema(t),
+    password: createPasswordSchema(t),
+  })
 
-export type Schema = z.infer<typeof signInSchema>
+export type Schema = z.infer<ReturnType<typeof createSignInSchema>>
 
 type Props = {
   isError?: boolean
@@ -28,6 +30,11 @@ type Props = {
 }
 
 export const SignInForm = ({ isError, onSubmit }: Props) => {
+  const t = useTranslations('SignInPage')
+  const tErrors = useTranslations('FormsErrors')
+
+  const signInSchema = createSignInSchema(tErrors)
+
   const {
     control,
     formState: { isDirty, isSubmitting, isValid },
@@ -48,16 +55,16 @@ export const SignInForm = ({ isError, onSubmit }: Props) => {
   useEffect(() => {
     if (isError) {
       setError('password', {
-        message: 'The email or password are incorrect. Try again please',
+        message: t('ErrorSignIn'),
         type: 'manual',
       })
     }
-  }, [isError, setError])
+  }, [isError, setError, t])
 
   return (
     <Card className={clsx(s.cardWrapper)}>
       <Typography as={'p'} className={clsx(s.typography)} variant={'h1'}>
-        Sign In
+        {t('FormTitle')}
       </Typography>
 
       <div className={clsx(s.iconsWrapper)}>
@@ -74,13 +81,13 @@ export const SignInForm = ({ isError, onSubmit }: Props) => {
           <InputControl
             autoComplete={'email'}
             control={control}
-            label={'Email'}
+            label={t('EmailInput')}
             name={'email'}
             type={'email'}
           />
           <InputControl
             control={control}
-            label={'Password'}
+            label={t('PasswordInput')}
             name={'password'}
             variant={'password'}
           />
@@ -92,17 +99,17 @@ export const SignInForm = ({ isError, onSubmit }: Props) => {
           href={'./forgotpassword'}
           variant={'smallLink'}
         >
-          Forgot Password
+          {t('ForgotPasswordLabel')}
         </Typography>
 
         <Button disabled={!isValid || isSubmitting || !isDirty} type={'submit'}>
-          Sign In
+          {t('FormBtn')}
         </Button>
         <Typography as={'p'} className={clsx(s.text)} variant={'regularText16'}>
-          Don’t have an account?
+          {t('FormLabel')}
         </Typography>
-        <Button as={Link} href={'/signup'} variant={'transparent'}>
-          Sign Up
+        <Button as={Link} href={'./signup'} variant={'transparent'}>
+          {t('FormLink')}
         </Button>
       </form>
     </Card>
