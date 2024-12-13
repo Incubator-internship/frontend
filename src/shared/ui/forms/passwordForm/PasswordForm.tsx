@@ -2,7 +2,13 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useNewPasswordMutation } from '@/app/api/auth/authApi'
-import { passwordSchema } from '@/shared/model/schemas/schemas'
+import {
+  createAgreeSchema,
+  createEmailSchema,
+  createPasswordSchema,
+  createUsernameSchema,
+  passwordSchema,
+} from '@/shared/model/schemas/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
@@ -16,20 +22,32 @@ import { Typography } from '../../typography'
 import { PasswordFormItem } from './passwordFormItem'
 import { ApiError } from './types'
 
-const passwordFormSchema = z
-  .object({
-    newPassword: passwordSchema,
-    passwordConfirmation: passwordSchema,
-    recoveryCode: z.string(),
-  })
-  .refine(data => data.newPassword === data.passwordConfirmation, {
-    message: 'The passwords must match',
-    path: ['passwordConfirmation'],
-  })
+const createPasswordFormSchema = (t: (key: string) => string) =>
+  z
+    .object({
+      newPassword: createPasswordSchema(t),
+      passwordConfirmation: createPasswordSchema(t),
+      recoveryCode: z.string(),
+    })
+    .refine(data => data.newPassword === data.passwordConfirmation, {
+      message: t('PasswordMatch'),
+      path: ['passwordConfirmation'],
+    })
 
-export type FormValues = z.infer<typeof passwordFormSchema>
+export type FormValues = z.infer<ReturnType<typeof createPasswordFormSchema>>
 
 export const PasswordForm = () => {
+  const router = useRouter()
+  const locale = useLocale()
+  const [newPasswordMutation] = useNewPasswordMutation()
+  const t = useTranslations('NewPasswordPage')
+  const tErrors = useTranslations('FormsErrors')
+
+  const passwordFormSchema = createPasswordFormSchema(tErrors)
+
+  const searchParams = useSearchParams()
+  const recoveryCode = searchParams ? searchParams.get('code') : null
+
   const {
     control,
     formState: { errors, isDirty, isValid },
@@ -44,15 +62,6 @@ export const PasswordForm = () => {
     mode: 'onBlur',
     resolver: zodResolver(passwordFormSchema),
   })
-
-  const router = useRouter()
-  const locale = useLocale()
-  const [newPasswordMutation] = useNewPasswordMutation()
-  const t = useTranslations('NewPasswordPage')
-  const tError = useTranslations('Error')
-
-  const searchParams = useSearchParams()
-  const recoveryCode = searchParams ? searchParams.get('code') : null
 
   function isApiError(error: unknown): error is ApiError {
     return (
@@ -73,11 +82,11 @@ export const PasswordForm = () => {
     } catch (error: unknown) {
       if (isApiError(error)) {
         if (error.status === 400) {
-          setError('recoveryCode', { message: tError('ErrorRecoveryCode') })
+          setError('recoveryCode', { message: t('ErrorRecoveryCode') })
           router.push(`/${locale}/forgotpassword`)
         } else if (error.status === 429) {
           setError('root', {
-            message: tError('Error429'),
+            message: t('Error429'),
           })
         }
       }
