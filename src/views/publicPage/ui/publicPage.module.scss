@@ -60,4 +60,33 @@
 .cardItem {
   width: 234px;
   height: 391px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  border: none;
+}
+
+.cardItemImage {
+  height: 240px;
+  position: relative;
+  width: 234px;
+}
+
+.cardItemAvatarTitle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.cardItemText {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
