@@ -1,5 +1,6 @@
 'use client'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Card } from '@/shared/ui/card'
 import { Typography } from '@/shared/ui/typography'
 
@@ -21,7 +22,12 @@ function PublicPage() {
         </Typography>
       </div>
       <div className={s.cards}>
-        <Card className={s.cardItem}>This is a default card</Card>
+        <Card className={s.cardItem}>
+          <Avatar>
+            <AvatarImage alt={'Name'} src={'https://github.com/shadcn.png'} />
+            <AvatarFallback>DK</AvatarFallback>
+          </Avatar>
+        </Card>
         <Card className={s.cardItem}>This is a default card</Card>
         <Card className={s.cardItem}>This is a default card</Card>
         <Card className={s.cardItem}>This is a default card</Card>
