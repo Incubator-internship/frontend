@@ -12,6 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Card } from '@/shared/ui/card'
 import { Typography } from '@/shared/ui/typography'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 import s from './publicPage.module.scss'
 
@@ -27,14 +28,15 @@ const cardsData = [
 ]
 
 //TODO: add carousel https://ui.shadcn.com/docs/components/carousel
-//TODO: add showmore https://chatgpt.com/share/675e033d-efb8-8013-8ff9-d1207c006998
-//FIX: Card reloading border
+//TODO: add showmoreText https://chatgpt.com/share/675e033d-efb8-8013-8ff9-d1207c006998
 
 function PublicPage() {
+  const t = useTranslations('PublicPage')
+
   return (
     <div className={s.wrapper}>
       <div className={s.registeredUsers}>
-        <Typography variant={'h2'}>Registered users:</Typography>
+        <Typography variant={'h2'}>{t('Registered users:')}</Typography>
         <Typography className={s.registeredUserValue} variant={'h2'}>
           {numberOfUsers.split('').map((number, i) => (
             <span className={s.el} key={number + i}>

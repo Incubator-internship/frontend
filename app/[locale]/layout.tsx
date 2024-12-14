@@ -42,7 +42,7 @@ export default async function RootLayout({
         <StoreProvider>
           <Suspense>
             <body>
-              <TestAuthComponent />
+              {/* <TestAuthComponent /> */}
               <Header />
               <main>{children}</main>
             </body>
