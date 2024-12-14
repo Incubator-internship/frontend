@@ -6,34 +6,25 @@ import ArrowRight from '@/shared/assets/icons/ArrowRight'
 
 import s from './modalSlider.module.scss'
 
-const images = [
-  'https://via.placeholder.com/800x400?text=Image+1',
-  'https://via.placeholder.com/800x400?text=Image+2',
-  'https://via.placeholder.com/800x400?text=Image+3',
-  'https://via.placeholder.com/800x400?text=Image+4',
-]
+type ModalSliderProps = {
+  images: string[]
+  nextPost: () => void
+  prevPost: () => void
+}
 
-export const ModalSlider = () => {
+export const ModalSlider = ({ images, nextPost, prevPost }: ModalSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const nextSlide = () => {
-    setCurrentIndex(prevIndex => (prevIndex + 1) % images.length)
-  }
-
-  const prevSlide = () => {
-    setCurrentIndex(prevIndex => (prevIndex - 1 + images.length) % images.length)
-  }
-
   const goToSlide = (index: number) => {
     setCurrentIndex(index)
   }
 
   return (
     <div className={s.modalSlider}>
-      <button className={s.prevButton} onClick={prevSlide} type={'submit'}>
+      <button className={s.prevButton} onClick={prevPost} type={'submit'}>
         <ArrowLeft className={s.icon} />
       </button>
       <img alt={`Slide ${currentIndex + 1}`} className={s.image} src={images[currentIndex]} />
-      <button className={s.nextButton} onClick={nextSlide} type={'submit'}>
+      <button className={s.nextButton} onClick={nextPost} type={'submit'}>
         <ArrowRight className={s.icon} />
       </button>
       <ul className={s.dots}>

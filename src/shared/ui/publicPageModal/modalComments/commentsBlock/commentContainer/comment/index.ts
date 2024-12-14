@@ -1,1 +1,1 @@
-export { Comment } from './Coment'
+export { Comment } from './Comment'

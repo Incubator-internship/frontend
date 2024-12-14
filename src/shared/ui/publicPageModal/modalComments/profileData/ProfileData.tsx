@@ -9,10 +9,9 @@ type ProfileDataProps = {
 }
 export const ProfileData: React.FC<ProfileDataProps> = ({ className, imageUrl, profileUrl }) => {
   return (
-    <div className={className || s.profileData}>
-      {/* <img alt={'ProfileImg'} className={s.img} src={imageUrl || ''} /> */}
-      <img className={s.img} />
-      <div className={s.urlProfile}>URL Profile</div>
-    </div>
+    <span className={className || s.profileData}>
+      <img alt={'ProfileImg'} className={s.img} src={imageUrl || ''} />
+      <div className={s.urlProfile}>{profileUrl}</div>
+    </span>
   )
 }

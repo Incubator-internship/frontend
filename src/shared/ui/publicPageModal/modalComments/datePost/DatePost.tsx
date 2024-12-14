@@ -1,5 +1,9 @@
 import s from './datePost.module.scss'
 
-export const DatePost = () => {
-  return <div className={s.date}>DATe</div>
+type DatePostProps = {
+  datePost: string
+}
+
+export const DatePost = ({ datePost }: DatePostProps) => {
+  return <div className={s.date}>{datePost}</div>
 }

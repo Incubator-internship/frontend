@@ -1,1 +1,0 @@
-export { CommentsHeader } from './CommentsHeader'

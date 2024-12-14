@@ -1,13 +1,23 @@
 import s from './commentBlock.module.scss'
 
+import { CommentsArray } from '../../DataArray'
 import { CommentContainer } from './commentContainer/CommentContainer'
 
-export const CommentBlock = () => {
+type CommentBlockProps = {
+  comments: CommentsArray[]
+}
+
+export const CommentBlock = ({ comments }: CommentBlockProps) => {
   return (
     <div className={s.commentBlock}>
-      <CommentContainer />
-      <CommentContainer />
-      <CommentContainer />
+      {comments.map(comment => (
+        <CommentContainer
+          answers={comment.answers}
+          datePost={comment.dateComment}
+          key={comment.id}
+          text={comment.comment}
+        />
+      ))}
     </div>
   )
 }
