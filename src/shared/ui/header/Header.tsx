@@ -24,6 +24,7 @@ export const Header = () => {
         Instagram
       </Link>
       <div className={s.container}>
+        <Select defaultValue={'2'} items={[]} variant={'narrow'} />
         {isAuth && (
           <div className={s.ball}>
             <BellOutline />
@@ -40,7 +41,6 @@ export const Header = () => {
             </Button>
           </div>
         )}
-        <Select defaultValue={'2'} items={[]} variant={'narrow'} />
       </div>
     </header>
   )
