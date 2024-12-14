@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { Suspense } from 'react'
+import React, { Suspense } from 'react'
 
 import StoreProvider from '@/app/config/store/storeProvider'
 import { Header } from '@/shared/ui/header'
@@ -42,8 +42,8 @@ export default async function RootLayout({
         <StoreProvider>
           <Suspense>
             <body>
-              <Header />
               <TestAuthComponent />
+              <Header />
               <main>{children}</main>
             </body>
           </Suspense>

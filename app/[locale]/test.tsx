@@ -1,5 +1,6 @@
 /* eslint-disable react/button-has-type */
 //TODO: компонент для тестирования состояния авторизации
+//TODO: app\[locale]\layout.tsx отключать здесь
 
 'use client'
 
@@ -24,9 +25,9 @@ export default function TestAuthComponent() {
 
   return (
     <div>
-      <p>Авторизация isAuth: {isAuth ? 'True' : 'False'}</p>
-      <button onClick={handleLogin}>Войти</button>
-      <button onClick={handleLogout}>Выйти</button>
+      <span>Авторизация isAuth: {isAuth ? 'True' : 'False'}</span>
+      <button onClick={handleLogin}>&nbsp;&nbsp;&nbsp;Войти&nbsp;&nbsp;&nbsp;</button>
+      <button onClick={handleLogout}>&nbsp;&nbsp;&nbsp;Выйти&nbsp;&nbsp;&nbsp;</button>
     </div>
   )
 }

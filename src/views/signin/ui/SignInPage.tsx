@@ -35,7 +35,7 @@ export default function SignInPage() {
       dispatch(loginStore())
       router.push(`/${locale}/profile`)
     }
-  }, [data, isSuccess, router, locale])
+  }, [data, isSuccess, router, locale, dispatch])
 
   const renderContent = () => {
     if (isLoading) {
