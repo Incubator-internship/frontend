@@ -1,7 +1,8 @@
 .wrapper {
   max-width: 1280px;
   margin: 0 auto;
-  background-color: rgb(43, 255, 0);
+
+  // background-color: rgb(43, 255, 0);
   height: 100%;
   width: 100%;
   display: flex;
@@ -11,11 +12,39 @@
 
 .registeredUsers {
   width: 100%;
+  display: flex;
   text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  outline: 1px solid var(--color-dark-300);
+  outline-offset: -1px;
+  margin: 24px 0;
+  padding: 12px 24px;
+}
+
+.registeredUserValue {
+  outline: 1px solid var(--color-dark-300);
+  outline-offset: -1px;
+  padding: 12px;
+  display: flex;
+  gap: 7px;
+}
+
+.el {
+  position: relative;
   justify-content: center;
   align-items: center;
-  outline: 1px solid black;
-  margin-top: 24px;
+  height: 24px;
+  width: 24px;
+}
+
+.el:not(:last-child)::after {
+  content: ' ';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  height: 30px;
+  border-right: 1px var(--color-dark-300) solid;
 }
 
 .cards {
@@ -25,7 +54,7 @@
   justify-content: center;
   align-items: center;
   gap: 12px;
-  margin: 24px 0;
+  margin: 12px 0;
 }
 
 .cardItem {
