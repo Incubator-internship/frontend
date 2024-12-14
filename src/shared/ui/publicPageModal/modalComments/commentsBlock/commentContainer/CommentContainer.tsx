@@ -4,14 +4,14 @@ import Line from '@/shared/assets/icons/Line'
 
 import s from './commentContainer.module.scss'
 
-import { CommentsArray } from '../../../DataArray'
+import { Answers } from '../../../DataArray'
 import { DatePost } from '../../datePost'
 import { ProfileData } from '../../profileData'
 import { AnswerContainer } from './answerContainer/AnswerContainer'
 import { Comment } from './comment/Comment'
 
 type CommentContainerProps = {
-  answers: string[]
+  answers: Answers[]
   datePost: string
   text: string
 }
@@ -40,7 +40,7 @@ export const CommentContainer = ({ answers, datePost, text }: CommentContainerPr
           )}
         </button>
       )}
-      {showAnswers && <AnswerContainer answers={answers} datePost={datePost} />}
+      {showAnswers && <AnswerContainer answers={answers} />}
     </div>
   )
 }

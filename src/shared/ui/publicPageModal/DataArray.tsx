@@ -4,15 +4,21 @@ export type PostType = {
   datePost: string
   id: string
   imagePost: string
-  likesCount: number
   likesPost: LikesPostType[]
 }
 
 export type CommentsArray = {
-  answers: string[]
+  answers: Answers[]
   comment: string
   dataPost: DataPost
   dateComment: string
+  id: string
+}
+
+export type Answers = {
+  answer: string
+  dataPost: DataPost
+  datePost: string
   id: string
 }
 
@@ -29,7 +35,26 @@ export const DataArray: PostType[] = [
   {
     comments: [
       {
-        answers: [],
+        answers: [
+          {
+            answer: 'First answer - First answer - First answer',
+            dataPost: {
+              imgProfile: 'https://via.placeholder.com/150?text=Profile+1',
+              urlProfile: 'ProfileProfile 1',
+            },
+            datePost: '10 Hours ago',
+            id: '1',
+          },
+          {
+            answer: 'Second answer - Second answer - Second answer',
+            dataPost: {
+              imgProfile: 'https://via.placeholder.com/150?text=Profile+1',
+              urlProfile: 'ProfileProfile 1',
+            },
+            datePost: '11 Hours ago',
+            id: '2',
+          },
+        ],
         comment:
           'First Comment - First Comment - First Comment - First Comment - First Comment - First Comment - First Comment -First Comment - First Comment - First Comment',
         dataPost: {
@@ -47,7 +72,6 @@ export const DataArray: PostType[] = [
     datePost: '2024-12-13',
     id: '1',
     imagePost: 'https://via.placeholder.com/800x400?text=Image+1',
-    likesCount: 4,
     likesPost: [
       {
         imgProfile: 'https://via.placeholder.com/150?text=Profile+4',
@@ -96,7 +120,6 @@ export const DataArray: PostType[] = [
     datePost: '2024-12-14',
     id: '2',
     imagePost: 'https://via.placeholder.com/800x400?text=Image+2',
-    likesCount: 2,
     likesPost: [
       {
         imgProfile: 'https://via.placeholder.com/150?text=Profile+4',
@@ -151,13 +174,24 @@ export const DataArray: PostType[] = [
     datePost: '2024-12-15',
     id: '3',
     imagePost: 'https://via.placeholder.com/800x400?text=Image+3',
-    likesCount: 2,
     likesPost: [
       {
         imgProfile: 'https://via.placeholder.com/150?text=Profile+4',
       },
       {
         imgProfile: 'https://via.placeholder.com/150?text=Profile+5',
+      },
+      {
+        imgProfile: 'https://via.placeholder.com/150?text=Profile+4',
+      },
+      {
+        imgProfile: 'https://via.placeholder.com/150?text=Profile+4',
+      },
+      {
+        imgProfile: 'https://via.placeholder.com/150?text=Profile+4',
+      },
+      {
+        imgProfile: 'https://via.placeholder.com/150?text=Profile+4',
       },
     ],
   },
@@ -218,7 +252,6 @@ export const DataArray: PostType[] = [
     datePost: '2024-12-16',
     id: '4',
     imagePost: 'https://via.placeholder.com/800x400?text=Image+4',
-    likesCount: 2,
     likesPost: [
       {
         imgProfile: 'https://via.placeholder.com/150?text=Profile+4',
@@ -297,7 +330,6 @@ export const DataArray: PostType[] = [
     datePost: '2024-12-17',
     id: '5',
     imagePost: 'https://via.placeholder.com/800x400?text=Image+5',
-    likesCount: 2,
     likesPost: [
       {
         imgProfile: 'https://via.placeholder.com/150?text=Profile+4',

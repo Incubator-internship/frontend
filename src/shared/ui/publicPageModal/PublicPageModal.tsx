@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 
+import Close from '@/shared/assets/icons/Close'
+
 import s from './publicPageModal.module.scss'
 
-import { DataArray, PostType } from './DataArray'
+import { DataArray } from './DataArray'
 import { ModalComments } from './modalComments'
 import { ModalSlider } from './modalSlider'
 
@@ -35,14 +37,19 @@ export const PublicPageModal = ({ children, isOpen = true, onClose }: PublicPage
   }
 
   return (
-    <div className={s.publicPageModule} onClick={handleBackdropClick}>
+    <div className={s.backdrop} onClick={handleBackdropClick}>
       <div className={s.publicPageModule}>
+        <button onClick={onClose} type={'button'}>
+          <Close className={s.close}></Close>
+        </button>
         <ModalSlider
-          images={[posts[currentIndex].imagePost]}
+          currentIndex={currentIndex}
           nextPost={nextPost}
+          posts={posts}
           prevPost={prevPost}
+          setCurrentIndex={setCurrentIndex}
         />
-        <ModalComments data={posts[currentIndex]} />
+        <ModalComments posts={posts[currentIndex]} />
       </div>
     </div>
   )

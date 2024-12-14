@@ -6,15 +6,19 @@ import { CommentsFooter } from './commentsFooter'
 import { CommentsHeader } from './commentsHeader'
 
 type ModalCommentsProps = {
-  data: PostType
+  posts: PostType
 }
 
-export const ModalComments = ({ data }: ModalCommentsProps) => {
+export const ModalComments = ({ posts }: ModalCommentsProps) => {
   return (
     <div className={s.modalComments}>
-      <CommentsHeader profileData={data.dataPost} />
-      <CommentBlock comments={data.comments} />
-      <CommentsFooter datePost={data.datePost} likesCount={data.likesCount} />
+      <CommentsHeader profileData={posts.dataPost} />
+      <CommentBlock comments={posts.comments} />
+      <CommentsFooter
+        datePost={posts.datePost}
+        likesCount={posts.likesPost.length}
+        likesPost={posts.likesPost}
+      />
     </div>
   )
 }

@@ -1,20 +1,21 @@
+import { Answers } from '@/shared/ui/publicPageModal/DataArray'
+
 import s from './answerContainer.module.scss'
 
 import { DatePost } from '../../../datePost/DatePost'
 import { ProfileData } from '../../../profileData/ProfileData'
 
 type AnswerContainerProps = {
-  answers: string[]
-  datePost: string
+  answers: Answers[]
 }
-export const AnswerContainer = ({ answers, datePost }: AnswerContainerProps) => {
+export const AnswerContainer = ({ answers }: AnswerContainerProps) => {
   return (
     <>
-      {answers.map((answer, index) => (
-        <div className={s.answerContainer} key={index}>
+      {answers.map(answer => (
+        <div className={s.answerContainer} key={answer.id}>
           <ProfileData className={s.profileDataComment} />
-          <span>{answer}</span>
-          <DatePost datePost={datePost} />
+          <span>{answer.answer}</span>
+          <DatePost datePost={answer.datePost} />
         </div>
       ))}
     </>
