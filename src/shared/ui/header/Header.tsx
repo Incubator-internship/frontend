@@ -7,16 +7,20 @@ import BellOutline from '@/shared/assets/icons/BellOutline'
 import { Button } from '@/shared/ui/button'
 import { Select } from '@/shared/ui/select'
 import Link from 'next/link'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import s from './header.module.scss'
 
 export const Header = () => {
   const locale = useLocale()
-  const isAuth = useSelector(selectAuthState)
 
+  const isAuth = useSelector(selectAuthState)
+  
   // FIX: (здесь ниже заглушка, но можно подключить селектор для получения реального значения)
   const count = 3
+
+  const t = useTranslations('Header')
+
 
   return (
     <header className={s.header}>
@@ -34,10 +38,10 @@ export const Header = () => {
         {!isAuth && (
           <div className={s.buttons}>
             <Button as={Link} href={`/${locale}/signin`} variant={'transparent'}>
-              Log in
+              {t('Login')}
             </Button>
             <Button as={Link} href={`/${locale}/signup`} variant={'primary'}>
-              Sign up
+              {t('SignUp')}
             </Button>
           </div>
         )}
