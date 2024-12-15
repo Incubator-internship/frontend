@@ -11,15 +11,17 @@ type CommentBlockProps = {
 
 export const CommentBlock = ({ comments }: CommentBlockProps) => {
   return (
-    <div className={s.commentBlock}>
-      {comments.map(comment => (
-        <CommentContainer
-          answers={comment.answers}
-          datePost={comment.dateComment}
-          key={comment.id}
-          text={comment.comment}
-        />
-      ))}
-    </div>
+    <Scroll height={'421px'} orientation={'vertical'} width={'100%'}>
+      <div className={s.commentBlock}>
+        {comments.map(comment => (
+          <CommentContainer
+            answers={comment.answers}
+            datePost={comment.dateComment}
+            key={comment.id}
+            text={comment.comment}
+          />
+        ))}
+      </div>
+    </Scroll>
   )
 }
