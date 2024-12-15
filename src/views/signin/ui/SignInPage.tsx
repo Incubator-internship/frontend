@@ -34,10 +34,9 @@ export default function SignInPage() {
     if (isSuccess) {
       localStorage.setItem('accessToken', data.accessToken)
       dispatch(loginStore())
-      router.push(`${locale}/profile`)
+      router.push(`/${locale}/profile`)
     }
   }, [data, isSuccess, router, locale, dispatch])
-
 
   const renderContent = () => {
     if (isLoading) {
