@@ -10,6 +10,7 @@ import image7 from '@/shared/assets/images/userProfile/photo7.webp'
 import Avatar from '@/shared/assets/images/userProfile/profileAvatar.webp'
 import { Typography } from '@/shared/ui/typography'
 import clsx from 'clsx'
+import Image from 'next/image'
 
 import s from './userProfile.module.scss'
 
@@ -27,7 +28,7 @@ export default function UserProfile() {
   return (
     <section className={s.userProfile}>
       <div className={s.info}>
-        <img alt={'Profile avatar'} className={s.ava} src={Avatar.src} />
+        <Image alt={'Profile avatar'} className={s.ava} height={204} src={Avatar.src} width={204} />
         <div className={s.bio}>
           <h2 className={s.username}>URLProfile</h2>
           <div className={s.stats}>
@@ -61,9 +62,19 @@ export default function UserProfile() {
         </div>
       </div>
       <div className={s.gallery}>
-        {galleryImages.map((image, index) => {
-          return <img alt={'Gallery image'} key={index} src={image} />
-        })}
+        {galleryImages.map((image, index) => (
+          <div className={s.cardItemImage} key={index}>
+            <Image
+              alt={`Gallery image ${index + 1}`}
+              fill
+              sizes={'234px'}
+              src={image}
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+        ))}
       </div>
     </section>
   )
