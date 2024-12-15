@@ -1,5 +1,7 @@
 'use client'
 
+import React from 'react'
+
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
 import avatar2 from '@/shared/assets/images/avatars/avatar2.webp'
 import avatar3 from '@/shared/assets/images/avatars/avatar3.webp'
@@ -28,10 +30,11 @@ const cardsData = [
 ]
 
 //TODO: add carousel https://ui.shadcn.com/docs/components/carousel
-//TODO: add showmoreText https://chatgpt.com/share/675e033d-efb8-8013-8ff9-d1207c006998
+//TODO: add showmoreText component
+//TODO: add cardsData & numberOfUsers types
 
-function PublicPage() {
-  const t = useTranslations('PublicPage')
+const PublicPage: React.FC = () => {
+  const t = useTranslations<'PublicPage'>('PublicPage')
 
   return (
     <div className={s.wrapper}>
