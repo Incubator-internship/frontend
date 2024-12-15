@@ -17,6 +17,7 @@ import { Typography } from '@/shared/ui/typography'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 
 import s from './confirmEmail.module.scss'
 
@@ -27,6 +28,9 @@ export default function ConfirmEmail() {
 
   const searchParams = useSearchParams()
   const code = searchParams?.get('code')
+
+  const t = useTranslations('ConfirmEmailPage')
+  const locale = useLocale()
 
   useEffect(() => {
     if (code && initialLoading) {
@@ -41,12 +45,10 @@ export default function ConfirmEmail() {
   return (
     <div className={s.page}>
       <Typography as={'h1'} className={s.title} variant={'h1'}>
-        {isError ? 'Email verification link expired' : 'Congratulations!'}
+        {isError ? t('TitleError') : t('TitleSuccess')}
       </Typography>
       <Typography as={'p'} className={s.subtitle} variant={'regularText16'}>
-        {isError
-          ? 'Looks like the verification link has expired. Not to worry, we can send the link again'
-          : 'Your email has been confirmed'}
+        {isError ? t('TextError') : t('TextSuccess')}
       </Typography>
       {isError ? (
         <div className={s.form}>
@@ -55,8 +57,8 @@ export default function ConfirmEmail() {
           />
         </div>
       ) : (
-        <Button as={Link} className={s.button} href={'/signin'}>
-          Sign In
+        <Button as={Link} className={s.button} href={`${locale}/signin`}>
+          {t('Btn')}
         </Button>
       )}
       <Image

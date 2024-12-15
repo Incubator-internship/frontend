@@ -17,6 +17,7 @@ import s from './signInPage.module.scss'
 export default function SignInPage() {
   const [login, { data, isError, isLoading, isSuccess }] = useLoginMutation()
   const router = useRouter()
+
   const dispatch = useDispatch()
   const locale = useLocale()
 
@@ -33,16 +34,17 @@ export default function SignInPage() {
     if (isSuccess) {
       localStorage.setItem('accessToken', data.accessToken)
       dispatch(loginStore())
-      router.push(`/${locale}/profile`)
+      router.push(`${locale}/profile`)
     }
   }, [data, isSuccess, router, locale, dispatch])
+
 
   const renderContent = () => {
     if (isLoading) {
       return <div className={clsx(s.loading)}>Loading...</div>
     }
     if (isSuccess) {
-      return <Link href={'/profile'} />
+      return <Link href={`${locale}/profile`} />
     } else {
       return (
         <div className={clsx(s.formWrapper)}>

@@ -2,33 +2,84 @@
   "SelectLanguage": {
     "English": "Английский",
     "Russian": "Русский"
-  },
-  "Error": {
-    "ErrorPasswordConfirmation": "Пароли должны совпадать",
-    "ErrorRecoveryCode": "Неверный код восстановления",
-    "Error429": "Более 5 попыток с одного IP-адреса в течение 10 секунд"
-  },
-  "NewPasswordPage": {
-    "CreateNewPasswordTitle": "Создать новый пароль",
-    "NewPassword": "Новый пароль",
-    "PasswordConfirmation": "Подтверждение пароля",
-    "CreateNewPasswordHelper": "Ваш пароль должен содержать от 6 до 20 символов",
-    "CreateNewPasswordButton": "Создать новый пароль"
-  },
-  "ForgotPasswordPage": {
-    "ForgotPassword": "Забыли пароль",
-    "Email": "Адрес электронной почты",
-    "Enter your email address and we will send you further instructions": "Введите свой адрес электронной почты и мы вышлем вам дальнейшие инструкции",
-    "Link": "Ссылка отправлена ​​по электронной почте; Если вы не получили электронное письмо, попробуйте еще раз",
-    "Send Link Again": "Отправить ссылку еще раз",
-    "Send Link": "Отправить ссылку",
-    "Back to Sign In": "Вернуться к входу",
-    "Email verification link expired": "Срок действия ссылки для подтверждения электронной почты истек",
-    "Looks like the verification link has expired; Not to worry, we can send the link again": "Похоже, срок действия ссылки для подтверждения истек; Не волнуйтесь, мы можем отправить ссылку еще раз",
-    "Resend link": "Отправить ссылку повторно",
-    "We have sent a link to confirm your email to": "Мы отправили ссылку для подтверждения вашего электронного письма на"
-  },
-  "PublicPage": {
-    "Registered users:": "Зарегистрировано пользователей:"
+    },
+    "Header": {
+      "SignUp": "Зарегистрироваться",
+      "Login": "Войти"
+    },
+    "NewPasswordPage": {
+      "CreateNewPasswordTitle": "Создать новый пароль",
+      "NewPassword": "Новый пароль",
+      "PasswordConfirmation": "Подтверждение пароля",
+      "CreateNewPasswordHelper": "Ваш пароль должен содержать от 6 до 20 символов",
+      "CreateNewPasswordButton": "Создать новый пароль",
+      "ErrorRecoveryCode": "Неверный код восстановления",
+      "Error429": "Более 5 попыток с одного IP-адреса в течение 10 секунд"
+    },
+    "ForgotPasswordPage": {
+      "ForgotPassword": "Забыли пароль",
+      "Email": "Адрес электронной почты",
+      "Enter your email address and we will send you further instructions": "Введите свой адрес электронной почты и мы вышлем вам дальнейшие инструкции",
+      "Link": "Ссылка отправлена ​​по электронной почте; Если вы не получили электронное письмо, попробуйте еще раз",
+      "Send Link Again": "Отправить ссылку еще раз",
+      "Send Link": "Отправить ссылку",
+      "Back to Sign In": "Вернуться к входу",
+      "Email verification link expired": "Срок действия ссылки для подтверждения электронной почты истек",
+      "Looks like the verification link has expired; Not to worry, we can send the link again": "Похоже, срок действия ссылки для подтверждения истек; Не волнуйтесь, мы можем отправить ссылку еще раз",
+      "Resend link": "Отправить ссылку повторно",
+      "We have sent a link to confirm your email to": "Мы отправили ссылку для подтверждения вашего электронного письма на",
+      "EmailError": "Пользователь с таким адресом электронной почты не существует",
+      "Error429": "Вы превысили максимальное количество попыток. Пожалуйста, повторите попытку позже"
+    },
+    "SignUpPage": {
+      "FormTitle": "Зарегистрироваться",
+      "UsernameInput": "Имя пользователя",
+      "EmailInput": "Email",
+      "PasswordInput": "Пароль",
+      "PasswordConfirmationInput": "Подтверждение пароля",
+      "Agree": "Я согласен с <link>Условиями использования</link> и <link2>Политикой конфиденциальности</link2>",
+      "FormBtn": "Зарегистрироваться",
+      "FormLabel": "У вас есть учетная запись?",
+      "FormLink": "Войти",
+      "ModalTitle": "Письмо отправлено",
+      "ModalText": "Мы отправили ссылку для подтверждения вашего электронного письма на",
+      "ModalBtn": "OK",
+      "ErrorUsername": "Пользователь с этим именем пользователя уже зарегистрирован",
+      "ErrorEmail": "Пользователь с этим адресом электронной почты уже зарегистрирован"
+    },
+    "SignInPage": {
+      "FormTitle": "Войти",
+      "EmailInput": "Email",
+      "PasswordInput": "Пароль",
+      "ForgotPasswordLabel": "Забыли пароль",
+      "FormBtn": "Войти",
+      "FormLabel": "У вас нет учетной записи?",
+      "FormLink": "Зарегистрироваться",
+      "ErrorSignIn": "Адрес электронной почты или пароль неверны. Попробуйте еще раз, пожалуйста"
+    },
+    "ConfirmEmailPage": {
+      "TitleError": "Срок действия ссылки для подтверждения электронной почты истек",
+      "TitleSuccess": "Поздравляем!",
+      "TextError": "Похоже, срок действия ссылки для подтверждения истек. Не волнуйтесь, мы можем отправить ссылку еще раз.",
+      "TextSuccess": "Ваш адрес электронной почты подтвержден",
+      "Btn": "Войти",
+      "EmailInput": "Email",
+      "FormBtn": "Повторно отправить ссылку"
+    },
+    "FormsErrors": {
+      "UsernameMin": "Минимальное количество символов 6",
+      "UsernameMax": "Максимальное количество символов 30",
+      "UsernameRegex": "Имя пользователя должно содержать цифры 0–9, a–z, A–Z, _ –",
+      "EmailRegex": "Электронная почта должна соответствовать формату example@example.com.",
+      "PasswordMin": "Минимальное количество символов 6",
+      "PasswordMax": "Максимальное количество символов 20",
+      "PasswordRegex": "Пароль должен содержать цифры 0–9, a–z, A–Z и хотя бы один из следующих символов: ",
+      "PasswordMatch": "Пароли должны совпадать",
+      "AgreeMessage": "Вы должны согласиться с условиями",
+      "Recaptcha": "Требуется reCAPTCHA"
+    },
+    "PublicPage": {
+      "Registered users:": "Зарегистрировано пользователей:"
+    }
   }
-}
+
