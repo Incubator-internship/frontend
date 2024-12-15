@@ -29,3 +29,9 @@ export type NewPasswordArgs = {
 export type PasswordRecoveryArgs = {
   email: string
 }
+
+export type MeData = {
+  email: string
+  login: string
+  userId: number
+}

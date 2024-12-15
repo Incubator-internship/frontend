@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form'
 
-import GitHub from '@/shared/assets/icons/GitHub'
-import Google from '@/shared/assets/icons/Google'
+import GithubIcon from '@/shared/assets/icons/GithubIcon'
+import GoogleIcon from '@/shared/assets/icons/GoogleIcon'
 import {
-  agreeSchema,
-  emailSchema,
-  passwordSchema,
-  usernameSchema,
+  createAgreeSchema,
+  createEmailSchema,
+  createPasswordSchema,
+  createUsernameSchema,
 } from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { Card } from '@/shared/ui/card'
@@ -16,24 +16,27 @@ import { Typography } from '@/shared/ui/typography'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SerializedError } from '@reduxjs/toolkit'
 import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 
 import s from './signUpForm.module.scss'
 
-export const signUpFormSchema = z
-  .object({
-    agree: agreeSchema,
-    confirmPassword: passwordSchema,
-    email: emailSchema,
-    password: passwordSchema,
-    username: usernameSchema,
-  })
-  .refine(data => data.password === data.confirmPassword, {
-    message: 'Passwords must match',
-    path: ['confirmPassword'],
-  })
+const createSignUpFormSchema = (t: (key: string) => string) =>
+  z
+    .object({
+      agree: createAgreeSchema(t),
+      confirmPassword: createPasswordSchema(t),
+      email: createEmailSchema(t),
+      password: createPasswordSchema(t),
+      username: createUsernameSchema(t),
+    })
+    .refine(data => data.password === data.confirmPassword, {
+      message: t('PasswordMatch'),
+      path: ['confirmPassword'],
+    })
 
-export type SignUpFormValues = z.infer<typeof signUpFormSchema>
+export type SignUpFormValues = z.infer<ReturnType<typeof createSignUpFormSchema>>
 
 type FetchBaseQueryErrorWithDetails = {
   data?: {
@@ -51,6 +54,13 @@ type Props = {
 }
 
 export const SignUpForm = ({ onSubmit }: Props) => {
+  const router = useRouter()
+  const t = useTranslations('SignUpPage')
+  const tErrors = useTranslations('FormsErrors')
+  const locale = useLocale()
+
+  const signUpFormSchema = createSignUpFormSchema(tErrors)
+
   const {
     control,
     formState: { errors, isDirty, isValid },
@@ -84,12 +94,12 @@ export const SignUpForm = ({ onSubmit }: Props) => {
 
           if (errorMessage.includes('userName')) {
             setError('username', {
-              message: 'User with this username is already registered',
+              message: t('ErrorUsername'),
               type: 'manual',
             })
           } else if (errorMessage.includes('email')) {
             setError('email', {
-              message: 'User with this email is already registered',
+              message: t('ErrorEmail'),
               type: 'manual',
             })
           }
@@ -104,35 +114,40 @@ export const SignUpForm = ({ onSubmit }: Props) => {
     <>
       <Card className={s.card}>
         <Typography as={'h1'} className={s.title} variant={'h1'}>
-          Sign Up
+          {t('FormTitle')}
         </Typography>
         <div className={s.cardTop}>
-          <button type={'button'}>
-            <Google />
+          <button onClick={() => router.push('/api/v1/auth/google')} type={'button'}>
+            <GoogleIcon className={s.icon} />
           </button>
           <button type={'button'}>
-            <GitHub />
+            <GithubIcon className={s.icon} fill={'white'} />
           </button>
         </div>
         <form className={s.form} onSubmit={onSubmitForm}>
           <InputControl
             className={s.input}
             control={control}
-            label={'Username'}
+            label={t('UsernameInput')}
             name={'username'}
           />
-          <InputControl className={s.input} control={control} label={'Email'} name={'email'} />
           <InputControl
             className={s.input}
             control={control}
-            label={'Password'}
+            label={t('EmailInput')}
+            name={'email'}
+          />
+          <InputControl
+            className={s.input}
+            control={control}
+            label={t('PasswordInput')}
             name={'password'}
             variant={'password'}
           />
           <InputControl
             className={s.input}
             control={control}
-            label={'Password confirmation'}
+            label={t('PasswordConfirmationInput')}
             name={'confirmPassword'}
             variant={'password'}
           />
@@ -141,21 +156,23 @@ export const SignUpForm = ({ onSubmit }: Props) => {
             control={control}
             label={
               <label htmlFor={'agree'}>
-                I agree to the <Link href={'/policies/termsOfService'}>Terms of Service</Link> and{' '}
-                <Link href={'/policies/privacyPolicy'}>Privacy Policy</Link>
+                {t.rich('Agree', {
+                  link: chunks => <Link href={`/${locale}/policies/termsOfService`}>{chunks}</Link>,
+                  link2: chunks => <Link href={`/${locale}/policies/privacyPolicy`}>{chunks}</Link>,
+                })}
               </label>
             }
             name={'agree'}
           />
           <Button className={s.button} disabled={!isDirty || !isValid} fullWidth type={'submit'}>
-            Sign Up
+            {t('FormBtn')}
           </Button>
         </form>
         <Typography as={'div'} className={s.caption} variant={'regularText16'}>
-          Do you have an account?
+          {t('FormLabel')}
         </Typography>
-        <Button as={Link} className={s.signIn} href={'/signin'} variant={'transparent'}>
-          Sign In
+        <Button as={Link} className={s.signIn} href={`/${locale}/signin`} variant={'transparent'}>
+          {t('FormLink')}
         </Button>
       </Card>
     </>

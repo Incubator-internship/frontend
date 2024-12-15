@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 
 import { usePasswordRecoveryMutation } from '@/app/api/auth/authApi'
 import rafikiImage from '@/shared/assets/images/rafiki.png'
-import { emailSchema } from '@/shared/model/schemas/schemas'
+import { createEmailSchema, createRecaptchaSchema } from '@/shared/model/schemas/schemas'
 import { Button } from '@/shared/ui/button'
 import { InputControl } from '@/shared/ui/inputControl'
 import { Modal } from '@/shared/ui/modal/Modal'
@@ -19,12 +19,13 @@ import { z } from 'zod'
 
 import s from './ForgotPasswordForm.module.scss'
 
-const ForgotPasswordSchema = z.object({
-  email: emailSchema,
-  token: z.string().min(1, { message: 'Required reCAPTCHA' }),
-})
+const createForgotPasswordSchema = (t: (key: string) => string) =>
+  z.object({
+    email: createEmailSchema(t),
+    token: createRecaptchaSchema(t),
+  })
 
-export type ForgotPasswordFields = z.infer<typeof ForgotPasswordSchema>
+export type ForgotPasswordFields = z.infer<ReturnType<typeof createForgotPasswordSchema>>
 
 export const ForgotPasswordForm = () => {
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
@@ -34,15 +35,17 @@ export const ForgotPasswordForm = () => {
   const [submittedEmail, setSubmittedEmail] = useState('')
   const [isRecoveryCodeValid, setIsRecoveryCodeValid] = useState(true)
   const t = useTranslations('ForgotPasswordPage')
+  const tError = useTranslations('FormsErrors')
   const locale = useLocale()
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const ForgotPasswordSchema = createForgotPasswordSchema(tError)
 
   const {
     control,
     formState: { errors, isValid },
     handleSubmit,
-    reset,
     setError,
     setValue,
     trigger,
@@ -98,10 +101,10 @@ export const ForgotPasswordForm = () => {
     } catch (error: unknown) {
       if (isApiError(error)) {
         if (error.status === 400) {
-          setError('email', { message: "User with this email doesn't exist." })
+          setError('email', { message: t('EmailError') })
         } else if (error.status === 429) {
           setError('email', {
-            message: 'You have exceeded the maximum number of attempts. Please try again later.',
+            message: t('Error429'),
           })
         }
       } else {
