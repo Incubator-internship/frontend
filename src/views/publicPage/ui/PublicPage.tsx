@@ -54,6 +54,7 @@ const PublicPage: React.FC = () => {
               <Image
                 alt={'Image1'}
                 fill
+                priority
                 sizes={'300px'}
                 src={card.image.src}
                 style={{
