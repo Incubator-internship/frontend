@@ -22,8 +22,13 @@ export const PublicPageModal = ({ children, isOpen = true, onClose }: PublicPage
     return null
   }
 
+  // const handleKeyDown = (event: KeyboardEvent) => {
+  //   if (event.key === 'Escape' && isOpen) {
+  //     onClose?.()
+  //   }
+  // }
   const handleBackdropClick = (event: React.MouseEvent) => {
-    if (event.target === event.currentTarget) {
+    if (event.target === event.currentTarget && isOpen) {
       onClose?.()
     }
   }

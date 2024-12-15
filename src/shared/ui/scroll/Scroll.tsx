@@ -11,7 +11,7 @@ export type itemsArray = {
 }
 export type ScrollProps = {
   height: string
-  items: itemsArray[]
+  items?: itemsArray[]
   orientation?: 'horizontal' | 'vertical'
   width: string
 } & ComponentPropsWithoutRef<typeof RadixScrollArea.Root>

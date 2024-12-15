@@ -1,3 +1,5 @@
+import { Scroll } from '@/shared/ui/scroll'
+
 import s from './commentBlock.module.scss'
 
 import { CommentsArray } from '../../DataArray'
