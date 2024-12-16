@@ -1,19 +1,20 @@
 'use client'
 
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-import Link from 'next/link'
-import { useLocale } from 'next-intl'
+import { selectAuthState } from '@/app/config/store/authSlice'
+
+import ProfilePage from './profile/ui/Profile'
+import PublicPage from './publicPage/ui/PublicPage'
 
 export default function Home() {
-  const locale = useLocale()
+  const isAuth = useSelector(selectAuthState)
 
   return (
     <div>
-      <Link href={`/${locale}/signup`}>Signup</Link>
-      <Link href={`/${locale}/signin`}>Signin</Link>
-      <Link href={`/${locale}/profile`}>Profile</Link>
-      <Link href={`/${locale}/forgotpassword`}>ForgotPass</Link>
+      {isAuth && <ProfilePage />}
+      {!isAuth && <PublicPage />}
     </div>
   )
 }

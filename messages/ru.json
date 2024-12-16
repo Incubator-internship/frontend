@@ -1,5 +1,5 @@
 {
-    "SelectLanguage": {
+  "SelectLanguage": {
     "English": "Английский",
     "Russian": "Русский"
     },
@@ -77,5 +77,9 @@
       "PasswordMatch": "Пароли должны совпадать",
       "AgreeMessage": "Вы должны согласиться с условиями",
       "Recaptcha": "Требуется reCAPTCHA"
+    },
+    "PublicPage": {
+      "Registered users:": "Зарегистрировано пользователей:"
     }
   }
+

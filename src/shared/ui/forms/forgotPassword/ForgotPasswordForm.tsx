@@ -19,6 +19,8 @@ import { z } from 'zod'
 
 import s from './ForgotPasswordForm.module.scss'
 
+import { ApiError } from '../passwordForm/types'
+
 const createForgotPasswordSchema = (t: (key: string) => string) =>
   z.object({
     email: createEmailSchema(t),
@@ -67,14 +69,6 @@ export const ForgotPasswordForm = () => {
       },
       5 * 60 * 1000
     ) // 5minutes
-  }
-
-  interface ApiError {
-    errorsMessages?: Array<{
-      field: string
-      message: string
-    }>
-    status: number
   }
 
   function isApiError(error: unknown): error is ApiError {

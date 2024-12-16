@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { Suspense } from 'react'
+import React, { Suspense } from 'react'
 
 import StoreProvider from '@/app/config/store/storeProvider'
 import { Header } from '@/shared/ui/header'
@@ -16,6 +16,7 @@ import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
 
 import { Locale, routing } from '../../src/i18n/routing'
+import TestAuthComponent from './test'
 
 export const metadata: Metadata = {
   description: 'Inctagram app',
@@ -41,7 +42,8 @@ export default async function RootLayout({
         <StoreProvider>
           <Suspense>
             <body>
-              <Header count={0} isAuth={false} />
+              {/* <TestAuthComponent /> */}
+              <Header />
               <main>{children}</main>
             </body>
           </Suspense>
