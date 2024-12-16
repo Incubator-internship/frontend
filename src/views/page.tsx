@@ -21,7 +21,7 @@ export default function Home() {
       <Link href={'/profile'}>Profile</Link>
       <Link href={'/forgotpassword'}>ForgotPass</Link>
       <button onClick={openModal} type={'button'}>
-        Open Public Page Modal
+        Open Modal
       </button>
       <PublicPageModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
