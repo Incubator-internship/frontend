@@ -1,3 +1,8 @@
+'use client'
+import { use } from 'react'
+import { useSelector } from 'react-redux'
+
+import { selectAuthState } from '@/app/config/store/authSlice'
 import BellOutline from '@/shared/assets/icons/BellOutline'
 import { Button } from '@/shared/ui/button'
 import { Select } from '@/shared/ui/select'
@@ -6,14 +11,16 @@ import { useLocale, useTranslations } from 'next-intl'
 
 import s from './header.module.scss'
 
-type Props = {
-  count: number
-  isAuth: boolean
-}
-
-export const Header = ({ count, isAuth }: Props) => {
+export const Header = () => {
   const locale = useLocale()
+
+  const isAuth = useSelector(selectAuthState)
+  
+  // FIX: (здесь ниже заглушка, но можно подключить селектор для получения реального значения)
+  const count = 3
+
   const t = useTranslations('Header')
+
 
   return (
     <header className={s.header}>
@@ -21,6 +28,7 @@ export const Header = ({ count, isAuth }: Props) => {
         Instagram
       </Link>
       <div className={s.container}>
+        <Select defaultValue={'2'} items={[]} variant={'narrow'} />
         {isAuth && (
           <div className={s.ball}>
             <BellOutline />
@@ -37,7 +45,6 @@ export const Header = ({ count, isAuth }: Props) => {
             </Button>
           </div>
         )}
-        <Select defaultValue={'2'} items={[]} variant={'narrow'} />
       </div>
     </header>
   )
