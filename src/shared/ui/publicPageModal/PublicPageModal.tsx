@@ -16,7 +16,7 @@ export type PublicPageModalProps = {
 
 export const PublicPageModal = ({ children, isOpen = true, onClose }: PublicPageModalProps) => {
   const posts = DataArray
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   if (!isOpen) {
     return null
@@ -33,12 +33,14 @@ export const PublicPageModal = ({ children, isOpen = true, onClose }: PublicPage
     }
   }
 
-  const nextPost = () => {
-    setCurrentIndex(prevIndex => (prevIndex + 1) % posts.length)
+  const nextImage = () => {
+    setCurrentImageIndex(prevIndex => (prevIndex + 1) % posts[0].imagePost.length)
   }
 
-  const prevPost = () => {
-    setCurrentIndex(prevIndex => (prevIndex - 1 + posts.length) % posts.length)
+  const prevImage = () => {
+    setCurrentImageIndex(
+      prevIndex => (prevIndex - 1 + posts[0].imagePost.length) % posts[0].imagePost.length
+    )
   }
 
   return (
@@ -48,13 +50,13 @@ export const PublicPageModal = ({ children, isOpen = true, onClose }: PublicPage
           <Close className={s.close}></Close>
         </button>
         <ModalSlider
-          currentIndex={currentIndex}
-          nextPost={nextPost}
-          posts={posts}
-          prevPost={prevPost}
-          setCurrentIndex={setCurrentIndex}
+          currentImageIndex={currentImageIndex}
+          nextImage={nextImage}
+          posts={posts[0]}
+          prevImage={prevImage}
+          setCurrentIndex={setCurrentImageIndex}
         />
-        <ModalComments posts={posts[currentIndex]} />
+        <ModalComments posts={posts[0]} />
       </div>
     </div>
   )

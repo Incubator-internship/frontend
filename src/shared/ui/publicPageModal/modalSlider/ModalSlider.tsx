@@ -4,21 +4,21 @@ import clsx from 'clsx'
 
 import s from './modalSlider.module.scss'
 
-import { PostType } from '../DataArray'
+import { ImagePost, PostType } from '../DataArray'
 
 type ModalSliderProps = {
-  currentIndex: number
-  nextPost: () => void
-  posts: PostType[]
-  prevPost: () => void
+  currentImageIndex: number
+  nextImage: () => void
+  posts: PostType
+  prevImage: () => void
   setCurrentIndex: (index: number) => void
 }
 
 export const ModalSlider = ({
-  currentIndex,
-  nextPost,
+  currentImageIndex,
+  nextImage,
   posts,
-  prevPost,
+  prevImage,
   setCurrentIndex,
 }: ModalSliderProps) => {
   const goToSlide = (index: number) => {
@@ -27,17 +27,17 @@ export const ModalSlider = ({
 
   return (
     <div className={s.modalSlider}>
-      <button className={s.prevButton} onClick={prevPost} type={'button'}>
+      <button className={s.prevButton} onClick={prevImage} type={'button'}>
         <ArrowLeft className={s.icon} />
       </button>
-      <img alt={'img'} className={s.image} src={posts[currentIndex].imagePost} />
-      <button className={s.nextButton} onClick={nextPost} type={'button'}>
+      <img alt={'img'} className={s.image} src={posts.imagePost[currentImageIndex].imgPost} />
+      <button className={s.nextButton} onClick={nextImage} type={'button'}>
         <ArrowRight className={s.icon} />
       </button>
       <ul className={s.dots}>
-        {posts.map((_, index) => (
+        {posts.imagePost.map((_, index) => (
           <li
-            className={clsx(s.dot, currentIndex === index && s.active)}
+            className={clsx(s.dot, currentImageIndex === index && s.active)}
             key={index}
             onClick={() => goToSlide(index)}
           />

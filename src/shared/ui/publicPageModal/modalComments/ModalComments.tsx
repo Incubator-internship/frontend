@@ -10,6 +10,8 @@ type ModalCommentsProps = {
 }
 
 export const ModalComments = ({ posts }: ModalCommentsProps) => {
+  console.log(posts)
+
   return (
     <div className={s.modalComments}>
       <CommentsHeader profileData={posts.dataPost} />
