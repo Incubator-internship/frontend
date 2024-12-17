@@ -1,1 +1,0 @@
-export { CommentsForPost } from './CommentsForPost'
