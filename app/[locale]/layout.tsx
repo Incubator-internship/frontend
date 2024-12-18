@@ -16,7 +16,6 @@ import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
 
 import { Locale, routing } from '../../src/i18n/routing'
-import TestAuthComponent from './test'
 
 export const metadata: Metadata = {
   description: 'Inctagram app',
@@ -42,7 +41,6 @@ export default async function RootLayout({
         <StoreProvider>
           <Suspense>
             <body>
-              {/* <TestAuthComponent /> */}
               <Header />
               <main>{children}</main>
             </body>
