@@ -1,8 +1,6 @@
 .wrapper {
   max-width: 1280px;
   margin: 0 auto;
-
-  // background-color: rgb(43, 255, 0);
   height: 100%;
   width: 100%;
   display: flex;
@@ -81,20 +79,10 @@
   margin: 12px 0;
 }
 
-.cardItemText {
-  // display: -webkit-box;
-  // -webkit-line-clamp: 3;
-  // -webkit-box-orient: vertical;
-  // overflow: hidden;
-  // text-overflow: ellipsis;
-  // white-space: normal;
-}
-
 .showMoreLess {
   cursor: pointer;
 }
 
 .showMoreSpan {
   color: var(--color-light-100);
-  text-decoration: none important;
 }

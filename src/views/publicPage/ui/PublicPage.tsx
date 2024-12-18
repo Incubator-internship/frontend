@@ -21,7 +21,7 @@ import s from './publicPage.module.scss'
 const cardItemText: string =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus exercitationem officia optio voluptates consequuntur possimus ex, ut adipisci alias maxime temporibus totam accusantium. Pariatur, magni numquam! Quibusdam, a tempore.'
 
-const numberOfUsers: string = '009213'
+const numberOfUsers: string = '9213'
 const cardsData = [
   { avatar: avatar1, image: image1, text: cardItemText },
   { avatar: avatar2, image: image2, text: cardItemText },
@@ -49,11 +49,14 @@ const PublicPage: React.FC = () => {
       <div className={s.registeredUsers}>
         <Typography variant={'h2'}>{t('Registered users:')}</Typography>
         <Typography className={s.registeredUserValue} variant={'h2'}>
-          {numberOfUsers.split('').map((number, i) => (
-            <span className={s.el} key={number + i}>
-              {number}
-            </span>
-          ))}
+          {numberOfUsers
+            .padStart(numberOfUsers.length + 2, '0')
+            .split('')
+            .map((number, i) => (
+              <span className={s.el} key={number + i}>
+                {number}
+              </span>
+            ))}
         </Typography>
       </div>
       <div className={s.cards}>
@@ -91,7 +94,7 @@ const PublicPage: React.FC = () => {
                     onClick={toggleLines(i)}
                     variant={'regularLink'}
                   >
-                    Show less
+                    {t('Show less')}
                   </Typography>
                 }
                 lines={3}
@@ -105,7 +108,7 @@ const PublicPage: React.FC = () => {
                       onClick={toggleLines(i)}
                       variant={'regularLink'}
                     >
-                      Show more
+                      {t('Show more')}
                     </Typography>
                   </>
                 }
