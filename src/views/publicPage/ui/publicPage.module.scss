@@ -82,10 +82,19 @@
 }
 
 .cardItemText {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
+  // display: -webkit-box;
+  // -webkit-line-clamp: 3;
+  // -webkit-box-orient: vertical;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // white-space: normal;
+}
+
+.showMoreLess {
+  cursor: pointer;
+}
+
+.showMoreSpan {
+  color: var(--color-light-100);
+  text-decoration: none important;
 }

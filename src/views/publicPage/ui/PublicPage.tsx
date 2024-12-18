@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useRef } from 'react'
 
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
 import avatar2 from '@/shared/assets/images/avatars/avatar2.webp'
@@ -12,6 +12,7 @@ import image3 from '@/shared/assets/images/publicImages/image3.webp'
 import image4 from '@/shared/assets/images/publicImages/image4.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Typography } from '@/shared/ui/typography'
+import { ShowMore, type ShowMoreRef, type ShowMoreToggleLinesFn } from '@re-dev/react-truncate'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
@@ -24,16 +25,24 @@ const numberOfUsers: string = '009213'
 const cardsData = [
   { avatar: avatar1, image: image1, text: cardItemText },
   { avatar: avatar2, image: image2, text: cardItemText },
-  { avatar: avatar3, image: image3, text: cardItemText },
-  { avatar: avatar4, image: image4, text: cardItemText },
+  {
+    avatar: avatar3,
+    image: image3,
+    text: 'Long text Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus exercitationem officia optio voluptates consequuntur possimus ex, ut adipisci alias maxime temporibus totam accusantium. Pariatur, magni numquam! Quibusdam, a tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus exercitationem officia optio voluptates consequuntur possimus ex, ut adipisci alias maxime temporibus totam accusantium. Pariatur, magni numquam! Quibusdam, a tempore.Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus exercitationem officia optio voluptates consequuntur possimus ex, ut adipisci alias maxime temporibus totam accusantium. Pariatur, magni numquam! Quibusdam, a tempore.',
+  },
+  { avatar: avatar4, image: image4, text: 'short text' },
 ]
 
 //TODO: add carousel https://ui.shadcn.com/docs/components/carousel
-//TODO: add showmoreText component
 //TODO: add cardsData & numberOfUsers types
 
 const PublicPage: React.FC = () => {
   const t = useTranslations<'PublicPage'>('PublicPage')
+  const refs = useRef<Array<ShowMoreRef | null>>([])
+
+  const toggleLines: (index: number) => ShowMoreToggleLinesFn = index => e => {
+    refs.current[index]?.toggleLines(e)
+  }
 
   return (
     <div className={s.wrapper}>
@@ -72,8 +81,40 @@ const PublicPage: React.FC = () => {
             <Typography color={'grey'} variant={'smallText'}>
               22 min ago
             </Typography>
-            <Typography className={s.cardItemText} variant={'regularText14'}>
-              {card.text}
+            <Typography as={'span'} className={s.cardItemText} variant={'regularText14'}>
+              <ShowMore
+                less={
+                  <Typography
+                    as={'span'}
+                    className={s.showMoreLess}
+                    color={'link'}
+                    onClick={toggleLines(i)}
+                    variant={'regularLink'}
+                  >
+                    Show less
+                  </Typography>
+                }
+                lines={3}
+                more={
+                  <>
+                    <span className={s.showMoreSpan}>...</span>
+                    <Typography
+                      as={'span'}
+                      className={s.showMoreLess}
+                      color={'link'}
+                      onClick={toggleLines(i)}
+                      variant={'regularLink'}
+                    >
+                      Show more
+                    </Typography>
+                  </>
+                }
+                ref={el => {
+                  refs.current[i] = el
+                }}
+              >
+                {card.text}
+              </ShowMore>
             </Typography>
           </div>
         ))}
