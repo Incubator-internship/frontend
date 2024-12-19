@@ -1,1 +1,0 @@
-export { SliderForPost } from './SliderForPost'
