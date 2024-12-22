@@ -1,4 +1,6 @@
-import { Answers } from '@/shared/ui/publicPageModal/DataArray'
+'use client'
+
+import { Answers } from '@/views/publicPageModal/DataArray'
 
 import s from './answerContainer.module.scss'
 

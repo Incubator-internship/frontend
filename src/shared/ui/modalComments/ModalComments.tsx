@@ -1,6 +1,8 @@
+'use client'
+
 import s from './modalComments.module.scss'
 
-import { PostType } from '../DataArray'
+import { PostType } from '../../../views/publicPageModal/DataArray'
 import { CommentBlock } from './commentsBlock'
 import { CommentsFooter } from './commentsFooter'
 import { CommentsHeader } from './commentsHeader'

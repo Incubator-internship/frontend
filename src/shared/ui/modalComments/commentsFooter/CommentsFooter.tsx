@@ -1,11 +1,14 @@
+'use client'
+
+import { LikesPost } from '@/views/publicPageModal/DataArray'
+
 import s from './commentsFooter.module.scss'
 
-import { LikesPostType } from '../../DataArray'
 import { DatePost } from '../datePost'
 type CommentsFooterProps = {
   datePost: string
   likesCount: number
-  likesPost: LikesPostType[]
+  likesPost: LikesPost[]
 }
 
 export const CommentsFooter = ({ datePost, likesCount, likesPost }: CommentsFooterProps) => {

@@ -1,6 +1,8 @@
+'use client'
+
 import s from './commentsHeader.module.scss'
 
-import { DataPost } from '../../DataArray'
+import { DataPost } from '../../../../views/publicPageModal/DataArray'
 import { ProfileData } from '../profileData'
 
 type CommentsHeaderProps = {

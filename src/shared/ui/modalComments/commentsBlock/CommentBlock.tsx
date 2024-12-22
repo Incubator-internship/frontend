@@ -1,8 +1,10 @@
+'use client'
+
 import { Scroll } from '@/shared/ui/scroll'
 
 import s from './commentBlock.module.scss'
 
-import { CommentsArray } from '../../DataArray'
+import { CommentsArray } from '../../../../views/publicPageModal/DataArray'
 import { CommentContainer } from './commentContainer/CommentContainer'
 
 type CommentBlockProps = {

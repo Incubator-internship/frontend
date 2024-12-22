@@ -1,10 +1,12 @@
+'use client'
+
 import { useState } from 'react'
 
 import Line from '@/shared/assets/icons/Line'
+import { Answers } from '@/views/publicPageModal/DataArray'
 
 import s from './commentContainer.module.scss'
 
-import { Answers } from '../../../DataArray'
 import { DatePost } from '../../datePost'
 import { ProfileData } from '../../profileData'
 import { AnswerContainer } from './answerContainer/AnswerContainer'

@@ -16,6 +16,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import s from './publicPage.module.scss'
+import { PublicPageModal } from '@/views/publicPageModal/ui/PublicPageModal'
 
 const cardItemText: string =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus exercitationem officia optio voluptates consequuntur possimus ex, ut adipisci alias maxime temporibus totam accusantium. Pariatur, magni numquam! Quibusdam, a tempore.'
@@ -36,49 +37,50 @@ const PublicPage: React.FC = () => {
   const t = useTranslations<'PublicPage'>('PublicPage')
 
   return (
-    <div className={s.wrapper}>
-      <div className={s.registeredUsers}>
-        <Typography variant={'h2'}>{t('Registered users:')}</Typography>
-        <Typography className={s.registeredUserValue} variant={'h2'}>
-          {numberOfUsers.split('').map((number, i) => (
-            <span className={s.el} key={number + i}>
-              {number}
-            </span>
-          ))}
-        </Typography>
-      </div>
-      <div className={s.cards}>
-        {cardsData.map((card, i) => (
-          <div className={s.cardItem} key={'cardItem' + i}>
-            <div className={s.cardItemImage}>
-              <Image
-                alt={'Image1'}
-                fill
-                priority
-                sizes={'300px'}
-                src={card.image.src}
-                style={{
-                  objectFit: 'cover',
-                }}
-              />
-            </div>
-            <div className={s.cardItemAvatarTitle}>
-              <Avatar>
-                <AvatarImage alt={'Avatar1'} src={card.avatar.src} />
-                <AvatarFallback>A1</AvatarFallback>
-              </Avatar>
-              <Typography variant={'h3'}>URLProfile</Typography>
-            </div>
-            <Typography color={'grey'} variant={'smallText'}>
-              22 min ago
-            </Typography>
-            <Typography className={s.cardItemText} variant={'regularText14'}>
-              {card.text}
-            </Typography>
-          </div>
-        ))}
-      </div>
-    </div>
+    // <div className={s.wrapper}>
+    //   <div className={s.registeredUsers}>
+    //     <Typography variant={'h2'}>{t('Registered users:')}</Typography>
+    //     <Typography className={s.registeredUserValue} variant={'h2'}>
+    //       {numberOfUsers.split('').map((number, i) => (
+    //         <span className={s.el} key={number + i}>
+    //           {number}
+    //         </span>
+    //       ))}
+    //     </Typography>
+    //   </div>
+    //   <div className={s.cards}>
+    //     {cardsData.map((card, i) => (
+    //       <div className={s.cardItem} key={'cardItem' + i}>
+    //         <div className={s.cardItemImage}>
+    //           <Image
+    //             alt={'Image1'}
+    //             fill
+    //             priority
+    //             sizes={'300px'}
+    //             src={card.image.src}
+    //             style={{
+    //               objectFit: 'cover',
+    //             }}
+    //           />
+    //         </div>
+    //         <div className={s.cardItemAvatarTitle}>
+    //           <Avatar>
+    //             <AvatarImage alt={'Avatar1'} src={card.avatar.src} />
+    //             <AvatarFallback>A1</AvatarFallback>
+    //           </Avatar>
+    //           <Typography variant={'h3'}>URLProfile</Typography>
+    //         </div>
+    //         <Typography color={'grey'} variant={'smallText'}>
+    //           22 min ago
+    //         </Typography>
+    //         <Typography className={s.cardItemText} variant={'regularText14'}>
+    //           {card.text}
+    //         </Typography>
+    //       </div>
+    //     ))}
+    //   </div>
+    // </div>
+    <PublicPageModal />
   )
 }
 
