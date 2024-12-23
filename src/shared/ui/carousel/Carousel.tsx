@@ -30,10 +30,6 @@ export const Carousel = ({
 
   return (
     <div className={s.carousel}>
-      <button className={s.prevButton} onClick={prevImage} type={'button'}>
-        <ArrowLeft className={s.icon} />
-      </button>
-      {/* <img alt={'img'} className={s.image} src={post.imagePost[currentImageIndex].imgPost} /> */}
       <Image
         alt={'Image1'}
         fill
@@ -44,6 +40,9 @@ export const Carousel = ({
       />
       <button className={s.nextButton} onClick={nextImage} type={'button'}>
         <ArrowRight className={s.icon} />
+      </button>
+      <button className={s.prevButton} onClick={prevImage} type={'button'}>
+        <ArrowLeft className={s.icon} />
       </button>
       <ul className={s.dots}>
         {post.imagePost.map((_, index) => (
