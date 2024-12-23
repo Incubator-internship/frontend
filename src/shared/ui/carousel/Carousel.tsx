@@ -38,12 +38,16 @@ export const Carousel = ({
         src={post.imagePost[currentImageIndex].imgPost}
         style={{ objectFit: 'cover' }}
       />
-      <button className={s.nextButton} onClick={nextImage} type={'button'}>
-        <ArrowRight className={s.icon} />
-      </button>
-      <button className={s.prevButton} onClick={prevImage} type={'button'}>
-        <ArrowLeft className={s.icon} />
-      </button>
+      {post.imagePost.length > 1 && (
+        <>
+          <button className={s.nextButton} onClick={nextImage} type={'button'}>
+            <ArrowRight className={s.icon} />
+          </button>
+          <button className={s.prevButton} onClick={prevImage} type={'button'}>
+            <ArrowLeft className={s.icon} />
+          </button>
+        </>
+      )}
       <ul className={s.dots}>
         {post.imagePost.map((_, index) => (
           <li
