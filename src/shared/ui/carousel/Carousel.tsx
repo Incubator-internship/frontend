@@ -3,6 +3,7 @@
 import ArrowLeft from '@/shared/assets/icons/ArrowLeft'
 import ArrowRight from '@/shared/assets/icons/ArrowRight'
 import clsx from 'clsx'
+import Image from 'next/image'
 
 import s from './carousel.module.scss'
 
@@ -32,7 +33,15 @@ export const Carousel = ({
       <button className={s.prevButton} onClick={prevImage} type={'button'}>
         <ArrowLeft className={s.icon} />
       </button>
-      <img alt={'img'} className={s.image} src={post.imagePost[currentImageIndex].imgPost} />
+      {/* <img alt={'img'} className={s.image} src={post.imagePost[currentImageIndex].imgPost} /> */}
+      <Image
+        alt={'Image1'}
+        fill
+        priority
+        sizes={'600px'}
+        src={post.imagePost[currentImageIndex].imgPost}
+        style={{ objectFit: 'cover' }}
+      />
       <button className={s.nextButton} onClick={nextImage} type={'button'}>
         <ArrowRight className={s.icon} />
       </button>

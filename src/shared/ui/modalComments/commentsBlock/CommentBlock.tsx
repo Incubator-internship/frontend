@@ -18,6 +18,7 @@ export const CommentBlock = ({ comments }: CommentBlockProps) => {
         {comments.map(comment => (
           <CommentContainer
             answers={comment.answers}
+            dataPost={comment.dataPost}
             datePost={comment.dateComment}
             key={comment.id}
             text={comment.comment}

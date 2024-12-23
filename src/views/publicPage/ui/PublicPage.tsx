@@ -12,11 +12,11 @@ import image3 from '@/shared/assets/images/publicImages/image3.webp'
 import image4 from '@/shared/assets/images/publicImages/image4.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Typography } from '@/shared/ui/typography'
+import { PublicPageModal } from '@/views/publicPageModal/ui/PublicPageModal'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import s from './publicPage.module.scss'
-import { PublicPageModal } from '@/views/publicPageModal/ui/PublicPageModal'
 
 const cardItemText: string =
   'Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui necessitatibus exercitationem officia optio voluptates consequuntur possimus ex, ut adipisci alias maxime temporibus totam accusantium. Pariatur, magni numquam! Quibusdam, a tempore.'
