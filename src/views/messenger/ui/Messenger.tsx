@@ -1,9 +1,8 @@
+'use client'
 import { useGetMeQuery } from '@/app/api/auth/authApi'
 
 export default function Messenger() {
-  // const { data, isSuccess } = useGetMeQuery()
+  const { data, isSuccess } = useGetMeQuery()
 
-  // return <div>{isSuccess && <div>Messenger</div>}</div>
-
-  return <div>Messenger</div>
+  return <div>{isSuccess && <div>Messenger</div>}</div>
 }

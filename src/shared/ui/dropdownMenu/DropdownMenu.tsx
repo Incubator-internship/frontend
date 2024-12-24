@@ -8,7 +8,7 @@ import styles from './dropdownMenu.module.css'
 type Item = {
   icon: ReactNode
   label: string
-  onSelect: (value: string) => void
+  onSelect: (event: Event) => void
 }
 
 type Props = {

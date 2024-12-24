@@ -45,8 +45,10 @@ export default async function RootLayout({
             <body>
               {/* <TestAuthComponent /> */}
               <Header />
-              <Sidebar />
-              <main>{children}</main>
+              <div style={{ display: 'flex' }}>
+                <Sidebar />
+                <main>{children}</main>
+              </div>
             </body>
           </Suspense>
         </StoreProvider>
