@@ -1,5 +1,6 @@
 'use client'
 import { useGetMeQuery } from '@/app/api/auth/authApi'
+import { Input } from '@/shared/ui/input'
 import { Typography } from '@/shared/ui/typography'
 import { clsx } from 'clsx'
 
@@ -30,9 +31,9 @@ export default function Messenger() {
       <div className={styles.pageContainer}>
         <div className={styles.contentWrapper}>
           <Typography className={styles.title}>Messenger</Typography>
-          <div className={styles.messengerContainer}>
+          <div className={styles.table}>
             <div className={clsx(styles.contactsContainer, styles.tableCell)}>
-              <div>Input search</div>
+              <Input className={styles.search} placeholder={'Input search'} variant={'search'} />
             </div>
             <div className={clsx(styles.messagesContainer, styles.tableCell)}>Messages Area</div>
             <div className={clsx(styles.tableCell)}>Contacts1</div>

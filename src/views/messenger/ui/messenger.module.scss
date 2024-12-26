@@ -19,7 +19,7 @@
   font-weight: var(--font-weight-bold);
 }
 
-.messengerContainer {
+.table {
   display: grid;
   grid-template-columns: [first] 269px [line2] auto [end];
   grid-template-rows: [row1-start] 72px [row1-end] auto [end];
@@ -41,4 +41,9 @@
 
 .contentWrapper {
   width: 100%;
+}
+
+.search {
+  margin: 17px 12px;
+  background-color: transparent;
 }
