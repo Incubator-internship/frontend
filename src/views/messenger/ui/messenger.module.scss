@@ -1,0 +1,44 @@
+.sidebar {
+  width: 220px;
+  height: 100vh;
+  background-color: #234e99;
+}
+
+.pageContainer {
+  overflow: hidden;
+  display: flex;
+  flex-grow: 1;
+
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 35px 64px 24px;
+}
+
+.title {
+  margin-bottom: 13px;
+  font-weight: var(--font-weight-bold);
+}
+
+.messengerContainer {
+  display: grid;
+  grid-template-columns: [first] 269px [line2] auto [end];
+  grid-template-rows: [row1-start] 72px [row1-end] auto [end];
+
+  height: 85vh;
+
+  border: 1px solid var(--color-dark-100);
+  border-radius: 2px;
+}
+
+.contactsContainer {
+}
+
+.tableCell {
+  justify-self: stretch;
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-300);
+}
+
+.contentWrapper {
+  width: 100%;
+}

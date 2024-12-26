@@ -4,7 +4,6 @@ import React, { Suspense } from 'react'
 
 import StoreProvider from '@/app/config/store/storeProvider'
 import { Header } from '@/shared/ui/header'
-import Sidebar from '@/shared/ui/sidebar/Sidebar'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
@@ -45,10 +44,7 @@ export default async function RootLayout({
             <body>
               {/* <TestAuthComponent /> */}
               <Header />
-              <div style={{ display: 'flex' }}>
-                <Sidebar />
-                <main>{children}</main>
-              </div>
+              <main>{children}</main>
             </body>
           </Suspense>
         </StoreProvider>
