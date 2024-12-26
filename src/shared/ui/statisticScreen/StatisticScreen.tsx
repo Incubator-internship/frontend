@@ -3,18 +3,12 @@
 import React, { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
 
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  LineElement,
-  LinearScale,
-  PointElement,
-  Ticks,
-} from 'chart.js'
+import { CategoryScale, Chart as ChartJS, LineElement, LinearScale, PointElement } from 'chart.js'
 
 import s from './statisticScreen.module.scss'
 
-import { StatisticData } from './StatisticData'
+import { Typography } from '../typography'
+import { StatisticData } from './generatedDate/StatisticData'
 
 type StatisticScreenProps = {
   category: 'Comments' | 'Like' | 'Publication views'
@@ -30,6 +24,7 @@ const PublicViewsStDate = StatisticData.publicationViews.map(item => item.date)
 
 const StatisticScreen = ({ category }: StatisticScreenProps) => {
   const [borderColor, setBorderColor] = useState('')
+  const [lineColor, setLineColor] = useState('')
   const [dataSt, setDataSt] = useState<number[]>([])
   const [labels, setLabels] = useState<string[]>([])
 
@@ -39,16 +34,19 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
     switch (category) {
       case 'Like':
         setBorderColor(root.getPropertyValue('--color-danger-500'))
+        setLineColor(root.getPropertyValue('--color-dark-300'))
         setDataSt(LikesStLike)
         setLabels(LikesStDate)
         break
       case 'Comments':
         setBorderColor(root.getPropertyValue('--color-accent-500'))
+        setLineColor(root.getPropertyValue('--color-dark-300'))
         setDataSt(CommentsStComment)
         setLabels(CommentsStDate)
         break
       case 'Publication views':
         setBorderColor(root.getPropertyValue('--color-success-500'))
+        setLineColor(root.getPropertyValue('--color-dark-300'))
         setDataSt(PublicViewsStPublication)
         setLabels(PublicViewsStDate)
         break
@@ -81,8 +79,35 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
     maintainAspectRatio: false,
     responsive: true,
     scales: {
+      x: {
+        border: {
+          color: lineColor,
+        },
+        grid: {
+          display: false,
+        },
+        ticks: {
+          callback: (value: number | string, index: number) => {
+            const label = labels[index]
+
+            if (index === 0 || index === labels.length - 1) {
+              return label
+            }
+
+            return ''
+          },
+          maxRotation: 0,
+          minRotation: 0,
+        },
+      },
       y: {
         beginAtZero: true,
+        border: {
+          color: lineColor,
+        },
+        grid: {
+          display: false,
+        },
         ticks: {},
       },
     },
@@ -91,7 +116,7 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
   return (
     <>
       <div className={s.header}>
-        <div>{category}</div>
+        <Typography variant={'body1'}>{category}</Typography>
         <div>Week | Month</div>
       </div>
       <div className={s.statisticScreen}>
