@@ -6,8 +6,10 @@ import React, {
   forwardRef,
   useState,
 } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useLogoutMutation } from '@/app/api/auth/authApi'
+import { loginStore, logoutStore, selectAuthState } from '@/app/config/store/authSlice'
 import {
   BookmarkIcon,
   BookmarkOutlineIcon,
@@ -29,6 +31,7 @@ import {
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useLocale } from 'next-intl'
 
 import s from './sidebar.module.scss'
 
@@ -110,14 +113,18 @@ type SidebarRef = ElementRef<'nav'>
 export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...rest }, ref) => {
   //TODO: path via useRouter to isSelected(path===router.path)
   const router = useRouter()
+  const dispatch = useDispatch()
+  const locale = useLocale()
+
   const [isModalOpen, setModalOpen] = useState<boolean>(false)
   const [logout] = useLogoutMutation()
 
   const toggleModal = () => setModalOpen(prevState => !prevState)
   const handleLogoutConfirm = () => {
     logout()
+    dispatch(logoutStore())
+    router.push(`/${locale}`)
     toggleModal()
-    router.push('/signin')
   }
 
   return (

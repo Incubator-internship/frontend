@@ -1,10 +1,14 @@
 import { inctagramApi } from '@/app/api/inctagramApi'
+import authReducer from '@/app/config/store/authSlice'
 import { combineSlices, configureStore } from '@reduxjs/toolkit'
 
 export const makeStore = () => {
   return configureStore({
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(inctagramApi.middleware),
-    reducer: combineSlices(inctagramApi),
+    reducer: {
+      auth: authReducer,
+      [inctagramApi.reducerPath]: inctagramApi.reducer,
+    },
   })
 }
 

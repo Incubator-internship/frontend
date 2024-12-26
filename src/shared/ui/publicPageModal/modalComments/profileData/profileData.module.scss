@@ -1,0 +1,20 @@
+.profileData {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-family: var(--font-family-primary);
+}
+
+.img {
+    width: 54px;
+    height: 36px;
+}
+
+.urlProfile {
+    margin-left: 10px;
+    color: var(--color-light-100);
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-semi-bold);
+    line-height: var(--line-height-m);
+    text-align: left;
+}
