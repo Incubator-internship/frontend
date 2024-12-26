@@ -2,6 +2,7 @@
 import { useGetMeQuery } from '@/app/api/auth/authApi'
 import { Input } from '@/shared/ui/input'
 import { Typography } from '@/shared/ui/typography'
+import ChooseContact from '@/views/messenger/ui/ChooseContact'
 import { clsx } from 'clsx'
 
 import styles from './messenger.module.scss'
@@ -35,9 +36,11 @@ export default function Messenger() {
             <div className={clsx(styles.contactsContainer, styles.tableCell)}>
               <Input className={styles.search} placeholder={'Input search'} variant={'search'} />
             </div>
-            <div className={clsx(styles.messagesContainer, styles.tableCell)}>Messages Area</div>
+            <div className={clsx(styles.messagesContainer, styles.tableCell)}></div>
             <div className={clsx(styles.tableCell)}>Contacts1</div>
-            <div>Message Area 1</div>
+            <div>
+              <ChooseContact />
+            </div>
           </div>
         </div>
       </div>
