@@ -1,6 +1,5 @@
 'use client'
-import { PasswordForm } from '@/shared/ui/forms/passwordForm'
-import { StatisticScreen } from '@/shared/ui/statisticScreen'
+import StatisticScreen from '@/shared/ui/statisticScreen/StatisticScreen'
 import { Typography } from '@/shared/ui/typography'
 
 import s from './statisticsPage.module.scss'
