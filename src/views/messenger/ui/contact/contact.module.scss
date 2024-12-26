@@ -1,0 +1,40 @@
+.contactContainer {
+  display: flex;
+  gap: 12px;
+
+  width: 100%;
+  height: 72px;
+  padding: 12px;
+
+  background-color: transparent;
+  border: 1px solid var(--color-dark-300);
+}
+
+.imageContainer {
+  overflow: hidden;
+
+  width: 48px;
+  height: 48px;
+
+  background-color: #4cbdfe;
+  border-radius: 50%;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.messageInfo {
+  flex-grow: 1;
+}
+
+.nameTimeContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.messageColor {
+  color: var(--color-light-900);
+}
