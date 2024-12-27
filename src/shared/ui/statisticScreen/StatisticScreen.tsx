@@ -7,6 +7,7 @@ import { CategoryScale, Chart as ChartJS, LineElement, LinearScale, PointElement
 
 import s from './statisticScreen.module.scss'
 
+import { Toggle } from '../toggle'
 import { Typography } from '../typography'
 import { StatisticData } from './generatedDate/StatisticData'
 
@@ -27,6 +28,7 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
   const [lineColor, setLineColor] = useState('')
   const [dataSt, setDataSt] = useState<number[]>([])
   const [labels, setLabels] = useState<string[]>([])
+  const [toggle, setToggle] = useState<'Month' | 'Week'>('Week')
 
   useEffect(() => {
     const root = getComputedStyle(document.documentElement)
@@ -51,28 +53,20 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
         setLabels(PublicViewsStDate)
         break
     }
-  }, [
-    category,
-    LikesStLike,
-    LikesStDate,
-    CommentsStComment,
-    CommentsStDate,
-    PublicViewsStPublication,
-    PublicViewsStDate,
-  ])
+  }, [category])
 
   const data = {
     datasets: [
       {
         borderColor: borderColor,
         borderWidth: 2,
-        data: dataSt,
+        data: toggle === 'Week' ? dataSt.slice(-7) : dataSt,
         fill: false,
         label: 'Quantity',
         pointRadius: 0,
       },
     ],
-    labels: labels,
+    labels: toggle === 'Week' ? labels.slice(-7) : labels,
   }
 
   const options = {
@@ -117,7 +111,7 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
     <>
       <div className={s.header}>
         <Typography variant={'body1'}>{category}</Typography>
-        <div>Week | Month</div>
+        <Toggle setToggle={setToggle} toggle={toggle} />
       </div>
       <div className={s.statisticScreen}>
         <Line data={data} options={options} />

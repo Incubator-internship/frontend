@@ -1,0 +1,20 @@
+.toggle {
+    display: flex;
+}
+
+.elToggle {
+padding: 6px 20px;
+border-bottom: 2px solid var(--color-dark-100);
+}
+
+.isActive {
+    border-bottom: 2px solid var(--color-accent-500);
+}
+
+.active {
+    color: var(--color-accent-500);;
+}
+
+.notActive {
+    color: var(--color-dark-100);
+}
