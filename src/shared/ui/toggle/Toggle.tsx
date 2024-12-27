@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import clsx from 'clsx'
+import { useTranslations } from 'next-intl'
 
 import s from './toggle.module.scss'
 
@@ -14,6 +15,7 @@ type ToggleProps = {
 }
 
 export const Toggle = ({ setToggle, toggle }: ToggleProps) => {
+  const t = useTranslations('StatisticPage')
   const handleClick = (toggle: 'Month' | 'Week') => {
     setToggle(toggle)
   }
@@ -25,7 +27,7 @@ export const Toggle = ({ setToggle, toggle }: ToggleProps) => {
         onClick={() => handleClick('Week')}
       >
         <Typography className={toggle === 'Week' ? s.active : s.notActive} variant={'h3'}>
-          Week
+          {t('Week')}
         </Typography>
       </div>
       <div
@@ -33,7 +35,7 @@ export const Toggle = ({ setToggle, toggle }: ToggleProps) => {
         onClick={() => handleClick('Month')}
       >
         <Typography className={toggle === 'Month' ? s.active : s.notActive} variant={'h3'}>
-          Month
+          {t('Month')}
         </Typography>
       </div>
     </div>

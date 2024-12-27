@@ -80,6 +80,14 @@
     },
     "PublicPage": {
       "Registered users:": "Зарегистрировано пользователей:"
-    }
+    },
+    "StatisticPage": {
+      "Statistics": "Статистика",
+      "Like": "Нравится",
+      "Comments": "Комментарии",
+      "Publication views": "Просмотры публикаций",
+      "Week": "Неделя",
+      "Month": "Месяц"
+  }
   }
 

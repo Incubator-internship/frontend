@@ -80,5 +80,13 @@
     },
   "PublicPage": {
     "Registered users:": "Registered users:"
+  },
+  "StatisticPage": {
+    "Statistics": "Statistics",
+    "Like": "Like",
+    "Comments": "Comments",
+    "Publication views": "Publication views",
+    "Week": "Week",
+    "Month": "Month"
   }
 }

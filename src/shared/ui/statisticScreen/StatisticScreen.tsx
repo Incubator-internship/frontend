@@ -82,10 +82,10 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
         },
         ticks: {
           callback: (value: number | string, index: number) => {
-            const label = labels[index]
+            const currentLabels = toggle === 'Week' ? labels.slice(-7) : labels
 
-            if (index === 0 || index === labels.length - 1) {
-              return label
+            if (index === 0 || index === currentLabels.length - 1) {
+              return currentLabels[index]
             }
 
             return ''
