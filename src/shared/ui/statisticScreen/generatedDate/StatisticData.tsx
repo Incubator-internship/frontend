@@ -1,4 +1,5 @@
 export type StatisticDataType = {
+  PublicViewsStDate(PublicViewsStDate: any): unknown
   comments: CommentsStat[]
   likes: LikesStat[]
   publicationViews: PublicationViewsStat[]

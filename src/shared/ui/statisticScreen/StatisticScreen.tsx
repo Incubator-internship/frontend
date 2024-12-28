@@ -3,7 +3,14 @@
 import React, { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
 
-import { CategoryScale, Chart as ChartJS, LineElement, LinearScale, PointElement } from 'chart.js'
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  LineElement,
+  LinearScale,
+  PointElement,
+  plugins,
+} from 'chart.js'
 
 import s from './statisticScreen.module.scss'
 
@@ -12,7 +19,13 @@ import { Typography } from '../typography'
 import { StatisticData } from './generatedDate/StatisticData'
 
 type StatisticScreenProps = {
-  category: 'Comments' | 'Like' | 'Publication views'
+  category:
+    | 'Comments'
+    | 'Like'
+    | 'Publication views'
+    | 'Комментарии'
+    | 'Нравится'
+    | 'Просмотры публикаций'
 }
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement)
@@ -35,18 +48,21 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
 
     switch (category) {
       case 'Like':
+      case 'Нравится':
         setBorderColor(root.getPropertyValue('--color-danger-500'))
         setLineColor(root.getPropertyValue('--color-dark-300'))
         setDataSt(LikesStLike)
         setLabels(LikesStDate)
         break
       case 'Comments':
+      case 'Комментарии':
         setBorderColor(root.getPropertyValue('--color-accent-500'))
         setLineColor(root.getPropertyValue('--color-dark-300'))
         setDataSt(CommentsStComment)
         setLabels(CommentsStDate)
         break
       case 'Publication views':
+      case 'Просмотры публикаций':
         setBorderColor(root.getPropertyValue('--color-success-500'))
         setLineColor(root.getPropertyValue('--color-dark-300'))
         setDataSt(PublicViewsStPublication)
@@ -71,6 +87,26 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
 
   const options = {
     maintainAspectRatio: false,
+    // plugins: {
+    //   tooltip: {
+    //     callbacks: {
+    //       label: function (tooltipItem) {
+    //         // Получаем индекс текущего элемента
+    //         const index = tooltipItem.dataIndex
+
+    //         // Получаем текущее значение
+    //         const value = tooltipItem.raw
+
+    //         // Получаем метку в зависимости от состояния toggle
+    //         const currentLabels = toggle === 'Week' ? labels.slice(-7) : labels
+    //         const label = currentLabels[index]
+
+    //         // Форматируем строку для отображения
+    //         return `${label}: ${value}`
+    //       },
+    //     },
+    //   },
+    // },
     responsive: true,
     scales: {
       x: {

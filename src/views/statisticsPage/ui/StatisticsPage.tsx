@@ -8,9 +8,9 @@ import s from './statisticsPage.module.scss'
 export default function StatisticsPage() {
   const t = useTranslations('StatisticPage')
   const categories = {
-    comments: 'Comments' as const,
-    like: 'Like' as const,
-    publicationViews: 'Publication views' as const,
+    comments: t('Comments') as 'Comments',
+    like: t('Like') as 'Like',
+    publicationViews: t('Publication views') as 'Publication views',
   }
 
   return (
