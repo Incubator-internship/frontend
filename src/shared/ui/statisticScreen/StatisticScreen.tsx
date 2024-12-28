@@ -93,9 +93,8 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
     plugins: {
       tooltip: {
         backgroundColor: 'rgb(51, 51, 51)',
-        bodyColor: '#fff',
         callbacks: {
-          label: function (context: any) {
+          label: (context: TooltipItem<'line'>) => {
             const index = context.dataIndex
 
             switch (category) {
@@ -112,9 +111,6 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
                 return ''
             }
           },
-        },
-        title: function () {
-          return null
         },
       },
     },
