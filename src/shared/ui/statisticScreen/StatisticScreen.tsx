@@ -111,6 +111,9 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
                 return ''
             }
           },
+          title: () => {
+            return []
+          },
         },
       },
     },
