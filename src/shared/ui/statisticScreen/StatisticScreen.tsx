@@ -9,8 +9,10 @@ import {
   LineElement,
   LinearScale,
   PointElement,
-  plugins,
+  Tooltip,
+  TooltipItem,
 } from 'chart.js'
+import { useTranslations } from 'next-intl'
 
 import s from './statisticScreen.module.scss'
 
@@ -28,7 +30,7 @@ type StatisticScreenProps = {
     | 'Просмотры публикаций'
 }
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement)
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip)
 const LikesStLike = StatisticData.likes.map(item => item.likes)
 const LikesStDate = StatisticData.likes.map(item => item.date)
 const CommentsStComment = StatisticData.comments.map(item => item.comments)
@@ -42,6 +44,7 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
   const [dataSt, setDataSt] = useState<number[]>([])
   const [labels, setLabels] = useState<string[]>([])
   const [toggle, setToggle] = useState<'Month' | 'Week'>('Week')
+  const t = useTranslations('StatisticPage')
 
   useEffect(() => {
     const root = getComputedStyle(document.documentElement)
@@ -87,26 +90,34 @@ const StatisticScreen = ({ category }: StatisticScreenProps) => {
 
   const options = {
     maintainAspectRatio: false,
-    // plugins: {
-    //   tooltip: {
-    //     callbacks: {
-    //       label: function (tooltipItem) {
-    //         // Получаем индекс текущего элемента
-    //         const index = tooltipItem.dataIndex
+    plugins: {
+      tooltip: {
+        backgroundColor: 'rgb(51, 51, 51)',
+        bodyColor: '#fff',
+        callbacks: {
+          label: function (context: any) {
+            const index = context.dataIndex
 
-    //         // Получаем текущее значение
-    //         const value = tooltipItem.raw
-
-    //         // Получаем метку в зависимости от состояния toggle
-    //         const currentLabels = toggle === 'Week' ? labels.slice(-7) : labels
-    //         const label = currentLabels[index]
-
-    //         // Форматируем строку для отображения
-    //         return `${label}: ${value}`
-    //       },
-    //     },
-    //   },
-    // },
+            switch (category) {
+              case 'Like':
+              case 'Нравится':
+                return LikesStLike[index] + ' ' + t('Like')
+              case 'Comments':
+              case 'Комментарии':
+                return CommentsStComment[index] + ' ' + t('Comments')
+              case 'Publication views':
+              case 'Просмотры публикаций':
+                return PublicViewsStPublication[index] + ' ' + t('Publication views')
+              default:
+                return ''
+            }
+          },
+        },
+        title: function () {
+          return null
+        },
+      },
+    },
     responsive: true,
     scales: {
       x: {
