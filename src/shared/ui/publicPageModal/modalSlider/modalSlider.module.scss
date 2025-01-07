@@ -19,7 +19,8 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--color-light-100);
-  background-color: var(--color-light-900);
+  background-color: var(--color-dark-300);
+  opacity: 0.5;
   border: none;
   cursor: pointer;
 }
