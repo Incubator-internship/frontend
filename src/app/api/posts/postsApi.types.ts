@@ -14,14 +14,22 @@ export type Photos = {
   url: string
 }
 
-export type DeleteOrChangePost = {
-  content?: string
-  postId: number
+export type UpdatePost = {
+  content: string
+  id: number
+}
+
+export type DeletePost = {
+  id: number
 }
 
 export type CreatePost = {
   content: string
   photos: string[]
+}
+
+export type CreatePostResponse = {
+  postId: number
 }
 
 export type Error = {
