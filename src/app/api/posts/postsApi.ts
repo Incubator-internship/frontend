@@ -1,5 +1,3 @@
-import { use } from 'react'
-
 import { inctagramApi } from '../inctagramApi'
 import {
   AllPostsOrPostDataByUserId,
