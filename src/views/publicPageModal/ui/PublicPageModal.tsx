@@ -1,12 +1,14 @@
+'use client'
+
 import React, { useState } from 'react'
 
 import Close from '@/shared/assets/icons/Close'
 
 import s from './publicPageModal.module.scss'
 
-import { DataArray, PostType } from './DataArray'
-import { ModalComments } from './modalComments'
-import { ModalSlider } from './modalSlider'
+import { Carousel } from '../../../shared/ui/carousel'
+import { ModalComments } from '../../../shared/ui/modalComments'
+import { DataArray, PostType } from '../DataArray'
 
 export type PublicPageModalProps = {
   isOpen?: boolean
@@ -49,7 +51,7 @@ export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageMod
         <button onClick={onClose} type={'button'}>
           <Close className={s.close}></Close>
         </button>
-        <ModalSlider
+        <Carousel
           currentImageIndex={currentImageIndex}
           nextImage={nextImage}
           post={post}

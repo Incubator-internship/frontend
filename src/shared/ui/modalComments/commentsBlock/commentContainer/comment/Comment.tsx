@@ -1,3 +1,5 @@
+'use client'
+
 import s from './comment.module.scss'
 type CommentProps = {
   text?: string

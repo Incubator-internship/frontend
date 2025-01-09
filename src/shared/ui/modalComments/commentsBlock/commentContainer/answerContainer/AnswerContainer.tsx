@@ -1,4 +1,6 @@
-import { Answers } from '@/shared/ui/publicPageModal/DataArray'
+'use client'
+
+import { Answers } from '@/views/publicPageModal/DataArray'
 
 import s from './answerContainer.module.scss'
 
@@ -13,7 +15,11 @@ export const AnswerContainer = ({ answers }: AnswerContainerProps) => {
     <>
       {answers.map(answer => (
         <div className={s.answerContainer} key={answer.id}>
-          <ProfileData className={s.profileDataComment} />
+          <ProfileData
+            className={s.profileDataComment}
+            imageUrl={answer.dataPost.imgProfile}
+            profileUrl={answer.dataPost.urlProfile}
+          />
           <span>{answer.answer}</span>
           <DatePost datePost={answer.datePost} />
         </div>
