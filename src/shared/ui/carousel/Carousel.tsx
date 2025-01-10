@@ -3,11 +3,9 @@ import ArrowLeft from '@/shared/assets/icons/ArrowLeft'
 import ArrowRight from '@/shared/assets/icons/ArrowRight'
 import clsx from 'clsx'
 
-import s from './modalSlider.module.scss'
+import s from './carousel.module.scss'
 
-import { PostType } from '../DataArray'
-
-type ModalSliderProps = {
+type CarouselProps = {
   currentImageIndex: number
   nextImage: () => void
   post?: PostsDataByPostId
@@ -15,19 +13,19 @@ type ModalSliderProps = {
   setCurrentIndex: (index: number) => void
 }
 
-export const ModalSlider = ({
+export const Carousel = ({
   currentImageIndex,
   nextImage,
   post,
   prevImage,
   setCurrentIndex,
-}: ModalSliderProps) => {
+}: CarouselProps) => {
   const goToSlide = (index: number) => {
     setCurrentIndex(index)
   }
 
   return (
-    <div className={s.modalSlider}>
+    <div className={s.carousel}>
       <button className={s.prevButton} onClick={prevImage} type={'button'}>
         <ArrowLeft className={s.icon} />
       </button>

@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 
 import { useGetPostsIdQuery } from '@/app/api/posts/postsApi'
+import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
 import Close from '@/shared/assets/icons/Close'
 
 import s from './publicPageModal.module.scss'
 
-import { DataArray, PostType } from './DataArray'
+import { Carousel } from '../carousel/Carousel'
 import { ModalComments } from './modalComments'
-import { ModalSlider } from './modalSlider'
 
 export type PublicPageModalProps = {
   isOpen?: boolean
   onClose?: () => void
-  post1?: PostType
+  post1?: PostsDataByPostId
 }
 
 export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageModalProps) => {
@@ -47,7 +47,7 @@ export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageMod
         <button onClick={onClose} type={'button'}>
           <Close className={s.close}></Close>
         </button>
-        <ModalSlider
+        <Carousel
           currentImageIndex={currentImageIndex}
           nextImage={nextImage}
           post={data}
