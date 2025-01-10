@@ -1,3 +1,13 @@
+import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
+import image1 from '@/shared/assets/images/publicImages/image1.webp'
+import image2 from '@/shared/assets/images/publicImages/image2.webp'
+import image3 from '@/shared/assets/images/publicImages/image3.webp'
+import image4 from '@/shared/assets/images/publicImages/image4.webp'
+import photo1 from '@/shared/assets/images/userProfile/photo1.webp'
+import photo2 from '@/shared/assets/images/userProfile/photo2.webp'
+import photo3 from '@/shared/assets/images/userProfile/photo3.webp'
+import photo4 from '@/shared/assets/images/userProfile/photo4.webp'
+
 export type PostType = {
   comments: CommentsArray[]
   dataPost: DataPost
@@ -41,8 +51,8 @@ export const DataArray: PostType = {
         {
           answer: 'First answer - First answer - First answer',
           dataPost: {
-            imgProfile: 'https://via.placeholder.com/150?text=Profile+1',
-            urlProfile: 'ProfileProfile 1',
+            imgProfile: photo3.src,
+            urlProfile: 'Profile Answer 1',
           },
           datePost: '10 Hours ago',
           id: '1',
@@ -50,8 +60,8 @@ export const DataArray: PostType = {
         {
           answer: 'Second answer - Second answer - Second answer',
           dataPost: {
-            imgProfile: 'https://via.placeholder.com/150?text=Profile+1',
-            urlProfile: 'ProfileProfile 1',
+            imgProfile: photo1.src,
+            urlProfile: 'Profile Answer 2',
           },
           datePost: '11 Hours ago',
           id: '2',
@@ -60,48 +70,45 @@ export const DataArray: PostType = {
       comment:
         'First Comment - First Comment - First Comment - First Comment - First Comment - First Comment - First Comment -First Comment - First Comment - First Comment',
       dataPost: {
-        imgProfile: 'https://via.placeholder.com/150?text=Profile+1',
-        urlProfile: 'ProfileProfile 1',
+        imgProfile: photo3.src,
+        urlProfile: 'Profile Comment 1',
       },
       dateComment: '13 Hours ago',
       id: '1',
     },
   ],
   dataPost: {
-    imgProfile: 'https://via.placeholder.com/150?text=Profile+3',
+    imgProfile: avatar1.src,
     urlProfile: 'Profile1',
   },
   datePost: '2024-12-13',
   id: '1',
   imagePost: [
     {
-      imgPost: 'https://via.placeholder.com/800x400?text=Image+1',
+      imgPost: image1.src,
     },
     {
-      imgPost: 'https://via.placeholder.com/800x400?text=Image+2',
+      imgPost: image2.src,
     },
     {
-      imgPost: 'https://via.placeholder.com/800x400?text=Image+3',
+      imgPost: image3.src,
     },
     {
-      imgPost: 'https://via.placeholder.com/800x400?text=Image+4',
-    },
-    {
-      imgPost: 'https://via.placeholder.com/800x400?text=Image+5',
+      imgPost: image4.src,
     },
   ],
   likesPost: [
     {
-      imgProfile: 'https://via.placeholder.com/150?text=Profile+4',
+      imgProfile: photo1.src,
     },
     {
-      imgProfile: 'https://via.placeholder.com/150?text=Profile+5',
+      imgProfile: photo2.src,
     },
     {
-      imgProfile: 'https://via.placeholder.com/150?text=Profile+5',
+      imgProfile: photo3.src,
     },
     {
-      imgProfile: 'https://via.placeholder.com/150?text=Profile+5',
+      imgProfile: photo4.src,
     },
   ],
 }

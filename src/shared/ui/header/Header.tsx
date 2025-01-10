@@ -1,5 +1,5 @@
 'use client'
-import { use } from 'react'
+
 import { useSelector } from 'react-redux'
 
 import { selectAuthState } from '@/app/config/store/authSlice'
@@ -15,12 +15,11 @@ export const Header = () => {
   const locale = useLocale()
 
   const isAuth = useSelector(selectAuthState)
-  
+
   // FIX: (здесь ниже заглушка, но можно подключить селектор для получения реального значения)
   const count = 3
 
   const t = useTranslations('Header')
-
 
   return (
     <header className={s.header}>

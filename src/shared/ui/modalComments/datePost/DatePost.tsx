@@ -1,3 +1,5 @@
+'use client'
+
 import s from './datePost.module.scss'
 
 type DatePostProps = {

@@ -1,10 +1,12 @@
+'use client'
+
 import { useState } from 'react'
 
 import Line from '@/shared/assets/icons/Line'
+import { Answers, DataPost } from '@/views/publicPageModal/DataArray'
 
 import s from './commentContainer.module.scss'
 
-import { Answers } from '../../../DataArray'
 import { DatePost } from '../../datePost'
 import { ProfileData } from '../../profileData'
 import { AnswerContainer } from './answerContainer/AnswerContainer'
@@ -12,11 +14,12 @@ import { Comment } from './comment/Comment'
 
 type CommentContainerProps = {
   answers: Answers[]
+  dataPost: DataPost
   datePost: string
   text: string
 }
 
-export const CommentContainer = ({ answers, datePost, text }: CommentContainerProps) => {
+export const CommentContainer = ({ answers, dataPost, datePost, text }: CommentContainerProps) => {
   const [showAnswers, setShowAnswers] = useState(false)
 
   const toggleAnswers = () => {
@@ -26,7 +29,11 @@ export const CommentContainer = ({ answers, datePost, text }: CommentContainerPr
   return (
     <div>
       <div className={s.commentContainer}>
-        <ProfileData className={s.profileDataComment} />
+        <ProfileData
+          className={s.profileDataComment}
+          imageUrl={dataPost.imgProfile}
+          profileUrl={dataPost.urlProfile}
+        />
         <Comment text={text} />
       </div>
       <DatePost datePost={datePost} />

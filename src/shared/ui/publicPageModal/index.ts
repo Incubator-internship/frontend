@@ -1,1 +1,0 @@
-export { PublicPageModal } from './PublicPageModal'
