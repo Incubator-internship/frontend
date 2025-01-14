@@ -1,0 +1,37 @@
+.modalWrapp {
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+}
+
+.imagesSettings {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.imagesSettingsWrapp {
+  display: flex;
+  align-items: center;
+}
+
+.settingsBtn {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  background-color: var(--color-dark-500);
+  border-radius: 2px;
+
+  &:not(:last-child) {
+    margin-right: 24px;
+  }
+}

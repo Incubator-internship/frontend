@@ -21,7 +21,8 @@
   overflow: hidden;
 
   width: 100%;
-  max-width: 378px;
+  min-width: 378px;
+  max-width: 500px;
   min-height: 230px;
 
   background-color: var(--color-dark-300);
