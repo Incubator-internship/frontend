@@ -2,6 +2,7 @@ import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
 import ArrowLeft from '@/shared/assets/icons/ArrowLeft'
 import ArrowRight from '@/shared/assets/icons/ArrowRight'
 import clsx from 'clsx'
+import Image from 'next/image'
 
 import s from './carousel.module.scss'
 
