@@ -8,14 +8,12 @@ import image5 from '@/shared/assets/images/userProfile/photo5.webp'
 import image6 from '@/shared/assets/images/userProfile/photo6.webp'
 import image7 from '@/shared/assets/images/userProfile/photo7.webp'
 import AvatarImg from '@/shared/assets/images/userProfile/profileAvatar.webp'
+import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Typography } from '@/shared/ui/typography'
 import clsx from 'clsx'
 import Image from 'next/image'
 
 import s from './userProfile.module.scss'
-import { AvatarImage, Avatar, AvatarFallback } from '@/shared/ui/avatar'
-
-
 
 const galleryImages = [
   image1.src,
@@ -26,13 +24,14 @@ const galleryImages = [
   image6.src,
   image7.src,
 ]
+
 export default function UserProfile() {
   return (
     <section className={s.userProfile}>
       <div className={s.info}>
-        <Avatar className={s.ava} >
-          <AvatarImage alt={'Profile avatar'}  src={AvatarImg.src} />
-          <AvatarFallback >👹</AvatarFallback>
+        <Avatar className={s.ava}>
+          <AvatarImage alt={'Profile avatar'} src={AvatarImg.src} />
+          <AvatarFallback>👹</AvatarFallback>
         </Avatar>
         <div className={s.bio}>
           <h2 className={s.username}>URLProfile</h2>
