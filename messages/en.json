@@ -92,5 +92,10 @@
     "Registered users:": "Registered users:",
     "Show less": "Show less",
     "Show more": "Show more"
+  },
+  "AddPostModal": {
+    "MainModalTitle": "Add Photo",
+    "MainModalBtn1": "Select from Computer",
+    "MainModalBtn2": "Open Draft"
   }
 }

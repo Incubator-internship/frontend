@@ -168,5 +168,10 @@
     "Registered users:": "Зарегистрировано пользователей:",
     "Show less": "Свернуть",
     "Show more": "Развернуть"
+  },
+  "AddPostModal": {
+    "MainModalTitle": "Добавить фото",
+    "MainModalBtn1": "Выбрать с компьютера",
+    "MainModalBtn2": "Открыть черновик"
   }
 }
