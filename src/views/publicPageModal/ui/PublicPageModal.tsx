@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 
+import { useGetPostsIdQuery } from '@/app/api/posts/postsApi'
+import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
 import Close from '@/shared/assets/icons/Close'
 
 import s from './publicPageModal.module.scss'
@@ -9,26 +11,20 @@ import s from './publicPageModal.module.scss'
 import { Carousel } from '../../../shared/ui/carousel'
 import { ModalComments } from '../../../shared/ui/modalComments'
 import { DataArray, PostType } from '../DataArray'
-
 export type PublicPageModalProps = {
   isOpen?: boolean
   onClose?: () => void
-  post1?: PostType
+  post1?: PostsDataByPostId
 }
 
 export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageModalProps) => {
-  const post = DataArray
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const { data, isError, isLoading } = useGetPostsIdQuery(3)
 
   if (!isOpen) {
     return null
   }
 
-  // const handleKeyDown = (event: KeyboardEvent) => {
-  //   if (event.key === 'Escape' && isOpen) {
-  //     onClose?.()
-  //   }
-  // }
   const handleBackdropClick = (event: React.MouseEvent) => {
     if (event.target === event.currentTarget && isOpen) {
       onClose?.()
@@ -36,13 +32,15 @@ export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageMod
   }
 
   const nextImage = () => {
-    setCurrentImageIndex(prevIndex => (prevIndex + 1) % post.imagePost.length)
+    const photosLength = data?.photos?.length || 0
+
+    setCurrentImageIndex(prevIndex => (prevIndex + 1) % photosLength)
   }
 
   const prevImage = () => {
-    setCurrentImageIndex(
-      prevIndex => (prevIndex - 1 + post.imagePost.length) % post.imagePost.length
-    )
+    const photosLength = data?.photos?.length || 0
+
+    setCurrentImageIndex(prevIndex => (prevIndex - 1 + photosLength) % photosLength)
   }
 
   return (
@@ -54,11 +52,11 @@ export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageMod
         <Carousel
           currentImageIndex={currentImageIndex}
           nextImage={nextImage}
-          post={post}
+          post={data}
           prevImage={prevImage}
           setCurrentIndex={setCurrentImageIndex}
         />
-        <ModalComments post={post} />
+        <ModalComments post={data} />
       </div>
     </div>
   )
