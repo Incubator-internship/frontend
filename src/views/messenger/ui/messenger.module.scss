@@ -33,7 +33,7 @@
 .contactsContainer {
 }
 
-.tableCell {
+.tableItem {
   scrollbar-color: var(--color-dark-300) var(--color-dark-500);
   scrollbar-width: thin;
 
@@ -45,18 +45,18 @@
 }
 
 /* Works on Chrome, Edge, and Safari */
-.tableCell::-webkit-scrollbar {
+.tableItem::-webkit-scrollbar {
   width: 14px;
 }
 
-.tableCell::-webkit-scrollbar-thumb {
+.tableItem::-webkit-scrollbar-thumb {
   background: var(--color-dark-300);
   background-clip: padding-box;
   border: 3px solid transparent;
   border-radius: 6px;
 }
 
-.tableCell::-webkit-scrollbar-track {
+.tableItem::-webkit-scrollbar-track {
   background: var(--color-dark-500);
 }
 
@@ -73,4 +73,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.selectedContact {
+  background-color: var(--color-dark-100);
 }

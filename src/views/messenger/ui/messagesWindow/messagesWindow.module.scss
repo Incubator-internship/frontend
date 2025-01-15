@@ -1,0 +1,34 @@
+.messageWindow {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+
+  width: 100%;
+  height: 100%;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.buttons {
+  position: absolute;
+  top: 7px;
+  right: 12px;
+
+  display: flex;
+  gap: 12px;
+}
+
+.messageInput {
+  align-items: flex-end;
+  width: 100%;
+}
+
+.inputFile {
+  display: none;
+}
+
+.inputContainer:focus-within {
+  border-color: #007bff;
+}
