@@ -79,8 +79,9 @@
     "Recaptcha": "Required reCAPTCHA"
   },
   "PublicPage": {
-
-    "Registered users:": "Registered users:"
+    "Registered users:": "Registered users:",
+    "Show less": "Show less",
+    "Show more": "Show more"
   },
   "StatisticPage": {
     "Statistics": "Statistics",
@@ -88,9 +89,6 @@
     "Comments": "Comments",
     "Publication views": "Publication views",
     "Week": "Week",
-    "Month": "Month",
-    "Registered users:": "Registered users:",
-    "Show less": "Show less",
-    "Show more": "Show more"
+    "Month": "Month"
   }
 }
