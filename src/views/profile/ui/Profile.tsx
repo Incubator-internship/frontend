@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { FileWithPath } from 'react-dropzone'
 
 import { useGetMeQuery } from '@/app/api/auth/authApi'
 import { useGetUsersQuery } from '@/app/api/inctagramApi'
@@ -12,20 +13,33 @@ import { Modal } from '@/shared/ui/modal'
 import { Sidebar } from '@/shared/ui/sidebar'
 import { Typography } from '@/shared/ui/typography'
 
+export type FileWithPreview = { preview: string } & FileWithPath
+
 export default function ProfilePage() {
   const { data: me } = useGetMeQuery()
   const { data: users } = useGetUsersQuery()
 
   const [isOpenMainPostModal, setIsOpenMainPostModal] = useState<boolean>(false)
   const [isOpenStepsPostModal, setIsOpenStepsPostModal] = useState<boolean>(false)
+  const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[] | null>([])
 
   const files = useAppSelector(state => state.post.images)
 
   console.log(files)
+
   useEffect(() => {
     if (files.length) {
       setIsOpenMainPostModal(false)
       setIsOpenStepsPostModal(true)
+      setImageWithPreview(
+        files.map(image =>
+          Object.assign(image, {
+            preview: URL.createObjectURL(image),
+          })
+        )
+      )
+
+      return () => imageWithPreview?.forEach(image => URL.revokeObjectURL(image.preview))
     }
   }, [files])
 
@@ -44,7 +58,7 @@ export default function ProfilePage() {
         isStepMode
         onClose={() => setIsOpenStepsPostModal(false)}
         steps={[
-          <CroppingPhotoStep images={files} key={1} />,
+          <CroppingPhotoStep images={imageWithPreview} key={1} />,
           <Typography as={'p'} key={2} style={{ marginLeft: '15px' }} variant={'body1'}>
             Step 2
           </Typography>,
