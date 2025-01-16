@@ -5,7 +5,6 @@
 }
 
 .pageContainer {
-  overflow: hidden;
   display: flex;
   flex-grow: 1;
 
@@ -24,7 +23,7 @@
   grid-template-columns: [first] 269px [line2] auto [end];
   grid-template-rows: [row1-start] 72px [row1-end] auto [end];
 
-  height: 85vh;
+  height: 100%;
 
   border: 1px solid var(--color-dark-100);
   border-radius: 2px;
@@ -34,12 +33,11 @@
 }
 
 .tableItem {
-  scrollbar-color: var(--color-dark-300) var(--color-dark-500);
-  scrollbar-width: thin;
+  //scrollbar-color: var(--color-dark-300) var(--color-dark-500);
+  //scrollbar-width: thin;
 
-  overflow-y: scroll;
+  overflow-y: auto;
   justify-self: stretch;
-
   background-color: var(--color-dark-500);
   border: 1px solid var(--color-dark-300);
 }
@@ -69,7 +67,8 @@
   background-color: transparent;
 }
 
-.center {
+.messagesColumn {
+  overflow-y: hidden;
   display: flex;
   align-items: center;
   justify-content: center;

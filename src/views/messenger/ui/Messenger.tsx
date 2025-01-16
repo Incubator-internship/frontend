@@ -6,8 +6,8 @@ import { Input } from '@/shared/ui/input'
 import { Typography } from '@/shared/ui/typography'
 import Contact from '@/views/messenger/ui/contact/Contact'
 import SelectedContact from '@/views/messenger/ui/contact/SelectedContact'
-import ChooseContact from '@/views/messenger/ui/messagesWindow/ChooseContact'
-import MessagesWindow from '@/views/messenger/ui/messagesWindow/MessagesWindow'
+import ChooseContact from '@/views/messenger/ui/messagesWindow/chooseContact/ChooseContact'
+import MessagesWindow from '@/views/messenger/ui/messagesWindow/messagesWindow/MessagesWindow'
 import { clsx } from 'clsx'
 
 import styles from './messenger.module.scss'
@@ -109,7 +109,7 @@ export default function Messenger() {
                 )}
               </div>
               <div className={clsx(styles.tableItem)}>{contactList}</div>
-              <div className={clsx(styles.center)}>
+              <div className={clsx(styles.messagesColumn)}>
                 {selectedContact ? <MessagesWindow /> : <ChooseContact />}
               </div>
             </div>

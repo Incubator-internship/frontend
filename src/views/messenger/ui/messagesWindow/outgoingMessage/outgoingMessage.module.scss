@@ -1,0 +1,19 @@
+.message {
+  display: flex;
+  flex-flow: column wrap;
+  align-self: end;
+
+  width: 50%;
+  max-width: 323px;
+  margin: 23px;
+  padding: 7px 12px;
+
+  background-color: var(--color-accent-900);
+  border-radius: 8px;
+}
+
+.time {
+  align-self: flex-end;
+  font-size: var(--font-size-s);
+  color: var(--color-light-900);
+}

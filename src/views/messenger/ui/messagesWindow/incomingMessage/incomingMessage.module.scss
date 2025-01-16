@@ -1,0 +1,42 @@
+.messageContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+
+  width: 50%;
+  max-width: 323px;
+  margin: 23px;
+}
+
+.image {
+  overflow: hidden;
+
+  width: 36px;
+  height: 36px;
+
+  background-color: #4cbdfe;
+  border-radius: 50%;
+}
+
+.image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+
+  padding: 7px 12px;
+
+  background-color: var(--color-dark-300);
+  border-radius: 8px;
+}
+
+.time {
+  align-self: flex-end;
+  font-size: var(--font-size-s);
+  color: var(--color-light-900);
+}
