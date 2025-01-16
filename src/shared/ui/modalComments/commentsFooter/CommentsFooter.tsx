@@ -6,7 +6,7 @@ import s from './commentsFooter.module.scss'
 
 import { DatePost } from '../datePost'
 type CommentsFooterProps = {
-  datePost: string
+  datePost?: string
   likesCount: number
   likesPost: LikesPost[]
 }
