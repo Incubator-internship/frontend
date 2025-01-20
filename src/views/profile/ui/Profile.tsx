@@ -8,6 +8,7 @@ import { useGetUsersQuery } from '@/app/api/inctagramApi'
 import { useAppSelector } from '@/app/config/store/store'
 import { AddPhotoMainModal } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoStep'
+import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
 import { Button } from '@/shared/ui/button'
 import { Modal } from '@/shared/ui/modal'
 import { Sidebar } from '@/shared/ui/sidebar'
@@ -59,9 +60,7 @@ export default function ProfilePage() {
         onClose={() => setIsOpenStepsPostModal(false)}
         steps={[
           <CroppingPhotoStep images={imageWithPreview} key={1} />,
-          <Typography as={'p'} key={2} style={{ marginLeft: '15px' }} variant={'body1'}>
-            Step 2
-          </Typography>,
+          <FiltersPhotoStep images={imageWithPreview} key={2} />,
           <Typography as={'p'} key={3} style={{ marginLeft: '15px' }} variant={'body1'}>
             Step 3
           </Typography>,
