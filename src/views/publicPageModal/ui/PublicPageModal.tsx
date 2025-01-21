@@ -1,7 +1,5 @@
 'use client'
 
-import React, { useState } from 'react'
-
 import { useGetPostsIdQuery } from '@/app/api/posts/postsApi'
 import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
 import Close from '@/shared/assets/icons/Close'
@@ -10,7 +8,6 @@ import s from './publicPageModal.module.scss'
 
 import { Carousel } from '../../../shared/ui/carousel'
 import { ModalComments } from '../../../shared/ui/modalComments'
-import { DataArray, PostType } from '../DataArray'
 export type PublicPageModalProps = {
   isOpen?: boolean
   onClose?: () => void
@@ -18,7 +15,6 @@ export type PublicPageModalProps = {
 }
 
 export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageModalProps) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const { data, isError, isLoading } = useGetPostsIdQuery(3)
 
   if (!isOpen) {
@@ -31,16 +27,8 @@ export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageMod
     }
   }
 
-  const nextImage = () => {
-    const photosLength = data?.photos?.length || 0
-
-    setCurrentImageIndex(prevIndex => (prevIndex + 1) % photosLength)
-  }
-
-  const prevImage = () => {
-    const photosLength = data?.photos?.length || 0
-
-    setCurrentImageIndex(prevIndex => (prevIndex - 1 + photosLength) % photosLength)
+  if (!data || !data.photos) {
+    return <div>No data</div>
   }
 
   return (
@@ -49,13 +37,7 @@ export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageMod
         <button onClick={onClose} type={'button'}>
           <Close className={s.close}></Close>
         </button>
-        <Carousel
-          currentImageIndex={currentImageIndex}
-          nextImage={nextImage}
-          post={data}
-          prevImage={prevImage}
-          setCurrentIndex={setCurrentImageIndex}
-        />
+        <Carousel photos={data.photos} />
         <ModalComments post={data} />
       </div>
     </div>

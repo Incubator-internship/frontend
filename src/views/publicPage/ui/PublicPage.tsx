@@ -11,7 +11,6 @@ import image2 from '@/shared/assets/images/publicImages/image2.webp'
 import image3 from '@/shared/assets/images/publicImages/image3.webp'
 import image4 from '@/shared/assets/images/publicImages/image4.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
-import { Carousel2 } from '@/shared/ui/carousel2'
 import { Typography } from '@/shared/ui/typography'
 import { ShowMore, type ShowMoreRef, type ShowMoreToggleLinesFn } from '@re-dev/react-truncate'
 import Image from 'next/image'
@@ -46,85 +45,84 @@ const PublicPage: React.FC = () => {
   }
 
   return (
-    // <div className={s.wrapper}>
-    //   <div className={s.registeredUsers}>
-    //     <Typography variant={'h2'}>{t('Registered users:')}</Typography>
-    //     <Typography className={s.registeredUserValue} variant={'h2'}>
-    //       {numberOfUsers
-    //         .padStart(numberOfUsers.length + 2, '0')
-    //         .split('')
-    //         .map((number, i) => (
-    //           <span className={s.el} key={number + i}>
-    //             {number}
-    //           </span>
-    //         ))}
-    //     </Typography>
-    //   </div>
-    //   <div className={s.cards}>
-    //     {cardsData.map((card, i) => (
-    //       <div className={s.cardItem} key={'cardItem' + i}>
-    //         <div className={s.cardItemImage}>
-    //           <Image
-    //             alt={'Image1'}
-    //             fill
-    //             priority
-    //             sizes={'300px'}
-    //             src={card.image.src}
-    //             style={{
-    //               objectFit: 'cover',
-    //             }}
-    //           />
-    //         </div>
-    //         <div className={s.cardItemAvatarTitle}>
-    //           <Avatar>
-    //             <AvatarImage alt={'Avatar1'} src={card.avatar.src} />
-    //             <AvatarFallback>A1</AvatarFallback>
-    //           </Avatar>
-    //           <Typography variant={'h3'}>URLProfile</Typography>
-    //         </div>
-    //         <Typography color={'grey'} variant={'smallText'}>
-    //           22 min ago
-    //         </Typography>
-    //         <Typography as={'span'} className={s.cardItemText} variant={'regularText14'}>
-    //           <ShowMore
-    //             less={
-    //               <Typography
-    //                 as={'span'}
-    //                 className={s.showMoreLess}
-    //                 color={'link'}
-    //                 onClick={toggleLines(i)}
-    //                 variant={'regularLink'}
-    //               >
-    //                 {t('Show less')}
-    //               </Typography>
-    //             }
-    //             lines={3}
-    //             more={
-    //               <>
-    //                 <span className={s.showMoreSpan}>...</span>
-    //                 <Typography
-    //                   as={'span'}
-    //                   className={s.showMoreLess}
-    //                   color={'link'}
-    //                   onClick={toggleLines(i)}
-    //                   variant={'regularLink'}
-    //                 >
-    //                   {t('Show more')}
-    //                 </Typography>
-    //               </>
-    //             }
-    //             ref={el => {
-    //               refs.current[i] = el
-    //             }}
-    //           >
-    //             {card.text}
-    //           </ShowMore>
-    //         </Typography>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
-    <Carousel2 />
+    <div className={s.wrapper}>
+      <div className={s.registeredUsers}>
+        <Typography variant={'h2'}>{t('Registered users:')}</Typography>
+        <Typography className={s.registeredUserValue} variant={'h2'}>
+          {numberOfUsers
+            .padStart(numberOfUsers.length + 2, '0')
+            .split('')
+            .map((number, i) => (
+              <span className={s.el} key={number + i}>
+                {number}
+              </span>
+            ))}
+        </Typography>
+      </div>
+      <div className={s.cards}>
+        {cardsData.map((card, i) => (
+          <div className={s.cardItem} key={'cardItem' + i}>
+            <div className={s.cardItemImage}>
+              <Image
+                alt={'Image1'}
+                fill
+                priority
+                sizes={'300px'}
+                src={card.image.src}
+                style={{
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
+            <div className={s.cardItemAvatarTitle}>
+              <Avatar>
+                <AvatarImage alt={'Avatar1'} src={card.avatar.src} />
+                <AvatarFallback>A1</AvatarFallback>
+              </Avatar>
+              <Typography variant={'h3'}>URLProfile</Typography>
+            </div>
+            <Typography color={'grey'} variant={'smallText'}>
+              22 min ago
+            </Typography>
+            <Typography as={'span'} className={s.cardItemText} variant={'regularText14'}>
+              <ShowMore
+                less={
+                  <Typography
+                    as={'span'}
+                    className={s.showMoreLess}
+                    color={'link'}
+                    onClick={toggleLines(i)}
+                    variant={'regularLink'}
+                  >
+                    {t('Show less')}
+                  </Typography>
+                }
+                lines={3}
+                more={
+                  <>
+                    <span className={s.showMoreSpan}>...</span>
+                    <Typography
+                      as={'span'}
+                      className={s.showMoreLess}
+                      color={'link'}
+                      onClick={toggleLines(i)}
+                      variant={'regularLink'}
+                    >
+                      {t('Show more')}
+                    </Typography>
+                  </>
+                }
+                ref={el => {
+                  refs.current[i] = el
+                }}
+              >
+                {card.text}
+              </ShowMore>
+            </Typography>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
 

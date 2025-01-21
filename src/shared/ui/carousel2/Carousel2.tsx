@@ -1,24 +1,33 @@
 'use client'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
+import 'swiper/swiper-bundle.css'
 
-export const Carousel2 = () => {
+import s from './carousel2.module.scss'
+
+export type Images = {
+  photo: string
+}
+type CarouselProps2 = {
+  photos: string[]
+}
+export const Carousel2 = ({ photos }: CarouselProps2) => {
   return (
     <Swiper
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      className={s.carousel}
+      modules={[Navigation, Pagination, A11y]}
       navigation
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={swiper => console.log(swiper)}
-      pagination={{ clickable: true }}
-      scrollbar={{ draggable: true }}
-      slidesPerView={3}
-      spaceBetween={50}
+      pagination={{ clickable: true, dynamicBullets: true, dynamicMainBullets: 5 }}
+      slidesPerView={1}
     >
-      <SwiperSlide>Slide 1</SwiperSlide>
-      <SwiperSlide>Slide 2</SwiperSlide>
-      <SwiperSlide>Slide 3</SwiperSlide>
-      <SwiperSlide>Slide 4</SwiperSlide>
+      {photos.map((el, index) => {
+        return (
+          <SwiperSlide key={index}>
+            <img alt={`Slide ${index}`} src={el} style={{ height: '100%', width: '100%' }} />
+          </SwiperSlide>
+        )
+      })}
     </Swiper>
   )
 }
