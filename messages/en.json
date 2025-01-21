@@ -90,5 +90,9 @@
     "Publication views": "Publication views",
     "Week": "Week",
     "Month": "Month"
+  },
+  "HomePage": {
+    "View All Comments": "View All Comments",
+    "Publish": "Publish"
   }
 }

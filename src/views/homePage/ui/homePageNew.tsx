@@ -13,11 +13,14 @@ import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Sidebar } from '@/shared/ui/sidebar'
 import { Typography } from '@/shared/ui/typography'
+import { useTranslations } from 'next-intl'
 
 import s from './homePage.module.scss'
 
 const HomePage: React.FC = () => {
   //TODO: id users which is following
+
+  const t = useTranslations<'HomePage'>('HomePage')
 
   const { data: posts, error, isLoading } = useGetPostsUserIdQuery(23)
 
@@ -89,12 +92,12 @@ const HomePage: React.FC = () => {
             <Typography variant={'smallText'}>2 243 &quot;Like&quot;</Typography>
           </div>
           <Typography className={s.postComments} color={'grey'} variant={'boldText14'}>
-            View All Comments (114)
+            {t('View All Comments')} (114)
           </Typography>
           <div className={s.postAddComment}>
             <input className={s.postInput} placeholder={'Add a Comment...'} type={'text'} />
             <Typography as={'a'} color={'link'} variant={'h3'}>
-              Publish
+              {t('Publish')}
             </Typography>
           </div>
         </div>
