@@ -93,6 +93,15 @@
   },
   "HomePage": {
     "View All Comments": "View All Comments",
-    "Publish": "Publish"
+    "Publish": "Publish",
+    "year ago": "{count} year ago",
+    "years ago": "{count} years ago",
+    "day ago": "{count} day ago",
+    "days ago": "{count} days ago",
+    "hour ago": "{count} hour ago",
+    "hours ago": "{count} hours ago",
+    "minute ago": "{count} minute ago",
+    "minutes ago": "{count} minutes ago",
+    "Add a Comment": "Add a Comment..."
   }
 }

@@ -37,13 +37,13 @@ const HomePage: React.FC = () => {
     const years = Math.floor(differenceInMs / (3600000 * 24 * 365))
 
     if (years > 0) {
-      return `${years} ${years === 1 ? 'год назад' : 'года назад'}`
+      return t(years === 1 ? 'year ago' : 'years ago', { count: years })
     } else if (days > 0) {
-      return `${days} ${days === 1 ? 'день назад' : 'дней назад'}`
+      return t(days === 1 ? 'day ago' : 'days ago', { count: days })
     } else if (hours > 0) {
-      return `${hours} ${hours === 1 ? 'час назад' : 'часов назад'}`
+      return t(hours === 1 ? 'hour ago' : 'hours ago', { count: hours })
     } else {
-      return `${minutes} ${minutes === 1 ? 'минуту назад' : 'минут назад'}`
+      return t(minutes === 1 ? 'minute ago' : 'minutes ago', { count: minutes })
     }
   }
 
@@ -95,7 +95,7 @@ const HomePage: React.FC = () => {
             {t('View All Comments')} (114)
           </Typography>
           <div className={s.postAddComment}>
-            <input className={s.postInput} placeholder={'Add a Comment...'} type={'text'} />
+            <input className={s.postInput} placeholder={t('Add a Comment')} type={'text'} />
             <Typography as={'a'} color={'link'} variant={'h3'}>
               {t('Publish')}
             </Typography>

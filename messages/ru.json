@@ -171,6 +171,15 @@
   },
   "HomePage": {
     "View All Comments": "Показать все комментарии",
-    "Publish": "Опубликовать"
+    "Publish": "Опубликовать",
+    "year ago": "{count} год назад",
+    "years ago": "{count} лет назад",
+    "day ago": "{count} день назад",
+    "days ago": "{count} дней назад",
+    "hour ago": "{count} час назад",
+    "hours ago": "{count} часов назад",
+    "minute ago": "{count} минуту назад",
+    "minutes ago": "{count} минут назад",
+    "Add a Comment": "Добавить комментарий..."
   }
 }
