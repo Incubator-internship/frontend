@@ -13,8 +13,16 @@ export const AddPhotoMainModal = () => {
   const dispatch = useAppDispatch()
 
   const { acceptedFiles, getInputProps, getRootProps, open } = useDropzone({
+    accept: { 'image/jpeg': [], 'image/png': [] },
+    maxSize: 20 * 1024 * 1024,
     onDrop: acceptedFiles => {
       dispatch(addImages(acceptedFiles))
+      // if (acceptedFiles.length > 0) {
+      //   // const file = acceptedFiles[0]
+      //
+      //   dispatch(addImages(acceptedFiles))
+      //   // dispatch(addImages(acceptedFiles))
+      // }
     },
   })
 

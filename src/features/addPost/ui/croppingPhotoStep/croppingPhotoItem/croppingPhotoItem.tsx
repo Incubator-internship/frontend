@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
 import { useAppDispatch } from '@/app/config/store/store'
 import { addImages } from '@/features/addPost/model/postSlice'
+import { AddingWindow } from '@/features/addPost/ui/addingWindow/AddingWindow'
 import Cropping from '@/shared/assets/icons/Cropping'
 import ImageIcon from '@/shared/assets/icons/ImageIcon'
 import Scale from '@/shared/assets/icons/Scale'
@@ -14,14 +15,18 @@ import s from './croppingPhotoItem.module.scss'
 
 type Props = {
   image: FileWithPreview
+  maxImages?: number
 }
 
-export const CroppingPhotoItem = ({ image }: Props) => {
+export const CroppingPhotoItem = ({ image, maxImages = 10 }: Props) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [aspect, setAspect] = useState(1 / 1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
   const [rotation, setRotation] = useState(0)
+
+  const [addedImages, setAddedImages] = useState<string[]>([])
+  const [showAddingWindow, setShowAddingWindow] = useState<boolean>(false)
 
   const dispatch = useAppDispatch()
 
@@ -43,6 +48,27 @@ export const CroppingPhotoItem = ({ image }: Props) => {
     } catch (e) {
       console.error(e)
     }
+  }
+
+  const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || addedImages.length >= maxImages) {
+      alert(`You can only add up to ${maxImages} images.`)
+
+      return
+    }
+
+    const file = e.target.files[0]
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file)
+
+      setAddedImages(prevImages => [...prevImages, imageUrl])
+    }
+  }
+
+  const handleShowAddingWindow = () => {
+    setShowAddingWindow(!showAddingWindow)
+    console.log('sowAddingWindow', showAddingWindow)
   }
 
   return (
@@ -68,7 +94,7 @@ export const CroppingPhotoItem = ({ image }: Props) => {
               <Scale />
             </div>
           </div>
-          <div className={s.settingsBtn}>
+          <div className={s.settingsBtn} onClick={handleShowAddingWindow}>
             <ImageIcon height={24} width={24} />
           </div>
         </div>
@@ -100,6 +126,8 @@ export const CroppingPhotoItem = ({ image }: Props) => {
         <Button className={s.BtbBtn} onClick={saveCroppedImage}>
           save
         </Button>
+
+        {showAddingWindow && <AddingWindow addImage={handleAddImage} addedImages={addedImages} />}
       </div>
     </div>
   )
