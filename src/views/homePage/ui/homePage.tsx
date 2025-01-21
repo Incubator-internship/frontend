@@ -1,85 +1,47 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 
-import { useGetAllPostsQuery } from '@/app/api/posts/postsApi'
+import { useGetPostsUserIdQuery } from '@/app/api/posts/postsApi'
+import {
+  BookmarkOutlineIcon,
+  HeartOutlineIcon,
+  MessageCircleOutlineIcon,
+  PaperPlaneOutlineIcon,
+} from '@/shared/assets/icons'
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
-import image1 from '@/shared/assets/images/publicImages/image1.webp'
-import image2 from '@/shared/assets/images/publicImages/image2.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
-import { Carousel } from '@/shared/ui/carousel'
-import { ModalComments } from '@/shared/ui/modalComments'
 import { Sidebar } from '@/shared/ui/sidebar'
 import { Typography } from '@/shared/ui/typography'
-import Image from 'next/image'
 
 import s from './homePage.module.scss'
 
-const post: any = {
-  comments: [],
-  dataPost: {
-    imgProfile: avatar1.src,
-    urlProfile: 'Profile 1',
-  },
-  datePost: '2024-12-23',
-  id: '1',
-  imagePost: [
-    { imgPost: image1.src },
-    { imgPost: image2.src },
-    { imgPost: image1.src },
-    { imgPost: image1.src },
-  ],
-  likesPost: [],
-}
-
-const post2: any = {
-  content: 'First test post test',
-  createdAt: '2025-01-03T12:04:36.389Z',
-  id: 3,
-  photos: [
-    {
-      id: 3,
-      postId: 3,
-      url: 'https://excubatoir-bucket.s3.eu-north-1.amazonaws.com/compressed-1735905873727-_74aa711f-8621-4d4d-8f9e-819323bf08a2.jpg',
-    },
-    {
-      id: 4,
-      postId: 3,
-      url: 'https://excubatoir-bucket.s3.eu-north-1.amazonaws.com/compressed-1735905874319-_1667f27c-64f7-4ef1-8295-d81f91adaf51.jpg',
-    },
-    {
-      id: 5,
-      postId: 3,
-      url: 'https://excubatoir-bucket.s3.eu-north-1.amazonaws.com/compressed-1735905874938-doroga_asfalt_razmetka_130996_3840x2400.jpg',
-    },
-    {
-      id: 6,
-      postId: 3,
-      url: 'https://excubatoir-bucket.s3.eu-north-1.amazonaws.com/compressed-1735905875588-doroga_derevia_tonnel_147629_3840x2400.jpg',
-    },
-    {
-      id: 7,
-      postId: 3,
-      url: 'https://excubatoir-bucket.s3.eu-north-1.amazonaws.com/compressed-1735905876077-IT-style%20logo%20for%20Excubator.png',
-    },
-  ],
-  userId: 23,
-}
-
 const HomePage: React.FC = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const { data: posts } = useGetAllPostsQuery()
+  //TODO: id users which is following
 
-  console.log(posts)
+  const { data: posts, error, isLoading } = useGetPostsUserIdQuery(23)
 
-  const nextImage = () => {
-    setCurrentImageIndex(prevIndex => (prevIndex + 1) % post.imagePost.length)
-  }
+  const updatedAt = posts && posts[0]?.updatedAt
 
-  const prevImage = () => {
-    setCurrentImageIndex(
-      prevIndex => (prevIndex - 1 + post.imagePost.length) % post.imagePost.length
-    )
+  const calculateTimeAgo = (updatedAt: string): string => {
+    const updatedTime = new Date(updatedAt)
+    const currentTime = new Date()
+    const differenceInMs = currentTime.getTime() - updatedTime.getTime()
+
+    const minutes = Math.floor(differenceInMs / 60000)
+    const hours = Math.floor(differenceInMs / 3600000)
+    const days = Math.floor(differenceInMs / (3600000 * 24))
+    const years = Math.floor(differenceInMs / (3600000 * 24 * 365))
+
+    if (years > 0) {
+      return `${years} ${years === 1 ? 'год назад' : 'года назад'}`
+    } else if (days > 0) {
+      return `${days} ${days === 1 ? 'день назад' : 'дней назад'}`
+    } else if (hours > 0) {
+      return `${hours} ${hours === 1 ? 'час назад' : 'часов назад'}`
+    } else {
+      return `${minutes} ${minutes === 1 ? 'минуту назад' : 'минут назад'}`
+    }
   }
 
   return (
@@ -89,19 +51,53 @@ const HomePage: React.FC = () => {
         <div className={s.postAvatarTitle}>
           <Avatar>
             <AvatarImage alt={'Avatar1'} src={avatar1.src} />
-            <AvatarFallback>A1</AvatarFallback>
+            <AvatarFallback>AF</AvatarFallback>
           </Avatar>
-          <Typography variant={'h3'}>URLProfile</Typography>
+
+          <Typography variant={'h3'}>URLProfiele &middot;</Typography>
+          {updatedAt && (
+            <Typography variant={'smallText'}>{calculateTimeAgo(updatedAt)}</Typography>
+          )}
+          <Typography className={s.lastChild} variant={'h2'}>
+            &middot;&middot;&middot;
+          </Typography>
         </div>
-        <Carousel
-          currentImageIndex={currentImageIndex}
-          nextImage={nextImage}
-          post={post}
-          prevImage={prevImage}
-          setCurrentIndex={setCurrentImageIndex}
-        />
-        {/* <ModalComments post={post} /> */}
-        <div>{posts && posts[0]?.content}</div>
+
+        {posts && <img alt={'Image1'} className={s.postImage} src={posts[0].photos[0].url} />}
+
+        <div className={s.postFooter}>
+          <div className={s.postIcons}>
+            <HeartOutlineIcon />
+            <MessageCircleOutlineIcon />
+            <PaperPlaneOutlineIcon />
+            <BookmarkOutlineIcon className={s.lastChild} />
+          </div>
+          <div className={s.postContent}>
+            <Avatar>
+              <AvatarImage alt={'Avatar1'} src={avatar1.src} />
+              <AvatarFallback>AF</AvatarFallback>
+            </Avatar>
+            <Typography variant={'boldText14'}>URLProfile {posts && posts[0]?.content}</Typography>
+          </div>
+          <div className={s.postLikes}>
+            {[1, 2, 3].map(item => (
+              <Avatar className={s.smallAvatar} key={item}>
+                <AvatarImage alt={`Avatar ${item}`} src={avatar1.src} />
+                <AvatarFallback>AF</AvatarFallback>
+              </Avatar>
+            ))}
+            <Typography variant={'smallText'}>2 243 &quot;Like&quot;</Typography>
+          </div>
+          <Typography className={s.postComments} color={'grey'} variant={'boldText14'}>
+            View All Comments (114)
+          </Typography>
+          <div className={s.postAddComment}>
+            <input className={s.postInput} placeholder={'Add a Comment...'} type={'text'} />
+            <Typography as={'a'} color={'link'} variant={'h3'}>
+              Publish
+            </Typography>
+          </div>
+        </div>
       </div>
     </div>
   )
