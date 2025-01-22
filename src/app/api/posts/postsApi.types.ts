@@ -5,6 +5,7 @@ export type PostsDataByPostId = {
   createdAt: string
   id: number
   photos: Photos[]
+  updatedAt: string
   userId: number
 }
 
