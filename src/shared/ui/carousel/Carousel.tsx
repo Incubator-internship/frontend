@@ -7,9 +7,6 @@ import clsx from 'clsx'
 
 import s from './carousel.module.scss'
 
-// export type Images = {
-//   photo: string
-// }
 type CarouselProps = {
   photos: Photos[] | string[]
 }
