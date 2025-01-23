@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import { useAppDispatch, useAppSelector } from '@/app/config/store/store'
@@ -11,18 +12,27 @@ import s from './addPhotoMainModal.module.scss'
 export const AddPhotoMainModal = () => {
   const t = useTranslations('AddPostModal')
   const dispatch = useAppDispatch()
+  const [error, setError] = useState('')
 
   const { acceptedFiles, getInputProps, getRootProps, open } = useDropzone({
     accept: { 'image/jpeg': [], 'image/png': [] },
-    maxSize: 20 * 1024 * 1024,
+    maxSize: 20 * 1024 * 1024, // 20 MB in bytes
     onDrop: acceptedFiles => {
       dispatch(addImages(acceptedFiles))
-      // if (acceptedFiles.length > 0) {
-      //   // const file = acceptedFiles[0]
-      //
-      //   dispatch(addImages(acceptedFiles))
-      //   // dispatch(addImages(acceptedFiles))
-      // }
+      setError('')
+    },
+    onDropRejected: fileRejections => {
+      const errorMessage = fileRejections
+        .map(fileRejection => {
+          if (fileRejection.errors[0].code === 'file-too-large') {
+            return 'File is too large. Maximum size is 20 MB.'
+          } else {
+            return 'Only JPEG and PNG images are allowed.'
+          }
+        })
+        .join(' ')
+
+      setError(errorMessage)
     },
   })
 
@@ -32,7 +42,9 @@ export const AddPhotoMainModal = () => {
         <div {...getRootProps({ className: s.dropzone })}>
           <input {...getInputProps()} />
           <ImageIcon />
+          {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
+
         {/*<ul>*/}
         {/*  {files.map(file => (*/}
         {/*    <li key={file.path}>*/}
@@ -41,6 +53,7 @@ export const AddPhotoMainModal = () => {
         {/*  ))}*/}
         {/*</ul>*/}
       </div>
+
       <Button className={s.btn} fullWidth onClick={open}>
         {t('MainModalBtn1')}
       </Button>
