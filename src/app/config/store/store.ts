@@ -11,7 +11,7 @@ export const makeStore = () => {
     reducer: {
       auth: authReducer,
       [inctagramApi.reducerPath]: inctagramApi.reducer,
-      post: postReducer,
+      // post: postReducer,
     },
   })
 }

@@ -1,24 +1,23 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
-import { useAppDispatch } from '@/app/config/store/store'
-import { addImages } from '@/features/addPost/model/postSlice'
 import { AddingWindow } from '@/features/addPost/ui/addingWindow/AddingWindow'
+import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
 import Cropping from '@/shared/assets/icons/Cropping'
 import ImageIcon from '@/shared/assets/icons/ImageIcon'
 import Scale from '@/shared/assets/icons/Scale'
 import { Button } from '@/shared/ui/button'
 import { getCroppedImg } from '@/shared/utils/cropImageUtils'
-import { FileWithPreview } from '@/views/profile/ui/Profile'
 
 import s from './croppingPhotoItem.module.scss'
 
 type Props = {
   image: FileWithPreview
   maxImages?: number
+  setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
 }
 
-export const CroppingPhotoItem = ({ image, maxImages = 10 }: Props) => {
+export const CroppingPhotoItem = ({ image, maxImages = 10, setImageWithPreview }: Props) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [aspect, setAspect] = useState(1 / 1)
@@ -28,7 +27,7 @@ export const CroppingPhotoItem = ({ image, maxImages = 10 }: Props) => {
   const [addedImages, setAddedImages] = useState<string[]>([])
   const [showAddingWindow, setShowAddingWindow] = useState<boolean>(false)
 
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
 
   const onCropComplete = async (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
@@ -43,7 +42,14 @@ export const CroppingPhotoItem = ({ image, maxImages = 10 }: Props) => {
       )
       const file = new File([croppedImage as BlobPart], 'name')
 
-      dispatch(addImages([file]))
+      const fileWithPreview: FileWithPreview = {
+        ...file,
+        id: image.id, // or generate a new unique id if needed
+        preview: URL.createObjectURL(file),
+      }
+
+      setImageWithPreview(prevImages => [...prevImages, fileWithPreview])
+
       console.log('donee', { croppedImage })
     } catch (e) {
       console.error(e)
