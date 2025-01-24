@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useId, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
 import { AddingWindow } from '@/features/addPost/ui/addingWindow/AddingWindow'
@@ -12,19 +12,19 @@ import { getCroppedImg } from '@/shared/utils/cropImageUtils'
 import s from './croppingPhotoItem.module.scss'
 
 type Props = {
-  image: FileWithPreview
-  maxImages?: number
+  image: FileWithPreview //удалить, оставить только images, когда реализуем выбор imag, которую будем кропать по id
+  images: FileWithPreview[]
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
 }
 
-export const CroppingPhotoItem = ({ image, maxImages = 10, setImageWithPreview }: Props) => {
+export const CroppingPhotoItem = ({ image, images, setImageWithPreview }: Props) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [aspect, setAspect] = useState(1 / 1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
   const [rotation, setRotation] = useState(0)
-
-  const [addedImages, setAddedImages] = useState<string[]>([])
+  const imageId = useId()
+  // const [addedImages, setAddedImages] = useState<string[]>([])
   const [showAddingWindow, setShowAddingWindow] = useState<boolean>(false)
 
   // const dispatch = useAppDispatch()
@@ -42,13 +42,13 @@ export const CroppingPhotoItem = ({ image, maxImages = 10, setImageWithPreview }
       )
       const file = new File([croppedImage as BlobPart], 'name')
 
-      const fileWithPreview: FileWithPreview = {
+      const newImgWithPreview: FileWithPreview = {
         ...file,
-        id: image.id, // or generate a new unique id if needed
+        id: image.id,
         preview: URL.createObjectURL(file),
       }
 
-      setImageWithPreview(prevImages => [...prevImages, fileWithPreview])
+      setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
 
       console.log('donee', { croppedImage })
     } catch (e) {
@@ -56,25 +56,8 @@ export const CroppingPhotoItem = ({ image, maxImages = 10, setImageWithPreview }
     }
   }
 
-  const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || addedImages.length >= maxImages) {
-      alert(`You can only add up to ${maxImages} images.`)
-
-      return
-    }
-
-    const file = e.target.files[0]
-
-    if (file) {
-      const imageUrl = URL.createObjectURL(file)
-
-      setAddedImages(prevImages => [...prevImages, imageUrl])
-    }
-  }
-
   const handleShowAddingWindow = () => {
     setShowAddingWindow(!showAddingWindow)
-    console.log('sowAddingWindow', showAddingWindow)
   }
 
   return (
@@ -133,7 +116,9 @@ export const CroppingPhotoItem = ({ image, maxImages = 10, setImageWithPreview }
           save
         </Button>
 
-        {showAddingWindow && <AddingWindow addImage={handleAddImage} addedImages={addedImages} />}
+        {showAddingWindow && (
+          <AddingWindow images={images} setImageWithPreview={setImageWithPreview} />
+        )}
       </div>
     </div>
   )

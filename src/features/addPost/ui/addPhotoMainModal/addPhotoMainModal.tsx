@@ -13,6 +13,8 @@ type Props = {
   setImages: Dispatch<SetStateAction<FileWithPreview[]>>
 }
 
+export const MAX_IMAGES = 10
+
 export const AddPhotoMainModal = ({ images, setImages }: Props) => {
   const t = useTranslations('AddPostModal')
   const [error, setError] = useState('')
@@ -22,6 +24,11 @@ export const AddPhotoMainModal = ({ images, setImages }: Props) => {
     accept: { 'image/jpeg': [], 'image/png': [] },
     maxSize: 20 * 1024 * 1024, // 20 MB in bytes
     onDrop: acceptedFiles => {
+      if (images.length + acceptedFiles.length > MAX_IMAGES) {
+        setError(`You can only add up to ${MAX_IMAGES} images.`)
+
+        return
+      }
       const chosenImages = acceptedFiles.map(
         (image: FileWithPath): FileWithPreview => ({
           ...image,

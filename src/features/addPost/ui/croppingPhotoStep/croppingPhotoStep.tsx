@@ -19,6 +19,7 @@ export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
         {images.map(image => (
           <CroppingPhotoItem
             image={image}
+            images={images}
             key={image.id}
             setImageWithPreview={setImageWithPreview}
           />
