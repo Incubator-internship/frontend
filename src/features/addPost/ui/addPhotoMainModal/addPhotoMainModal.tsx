@@ -5,7 +5,7 @@ import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
 import ImageIcon from '@/shared/assets/icons/ImageIcon'
 import { Button } from '@/shared/ui/button'
 import { useTranslations } from 'next-intl'
-import { v1 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 import s from './addPhotoMainModal.module.scss'
 
@@ -32,7 +32,7 @@ export const AddPhotoMainModal = ({ images, setImages }: Props) => {
       const chosenImages = acceptedFiles.map(
         (image: FileWithPath): FileWithPreview => ({
           ...image,
-          id: v1(),
+          id: uuidv4(),
           preview: URL.createObjectURL(image),
         })
       )

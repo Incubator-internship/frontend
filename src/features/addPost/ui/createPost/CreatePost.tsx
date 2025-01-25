@@ -31,6 +31,10 @@ export default function CreatePost({
       setIsOpenMainPostModal(false)
       setIsOpenStepsPostModal(true)
     }
+    if (imageWithPreview.length === 0) {
+      setIsOpenMainPostModal(true)
+      setIsOpenStepsPostModal(false)
+    }
   }, [imageWithPreview, setIsOpenMainPostModal, setIsOpenStepsPostModal])
 
   return (

@@ -4,7 +4,7 @@ import { MAX_IMAGES } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMain
 import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
 import CloseIcon from '@/shared/assets/icons/CloseIcon'
 import PlusCircleOutlineIcon from '@/shared/assets/icons/PlusCircleOutlineIcon'
-import { v1 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 import s from './addingWindow.module.scss'
 
@@ -29,7 +29,7 @@ export function AddingWindow({ images, setImageWithPreview }: Props) {
     const newImages = selectedFiles.map(
       (file): FileWithPreview => ({
         ...file,
-        id: v1(),
+        id: uuidv4(),
         preview: URL.createObjectURL(file),
       })
     )
