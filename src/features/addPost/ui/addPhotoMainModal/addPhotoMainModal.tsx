@@ -5,6 +5,7 @@ import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
 import ImageIcon from '@/shared/assets/icons/ImageIcon'
 import { Button } from '@/shared/ui/button'
 import { useTranslations } from 'next-intl'
+import { v1 } from 'uuid'
 
 import s from './addPhotoMainModal.module.scss'
 
@@ -18,7 +19,6 @@ export const MAX_IMAGES = 10
 export const AddPhotoMainModal = ({ images, setImages }: Props) => {
   const t = useTranslations('AddPostModal')
   const [error, setError] = useState('')
-  const imageId = useId()
 
   const { acceptedFiles, getInputProps, getRootProps, open } = useDropzone({
     accept: { 'image/jpeg': [], 'image/png': [] },
@@ -32,7 +32,7 @@ export const AddPhotoMainModal = ({ images, setImages }: Props) => {
       const chosenImages = acceptedFiles.map(
         (image: FileWithPath): FileWithPreview => ({
           ...image,
-          id: imageId,
+          id: v1(),
           preview: URL.createObjectURL(image),
         })
       )

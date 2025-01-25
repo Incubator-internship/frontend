@@ -54,6 +54,8 @@
 
 .addItem {
   position: relative;
+  width: 36px;
+  height: 36px;
 }
 
 .addImageLabel {
@@ -73,6 +75,26 @@
   & svg {
     width: 36px;
     height: 36px;
+    fill: var(--color-light-100);
+  }
+}
+
+.deleteButton {
+  position: absolute;
+  top: 15px;
+  right: 5px;
+
+  width: 12px;
+  height: 12px;
+
+  & svg {
+    width: 12px;
+    height: 12px;
+
+    opacity: 0.8;
+    background: var(--color-dark-500);
+    border-radius: 2px;
+
     fill: var(--color-light-100);
   }
 }
