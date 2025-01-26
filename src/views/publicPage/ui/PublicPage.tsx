@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 
+import { useGetUsersQuery } from '@/app/api/inctagramApi'
 import { useGetAllPostsQuery } from '@/app/api/posts/postsApi'
 import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
@@ -11,16 +12,27 @@ import { formatDistanceToNow } from 'date-fns'
 import { enGB, ru } from 'date-fns/locale'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { Navigation, Pagination } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+
+// import 'swiper/css'
+// import 'swiper/css/navigation'
+// import 'swiper/css/pagination'
+
+import 'swiper/swiper-bundle.css'
 
 import s from './publicPage.module.scss'
 
-const numberOfUsers: string = '9213'
-
-//TODO: add carousel https://ui.shadcn.com/docs/components/carousel
-//TODO: numberOfUsers
-
 const PublicPage: React.FC = () => {
   const t = useTranslations<'PublicPage'>('PublicPage')
+  const {
+    data: users,
+    error: usersError,
+    isLoading: isUsersLoading,
+  } = useGetUsersQuery(undefined, {
+    pollingInterval: 60000,
+  })
+  const numberOfUsers: string = users?.length?.toString() || '0'
 
   const {
     data: posts,
@@ -69,8 +81,8 @@ const PublicPage: React.FC = () => {
         <div className={s.cards}>
           {posts.map((card, i) => (
             <div className={s.cardItem} key={'cardItem' + i} onClick={() => handlePostClick(card)}>
-              <div className={s.cardItemImage}>
-                <Image
+              <div className={s.cardItemImage} onClick={e => e.stopPropagation()}>
+                {/* <Image
                   alt={'Image1'}
                   fill
                   priority
@@ -79,7 +91,26 @@ const PublicPage: React.FC = () => {
                   style={{
                     objectFit: 'cover',
                   }}
-                />
+                /> */}
+                <Swiper
+                  modules={[Navigation, Pagination]}
+                  navigation
+                  pagination={{ clickable: true }}
+                  slidesPerView={1}
+                  spaceBetween={20}
+                >
+                  {card.photos.map(photo => (
+                    <SwiperSlide key={photo.id}>
+                      <Image
+                        alt={`Photo ${photo.id}`}
+                        height={240}
+                        src={photo.url}
+                        style={{ objectFit: 'cover' }}
+                        width={234}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </div>
               <div className={s.cardItemAvatarTitle}>
                 <Avatar>
@@ -101,7 +132,10 @@ const PublicPage: React.FC = () => {
                       as={'span'}
                       className={s.showMoreLess}
                       color={'link'}
-                      onClick={toggleLines(i)}
+                      onClick={e => {
+                        e.stopPropagation()
+                        toggleLines(i)(e)
+                      }}
                       variant={'regularLink'}
                     >
                       {t('Show less')}
@@ -115,7 +149,10 @@ const PublicPage: React.FC = () => {
                         as={'span'}
                         className={s.showMoreLess}
                         color={'link'}
-                        onClick={toggleLines(i)}
+                        onClick={e => {
+                          e.stopPropagation()
+                          toggleLines(i)(e)
+                        }}
                         variant={'regularLink'}
                       >
                         {t('Show more')}
