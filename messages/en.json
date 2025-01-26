@@ -81,7 +81,8 @@
   "PublicPage": {
     "Registered users:": "Registered users:",
     "Show less": "Show less",
-    "Show more": "Show more"
+    "Show more": "Show more",
+    "locale": "en"
   },
   "StatisticPage": {
     "Statistics": "Statistics",

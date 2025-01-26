@@ -81,7 +81,8 @@
   "PublicPage": {
     "Registered users:": "Зарегистрировано пользователей:",
     "Show less": "Свернуть",
-    "Show more": "Развернуть"
+    "Show more": "Развернуть",
+    "locale": "ru"
   },
   "HomePage": {
     "View All Comments": "Показать все комментарии",
