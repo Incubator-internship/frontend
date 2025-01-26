@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react'
 
 import { useGetAllPostsQuery } from '@/app/api/posts/postsApi'
+import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Typography } from '@/shared/ui/typography'
+import { PublicPageModal } from '@/views/publicPageModal/ui/PublicPageModal'
 import { ShowMore, type ShowMoreRef, type ShowMoreToggleLinesFn } from '@re-dev/react-truncate'
 import { formatDistanceToNow } from 'date-fns'
 import { enGB, ru } from 'date-fns/locale'
@@ -33,6 +35,19 @@ const PublicPage: React.FC = () => {
     refs.current[index]?.toggleLines(e)
   }
 
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedPost, setSelectedPost] = useState<PostsDataByPostId | null>(null)
+
+  const handlePostClick = (post: PostsDataByPostId) => {
+    setSelectedPost(post)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedPost(null)
+  }
+
   return (
     <div className={s.wrapper}>
       <div className={s.registeredUsers}>
@@ -53,7 +68,7 @@ const PublicPage: React.FC = () => {
       {posts && (
         <div className={s.cards}>
           {posts.map((card, i) => (
-            <div className={s.cardItem} key={'cardItem' + i}>
+            <div className={s.cardItem} key={'cardItem' + i} onClick={() => handlePostClick(card)}>
               <div className={s.cardItemImage}>
                 <Image
                   alt={'Image1'}
@@ -118,6 +133,7 @@ const PublicPage: React.FC = () => {
           ))}
         </div>
       )}
+      <PublicPageModal isOpen={isModalOpen} onClose={closeModal} post1={selectedPost} />
     </div>
   )
 }
