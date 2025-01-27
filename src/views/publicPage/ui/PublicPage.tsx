@@ -15,21 +15,13 @@ import { useTranslations } from 'next-intl'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-// import 'swiper/css'
-// import 'swiper/css/navigation'
-// import 'swiper/css/pagination'
-
 import 'swiper/swiper-bundle.css'
 
 import s from './publicPage.module.scss'
 
 const PublicPage: React.FC = () => {
   const t = useTranslations<'PublicPage'>('PublicPage')
-  const {
-    data: users,
-    error: usersError,
-    isLoading: isUsersLoading,
-  } = useGetUsersQuery(undefined, {
+  const { data: users } = useGetUsersQuery(undefined, {
     pollingInterval: 60000,
   })
   const numberOfUsers: string = users?.length?.toString() || '0'
@@ -41,6 +33,7 @@ const PublicPage: React.FC = () => {
   } = useGetAllPostsQuery(undefined, {
     pollingInterval: 60000, // Update each 60sec
   })
+
   const refs = useRef<Array<ShowMoreRef | null>>([])
 
   const toggleLines: (index: number) => ShowMoreToggleLinesFn = index => e => {
@@ -82,16 +75,6 @@ const PublicPage: React.FC = () => {
           {posts.map((card, i) => (
             <div className={s.cardItem} key={'cardItem' + i} onClick={() => handlePostClick(card)}>
               <div className={s.cardItemImage} onClick={e => e.stopPropagation()}>
-                {/* <Image
-                  alt={'Image1'}
-                  fill
-                  priority
-                  sizes={'300px'}
-                  src={card.photos[0].url}
-                  style={{
-                    objectFit: 'cover',
-                  }}
-                /> */}
                 <Swiper
                   modules={[Navigation, Pagination]}
                   navigation
@@ -104,6 +87,7 @@ const PublicPage: React.FC = () => {
                       <Image
                         alt={`Photo ${photo.id}`}
                         height={240}
+                        priority
                         src={photo.url}
                         style={{ objectFit: 'cover' }}
                         width={234}
