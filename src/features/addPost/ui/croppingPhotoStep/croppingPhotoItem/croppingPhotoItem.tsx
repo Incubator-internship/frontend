@@ -11,6 +11,8 @@ import { getCroppedImg } from '@/shared/utils/cropImageUtils'
 
 import s from './croppingPhotoItem.module.scss'
 
+import { useCroppSettings } from './hooks/useCroppSettings'
+
 type Props = {
   image: FileWithPreview //удалить, оставить только images, когда реализуем выбор imag, которую будем кропать по id
   images: FileWithPreview[]
@@ -18,16 +20,18 @@ type Props = {
 }
 
 export const CroppingPhotoItem = ({ image, images, setImageWithPreview }: Props) => {
-  const [crop, setCrop] = useState({ x: 0, y: 0 })
-  const [zoom, setZoom] = useState(1)
-  const [aspect, setAspect] = useState(1 / 1)
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
-  const [rotation, setRotation] = useState(0)
-  const imageId = useId()
-  // const [addedImages, setAddedImages] = useState<string[]>([])
+  const {
+    aspect,
+    crop,
+    croppedAreaPixels,
+    rotation,
+    setAspect,
+    setCrop,
+    setCroppedAreaPixels,
+    setZoom,
+    zoom,
+  } = useCroppSettings()
   const [showAddingWindow, setShowAddingWindow] = useState<boolean>(false)
-
-  // const dispatch = useAppDispatch()
 
   const onCropComplete = async (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
