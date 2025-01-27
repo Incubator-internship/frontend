@@ -3,6 +3,9 @@ import Cropper, { Area } from 'react-easy-crop'
 
 import { AddingWindow } from '@/features/addPost/ui/addingWindow/AddingWindow'
 import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
+import Crop11 from '@/shared/assets/icons/Crop11'
+import Crop45 from '@/shared/assets/icons/Crop45'
+import Crop169 from '@/shared/assets/icons/Crop169'
 import Cropping from '@/shared/assets/icons/Cropping'
 import ImageIcon from '@/shared/assets/icons/ImageIcon'
 import Scale from '@/shared/assets/icons/Scale'
@@ -26,6 +29,8 @@ export const CroppingPhotoItem = ({ image, images, setImageWithPreview }: Props)
   const imageId = useId()
   // const [addedImages, setAddedImages] = useState<string[]>([])
   const [showAddingWindow, setShowAddingWindow] = useState<boolean>(false)
+  const [showScaleWindow, setShowScaleWindow] = useState<boolean>(false)
+  const [showCroppingWindow, setShowCroppingWindow] = useState<boolean>(false)
 
   // const dispatch = useAppDispatch()
 
@@ -76,10 +81,13 @@ export const CroppingPhotoItem = ({ image, images, setImageWithPreview }: Props)
       <div>
         <div className={s.imagesSettings}>
           <div className={s.imagesSettingsWrapp}>
-            <div className={s.settingsBtn}>
+            <div
+              className={s.settingsBtn}
+              onClick={() => setShowCroppingWindow(!showCroppingWindow)}
+            >
               <Cropping />
             </div>
-            <div className={s.settingsBtn}>
+            <div className={s.settingsBtn} onClick={() => setShowScaleWindow(!showScaleWindow)}>
               <Scale />
             </div>
           </div>
@@ -87,31 +95,38 @@ export const CroppingPhotoItem = ({ image, images, setImageWithPreview }: Props)
             <ImageIcon height={24} width={24} />
           </div>
         </div>
-        <div className={s.settingsScale}>
-          <input
-            aria-labelledby={'Zoom'}
-            className={'zoom-range'}
-            max={3}
-            min={1}
-            onChange={e => {
-              setZoom(+e.target.value)
-            }}
-            step={0.1}
-            type={'range'}
-            value={zoom}
-          />
-        </div>
-        <div className={s.settingsCrop}>
-          <div className={s.settingsCropBtn} onClick={() => setAspect(1 / 1)}>
-            1/1
+        {showScaleWindow && (
+          <div className={s.settingsScale}>
+            <input
+              aria-labelledby={'Zoom'}
+              className={'zoom-range'}
+              max={3}
+              min={1}
+              onChange={e => {
+                setZoom(+e.target.value)
+              }}
+              step={0.1}
+              type={'range'}
+              value={zoom}
+            />
           </div>
-          <div className={s.settingsCropBtn} onClick={() => setAspect(4 / 5)}>
-            4/5
+        )}
+        {showCroppingWindow && (
+          <div className={s.settingsCrop}>
+            <div className={s.settingsCropBtn} onClick={() => setAspect(1 / 1)}>
+              1/1
+              <Crop11 />
+            </div>
+            <div className={s.settingsCropBtn} onClick={() => setAspect(4 / 5)}>
+              4/5
+              <Crop45 />
+            </div>
+            <div className={s.settingsCropBtn} onClick={() => setAspect(16 / 9)}>
+              16/9
+              <Crop169 />
+            </div>
           </div>
-          <div className={s.settingsCropBtn} onClick={() => setAspect(16 / 9)}>
-            16/9
-          </div>
-        </div>
+        )}
         <Button className={s.BtbBtn} onClick={saveCroppedImage}>
           save
         </Button>
