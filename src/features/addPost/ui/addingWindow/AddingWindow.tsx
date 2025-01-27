@@ -40,7 +40,7 @@ export function AddingWindow({ images, setImageWithPreview }: Props) {
     <div className={s.addingWindow}>
       <div className={s.addedImages}>
         {images.map((img, index) => (
-          <div className={s.addedImage} key={img.id}>
+          <div className={s.addedImage} key={`${img.id}_${index}`}>
             <img alt={`Added ${index + 1}`} src={img.preview} />
           </div>
         ))}

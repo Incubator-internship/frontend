@@ -16,11 +16,11 @@ export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
   return (
     <div className={s.modalWrapp}>
       <div className={s.items}>
-        {images.map(image => (
+        {images.map((image, index) => (
           <CroppingPhotoItem
             image={image}
             images={images}
-            key={image.id}
+            key={`${image.id}_${index}`}
             setImageWithPreview={setImageWithPreview}
           />
         ))}
