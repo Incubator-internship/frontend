@@ -83,6 +83,11 @@
     "Show less": "Свернуть",
     "Show more": "Развернуть"
   },
+  "AddPostModal": {
+    "MainModalTitle": "Добавить фото",
+    "MainModalBtn1": "Выбрать с компьютера",
+    "MainModalBtn2": "Открыть черновик"
+  },
   "HomePage": {
     "View All Comments": "Показать все комментарии",
     "Publish": "Опубликовать",

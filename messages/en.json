@@ -89,7 +89,15 @@
     "Comments": "Comments",
     "Publication views": "Publication views",
     "Week": "Week",
-    "Month": "Month"
+    "Month": "Month",
+    "Registered users:": "Registered users:",
+    "Show less": "Show less",
+    "Show more": "Show more"
+  },
+  "AddPostModal": {
+    "MainModalTitle": "Add Photo",
+    "MainModalBtn1": "Select from Computer",
+    "MainModalBtn2": "Open Draft"
   },
   "HomePage": {
     "View All Comments": "View All Comments",
