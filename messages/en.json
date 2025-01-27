@@ -79,8 +79,9 @@
     "Recaptcha": "Required reCAPTCHA"
   },
   "PublicPage": {
-
-    "Registered users:": "Registered users:"
+    "Registered users:": "Registered users:",
+    "Show less": "Show less",
+    "Show more": "Show more"
   },
   "StatisticPage": {
     "Statistics": "Statistics",
@@ -97,5 +98,18 @@
     "MainModalTitle": "Add Photo",
     "MainModalBtn1": "Select from Computer",
     "MainModalBtn2": "Open Draft"
+  },
+  "HomePage": {
+    "View All Comments": "View All Comments",
+    "Publish": "Publish",
+    "year ago": "{count} year ago",
+    "years ago": "{count} years ago",
+    "day ago": "{count} day ago",
+    "days ago": "{count} days ago",
+    "hour ago": "{count} hour ago",
+    "hours ago": "{count} hours ago",
+    "minute ago": "{count} minute ago",
+    "minutes ago": "{count} minutes ago",
+    "Add a Comment": "Add a Comment..."
   }
 }
