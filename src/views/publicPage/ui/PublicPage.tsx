@@ -16,6 +16,8 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/swiper-bundle.css'
+//NOTE: node_modules\swiper\swiper-bundle.css rewriting
+import './publicPage.scss'
 
 import s from './publicPage.module.scss'
 
