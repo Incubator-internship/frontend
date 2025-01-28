@@ -81,7 +81,8 @@
   "PublicPage": {
     "Registered users:": "Зарегистрировано пользователей:",
     "Show less": "Свернуть",
-    "Show more": "Развернуть"
+    "Show more": "Развернуть",
+    "locale": "ru"
   },
   "AddPostModal": {
     "MainModalTitle": "Добавить фото",
