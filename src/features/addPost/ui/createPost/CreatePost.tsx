@@ -6,6 +6,7 @@ import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/cropp
 import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
 import { Modal } from '@/shared/ui/modal'
 import { Typography } from '@/shared/ui/typography'
+import { use } from 'ast-types'
 import { extend } from 'dayjs'
 
 type Props = {
@@ -31,11 +32,14 @@ export default function CreatePost({
       setIsOpenMainPostModal(false)
       setIsOpenStepsPostModal(true)
     }
-    if (imageWithPreview.length === 0) {
+  }, [imageWithPreview, setIsOpenMainPostModal, setIsOpenStepsPostModal])
+
+  useEffect(() => {
+    if (imageWithPreview.length === 0 && isOpenStepsPostModal) {
       setIsOpenMainPostModal(true)
       setIsOpenStepsPostModal(false)
     }
-  }, [imageWithPreview, setIsOpenMainPostModal, setIsOpenStepsPostModal])
+  }, [imageWithPreview, isOpenStepsPostModal, setIsOpenMainPostModal, setIsOpenStepsPostModal])
 
   return (
     <div>

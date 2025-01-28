@@ -4,6 +4,7 @@ import { MAX_IMAGES } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMain
 import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
 import CloseIcon from '@/shared/assets/icons/CloseIcon'
 import PlusCircleOutlineIcon from '@/shared/assets/icons/PlusCircleOutlineIcon'
+import Image from 'next/image'
 import { v4 as uuidv4 } from 'uuid'
 
 import s from './addingWindow.module.scss'
@@ -41,11 +42,11 @@ export function AddingWindow({ images, setImageWithPreview }: Props) {
   }
 
   return (
-    <div className={s.addingWindow}>
+    <div className={`${s.addingWindow} ${images.length > 0 ? s.visible : ''}`}>
       <div className={s.addedImages}>
         {images.map((img, index) => (
           <div className={s.addedImage} key={img.id}>
-            <img alt={`Added ${index + 1}`} src={img.preview} />
+            <Image alt={`Added ${index + 1}`} height={82} src={img.preview} width={80} />
             <button className={s.deleteButton} onClick={() => deleteImage(img.id)} type={'button'}>
               <CloseIcon />
             </button>

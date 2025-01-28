@@ -11,8 +11,6 @@ type Props = {
 }
 
 export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
-  console.log('croppingImages', images)
-
   return (
     <div className={s.modalWrapp}>
       <div className={s.items}>

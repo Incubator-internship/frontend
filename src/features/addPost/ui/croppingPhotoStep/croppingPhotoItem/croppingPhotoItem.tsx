@@ -49,14 +49,13 @@ export const CroppingPhotoItem = ({ image, images, setImageWithPreview }: Props)
       }
 
       setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
-
-      console.log('donee', { croppedImage })
     } catch (e) {
       console.error(e)
     }
   }
 
   const handleShowAddingWindow = () => {
+    console.log('click on the icon')
     setShowAddingWindow(!showAddingWindow)
   }
 
