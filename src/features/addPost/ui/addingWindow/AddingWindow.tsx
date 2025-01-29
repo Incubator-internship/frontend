@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, memo, useEffect, useId } from 'react'
+import React, { ChangeEvent, Dispatch, SetStateAction, memo, useEffect, useId } from 'react'
 
 import { MAX_IMAGES } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
@@ -14,11 +14,7 @@ type Props = {
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
 }
 
-export const AddingWindow = memo(function AddingWindow({ images, setImageWithPreview }: Props) {
-  useEffect(() => {
-    console.log('mounted Adding Window')
-  }, [])
-
+export function AddingWindow({ images, setImageWithPreview }: Props) {
   const addImages = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
       return
@@ -72,4 +68,4 @@ export const AddingWindow = memo(function AddingWindow({ images, setImageWithPre
       </div>
     </div>
   )
-})
+}
