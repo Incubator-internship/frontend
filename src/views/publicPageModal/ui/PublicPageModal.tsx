@@ -1,8 +1,8 @@
 'use client'
 
 import { useGetPostsIdQuery } from '@/app/api/posts/postsApi'
-import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
 import Close from '@/shared/assets/icons/Close'
+import { skipToken } from '@reduxjs/toolkit/query'
 
 import s from './publicPageModal.module.scss'
 
@@ -11,11 +11,11 @@ import { ModalComments } from '../../../shared/ui/modalComments'
 export type PublicPageModalProps = {
   isOpen?: boolean
   onClose?: () => void
-  post1?: PostsDataByPostId | null
+  postId: null | number
 }
 
-export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageModalProps) => {
-  const { data, isError, isLoading } = useGetPostsIdQuery(3)
+export const PublicPageModal = ({ isOpen = true, onClose, postId }: PublicPageModalProps) => {
+  const { data, isError, isLoading } = useGetPostsIdQuery(postId !== null ? postId : skipToken)
 
   if (!isOpen) {
     return null

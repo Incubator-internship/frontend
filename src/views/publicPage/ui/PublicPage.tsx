@@ -43,10 +43,10 @@ const PublicPage: React.FC = () => {
   }
 
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedPost, setSelectedPost] = useState<PostsDataByPostId | null>(null)
+  const [selectedPost, setSelectedPost] = useState<null | number>(null)
 
   const handlePostClick = (post: PostsDataByPostId) => {
-    setSelectedPost(post)
+    setSelectedPost(post.id)
     setIsModalOpen(true)
   }
 
@@ -156,7 +156,7 @@ const PublicPage: React.FC = () => {
           ))}
         </div>
       )}
-      <PublicPageModal isOpen={isModalOpen} onClose={closeModal} post1={selectedPost} />
+      <PublicPageModal isOpen={isModalOpen} onClose={closeModal} postId={selectedPost} />
     </div>
   )
 }
