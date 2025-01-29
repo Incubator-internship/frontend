@@ -25,8 +25,6 @@ export default function CreatePost({
 }: Props) {
   const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[]>([])
 
-  // const files = useAppSelector(state => state.post.images)
-
   useEffect(() => {
     if (imageWithPreview?.length) {
       setIsOpenMainPostModal(false)
@@ -41,6 +39,13 @@ export default function CreatePost({
     }
   }, [imageWithPreview, isOpenStepsPostModal, setIsOpenMainPostModal, setIsOpenStepsPostModal])
 
+  const onSaveCroppedImage = (newImgWithPreview: FileWithPreview) => {
+    setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
+  }
+  const onCroppStep = () => {
+    ;() => onSaveCroppedImage
+  }
+
   return (
     <div>
       <Modal
@@ -54,10 +59,12 @@ export default function CreatePost({
         isOpen={isOpenStepsPostModal}
         isStepMode
         onClose={() => setIsOpenStepsPostModal(false)}
+        onNext={onCroppStep}
         steps={[
           <CroppingPhotoStep
             images={imageWithPreview}
             key={1}
+            onSaveCroppedImage={onSaveCroppedImage}
             setImageWithPreview={setImageWithPreview}
           />,
           <FiltersPhotoStep images={imageWithPreview} key={2} />,

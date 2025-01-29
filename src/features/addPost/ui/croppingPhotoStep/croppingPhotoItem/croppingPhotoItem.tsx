@@ -14,44 +14,43 @@ import s from './croppingPhotoItem.module.scss'
 type Props = {
   image: FileWithPreview //удалить, оставить только images, когда реализуем выбор imag, которую будем кропать по id
   images: FileWithPreview[]
+  onSaveCroppedImage: (newImgWithPreview: FileWithPreview) => void
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
 }
 
-export const CroppingPhotoItem = ({ image, images, setImageWithPreview }: Props) => {
+export const CroppingPhotoItem = ({
+  image,
+  images,
+  onSaveCroppedImage,
+  setImageWithPreview,
+}: Props) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const [aspect, setAspect] = useState(1 / 1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
   const [rotation, setRotation] = useState(0)
-  const imageId = useId()
-  // const [addedImages, setAddedImages] = useState<string[]>([])
   const [showAddingWindow, setShowAddingWindow] = useState<boolean>(false)
-
-  // const dispatch = useAppDispatch()
 
   const onCropComplete = async (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
-  }
+    // try {
+    //   const croppedImage = await getCroppedImg(
+    //     image.preview as string,
+    //     croppedAreaPixels as Area,
+    //     rotation
+    //   )
+    //   const file = new File([croppedImage as BlobPart], 'name')
 
-  const saveCroppedImage = async () => {
-    try {
-      const croppedImage = await getCroppedImg(
-        image.preview as string,
-        croppedAreaPixels as Area,
-        rotation
-      )
-      const file = new File([croppedImage as BlobPart], 'name')
+    //   const newImgWithPreview: FileWithPreview = {
+    //     ...file,
+    //     id: image.id,
+    //     preview: URL.createObjectURL(file),
+    //   }
 
-      const newImgWithPreview: FileWithPreview = {
-        ...file,
-        id: image.id,
-        preview: URL.createObjectURL(file),
-      }
-
-      setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
-    } catch (e) {
-      console.error(e)
-    }
+    //   onSaveCroppedImage(newImgWithPreview)
+    // } catch (e) {
+    //   console.error(e)
+    // }
   }
 
   const handleShowAddingWindow = () => {
@@ -111,9 +110,6 @@ export const CroppingPhotoItem = ({ image, images, setImageWithPreview }: Props)
             16/9
           </div>
         </div>
-        <Button className={s.BtbBtn} onClick={saveCroppedImage}>
-          save
-        </Button>
 
         {showAddingWindow && (
           <AddingWindow images={images} setImageWithPreview={setImageWithPreview} />

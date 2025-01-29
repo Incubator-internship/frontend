@@ -7,10 +7,11 @@ import s from './croppingPhotoStep.module.scss'
 
 type Props = {
   images: FileWithPreview[]
+  onSaveCroppedImage: (newImgWithPreview: FileWithPreview) => void
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
 }
 
-export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
+export const CroppingPhotoStep = ({ images, onSaveCroppedImage, setImageWithPreview }: Props) => {
   return (
     <div className={s.modalWrapp}>
       <div className={s.items}>
@@ -19,10 +20,12 @@ export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
             image={image}
             images={images}
             key={image.id}
+            onSaveCroppedImage={onSaveCroppedImage}
             setImageWithPreview={setImageWithPreview}
           />
         ))}
       </div>
+      <button type={'button'}>123</button>
     </div>
   )
 }
