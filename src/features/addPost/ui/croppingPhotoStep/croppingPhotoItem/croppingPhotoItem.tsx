@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useId, useState } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useId, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
 import { AddingWindow } from '@/features/addPost/ui/addingWindow/AddingWindow'
@@ -29,6 +29,10 @@ export const CroppingPhotoItem = ({ image, images, setImageWithPreview }: Props)
 
   // const dispatch = useAppDispatch()
 
+  useEffect(() => {
+    console.log('mounted croppingPhotoItem')
+  }, [])
+
   const onCropComplete = async (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
@@ -55,9 +59,12 @@ export const CroppingPhotoItem = ({ image, images, setImageWithPreview }: Props)
   }
 
   const handleShowAddingWindow = () => {
-    console.log('click on the icon')
-    setShowAddingWindow(!showAddingWindow)
+    setShowAddingWindow(prevState => !prevState)
   }
+
+  useEffect(() => {
+    console.log('showAddingWindow', showAddingWindow)
+  }, [showAddingWindow])
 
   return (
     <div>
