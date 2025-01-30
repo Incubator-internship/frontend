@@ -5,21 +5,46 @@ import { CroppingPhotoItem } from '@/features/addPost/ui/croppingPhotoStep/cropp
 
 import s from './croppingPhotoStep.module.scss'
 
+import { useCroppSettings } from './croppingPhotoItem/hooks/useCroppSettings'
+
 type Props = {
   images: FileWithPreview[]
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
 }
 
 export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
+  const {
+    aspect,
+    crop,
+    croppedAreaPixels,
+    rotation,
+    setAspect,
+    setCrop,
+    setCroppedAreaPixels,
+    setZoom,
+    zoom,
+  } = useCroppSettings()
+
+  console.log('croppingImages', images)
+
   return (
     <div className={s.modalWrapp}>
       <div className={s.items}>
-        {images.map(image => (
+        {images.map((image, index) => (
           <CroppingPhotoItem
+            aspect={aspect}
+            crop={crop}
+            croppedAreaPixels={croppedAreaPixels}
             image={image}
             images={images}
-            key={image.id}
+            key={`${image.id}_${index}`}
+            rotation={rotation}
+            setAspect={setAspect}
+            setCrop={setCrop}
+            setCroppedAreaPixels={setCroppedAreaPixels}
             setImageWithPreview={setImageWithPreview}
+            setZoom={setZoom}
+            zoom={zoom}
           />
         ))}
       </div>
