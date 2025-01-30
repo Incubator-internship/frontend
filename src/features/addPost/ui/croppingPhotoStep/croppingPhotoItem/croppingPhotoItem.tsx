@@ -37,7 +37,13 @@ export const CroppingPhotoItem = ({ image, images, setImageWithPreview, ...rest 
       )
       const file = new File([croppedImage as BlobPart], 'name')
 
-      // onSaveCroppedImage(newImgWithPreview)
+      const newImgWithPreview: FileWithPreview = {
+        ...file,
+        id: image.id,
+        preview: URL.createObjectURL(file),
+      }
+
+      setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
     } catch (e) {
       console.error(e)
     }

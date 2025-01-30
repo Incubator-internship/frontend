@@ -9,10 +9,8 @@ import { useCroppSettings } from './croppingPhotoItem/hooks/useCroppSettings'
 
 type Props = {
   images: FileWithPreview[]
-  onSaveCroppedImage: (newImgWithPreview: FileWithPreview) => void
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
 }
-
 
 export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
   const {
@@ -50,7 +48,6 @@ export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
           />
         ))}
       </div>
-      <button type={'button'}>123</button>
     </div>
   )
 }
