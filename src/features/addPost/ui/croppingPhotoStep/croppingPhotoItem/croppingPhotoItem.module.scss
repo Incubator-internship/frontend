@@ -40,7 +40,7 @@
 
   padding: 10px;
 
-  background: var(--color-dark-500);
+  background: rgb(23 23 23 / 80%);
   border-radius: 2px;
 }
 
@@ -49,14 +49,22 @@
   bottom: 50px;
   left: 0;
 
+  min-width: 150px;
   padding: 10px;
 
-  background: var(--color-dark-500);
-  border-radius: 2px;
+  background: rgb(23 23 23 / 80%);
+  border-radius: 4px;
 }
 
 .settingsCropBtn {
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
 }
 
 .BtbBtn {

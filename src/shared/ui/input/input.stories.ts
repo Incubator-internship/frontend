@@ -14,6 +14,7 @@ const meta = {
     value: { control: 'text' },
   },
   component: Input,
+  tags: ['autodocs'],
   title: 'Components/Input',
 } satisfies Meta<typeof Input>
 

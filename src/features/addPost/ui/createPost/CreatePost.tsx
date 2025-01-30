@@ -1,13 +1,15 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { FileWithPath } from 'react-dropzone'
+import { Area } from 'react-easy-crop'
 
 import { AddPhotoMainModal } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoStep'
 import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
 import { Modal } from '@/shared/ui/modal'
 import { Typography } from '@/shared/ui/typography'
-import { use } from 'ast-types'
-import { extend } from 'dayjs'
+import { getCroppedImg } from '@/shared/utils/cropImageUtils'
+
+import { useCroppSettings } from '../croppingPhotoStep/croppingPhotoItem/hooks/useCroppSettings'
 
 type Props = {
   isOpenMainPostModal: boolean
@@ -37,7 +39,17 @@ export default function CreatePost({
       setIsOpenMainPostModal(true)
       setIsOpenStepsPostModal(false)
     }
-  }, [imageWithPreview, isOpenStepsPostModal, setIsOpenMainPostModal, setIsOpenStepsPostModal])
+  }, [imageWithPreview, isOpenStepsPostModal])
+
+  // useEffect(() => {
+  //   if (imageWithPreview.length > 0) {
+  //     setIsOpenMainPostModal(false)
+  //     setIsOpenStepsPostModal(true)
+  //   } else if (isOpenStepsPostModal) {
+  //     setIsOpenMainPostModal(true)
+  //     setIsOpenStepsPostModal(false)
+  //   }
+  // }, [imageWithPreview, isOpenStepsPostModal])
 
   const onSaveCroppedImage = (newImgWithPreview: FileWithPreview) => {
     setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])

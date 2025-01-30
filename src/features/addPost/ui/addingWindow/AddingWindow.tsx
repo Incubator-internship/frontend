@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useId } from 'react'
+import React, { ChangeEvent, Dispatch, SetStateAction, memo, useEffect, useId } from 'react'
 
 import { MAX_IMAGES } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
@@ -42,7 +42,7 @@ export function AddingWindow({ images, setImageWithPreview }: Props) {
   }
 
   return (
-    <div className={`${s.addingWindow} ${images.length > 0 ? s.visible : ''}`}>
+    <div className={s.addingWindow}>
       <div className={s.addedImages}>
         {images.map((img, index) => (
           <div className={s.addedImage} key={img.id}>

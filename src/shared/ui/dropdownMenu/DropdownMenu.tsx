@@ -3,12 +3,12 @@ import React, { ReactNode } from 'react'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 
-import styles from './dropdownMenu.module.css'
+import styles from './dropdownMenu.module.scss'
 
 type Item = {
   icon: ReactNode
   label: string
-  onSelect: (value: string) => void
+  onSelect: (event: Event) => void
 }
 
 type Props = {
@@ -28,7 +28,7 @@ const DropdownMenuDemo = ({ content }: Props) => {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button aria-label={'Customise options'} className={styles.IconButton}>
+        <button aria-label={'Customise options'} className={styles.IconButton} type={'button'}>
           <DotsHorizontalIcon height={25} width={25} />
         </button>
       </DropdownMenu.Trigger>

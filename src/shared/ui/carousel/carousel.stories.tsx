@@ -2,13 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
+import { Photos } from '@/app/api/posts/postsApi.types'
 import image1 from '@/shared/assets/images/publicImages/image1.webp'
 import image2 from '@/shared/assets/images/publicImages/image2.webp'
 import image3 from '@/shared/assets/images/publicImages/image3.webp'
 import image4 from '@/shared/assets/images/publicImages/image4.webp'
-import photo3 from '@/shared/assets/images/userProfile/photo3.webp'
 
-import { PostType } from '../../../views/publicPageModal/DataArray'
 import { Carousel } from './Carousel'
 
 const meta: Meta<typeof Carousel> = {
@@ -24,71 +23,39 @@ export default meta
 
 type Story = StoryObj<typeof Carousel>
 
-const Post: PostType = {
-  comments: [],
-  dataPost: {
-    imgProfile: photo3.src,
-    urlProfile: 'Profile 1',
-  },
-  datePost: '2024-12-23',
-  id: '1',
-  imagePost: [
-    { imgPost: image1.src },
-    { imgPost: image2.src },
-    { imgPost: image3.src },
-    { imgPost: image4.src },
-  ],
-  likesPost: [],
-}
-
-export const Default: Story = {
+export const DefaultWithPhotos: Story = {
   render: () => {
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const photos: Photos[] = [
+      { id: 1, postId: 1, url: image1.src },
+      { id: 2, postId: 1, url: image2.src },
+      { id: 3, postId: 1, url: image3.src },
+      { id: 4, postId: 1, url: image4.src },
+    ]
 
-    const nextImage = () => {
-      setCurrentIndex(prevIndex => (prevIndex + 1) % Post.imagePost.length)
-    }
-
-    const prevImage = () => {
-      setCurrentIndex(prevIndex => (prevIndex - 1 + Post.imagePost.length) % Post.imagePost.length)
-    }
-
-    return (
-      <Carousel
-        currentImageIndex={currentIndex}
-        nextImage={nextImage}
-        post={Post}
-        prevImage={prevImage}
-        setCurrentIndex={setCurrentIndex}
-      />
-    )
+    return <Carousel photos={photos} />
   },
 }
-export const SingleImage: Story = {
+
+export const DefaultWithArrayStrings: Story = {
   render: () => {
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const photos: string[] = [image1.src, image2.src, image3.src, image4.src]
 
-    const nextImage = () => {
-      setCurrentIndex(prev => (prev + 1) % Post.imagePost.length)
-    }
+    return <Carousel photos={photos} />
+  },
+}
 
-    const prevImage = () => {
-      setCurrentIndex(prev => (prev - 1 + Post.imagePost.length) % Post.imagePost.length)
-    }
+export const SingleImageWithArrayPhotos: Story = {
+  render: () => {
+    const singlePhoto: Photos[] = [{ id: 1, postId: 1, url: image1.src }]
 
-    const singleImagePost = {
-      ...Post,
-      imagePost: [{ imgPost: image1.src }],
-    }
+    return <Carousel photos={singlePhoto} />
+  },
+}
 
-    return (
-      <Carousel
-        currentImageIndex={currentIndex}
-        nextImage={nextImage}
-        post={singleImagePost}
-        prevImage={prevImage}
-        setCurrentIndex={setCurrentIndex}
-      />
-    )
+export const SingleImageWithStrings: Story = {
+  render: () => {
+    const singlePhoto: string[] = [image1.src]
+
+    return <Carousel photos={singlePhoto} />
   },
 }
