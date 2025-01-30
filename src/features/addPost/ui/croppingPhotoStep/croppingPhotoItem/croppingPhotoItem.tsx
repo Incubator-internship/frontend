@@ -1,4 +1,6 @@
+
 import { Dispatch, SetStateAction } from 'react'
+
 import Cropper, { Area } from 'react-easy-crop'
 
 import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
@@ -24,6 +26,7 @@ type Props = {
 }
 
 export const CroppingPhotoItem = ({ image, images, setImageWithPreview, ...rest }: Props) => {
+
   const onCropComplete = async (croppedArea: Area, croppedAreaPixels: Area) => {
     rest.setCroppedAreaPixels(croppedAreaPixels)
   }
@@ -44,8 +47,6 @@ export const CroppingPhotoItem = ({ image, images, setImageWithPreview, ...rest 
       }
 
       setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
-
-      console.log('donee', { croppedImage })
     } catch (e) {
       console.error(e)
     }

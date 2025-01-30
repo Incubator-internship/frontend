@@ -35,6 +35,23 @@ export default function CreatePost({
     }
   }, [imageWithPreview, setIsOpenMainPostModal, setIsOpenStepsPostModal])
 
+  useEffect(() => {
+    if (imageWithPreview.length === 0 && isOpenStepsPostModal) {
+      setIsOpenMainPostModal(true)
+      setIsOpenStepsPostModal(false)
+    }
+  }, [imageWithPreview, isOpenStepsPostModal])
+
+  // useEffect(() => {
+  //   if (imageWithPreview.length > 0) {
+  //     setIsOpenMainPostModal(false)
+  //     setIsOpenStepsPostModal(true)
+  //   } else if (isOpenStepsPostModal) {
+  //     setIsOpenMainPostModal(true)
+  //     setIsOpenStepsPostModal(false)
+  //   }
+  // }, [imageWithPreview, isOpenStepsPostModal])
+
   return (
     <div>
       <Modal
