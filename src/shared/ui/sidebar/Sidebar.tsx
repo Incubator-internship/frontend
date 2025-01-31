@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { useLogoutMutation } from '@/app/api/auth/authApi'
 import { logoutStore, selectAuthState } from '@/app/config/store/authSlice'
+import CreatePost from '@/features/addPost/ui/createPost/CreatePost'
 import { LogOutOutlineIcon } from '@/shared/assets/icons'
+import { Portal } from '@/shared/ui/portal/Portal'
 import clsx from 'clsx'
 import { usePathname, useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
@@ -33,11 +35,15 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
   const pathname = usePathname()
 
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false)
-  const [isCreateModalOpen, setCreateModalOpen] = useState(false)
+  // const [isCreateModalOpen, setCreateModalOpen] = useState(false)
+  const [isOpenMainPostModal, setIsOpenMainPostModal] = useState<boolean>(false)
+  const [isOpenStepsPostModal, setIsOpenStepsPostModal] = useState<boolean>(false)
+
   const [logout] = useLogoutMutation()
 
+  const toggleCreateModal = () => setIsOpenMainPostModal(prev => !prev)
   const toggleLogoutModal = () => setLogoutModalOpen(prev => !prev)
-  const toggleCreateModal = () => setCreateModalOpen(prev => !prev)
+  // const toggleCreateModal = () => setCreateModalOpen(prev => !prev)
 
   const handleLogoutConfirm = () => {
     logout()
@@ -81,14 +87,16 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
       </Modal>
 
       {/* Modal Create */}
-      <Modal isOpen={isCreateModalOpen} onClose={toggleCreateModal} title={'Create'}>
-        <Typography as={'p'} className={s.sidebarModalText} variant={'body1'}>
-          Форма для создания чего-то...
-        </Typography>
-        <Button className={s.sidebarModalButton} onClick={toggleCreateModal}>
-          Close
-        </Button>
-      </Modal>
+      {isOpenMainPostModal && (
+        <Portal containerId={'portal'}>
+          <CreatePost
+            isOpenMainPostModal={isOpenMainPostModal}
+            isOpenStepsPostModal={isOpenStepsPostModal}
+            setIsOpenMainPostModal={setIsOpenMainPostModal}
+            setIsOpenStepsPostModal={setIsOpenStepsPostModal}
+          />
+        </Portal>
+      )}
     </nav>
   )
 })
