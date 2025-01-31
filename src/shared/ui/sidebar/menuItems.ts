@@ -1,8 +1,12 @@
+import React from 'react'
+
 import {
   BookmarkIcon,
   BookmarkOutlineIcon,
   HomeIcon,
   HomeOutlineIcon,
+  LogOutIcon,
+  LogOutOutlineIcon,
   MessageCircleIcon,
   MessageCircleOutlineIcon,
   PersonIcon,
@@ -24,7 +28,10 @@ export type MenuItem = {
   path: string
 }
 
-export const getMenuItems = (toggleCreateModal: () => void): MenuItem[] => [
+export const getMenuItems = (
+  toggleCreateModal: () => void,
+  toggleLogoutModal: () => void
+): MenuItem[] => [
   { Icon: HomeIcon, IconOutline: HomeOutlineIcon, label: 'Home', path: '/home' },
   {
     Icon: PlusSquareIcon,
@@ -60,5 +67,12 @@ export const getMenuItems = (toggleCreateModal: () => void): MenuItem[] => [
     disabled: true,
     label: 'Favourites',
     path: '/favourites',
+  },
+  {
+    Icon: LogOutIcon,
+    IconOutline: LogOutOutlineIcon,
+    label: 'Log Out',
+    onClick: toggleLogoutModal,
+    path: '',
   },
 ]

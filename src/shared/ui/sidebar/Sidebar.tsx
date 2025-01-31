@@ -46,7 +46,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
     toggleLogoutModal()
   }
 
-  const menuItems = getMenuItems(toggleCreateModal) // Получаем меню с обработчиком
+  const menuItems = getMenuItems(toggleCreateModal, toggleLogoutModal)
 
   return (
     <nav className={clsx(s.nav, className)} ref={ref} {...rest}>
@@ -64,19 +64,8 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
           />
         ))}
       </div>
-      <div className={s.navItems}>
-        <Typography
-          as={'button'}
-          className={s.item}
-          onClick={toggleLogoutModal}
-          variant={'mediumText14'}
-        >
-          <LogOutOutlineIcon />
-          Log Out
-        </Typography>
-      </div>
 
-      {/* Modal для выхода */}
+      {/* Modal Logout */}
       <Modal isOpen={isLogoutModalOpen} onClose={toggleLogoutModal} title={'Log Out'}>
         <Typography as={'p'} className={s.sidebarModalText} variant={'body1'}>
           Are you really want to log out of your account “Epam@epam.com”?
@@ -91,7 +80,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
         </div>
       </Modal>
 
-      {/* Modal для создания */}
+      {/* Modal Create */}
       <Modal isOpen={isCreateModalOpen} onClose={toggleCreateModal} title={'Create'}>
         <Typography as={'p'} className={s.sidebarModalText} variant={'body1'}>
           Форма для создания чего-то...
