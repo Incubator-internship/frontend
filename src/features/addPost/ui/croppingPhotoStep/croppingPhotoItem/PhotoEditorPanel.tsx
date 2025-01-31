@@ -20,7 +20,13 @@ type Props = {
   zoom?: number
 }
 
-export const ImageCropp = ({ images, setAspect, setImageWithPreview, setZoom, zoom }: Props) => {
+export const PhotoEditorPanel = ({
+  images,
+  setAspect,
+  setImageWithPreview,
+  setZoom,
+  zoom,
+}: Props) => {
   const [showAddingWindow, setShowAddingWindow] = useState<boolean>(false)
   const [showScaleWindow, setShowScaleWindow] = useState<boolean>(false)
   const [showCroppingWindow, setShowCroppingWindow] = useState<boolean>(false)

@@ -39,17 +39,7 @@ export default function CreatePost({
       setIsOpenMainPostModal(true)
       setIsOpenStepsPostModal(false)
     }
-  }, [imageWithPreview, isOpenStepsPostModal])
-
-  // useEffect(() => {
-  //   if (imageWithPreview.length > 0) {
-  //     setIsOpenMainPostModal(false)
-  //     setIsOpenStepsPostModal(true)
-  //   } else if (isOpenStepsPostModal) {
-  //     setIsOpenMainPostModal(true)
-  //     setIsOpenStepsPostModal(false)
-  //   }
-  // }, [imageWithPreview, isOpenStepsPostModal])
+  }, [imageWithPreview, isOpenStepsPostModal, setIsOpenMainPostModal, setIsOpenStepsPostModal])
 
   const onSaveCroppedImage = (newImgWithPreview: FileWithPreview) => {
     setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
