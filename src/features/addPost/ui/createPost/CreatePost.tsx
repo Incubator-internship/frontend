@@ -26,7 +26,6 @@ export default function CreatePost({
   setIsOpenStepsPostModal,
 }: Props) {
   const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[]>([])
-  const { croppedAreaPixels, rotation } = useCroppSettings()
 
   useEffect(() => {
     if (imageWithPreview?.length) {
@@ -52,6 +51,13 @@ export default function CreatePost({
   //   }
   // }, [imageWithPreview, isOpenStepsPostModal])
 
+  const onSaveCroppedImage = (newImgWithPreview: FileWithPreview) => {
+    setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
+  }
+  const onCroppStep = () => {
+    ;() => onSaveCroppedImage
+  }
+
   return (
     <div>
       <Modal
@@ -65,10 +71,12 @@ export default function CreatePost({
         isOpen={isOpenStepsPostModal}
         isStepMode
         onClose={() => setIsOpenStepsPostModal(false)}
+        onNext={onCroppStep}
         steps={[
           <CroppingPhotoStep
             images={imageWithPreview}
             key={1}
+            onSaveCroppedImage={onSaveCroppedImage}
             setImageWithPreview={setImageWithPreview}
           />,
           <FiltersPhotoStep images={imageWithPreview} key={2} />,
