@@ -24,7 +24,6 @@ type Props = {
   // zoom?: number
 }
 
-
 export const CroppingPhotoItem = ({ image, setImageWithPreview }: Props) => {
   const {
     aspect,
@@ -76,13 +75,6 @@ export const CroppingPhotoItem = ({ image, setImageWithPreview }: Props) => {
           zoom={zoom}
         />
       </div>
-      {/*<ImageCropp*/}
-      {/*  images={images}*/}
-      {/*  setAspect={rest.setAspect}*/}
-      {/*  setImageWithPreview={setImageWithPreview}*/}
-      {/*  setZoom={rest.setZoom}*/}
-      {/*  zoom={rest.zoom}*/}
-      {/*/>*/}
     </div>
   )
 }

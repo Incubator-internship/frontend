@@ -16,12 +16,11 @@ type Props = {
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
 }
 
-export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
+export const CroppingPhotoStep = ({ images, onSaveCroppedImage, setImageWithPreview }: Props) => {
   const {
     aspect,
     crop,
     croppedAreaPixels,
-    rotation,
     setAspect,
     setCrop,
     setCroppedAreaPixels,
@@ -36,31 +35,18 @@ export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
       <div className={s.items}>
         <Carousel photos={photosForCarousel} />
         <PhotoEditorPanel
+          aspect={aspect}
+          crop={crop}
+          croppedAreaPixels={croppedAreaPixels}
           images={images}
           setAspect={setAspect}
+          setCrop={setCrop}
+          setCroppedAreaPixels={setCroppedAreaPixels}
           setImageWithPreview={setImageWithPreview}
           setZoom={setZoom}
           zoom={zoom}
         />
-        {/*{images.map((image, index) => (*/}
-        {/*  <CroppingPhotoItem*/}
-        {/*    aspect={aspect}*/}
-        {/*    crop={crop}*/}
-        {/*    croppedAreaPixels={croppedAreaPixels}*/}
-        {/*    image={image}*/}
-        {/*    images={images}*/}
-        {/*    key={`${image.id}_${index}`}*/}
-        {/*    rotation={rotation}*/}
-        {/*    setAspect={setAspect}*/}
-        {/*    setCrop={setCrop}*/}
-        {/*    setCroppedAreaPixels={setCroppedAreaPixels}*/}
-        {/*    setImageWithPreview={setImageWithPreview}*/}
-        {/*    setZoom={setZoom}*/}
-        {/*    zoom={zoom}*/}
-        {/*  />*/}
-        {/*))}*/}
       </div>
-      <button type={'button'}>123</button>
     </div>
   )
 }

@@ -24,7 +24,7 @@ export const Modal = ({
   isStepMode = false,
   onClose,
   onFinish,
-  onNext,
+  // onNext,
   steps = [],
   title,
 }: ModalProps) => {
@@ -41,7 +41,7 @@ export const Modal = ({
   }
 
   const goToNext = () => {
-    onNext?.()
+    // onNext?.()
     setStep(prevStep => Math.min(prevStep + 1, steps.length - 1))
   }
 

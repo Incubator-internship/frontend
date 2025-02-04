@@ -9,8 +9,6 @@ import { Modal } from '@/shared/ui/modal'
 import { Typography } from '@/shared/ui/typography'
 import { getCroppedImg } from '@/shared/utils/cropImageUtils'
 
-import { useCroppSettings } from '../croppingPhotoStep/croppingPhotoItem/hooks/useCroppSettings'
-
 type Props = {
   isOpenMainPostModal: boolean
   isOpenStepsPostModal: boolean
@@ -44,9 +42,6 @@ export default function CreatePost({
   const onSaveCroppedImage = (newImgWithPreview: FileWithPreview) => {
     setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
   }
-  const onCroppStep = () => {
-    ;() => onSaveCroppedImage
-  }
 
   return (
     <div>
@@ -61,7 +56,7 @@ export default function CreatePost({
         isOpen={isOpenStepsPostModal}
         isStepMode
         onClose={() => setIsOpenStepsPostModal(false)}
-        onNext={onCroppStep}
+        // onNext={onCroppStep}
         steps={[
           <CroppingPhotoStep
             images={imageWithPreview}
