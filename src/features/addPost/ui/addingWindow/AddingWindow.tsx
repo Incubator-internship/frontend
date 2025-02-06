@@ -1,8 +1,11 @@
-import { ChangeEvent, Dispatch, SetStateAction, useId } from 'react'
+import React, { ChangeEvent, Dispatch, SetStateAction, memo, useEffect, useId } from 'react'
 
 import { MAX_IMAGES } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
+import CloseIcon from '@/shared/assets/icons/CloseIcon'
 import PlusCircleOutlineIcon from '@/shared/assets/icons/PlusCircleOutlineIcon'
+import Image from 'next/image'
+import { v4 as uuidv4 } from 'uuid'
 
 import s from './addingWindow.module.scss'
 
@@ -12,8 +15,7 @@ type Props = {
 }
 
 export function AddingWindow({ images, setImageWithPreview }: Props) {
-  const imageId = useId()
-  const handleAddImages = (e: ChangeEvent<HTMLInputElement>) => {
+  const addImages = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
       return
     }
@@ -28,20 +30,26 @@ export function AddingWindow({ images, setImageWithPreview }: Props) {
     const newImages = selectedFiles.map(
       (file): FileWithPreview => ({
         ...file,
-        id: imageId,
+        id: uuidv4(),
         preview: URL.createObjectURL(file),
       })
     )
 
     setImageWithPreview(prevImages => [...prevImages, ...newImages])
   }
+  const deleteImage = (id: string) => {
+    setImageWithPreview(prevState => prevState.filter(image => image.id !== id))
+  }
 
   return (
     <div className={s.addingWindow}>
       <div className={s.addedImages}>
         {images.map((img, index) => (
-          <div className={s.addedImage} key={`${img.id}_${index}`}>
-            <img alt={`Added ${index + 1}`} src={img.preview} />
+          <div className={s.addedImage} key={img.id}>
+            <Image alt={`Added ${index + 1}`} height={82} src={img.preview} width={80} />
+            <button className={s.deleteButton} onClick={() => deleteImage(img.id)} type={'button'}>
+              <CloseIcon />
+            </button>
           </div>
         ))}
       </div>
@@ -50,7 +58,7 @@ export function AddingWindow({ images, setImageWithPreview }: Props) {
           accept={'image/jpeg, image/png'}
           id={'add-image-input'}
           multiple
-          onChange={handleAddImages}
+          onChange={addImages}
           style={{ display: 'none' }}
           type={'file'}
         />

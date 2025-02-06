@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useGetMeQuery } from '@/app/api/auth/authApi'
 import { useGetUsersQuery } from '@/app/api/inctagramApi'
