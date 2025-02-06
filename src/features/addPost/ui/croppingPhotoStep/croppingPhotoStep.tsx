@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 
 import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
 import { PhotoEditorPanel } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoItem/PhotoEditorPanel'
@@ -27,13 +27,21 @@ export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
     setZoom,
     zoom,
   } = useCroppSettings()
+  const [idCurrentImage, setIdCurrentImage] = useState<string>(images[0].id)
 
   const photosForCarousel = mapPhotosToCarouselItems(images)
 
   return (
     <div className={s.modalWrapp}>
       <div className={s.items}>
-        <Carousel photos={photosForCarousel} />
+        {images.length > 0 && (
+          <Carousel
+            idCurrentImage={idCurrentImage}
+            photos={photosForCarousel}
+            setIdCurrentImage={setIdCurrentImage}
+          />
+        )}
+
         <PhotoEditorPanel
           images={images}
           setAspect={setAspect}

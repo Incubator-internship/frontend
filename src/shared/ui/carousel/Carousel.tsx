@@ -8,10 +8,13 @@ import clsx from 'clsx'
 import s from './carousel.module.scss'
 
 type CarouselProps = {
-  photos: Photos[] | string[]
+  idCurrentImage: string
+  // photos: Photos[] | string[]
+  photos: Photos[]
+  setIdCurrentImage: (id: string) => void
 }
 
-export const Carousel = ({ photos }: CarouselProps) => {
+export const Carousel = ({ idCurrentImage, photos, setIdCurrentImage }: CarouselProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const goToSlide = (index: number) => {
@@ -23,22 +26,31 @@ export const Carousel = ({ photos }: CarouselProps) => {
 
     if (currentImageIndex < photosLength - 1) {
       setCurrentImageIndex(prevIndex => prevIndex + 1)
+      const idCurrentPhoto = photos[currentImageIndex].id
+
+      setIdCurrentImage(idCurrentPhoto)
     }
   }
 
   const prevImage = () => {
     if (currentImageIndex > 0) {
       setCurrentImageIndex(prevIndex => prevIndex - 1)
+      const idCurrentPhoto = photos[currentImageIndex].id
+
+      setIdCurrentImage(idCurrentPhoto)
     }
   }
 
-  const isImagesType = (photos: Photos[] | string[]): photos is string[] => {
-    return typeof photos[0] === 'string'
-  }
+  // const isImagesType = (photos: Photos[] | string[]): photos is string[] => {
+  //   return typeof photos[0] === 'string'
+  // }
 
-  const currentImageUrl = isImagesType(photos)
-    ? photos[currentImageIndex]
-    : photos[currentImageIndex].url
+  // const currentImageUrl = isImagesType(photos)
+  //   ? photos[currentImageIndex]
+  //   : photos[currentImageIndex].url
+
+  // const currentImageUrl = photos[currentImageIndex].url
+  const currentImageUrl = photos.find(photo => photo.id === idCurrentImage)?.url
 
   return (
     <div className={s.carousel}>
