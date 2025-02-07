@@ -27,7 +27,7 @@ export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
     setZoom,
     zoom,
   } = useCroppSettings()
-  const [idCurrentImage, setIdCurrentImage] = useState<string>('')
+  const [idCurrentImage, setIdCurrentImage] = useState<string>(images.length ? images[0].id : '')
 
   const photosForCarousel = mapPhotosToCarouselItems(images)
 
