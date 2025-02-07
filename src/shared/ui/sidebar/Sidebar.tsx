@@ -38,7 +38,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
   // const [isCreateModalOpen, setCreateModalOpen] = useState(false)
   const [isOpenMainPostModal, setIsOpenMainPostModal] = useState<boolean>(false)
   const [isOpenStepsPostModal, setIsOpenStepsPostModal] = useState<boolean>(false)
-
+  const openPostModal = isOpenMainPostModal || isOpenStepsPostModal
   const [logout] = useLogoutMutation()
 
   const toggleCreateModal = () => setIsOpenMainPostModal(prev => !prev)
@@ -87,7 +87,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
       </Modal>
 
       {/* Modal Create */}
-      {isOpenMainPostModal && (
+      {openPostModal && (
         <Portal containerId={'portal'}>
           <CreatePost
             isOpenMainPostModal={isOpenMainPostModal}
