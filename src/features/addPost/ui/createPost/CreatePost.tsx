@@ -25,6 +25,7 @@ export default function CreatePost({
   setIsOpenMainPostModal,
   setIsOpenStepsPostModal,
 }: Props) {
+  console.log('mounted CreatePost')
   const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[]>([])
   const { croppedAreaPixels, rotation } = useCroppSettings()
 
