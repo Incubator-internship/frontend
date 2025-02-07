@@ -8,8 +8,8 @@ import s from './profileData.module.scss'
 
 type ProfileDataProps = {
   className?: string
-  imageUrl: string
-  profileUrl: string
+  imageUrl: string | undefined
+  profileUrl: string | undefined
 }
 export const ProfileData: React.FC<ProfileDataProps> = ({ className, imageUrl, profileUrl }) => {
   return (

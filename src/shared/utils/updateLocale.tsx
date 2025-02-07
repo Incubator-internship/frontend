@@ -1,3 +1,1 @@
-export const updateLocale = (locale: string) => {
-  
-}
+export const updateLocale = (locale: string) => {}

@@ -1,4 +1,4 @@
-import { FileWithPreview } from '@/views/profile/ui/Profile'
+import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
 
 type Props = {
   images: FileWithPreview[] | null
