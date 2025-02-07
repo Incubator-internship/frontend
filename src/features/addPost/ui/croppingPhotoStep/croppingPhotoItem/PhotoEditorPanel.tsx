@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
 
+import { useCroppSettings } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoItem/hooks/useCroppSettings'
 import AddImageIcon from '@/shared/assets/icons/AddImageIcon'
 import Crop11 from '@/shared/assets/icons/Crop11'
 import Crop45 from '@/shared/assets/icons/Crop45'
@@ -15,18 +16,20 @@ import { FileWithPreview } from '../../createPost/CreatePost'
 
 type Props = {
   images: FileWithPreview[]
-  setAspect?: Dispatch<SetStateAction<number>>
+  // setAspect?: Dispatch<SetStateAction<number>>
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
-  setZoom?: Dispatch<SetStateAction<number>>
-  zoom?: number
+  setIsEditPhoto: Dispatch<SetStateAction<boolean>>
+  // setZoom?: Dispatch<SetStateAction<number>>
+  // zoom?: number
 }
 
 export const PhotoEditorPanel = ({
   images,
-  setAspect,
+  // setAspect,
   setImageWithPreview,
-  setZoom,
-  zoom,
+  setIsEditPhoto,
+  // setZoom,
+  // zoom,
 }: Props) => {
   const [showAddingWindow, setShowAddingWindow] = useState<boolean>(false)
   const [showScaleWindow, setShowScaleWindow] = useState<boolean>(false)
@@ -35,14 +38,25 @@ export const PhotoEditorPanel = ({
     setShowAddingWindow(!showAddingWindow)
   }
 
+  const { setAspect, setZoom, zoom } = useCroppSettings()
+
+  const handleCropping = () => {
+    setShowCroppingWindow(prevState => !prevState)
+    setIsEditPhoto(prevState => !prevState)
+  }
+  const handleScale = () => {
+    setShowScaleWindow(prevState => !prevState)
+    setIsEditPhoto(prevState => !prevState)
+  }
+
   return (
     <div>
       <div className={s.imagesSettings}>
         <div className={s.imagesSettingsWrapp}>
-          <div className={s.settingsBtn} onClick={() => setShowCroppingWindow(!showCroppingWindow)}>
+          <div className={s.settingsBtn} onClick={handleCropping}>
             <Cropping />
           </div>
-          <div className={s.settingsBtn} onClick={() => setShowScaleWindow(!showScaleWindow)}>
+          <div className={s.settingsBtn} onClick={handleScale}>
             <Scale />
           </div>
         </div>

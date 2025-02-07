@@ -16,20 +16,24 @@ type Props = {
 }
 
 export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
-  const {
-    aspect,
-    crop,
-    croppedAreaPixels,
-    rotation,
-    setAspect,
-    setCrop,
-    setCroppedAreaPixels,
-    setZoom,
-    zoom,
-  } = useCroppSettings()
+  // const {
+  //   aspect,
+  //   crop,
+  //   croppedAreaPixels,
+  //   rotation,
+  //   setAspect,
+  //   setCrop,
+  //   setCroppedAreaPixels,
+  //   setZoom,
+  //   zoom,
+  // } = useCroppSettings()
   const [idCurrentImage, setIdCurrentImage] = useState<string>(images.length ? images[0].id : '')
+  const [isEditPhoto, setIsEditPhoto] = useState(false)
 
   const photosForCarousel = mapPhotosToCarouselItems(images)
+  const editedPhoto = images.find(image => image.id === idCurrentImage)
+
+  console.log('isEditPhoto', isEditPhoto)
 
   return (
     <div className={s.modalWrapp}>
@@ -42,13 +46,18 @@ export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
           />
         )}
 
+        {isEditPhoto && editedPhoto && (
+          <CroppingPhotoItem image={editedPhoto} setImageWithPreview={setImageWithPreview} />
+        )}
         <PhotoEditorPanel
           images={images}
-          setAspect={setAspect}
+          // setAspect={setAspect}
           setImageWithPreview={setImageWithPreview}
-          setZoom={setZoom}
-          zoom={zoom}
+          setIsEditPhoto={setIsEditPhoto}
+          // setZoom={setZoom}
+          // zoom={zoom}
         />
+
         {/*{images.map((image, index) => (*/}
         {/*  <CroppingPhotoItem*/}
         {/*    aspect={aspect}*/}
