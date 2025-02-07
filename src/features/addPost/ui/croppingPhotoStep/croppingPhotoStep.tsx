@@ -16,24 +16,24 @@ type Props = {
 }
 
 export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
-  // const {
-  //   aspect,
-  //   crop,
-  //   croppedAreaPixels,
-  //   rotation,
-  //   setAspect,
-  //   setCrop,
-  //   setCroppedAreaPixels,
-  //   setZoom,
-  //   zoom,
-  // } = useCroppSettings()
+  const {
+    aspect,
+    crop,
+    croppedAreaPixels,
+    rotation,
+    setAspect,
+    setCrop,
+    setCroppedAreaPixels,
+    setZoom,
+    zoom,
+  } = useCroppSettings()
   const [idCurrentImage, setIdCurrentImage] = useState<string>(images.length ? images[0].id : '')
   const [isEditPhoto, setIsEditPhoto] = useState(false)
 
   const photosForCarousel = mapPhotosToCarouselItems(images)
   const editedPhoto = images.find(image => image.id === idCurrentImage)
 
-  console.log('isEditPhoto', isEditPhoto)
+  const [newImage, setNewImage] = useState<FileWithPreview | null>(editedPhoto ? editedPhoto : null)
 
   return (
     <div className={s.modalWrapp}>
@@ -47,15 +47,31 @@ export const CroppingPhotoStep = ({ images, setImageWithPreview }: Props) => {
         )}
 
         {isEditPhoto && editedPhoto && (
-          <CroppingPhotoItem image={editedPhoto} setImageWithPreview={setImageWithPreview} />
+          <CroppingPhotoItem
+            aspect={aspect}
+            crop={crop}
+            croppedAreaPixels={croppedAreaPixels}
+            image={editedPhoto}
+            images={images}
+            rotation={rotation}
+            setAspect={setAspect}
+            setCrop={setCrop}
+            setCroppedAreaPixels={setCroppedAreaPixels}
+            setImageWithPreview={setImageWithPreview}
+            setNewImage={setNewImage}
+            setZoom={setZoom}
+            zoom={zoom}
+          />
         )}
         <PhotoEditorPanel
+          idCurrentImage={idCurrentImage}
           images={images}
-          // setAspect={setAspect}
+          newImage={newImage}
+          setAspect={setAspect}
           setImageWithPreview={setImageWithPreview}
           setIsEditPhoto={setIsEditPhoto}
-          // setZoom={setZoom}
-          // zoom={zoom}
+          setZoom={setZoom}
+          zoom={zoom}
         />
 
         {/*{images.map((image, index) => (*/}

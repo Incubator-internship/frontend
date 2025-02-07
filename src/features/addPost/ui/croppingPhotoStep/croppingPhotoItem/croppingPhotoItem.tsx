@@ -10,35 +10,39 @@ import s from './croppingPhotoItem.module.scss'
 import { PhotoEditorPanel } from './PhotoEditorPanel'
 
 type Props = {
-  // aspect?: number
-  // crop?: { x: number; y: number }
-  // croppedAreaPixels?: Area | null
+  aspect?: number
+  crop?: { x: number; y: number }
+  croppedAreaPixels?: Area | null
   image: FileWithPreview //удалить, оставить только images, когда реализуем выбор imag, которую будем кропать по id
-  // images: FileWithPreview[]
-  // rotation?: number
-  // setAspect?: Dispatch<SetStateAction<number>>
-  // setCrop?: Dispatch<SetStateAction<{ x: number; y: number }>>
-  // setCroppedAreaPixels: Dispatch<SetStateAction<Area | null>>
+  images: FileWithPreview[]
+  rotation?: number
+  setAspect?: Dispatch<SetStateAction<number>>
+  setCrop?: Dispatch<SetStateAction<{ x: number; y: number }>>
+  setCroppedAreaPixels: Dispatch<SetStateAction<Area | null>>
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
-  // setZoom?: Dispatch<SetStateAction<number>>
-  // zoom?: number
+  setNewImage: Dispatch<SetStateAction<FileWithPreview | null>>
+  setZoom?: Dispatch<SetStateAction<number>>
+  zoom?: number
 }
 
-export const CroppingPhotoItem = ({ image, setImageWithPreview }: Props) => {
-  const {
-    aspect,
-    crop,
-    croppedAreaPixels,
-    rotation,
-    setAspect,
-    setCrop,
-    setCroppedAreaPixels,
-    setZoom,
-    zoom,
-  } = useCroppSettings()
-
+export const CroppingPhotoItem = ({
+  aspect,
+  crop,
+  croppedAreaPixels,
+  image,
+  images,
+  rotation,
+  setAspect,
+  setCrop,
+  setCroppedAreaPixels,
+  setImageWithPreview,
+  setNewImage,
+  setZoom,
+  zoom,
+}: Props) => {
   const onCropComplete = async (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
+    await saveCroppedImage()
   }
 
   const saveCroppedImage = async () => {
@@ -50,13 +54,17 @@ export const CroppingPhotoItem = ({ image, setImageWithPreview }: Props) => {
       )
       const file = new File([croppedImage as BlobPart], 'name')
 
+      console.log('file', file)
+
       const newImgWithPreview: FileWithPreview = {
         ...file,
         id: image.id,
         preview: URL.createObjectURL(file),
       }
 
-      setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
+      console.log('newImgWithPreview', newImgWithPreview)
+
+      setNewImage(newImgWithPreview)
     } catch (e) {
       console.error(e)
     }
@@ -75,13 +83,6 @@ export const CroppingPhotoItem = ({ image, setImageWithPreview }: Props) => {
           zoom={zoom}
         />
       </div>
-      {/*<ImageCropp*/}
-      {/*  images={images}*/}
-      {/*  setAspect={rest.setAspect}*/}
-      {/*  setImageWithPreview={setImageWithPreview}*/}
-      {/*  setZoom={rest.setZoom}*/}
-      {/*  zoom={rest.zoom}*/}
-      {/*/>*/}
     </div>
   )
 }

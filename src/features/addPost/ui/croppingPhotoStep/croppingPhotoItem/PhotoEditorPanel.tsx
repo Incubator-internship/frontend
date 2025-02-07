@@ -15,21 +15,25 @@ import { AddingWindow } from '../../addingWindow/AddingWindow'
 import { FileWithPreview } from '../../createPost/CreatePost'
 
 type Props = {
+  idCurrentImage: string
   images: FileWithPreview[]
-  // setAspect?: Dispatch<SetStateAction<number>>
+  newImage: FileWithPreview | null
+  setAspect?: Dispatch<SetStateAction<number>>
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
   setIsEditPhoto: Dispatch<SetStateAction<boolean>>
-  // setZoom?: Dispatch<SetStateAction<number>>
-  // zoom?: number
+  setZoom?: Dispatch<SetStateAction<number>>
+  zoom?: number
 }
 
 export const PhotoEditorPanel = ({
+  idCurrentImage,
   images,
-  // setAspect,
+  newImage,
+  setAspect,
   setImageWithPreview,
   setIsEditPhoto,
-  // setZoom,
-  // zoom,
+  setZoom,
+  zoom,
 }: Props) => {
   const [showAddingWindow, setShowAddingWindow] = useState<boolean>(false)
   const [showScaleWindow, setShowScaleWindow] = useState<boolean>(false)
@@ -38,11 +42,20 @@ export const PhotoEditorPanel = ({
     setShowAddingWindow(!showAddingWindow)
   }
 
-  const { setAspect, setZoom, zoom } = useCroppSettings()
-
   const handleCropping = () => {
     setShowCroppingWindow(prevState => !prevState)
     setIsEditPhoto(prevState => !prevState)
+
+    console.log('images', images)
+    console.log('newImage', newImage)
+
+    const imagesWithReplacedImage = images
+      .map(item => (item.id === idCurrentImage ? newImage : item))
+      .filter(item => item !== null)
+
+    console.log('imagesWithReplacedImage', imagesWithReplacedImage)
+
+    // setImageWithPreview(imagesWithReplacedImage)
   }
   const handleScale = () => {
     setShowScaleWindow(prevState => !prevState)
