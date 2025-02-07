@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
+import AddImageIcon from '@/shared/assets/icons/AddImageIcon'
 import Crop11 from '@/shared/assets/icons/Crop11'
 import Crop45 from '@/shared/assets/icons/Crop45'
 import Crop169 from '@/shared/assets/icons/Crop169'
@@ -119,7 +120,7 @@ export const PhotoEditorPanel = ({
           </div>
         </div>
         <div className={s.settingsBtn} onClick={() => setShowAddingWindow(!showAddingWindow)}>
-          <ImageIcon height={24} width={24} />
+          <AddImageIcon fill={'white'} />
         </div>
       </div>
       {showScaleWindow && (

@@ -27,6 +27,7 @@ export default function CreatePost({
 
   useEffect(() => {
     if (imageWithPreview?.length) {
+      debugger
       setIsOpenMainPostModal(false)
       setIsOpenStepsPostModal(true)
     }

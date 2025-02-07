@@ -11,7 +11,7 @@ import { ModalComments } from '../../../shared/ui/modalComments'
 export type PublicPageModalProps = {
   isOpen?: boolean
   onClose?: () => void
-  post1?: PostsDataByPostId
+  post1?: PostsDataByPostId | null
 }
 
 export const PublicPageModal = ({ isOpen = true, onClose, post1 }: PublicPageModalProps) => {
