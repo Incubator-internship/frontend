@@ -75,13 +75,6 @@ export const CroppingPhotoItem = ({ image, setImageWithPreview }: Props) => {
           zoom={zoom}
         />
       </div>
-      {/*<ImageCropp*/}
-      {/*  images={images}*/}
-      {/*  setAspect={rest.setAspect}*/}
-      {/*  setImageWithPreview={setImageWithPreview}*/}
-      {/*  setZoom={rest.setZoom}*/}
-      {/*  zoom={rest.zoom}*/}
-      {/*/>*/}
     </div>
   )
 }

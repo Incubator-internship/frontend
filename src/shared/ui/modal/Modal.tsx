@@ -13,6 +13,7 @@ export type ModalProps = {
   isStepMode?: boolean
   onClose?: () => void
   onFinish?: () => void
+  onNext?: () => void
   steps?: React.ReactNode[]
   title?: string | string[]
 }
@@ -23,6 +24,7 @@ export const Modal = ({
   isStepMode = false,
   onClose,
   onFinish,
+  // onNext,
   steps = [],
   title,
 }: ModalProps) => {
@@ -39,6 +41,7 @@ export const Modal = ({
   }
 
   const goToNext = () => {
+    // onNext?.()
     setStep(prevStep => Math.min(prevStep + 1, steps.length - 1))
   }
 
