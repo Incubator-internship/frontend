@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 import { Photos } from '@/app/api/posts/postsApi.types'
 import ArrowLeft from '@/shared/assets/icons/ArrowLeft'
