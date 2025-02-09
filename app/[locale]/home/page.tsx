@@ -1,1 +1,1 @@
-export { default } from '@/views/homePage/ui/homePage'
+export { default } from '@/views/homePage/ui/HomePage'

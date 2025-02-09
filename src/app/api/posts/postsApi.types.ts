@@ -10,8 +10,8 @@ export type PostsDataByPostId = {
 }
 
 export type Photos = {
-  id: number
-  postId: number
+  id: string
+  postId: string
   url: string
 }
 

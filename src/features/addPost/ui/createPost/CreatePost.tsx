@@ -1,12 +1,13 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { FileWithPath } from 'react-dropzone'
+import { Area } from 'react-easy-crop'
 
 import { AddPhotoMainModal } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoStep'
 import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
 import { Modal } from '@/shared/ui/modal'
 import { Typography } from '@/shared/ui/typography'
-import { extend } from 'dayjs'
+import { getCroppedImg } from '@/shared/utils/cropImageUtils'
 
 type Props = {
   isOpenMainPostModal: boolean
@@ -24,14 +25,24 @@ export default function CreatePost({
 }: Props) {
   const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[]>([])
 
-  // const files = useAppSelector(state => state.post.images)
-
   useEffect(() => {
     if (imageWithPreview?.length) {
+      debugger
       setIsOpenMainPostModal(false)
       setIsOpenStepsPostModal(true)
     }
   }, [imageWithPreview, setIsOpenMainPostModal, setIsOpenStepsPostModal])
+
+  useEffect(() => {
+    if (imageWithPreview.length === 0 && isOpenStepsPostModal) {
+      setIsOpenMainPostModal(true)
+      setIsOpenStepsPostModal(false)
+    }
+  }, [imageWithPreview, isOpenStepsPostModal, setIsOpenMainPostModal, setIsOpenStepsPostModal])
+
+  const onSaveCroppedImage = (newImgWithPreview: FileWithPreview) => {
+    setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
+  }
 
   return (
     <div>
@@ -46,10 +57,12 @@ export default function CreatePost({
         isOpen={isOpenStepsPostModal}
         isStepMode
         onClose={() => setIsOpenStepsPostModal(false)}
+        // onNext={onCroppStep}
         steps={[
           <CroppingPhotoStep
             images={imageWithPreview}
             key={1}
+            onSaveCroppedImage={onSaveCroppedImage}
             setImageWithPreview={setImageWithPreview}
           />,
           <FiltersPhotoStep images={imageWithPreview} key={2} />,

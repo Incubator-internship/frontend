@@ -13,6 +13,8 @@ import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Sidebar } from '@/shared/ui/sidebar'
 import { Typography } from '@/shared/ui/typography'
+import { formatDistanceToNow } from 'date-fns'
+import { enGB, ru } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
 
 import s from './homePage.module.scss'
@@ -26,27 +28,6 @@ const HomePage: React.FC = () => {
 
   const updatedAt = posts && posts[0]?.updatedAt
 
-  const calculateTimeAgo = (updatedAt: string): string => {
-    const updatedTime = new Date(updatedAt)
-    const currentTime = new Date()
-    const differenceInMs = currentTime.getTime() - updatedTime.getTime()
-
-    const minutes = Math.floor(differenceInMs / 60000)
-    const hours = Math.floor(differenceInMs / 3600000)
-    const days = Math.floor(differenceInMs / (3600000 * 24))
-    const years = Math.floor(differenceInMs / (3600000 * 24 * 365))
-
-    if (years > 0) {
-      return t(years === 1 ? 'year ago' : 'years ago', { count: years })
-    } else if (days > 0) {
-      return t(days === 1 ? 'day ago' : 'days ago', { count: days })
-    } else if (hours > 0) {
-      return t(hours === 1 ? 'hour ago' : 'hours ago', { count: hours })
-    } else {
-      return t(minutes === 1 ? 'minute ago' : 'minutes ago', { count: minutes })
-    }
-  }
-
   return (
     <div style={{ display: 'flex' }}>
       <Sidebar />
@@ -59,7 +40,12 @@ const HomePage: React.FC = () => {
 
           <Typography variant={'h3'}>URLProfiele &middot;</Typography>
           {updatedAt && (
-            <Typography variant={'smallText'}>{calculateTimeAgo(updatedAt)}</Typography>
+            <Typography color={'grey'} variant={'smallText'}>
+              {formatDistanceToNow(new Date(updatedAt), {
+                addSuffix: true,
+                locale: t('locale') === 'ru' ? ru : enGB,
+              })}
+            </Typography>
           )}
           <Typography className={s.lastChild} variant={'h2'}>
             &middot;&middot;&middot;
