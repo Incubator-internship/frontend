@@ -1,4 +1,6 @@
 'use client'
+import { useSelector } from 'react-redux'
+
 import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
 import { DataArray } from '@/views/publicPageModal/DataArray'
 
@@ -17,7 +19,7 @@ export const ModalComments = ({ post }: ModalCommentsProps) => {
 
   return (
     <div className={s.modalComments}>
-      <CommentsHeader profileData={post2.dataPost} />
+      <CommentsHeader postUserId={post?.userId} profileData={post2.dataPost} />
       <CommentBlock comments={post2.comments} contentData={post} />
       <CommentsFooter
         datePost={post?.createdAt}

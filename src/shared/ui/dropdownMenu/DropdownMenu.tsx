@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
+import clsx from 'clsx'
 
 import styles from './dropdownMenu.module.scss'
 
@@ -13,9 +14,10 @@ type Item = {
 
 type Props = {
   content: Item[]
+  isModal?: boolean
 }
 
-const DropdownMenuDemo = ({ content }: Props) => {
+const DropdownMenuDemo = ({ content, isModal }: Props) => {
   const contentItems = content.map(item => {
     return (
       <DropdownMenu.Item className={styles.Item} key={item.label} onSelect={item.onSelect}>
@@ -34,7 +36,10 @@ const DropdownMenuDemo = ({ content }: Props) => {
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className={styles.Content} sideOffset={5}>
+        <DropdownMenu.Content
+          className={clsx(styles.Content, { [styles.ifUseModal]: isModal })}
+          sideOffset={5}
+        >
           {contentItems}
         </DropdownMenu.Content>
       </DropdownMenu.Portal>

@@ -1,6 +1,9 @@
 'use client'
 
+import { useSelector } from 'react-redux'
+
 import { useGetPostsIdQuery } from '@/app/api/posts/postsApi'
+import { selectAuthState } from '@/app/config/store/authSlice'
 import Close from '@/shared/assets/icons/Close'
 import { skipToken } from '@reduxjs/toolkit/query'
 

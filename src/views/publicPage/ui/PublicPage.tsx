@@ -11,13 +11,14 @@ import { ShowMore, type ShowMoreRef, type ShowMoreToggleLinesFn } from '@re-dev/
 import { formatDistanceToNow } from 'date-fns'
 import { enGB, ru } from 'date-fns/locale'
 import Image from 'next/image'
-import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import 'swiper/swiper-bundle.css'
 //NOTE: node_modules\swiper\swiper-bundle.css rewriting
 import './publicPage.scss'
+import 'swiper/swiper-bundle.css'
 
 import s from './publicPage.module.scss'
 
@@ -44,10 +45,13 @@ const PublicPage: React.FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedPost, setSelectedPost] = useState<null | number>(null)
+  //const router = useRouter()
+  //const locale = useLocale()
 
   const handlePostClick = (post: PostsDataByPostId) => {
     setSelectedPost(post.id)
     setIsModalOpen(true)
+    //router.push(`/${locale}/post/${post.id}`)
   }
 
   const closeModal = () => {

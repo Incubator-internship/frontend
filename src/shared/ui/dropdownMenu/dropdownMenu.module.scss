@@ -1,6 +1,5 @@
 .Content {
   will-change: transform, opacity;
-
   min-width: 137px;
 
   background-color: var(--color-dark-500);
@@ -25,6 +24,10 @@
     animation-name: slideRightAndFade;
   }
 }
+
+.ifUseModal {
+  z-index: 9999;
+  }
 
 .Item {
   user-select: none;
