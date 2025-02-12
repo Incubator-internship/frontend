@@ -55,7 +55,7 @@ export const PhotoEditorPanel = ({
 
     console.log('imagesWithReplacedImage', imagesWithReplacedImage)
 
-    // setImageWithPreview(imagesWithReplacedImage)
+    setImageWithPreview(imagesWithReplacedImage)
   }
   const handleScale = () => {
     setShowScaleWindow(prevState => !prevState)

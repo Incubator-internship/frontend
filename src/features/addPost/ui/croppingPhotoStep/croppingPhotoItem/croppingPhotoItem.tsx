@@ -59,7 +59,9 @@ export const CroppingPhotoItem = ({
       const newImgWithPreview: FileWithPreview = {
         ...file,
         id: image.id,
+        path: URL.createObjectURL(file),
         preview: URL.createObjectURL(file),
+        relativePath: URL.createObjectURL(file),
       }
 
       console.log('newImgWithPreview', newImgWithPreview)
