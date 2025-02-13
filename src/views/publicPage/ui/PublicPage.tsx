@@ -36,6 +36,7 @@ const PublicPage: React.FC = () => {
     pollingInterval: 60000, // Update each 60sec
   })
 
+  console.log(posts)
   const refs = useRef<Array<ShowMoreRef | null>>([])
 
   const toggleLines: (index: number) => ShowMoreToggleLinesFn = index => e => {
@@ -74,7 +75,7 @@ const PublicPage: React.FC = () => {
       {error && <div>No posts available...</div>}
       {posts && (
         <div className={s.cards}>
-          {posts.map((card, i) => (
+          {posts.posts.map((card, i) => (
             <div className={s.cardItem} key={'cardItem' + i} onClick={() => handlePostClick(card)}>
               <div className={s.cardItemImage} onClick={e => e.stopPropagation()}>
                 <Swiper
