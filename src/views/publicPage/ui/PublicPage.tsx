@@ -74,7 +74,7 @@ const PublicPage: React.FC = () => {
       {error && <div>No posts available...</div>}
       {posts && (
         <div className={s.cards}>
-          {posts.map((card, i) => (
+          {posts.posts.map((card, i) => (
             <div className={s.cardItem} key={'cardItem' + i} onClick={() => handlePostClick(card)}>
               <div className={s.cardItemImage} onClick={e => e.stopPropagation()}>
                 <Swiper
