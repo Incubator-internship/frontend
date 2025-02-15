@@ -1,20 +1,18 @@
-'use client'
-
 import React from 'react'
-import { useSelector } from 'react-redux'
 
-import { selectAuthState } from '@/app/config/store/authSlice'
+import { checkAuth } from '@/shared/utils/checkAuth'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
-import ProfilePage from './profile/ui/Profile'
 import PublicPage from './publicPage/ui/PublicPage'
 
-export default function Home() {
-  const isAuth = useSelector(selectAuthState)
+export default async function Home() {
+  const { isAuth } = await checkAuth()
+  const locale = cookies().get('NEXT_LOCALE')?.value || 'en'
 
-  return (
-    <div>
-      {isAuth && <ProfilePage />}
-      {!isAuth && <PublicPage />}
-    </div>
-  )
+  if (isAuth) {
+    redirect(`/${locale}/profile`)
+  }
+
+  return <PublicPage />
 }
