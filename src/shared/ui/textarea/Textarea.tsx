@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ComponentPropsWithoutRef, useId } from 'react'
+import React, { ChangeEvent, ComponentPropsWithRef, useId } from 'react'
 
 import clsx from 'clsx'
 
@@ -9,7 +9,7 @@ import { Typography } from '../typography'
 type TextareaProps = {
   error?: string
   label?: string
-} & ComponentPropsWithoutRef<'textarea'>
+} & ComponentPropsWithRef<'textarea'>
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, disabled, error, label, onChange, ...restProps }, ref) => {

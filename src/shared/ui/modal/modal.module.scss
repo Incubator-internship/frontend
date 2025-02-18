@@ -20,9 +20,10 @@
 
   overflow: hidden;
 
-  width: 100%;
+  // width: 100%;width
   min-width: 378px;
-  max-width: 500px;
+
+  // max-width: 500px;max-width
   min-height: 230px;
 
   background-color: var(--color-dark-300);
@@ -66,7 +67,7 @@
 }
 
 .body {
-  padding: 12px 24px;
+  // padding: 12px 24px;
 
   color: var(--color-light-100);
   word-wrap: break-word;

@@ -1,13 +1,12 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { FileWithPath } from 'react-dropzone'
-import { Area } from 'react-easy-crop'
 
 import { AddPhotoMainModal } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoStep'
 import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
 import { Modal } from '@/shared/ui/modal'
-import { Typography } from '@/shared/ui/typography'
-import { getCroppedImg } from '@/shared/utils/cropImageUtils'
+
+import PublushPhotoStep from '../publishPhotoStep/PublushPhotoStep'
 
 type Props = {
   isOpenMainPostModal: boolean
@@ -27,7 +26,7 @@ export default function CreatePost({
 
   useEffect(() => {
     if (imageWithPreview?.length) {
-      debugger
+      // debugger
       setIsOpenMainPostModal(false)
       setIsOpenStepsPostModal(true)
     }
@@ -66,9 +65,7 @@ export default function CreatePost({
             setImageWithPreview={setImageWithPreview}
           />,
           <FiltersPhotoStep images={imageWithPreview} key={2} />,
-          <Typography as={'p'} key={3} style={{ marginLeft: '15px' }} variant={'body1'}>
-            Step 3
-          </Typography>,
+          <PublushPhotoStep images={imageWithPreview} key={3} />,
         ]}
         title={['Cropping', 'Filters', 'Publication']}
       />

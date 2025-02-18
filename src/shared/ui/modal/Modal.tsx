@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import ArrowLeft from '@/shared/assets/icons/ArrowLeft'
 import Close from '@/shared/assets/icons/Close'
+import clsx from 'clsx'
 
 import s from './modal.module.scss'
 
@@ -55,9 +56,9 @@ export const Modal = ({
   }
 
   return (
-    <div className={s.backdrop} onClick={handleBackdropClick}>
+    <div className={clsx(s.backdrop)} onClick={handleBackdropClick}>
       <div className={s.modal}>
-        <div className={s.head}>
+        <div className={clsx(s.head)}>
           {isStepMode ? (
             <div className={s.headWrapp}>
               {step > 0 && (
@@ -72,9 +73,9 @@ export const Modal = ({
                 </button>
               )}
               {step === steps.length - 1 && (
-                <button onClick={finishHandler} type={'button'}>
-                  finish
-                </button>
+                <Typography as={'button'} onClick={finishHandler} type={'button'} variant={'link2'}>
+                  Publish
+                </Typography>
               )}
             </div>
           ) : (
@@ -86,7 +87,7 @@ export const Modal = ({
             </>
           )}
         </div>
-        <div className={s.body}>{isStepMode ? steps[step] : children}</div>
+        <div className={clsx(s.body)}>{isStepMode ? steps[step] : children}</div>
       </div>
     </div>
   )
