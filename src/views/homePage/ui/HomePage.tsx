@@ -10,6 +10,7 @@ import {
   PaperPlaneOutlineIcon,
 } from '@/shared/assets/icons'
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
+import AddCommentBlock from '@/shared/ui/addCommentBlock/AddCommentBlock'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Sidebar } from '@/shared/ui/sidebar'
 import { Typography } from '@/shared/ui/typography'
@@ -80,12 +81,13 @@ const HomePage: React.FC = () => {
           <Typography className={s.postComments} color={'grey'} variant={'boldText14'}>
             {t('View All Comments')} (114)
           </Typography>
-          <div className={s.postAddComment}>
+          {/* <div className={s.postAddComment}>
             <input className={s.postInput} placeholder={t('Add a Comment')} type={'text'} />
             <Typography as={'a'} color={'link'} variant={'h3'}>
               {t('Publish')}
             </Typography>
-          </div>
+          </div> */}
+          <AddCommentBlock />
         </div>
       </div>
     </div>

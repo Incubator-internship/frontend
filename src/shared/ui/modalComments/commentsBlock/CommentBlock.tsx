@@ -15,7 +15,7 @@ type CommentBlockProps = {
 
 export const CommentBlock = ({ comments, contentData }: CommentBlockProps) => {
   return (
-    <Scroll height={'421px'} orientation={'vertical'} width={'100%'}>
+    <Scroll height={'351px'} orientation={'vertical'} width={'100%'}>
       <div className={s.commentBlock}>
         <CommentContainer
           content={contentData?.content}

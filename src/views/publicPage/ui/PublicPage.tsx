@@ -5,6 +5,7 @@ import { useGetAllPostsQuery } from '@/app/api/posts/postsApi'
 import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
+import { ModalCloseDeleteUnfollowPost } from '@/shared/ui/modal/modalCreateOrDeletePost'
 import { Typography } from '@/shared/ui/typography'
 import { PublicPageModal } from '@/views/publicPageModal/ui/PublicPageModal'
 import { ShowMore, type ShowMoreRef, type ShowMoreToggleLinesFn } from '@re-dev/react-truncate'
@@ -160,7 +161,10 @@ const PublicPage: React.FC = () => {
           ))}
         </div>
       )}
-      <PublicPageModal isOpen={isModalOpen} onClose={closeModal} postId={selectedPost} />
+      {/* <PublicPageModal isOpen={isModalOpen} onClose={closeModal} postId={selectedPost} /> */}
+      {/* <ModalCreateOrDeletePost variant={'delete'} /> */}
+      <ModalCloseDeleteUnfollowPost variant={'unfollow'} />
+      {/* <ModalCreateOrDeletePost variant={'close'} /> */}
     </div>
   )
 }
