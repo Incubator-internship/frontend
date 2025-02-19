@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import image1 from '@/shared/assets/images/publicImages/image1.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
@@ -17,6 +17,7 @@ type Props = {
 }
 
 export default function PublushPhotoStep({ images }: Props) {
+  const [description, setDescription] = useState<string>('')
   const photosForCarousel = mapPhotosToCarouselItems(images ?? [])
 
   return (

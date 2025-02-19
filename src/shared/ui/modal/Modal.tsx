@@ -6,10 +6,12 @@ import clsx from 'clsx'
 
 import s from './modal.module.scss'
 
+import { Button } from '../button'
 import { Typography } from '../typography'
 
 export type ModalProps = {
   children?: React.ReactNode
+  createPost?: () => void
   isOpen?: boolean
   isStepMode?: boolean
   onClose?: () => void
@@ -21,6 +23,7 @@ export type ModalProps = {
 
 export const Modal = ({
   children,
+  createPost,
   isOpen = true,
   isStepMode = false,
   onClose,
@@ -53,6 +56,7 @@ export const Modal = ({
   const finishHandler = () => {
     onFinish?.()
     onClose?.()
+    createPost?.()
   }
 
   return (
@@ -73,9 +77,9 @@ export const Modal = ({
                 </button>
               )}
               {step === steps.length - 1 && (
-                <Typography as={'button'} onClick={finishHandler} type={'button'} variant={'link2'}>
+                <Button onClick={finishHandler} variant={'transparent'}>
                   Publish
-                </Typography>
+                </Button>
               )}
             </div>
           ) : (

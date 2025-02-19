@@ -10,9 +10,9 @@ import {
 
 const postsApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
-    createPost: builder.mutation<CreatePostResponse, CreatePost>({
-      query: body => ({
-        body,
+    createPost: builder.mutation<CreatePostResponse, FormData>({
+      query: bodyFormData => ({
+        body: bodyFormData,
         method: 'POST',
         url: '/v1/posts/post',
       }),
