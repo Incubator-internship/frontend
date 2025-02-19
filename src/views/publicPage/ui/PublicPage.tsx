@@ -161,10 +161,7 @@ const PublicPage: React.FC = () => {
           ))}
         </div>
       )}
-      {/* <PublicPageModal isOpen={isModalOpen} onClose={closeModal} postId={selectedPost} /> */}
-      {/* <ModalCreateOrDeletePost variant={'delete'} /> */}
-      <ModalCloseDeleteUnfollowPost variant={'unfollow'} />
-      {/* <ModalCreateOrDeletePost variant={'close'} /> */}
+      <PublicPageModal isOpen={isModalOpen} onClose={closeModal} postId={selectedPost} />
     </div>
   )
 }

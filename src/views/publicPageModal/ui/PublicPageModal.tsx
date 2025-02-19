@@ -1,9 +1,6 @@
 'use client'
 
-import { useSelector } from 'react-redux'
-
 import { useGetPostsIdQuery } from '@/app/api/posts/postsApi'
-import { selectAuthState } from '@/app/config/store/authSlice'
 import Close from '@/shared/assets/icons/Close'
 import { skipToken } from '@reduxjs/toolkit/query'
 
@@ -11,6 +8,7 @@ import s from './publicPageModal.module.scss'
 
 import { Carousel } from '../../../shared/ui/carousel'
 import { ModalComments } from '../../../shared/ui/modalComments'
+
 export type PublicPageModalProps = {
   isOpen?: boolean
   onClose?: () => void
@@ -25,9 +23,17 @@ export const PublicPageModal = ({ isOpen = true, onClose, postId }: PublicPageMo
   }
 
   const handleBackdropClick = (event: React.MouseEvent) => {
-    if (event.target === event.currentTarget && isOpen) {
+    if (event.target === event.currentTarget) {
       onClose?.()
     }
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (isError) {
+    return <div>Error loading post data.</div>
   }
 
   if (!data || !data.photos) {

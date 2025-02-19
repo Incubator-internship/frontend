@@ -7,6 +7,8 @@ import UnfollowIcon from '@/shared/assets/icons/UnfollowIcon'
 import DropdownMenuDemo from '../../dropdownMenu/DropdownMenu'
 
 export const renderDropDownMenu = (myId?: number, isFollow?: boolean, postUserId?: number) => {
+  const currentUrl = window.location.href
+
   if (myId === postUserId) {
     return (
       <DropdownMenuDemo
@@ -43,8 +45,12 @@ export const renderDropDownMenu = (myId?: number, isFollow?: boolean, postUserId
           {
             icon: <CopyIcon />,
             label: 'Copy Link',
-            onSelect: value => {
-              console.log('click Copy Link', value)
+            onSelect: async () => {
+              try {
+                await navigator.clipboard.writeText(currentUrl)
+              } catch (err) {
+                console.error('error:', err)
+              }
             },
           },
         ]}
@@ -65,8 +71,12 @@ export const renderDropDownMenu = (myId?: number, isFollow?: boolean, postUserId
           {
             icon: <CopyIcon />,
             label: 'Copy Link',
-            onSelect: value => {
-              console.log('click Copy', value)
+            onSelect: async () => {
+              try {
+                await navigator.clipboard.writeText(currentUrl)
+              } catch (err) {
+                console.error('error:', err)
+              }
             },
           },
         ]}
