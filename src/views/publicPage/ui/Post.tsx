@@ -24,21 +24,24 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
   const t = useTranslations('PublicPage')
   const showMoreRef = useRef<ShowMoreRef>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedPostId, setSelectedPostId] = useState<null | number>(null)
 
   const toggleLines: ShowMoreToggleLinesFn = e => {
     showMoreRef.current?.toggleLines(e)
   }
 
-  const handlePostClick = () => {
+  const handlePostClick = (postId: number) => {
     setIsModalOpen(true)
+    setSelectedPostId(postId)
   }
 
   const closeModal = () => {
     setIsModalOpen(false)
+    setSelectedPostId(null)
   }
 
   return (
-    <div className={s.postItem} onClick={handlePostClick}>
+    <div className={s.postItem} onClick={() => handlePostClick(post.id)}>
       <div onClick={e => e.stopPropagation()}>
         <Swiper
           modules={[Navigation, Pagination]}
@@ -48,7 +51,7 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
           spaceBetween={20}
         >
           {post.photos.map(photo => (
-            <SwiperSlide key={photo.id}>
+            <SwiperSlide key={photo.id} onClick={() => handlePostClick(post.id)}>
               <Image
                 alt={`Photo ${photo.id}`}
                 height={240}
@@ -117,7 +120,7 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
         </ShowMore>
       </Typography>
 
-      <PublicPageModal isOpen={isModalOpen} onClose={closeModal} post1={post} />
+      <PublicPageModal isOpen={isModalOpen} onClose={closeModal} postId={post.id} />
     </div>
   )
 }
