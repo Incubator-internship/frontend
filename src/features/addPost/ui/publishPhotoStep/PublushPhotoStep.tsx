@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import type { FileWithPreview, FormData } from '../createPost/CreatePost'
+
+import React from 'react'
+import { useFormContext } from 'react-hook-form'
 
 import image1 from '@/shared/assets/images/publicImages/image1.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
@@ -10,14 +13,15 @@ import clsx from 'clsx'
 import s from './publishPhotoStep.module.scss'
 
 import { mapPhotosToCarouselItems } from '../../utils/photoUtils'
-import { FileWithPreview } from '../createPost/CreatePost'
 
 type Props = {
   images?: FileWithPreview[]
+  onSubmit?: (data: FormData) => void
 }
 
 export default function PublushPhotoStep({ images }: Props) {
-  const [description, setDescription] = useState<string>('')
+  const { control, watch } = useFormContext<FormData>()
+  const descriptionValue = watch('description') || ''
   const photosForCarousel = mapPhotosToCarouselItems(images ?? [])
 
   return (
@@ -35,10 +39,17 @@ export default function PublushPhotoStep({ images }: Props) {
                 URLProfile
               </Typography>
             </div>
-            <TextareaWithControl label={'Add publication descriptions'} placeholder={'Text-area'} />
-            <Typography className={clsx(s.count)} variant={'body2'}>
-              {'0/500'}
-            </Typography>
+            <form>
+              <TextareaWithControl
+                control={control}
+                label={'Add publication descriptions'}
+                name={'description'}
+                placeholder={'Text-area'}
+              />
+              <Typography className={clsx(s.count)} variant={'body2'}>
+                {`${descriptionValue.length}/500`}
+              </Typography>
+            </form>
           </div>
           <div className={s.userLocation}>
             <Typography as={'span'} className={s.locationCity} variant={'caption'}>
@@ -51,7 +62,6 @@ export default function PublushPhotoStep({ images }: Props) {
               New York
               <Typography className={s.subTitle}>Washington Square Park</Typography>
             </Typography>
-
             <Typography className={s.locationBox}>
               New York
               <Typography className={s.subTitle}>Washington Square Park</Typography>

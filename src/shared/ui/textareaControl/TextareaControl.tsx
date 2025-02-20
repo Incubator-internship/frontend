@@ -1,37 +1,32 @@
-import React, { ChangeEvent, ComponentPropsWithRef, ComponentPropsWithoutRef, useId } from 'react'
-import { SubmitHandler, useController, useForm } from 'react-hook-form'
+import React, { ComponentPropsWithRef, useId } from 'react'
+import { Control, useController } from 'react-hook-form'
 
 import clsx from 'clsx'
 
-import s from '@/shared/ui/textarea/textarea.module.scss'
+import s from './../textarea/textarea.module.scss'
 
 import { Textarea } from '../textarea/Textarea'
 import { Typography } from '../typography'
 
 type FormValues = {
-  textarea: string
+  description: string
 }
 
-type TextareaProps = {
-  error?: string
+type TextareaWithControlProps = {
+  control: Control<FormValues>
   label?: string
-  onSubmit?: SubmitHandler<FormValues>
+  name: string
 } & ComponentPropsWithRef<'textarea'>
 
-export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, disabled, error, label, onChange, onSubmit, ...restProps }, ref) => {
-    const {
-      control,
-      formState: { errors },
-    } = useForm<FormValues>()
+export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, TextareaWithControlProps>(
+  ({ className, control, disabled, label, name, ...restProps }, ref) => {
     const id = useId()
-    const { field } = useController({
+    const {
+      field,
+      fieldState: { error },
+    } = useController({
       control,
-      name: 'textarea',
-      rules: {
-        minLength: { message: 'Error text: Minimum length should be 10 characters', value: 10 },
-        required: 'The field message is required',
-      },
+      name,
     })
 
     return (
@@ -51,9 +46,14 @@ export const TextareaWithControl = React.forwardRef<HTMLTextAreaElement, Textare
           {...field}
           className={className}
           disabled={disabled}
-          error={errors.textarea?.message}
+          id={id}
           ref={ref}
         />
+        {error && (
+          <Typography color={'red'} variant={'body2'}>
+            {error.message}
+          </Typography>
+        )}
       </>
     )
   }
