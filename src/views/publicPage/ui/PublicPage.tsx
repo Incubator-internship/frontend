@@ -10,11 +10,10 @@ import Post from './Post'
 const PublicPage = async () => {
   const data: AllPosts = await fetchPosts()
   const t = await getTranslations('PublicPage')
-  // const { posts } = data
+  const { posts } = data
 
-  const { nextCursor, posts } = data //NOTE: for future pagination
+  // const { nextCursor, posts } = data //NOTE: for future pagination
 
-  console.log(nextCursor)
   //TODO: fetch users count
   const numberOfUsers: string = '9213'
 
