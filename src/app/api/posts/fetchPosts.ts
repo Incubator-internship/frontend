@@ -1,4 +1,4 @@
-import { AllPosts } from './postsApi.types' // замени путь при необходимости
+import { AllPosts } from './postsApi.types'
 
 export default async function fetchPosts(): Promise<AllPosts> {
   try {
