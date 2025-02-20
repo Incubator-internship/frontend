@@ -13,6 +13,7 @@ export default async function Home() {
   if (isAuth) {
     redirect(`/${locale}/profile`)
   }
+  console.log(isAuth)
 
   return <PublicPage />
 }

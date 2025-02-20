@@ -45,7 +45,7 @@
   border-right: 1px var(--color-dark-300) solid;
 }
 
-.cards {
+.posts {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -56,7 +56,7 @@
   cursor: pointer;
 }
 
-.cardItem {
+.postItem {
   width: 234px;
   min-height: 391px;
   display: flex;
@@ -66,13 +66,7 @@
   overflow: hidden;
 }
 
-.cardItemImage {
-  height: 240px;
-  position: relative;
-  width: 234px;
-}
-
-.cardItemAvatarTitle {
+.postItemAvatarTitle {
   display: flex;
   align-items: center;
   justify-content: flex-start;

@@ -36,17 +36,20 @@ export default async function RootLayout({
   const messages = await getMessages()
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <html lang={locale}>
-        <StoreProvider>
-          <Suspense>
-            <body>
+    <html lang={locale}>
+      <head>
+        <title>Inctagram</title>
+      </head>
+      <body>
+        <NextIntlClientProvider messages={messages}>
+          <StoreProvider>
+            <Suspense fallback={<div>Loading...</div>}>
               <Header />
               <main>{children}</main>
-            </body>
-          </Suspense>
-        </StoreProvider>
-      </html>
-    </NextIntlClientProvider>
+            </Suspense>
+          </StoreProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   )
 }

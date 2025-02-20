@@ -1,7 +1,9 @@
-export type AllPostsOrPostDataByUserId = {
+export type AllPosts = {
   nextCursor: number
   posts: PostsDataByPostId[]
 }
+
+export type PostDataByUserId = PostsDataByPostId[]
 
 export type PostsDataByPostId = {
   content: string
