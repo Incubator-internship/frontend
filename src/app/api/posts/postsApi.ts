@@ -1,9 +1,10 @@
 import { inctagramApi } from '../inctagramApi'
 import {
-  AllPostsOrPostDataByUserId,
+  AllPosts,
   CreatePost,
   CreatePostResponse,
   DeletePost,
+  PostDataByUserId,
   PostsDataByPostId,
   UpdatePost,
 } from './postsApi.types'
@@ -23,13 +24,13 @@ const postsApi = inctagramApi.injectEndpoints({
         url: `/v1/posts/${id}`,
       }),
     }),
-    getAllPosts: builder.query<AllPostsOrPostDataByUserId, void>({
+    getAllPosts: builder.query<AllPosts, void>({
       query: () => 'v1/posts/all-posts',
     }),
     getPostsId: builder.query<PostsDataByPostId, number>({
       query: id => `/v1/posts/${id}`,
     }),
-    getPostsUserId: builder.query<AllPostsOrPostDataByUserId, number>({
+    getPostsUserId: builder.query<PostDataByUserId, number>({
       query: userId => `/v1/posts/user-posts/${userId}`,
     }),
     updatePost: builder.mutation<void, UpdatePost>({
