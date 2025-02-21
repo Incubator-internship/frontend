@@ -27,7 +27,6 @@ export const Modal = ({
   isOpen = true,
   isStepMode = false,
   onClose,
-  onFinish,
   // onNext,
   steps = [],
   title,
@@ -45,7 +44,6 @@ export const Modal = ({
   }
 
   const goToNext = () => {
-    // onNext?.()
     setStep(prevStep => Math.min(prevStep + 1, steps.length - 1))
   }
 
@@ -54,7 +52,6 @@ export const Modal = ({
   }
 
   const finishHandler = () => {
-    onFinish?.()
     onClose?.()
     createPost?.()
   }
@@ -66,15 +63,15 @@ export const Modal = ({
           {isStepMode ? (
             <div className={s.headWrapp}>
               {step > 0 && (
-                <button onClick={goToPrevious} type={'button'}>
+                <Button onClick={goToPrevious} variant={'transparent'}>
                   <ArrowLeft />
-                </button>
+                </Button>
               )}
               <Typography as={'h2'}>{title && title[step]}</Typography>
               {step < steps.length - 1 && (
-                <button onClick={goToNext} type={'button'}>
+                <Button onClick={goToNext} variant={'transparent'}>
                   Next
-                </button>
+                </Button>
               )}
               {step === steps.length - 1 && (
                 <Button onClick={finishHandler} variant={'transparent'}>

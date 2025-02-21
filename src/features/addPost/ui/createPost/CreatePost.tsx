@@ -6,9 +6,9 @@ import { useCreatePostMutation } from '@/app/api/posts/postsApi'
 import { AddPhotoMainModal } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoStep'
 import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
+import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/schemas'
 import { Modal } from '@/shared/ui/modal'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 
 import { convertPreviewToFile } from '../../utils/photoUtils'
 import PublushPhotoStep from '../publishPhotoStep/PublushPhotoStep'
@@ -21,12 +21,6 @@ type Props = {
 }
 export type FileWithPreview = { id: string; preview: string } & FileWithPath
 
-const schema = z.object({
-  description: z.string().max(500, 'Максимум 500 символов'),
-})
-
-export type FormData = z.infer<typeof schema>
-
 export default function CreatePost({
   isOpenMainPostModal,
   isOpenStepsPostModal,
@@ -36,14 +30,13 @@ export default function CreatePost({
   const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[]>([])
   const [createPost] = useCreatePostMutation()
 
-  const methods = useForm<FormData>({
+  const methods = useForm<PostFormData>({
     defaultValues: { description: '' },
-    resolver: zodResolver(schema),
+    resolver: zodResolver(maximumCharactersSchema),
   })
 
   useEffect(() => {
     if (imageWithPreview?.length) {
-      // debugger
       setIsOpenMainPostModal(false)
       setIsOpenStepsPostModal(true)
     }
@@ -60,10 +53,8 @@ export default function CreatePost({
     setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
   }
 
-  const sendPostCallBack = async (data: FormData) => {
+  const sendPostCallBack = async (data: PostFormData) => {
     if (imageWithPreview.length === 0) {
-      console.error('Ошибка/ Нет изображений для загрузки')
-
       return
     }
 
@@ -73,15 +64,12 @@ export default function CreatePost({
       const files = await Promise.all(imageWithPreview.map(convertPreviewToFile))
 
       files.forEach((file, index) => {
-        console.log(`Файл ${index}:`, file.name, file.type, file.size)
         bodyFormData.append('photos', file)
       })
 
       bodyFormData.append('content', data.description)
 
-      const response = await createPost(bodyFormData).unwrap()
-
-      console.log(response)
+      await createPost(bodyFormData).unwrap()
     } catch (error) {
       console.error(error)
     }
@@ -102,7 +90,6 @@ export default function CreatePost({
           isOpen={isOpenStepsPostModal}
           isStepMode
           onClose={() => setIsOpenStepsPostModal(false)}
-          // onNext={onCroppStep}
           steps={[
             <CroppingPhotoStep
               images={imageWithPreview}
