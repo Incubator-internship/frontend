@@ -42,7 +42,7 @@ export const PublicPageModal = ({ isOpen = true, onClose, postId }: PublicPageMo
 
   return (
     <div className={s.backdrop} onClick={handleBackdropClick}>
-      <div className={s.publicPageModule}>
+      <div className={s.publicPageModule} onClick={e => e.stopPropagation()}>
         <button onClick={onClose} type={'button'}>
           <Close className={s.close}></Close>
         </button>
