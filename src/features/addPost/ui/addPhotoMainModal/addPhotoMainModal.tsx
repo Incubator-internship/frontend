@@ -69,7 +69,7 @@ export const AddPhotoMainModal = ({ images, setImages }: Props) => {
       <Button className={s.btn} fullWidth onClick={open}>
         {t('MainModalBtn1')}
       </Button>
-      <Button disabled fullWidth onClick={() => {}} variant={'transparent'}>
+      <Button className={s.btnDraft} disabled fullWidth onClick={() => {}} variant={'transparent'}>
         {t('MainModalBtn2')}
       </Button>
     </div>
