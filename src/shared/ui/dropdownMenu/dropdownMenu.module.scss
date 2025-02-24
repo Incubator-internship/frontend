@@ -1,6 +1,7 @@
 .Content {
   will-change: transform, opacity;
   min-width: 137px;
+  z-index: 1002;
 
   background-color: var(--color-dark-500);
   border: solid 1px var(--color-dark-100);
