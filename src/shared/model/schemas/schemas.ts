@@ -75,3 +75,9 @@ export const passwordSchema = z
 export const agreeSchema = z.boolean().refine(val => val, {
   message: 'You must agree to the terms',
 })
+
+export const maximumCharactersSchema = z.object({
+  description: z.string().max(500),
+})
+
+export type PostFormData = z.infer<typeof maximumCharactersSchema>

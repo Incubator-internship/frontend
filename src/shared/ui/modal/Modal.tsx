@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 
 import ArrowLeft from '@/shared/assets/icons/ArrowLeft'
 import Close from '@/shared/assets/icons/Close'
+import clsx from 'clsx'
 
 import s from './modal.module.scss'
 
+import { Button } from '../button'
 import { Typography } from '../typography'
 
 export type ModalProps = {
   children?: React.ReactNode
+  createPost?: () => void
   isOpen?: boolean
   isStepMode?: boolean
   onClose?: () => void
@@ -20,10 +23,10 @@ export type ModalProps = {
 
 export const Modal = ({
   children,
+  createPost,
   isOpen = true,
   isStepMode = false,
   onClose,
-  onFinish,
   // onNext,
   steps = [],
   title,
@@ -41,7 +44,6 @@ export const Modal = ({
   }
 
   const goToNext = () => {
-    // onNext?.()
     setStep(prevStep => Math.min(prevStep + 1, steps.length - 1))
   }
 
@@ -50,31 +52,31 @@ export const Modal = ({
   }
 
   const finishHandler = () => {
-    onFinish?.()
     onClose?.()
+    createPost?.()
   }
 
   return (
-    <div className={s.backdrop} onClick={handleBackdropClick}>
+    <div className={clsx(s.backdrop)} onClick={handleBackdropClick}>
       <div className={s.modal}>
-        <div className={s.head}>
+        <div className={clsx(s.head)}>
           {isStepMode ? (
             <div className={s.headWrapp}>
               {step > 0 && (
-                <button onClick={goToPrevious} type={'button'}>
+                <Button onClick={goToPrevious} variant={'transparent'}>
                   <ArrowLeft />
-                </button>
+                </Button>
               )}
               <Typography as={'h2'}>{title && title[step]}</Typography>
               {step < steps.length - 1 && (
-                <button onClick={goToNext} type={'button'}>
+                <Button onClick={goToNext} variant={'transparent'}>
                   Next
-                </button>
+                </Button>
               )}
               {step === steps.length - 1 && (
-                <button onClick={finishHandler} type={'button'}>
-                  finish
-                </button>
+                <Button onClick={finishHandler} variant={'transparent'}>
+                  Publish
+                </Button>
               )}
             </div>
           ) : (
@@ -86,7 +88,7 @@ export const Modal = ({
             </>
           )}
         </div>
-        <div className={s.body}>{isStepMode ? steps[step] : children}</div>
+        <div className={clsx(s.body)}>{isStepMode ? steps[step] : children}</div>
       </div>
     </div>
   )

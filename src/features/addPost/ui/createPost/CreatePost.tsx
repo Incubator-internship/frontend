@@ -1,13 +1,17 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { FileWithPath } from 'react-dropzone'
-import { Area } from 'react-easy-crop'
+import { FormProvider, useForm } from 'react-hook-form'
 
+import { useCreatePostMutation } from '@/app/api/posts/postsApi'
 import { AddPhotoMainModal } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoStep'
 import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
+import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/schemas'
 import { Modal } from '@/shared/ui/modal'
-import { Typography } from '@/shared/ui/typography'
-import { getCroppedImg } from '@/shared/utils/cropImageUtils'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import { convertPreviewToFile } from '../../utils/photoUtils'
+import PublushPhotoStep from '../publishPhotoStep/PublushPhotoStep'
 
 type Props = {
   isOpenMainPostModal: boolean
@@ -24,10 +28,15 @@ export default function CreatePost({
   setIsOpenStepsPostModal,
 }: Props) {
   const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[]>([])
+  const [createPost] = useCreatePostMutation()
+
+  const methods = useForm<PostFormData>({
+    defaultValues: { description: '' },
+    resolver: zodResolver(maximumCharactersSchema),
+  })
 
   useEffect(() => {
     if (imageWithPreview?.length) {
-      debugger
       setIsOpenMainPostModal(false)
       setIsOpenStepsPostModal(true)
     }
@@ -44,6 +53,28 @@ export default function CreatePost({
     setImageWithPreview(prevImages => [...prevImages, newImgWithPreview])
   }
 
+  const sendPostCallBack = async (data: PostFormData) => {
+    if (imageWithPreview.length === 0) {
+      return
+    }
+
+    const bodyFormData = new FormData()
+
+    try {
+      const files = await Promise.all(imageWithPreview.map(convertPreviewToFile))
+
+      files.forEach((file, index) => {
+        bodyFormData.append('photos', file)
+      })
+
+      bodyFormData.append('content', data.description)
+
+      await createPost(bodyFormData).unwrap()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div>
       <Modal
@@ -53,25 +84,25 @@ export default function CreatePost({
       >
         <AddPhotoMainModal images={imageWithPreview} setImages={setImageWithPreview} />
       </Modal>
-      <Modal
-        isOpen={isOpenStepsPostModal}
-        isStepMode
-        onClose={() => setIsOpenStepsPostModal(false)}
-        // onNext={onCroppStep}
-        steps={[
-          <CroppingPhotoStep
-            images={imageWithPreview}
-            key={1}
-            onSaveCroppedImage={onSaveCroppedImage}
-            setImageWithPreview={setImageWithPreview}
-          />,
-          <FiltersPhotoStep images={imageWithPreview} key={2} />,
-          <Typography as={'p'} key={3} style={{ marginLeft: '15px' }} variant={'body1'}>
-            Step 3
-          </Typography>,
-        ]}
-        title={['Cropping', 'Filters', 'Publication']}
-      />
+      <FormProvider {...methods}>
+        <Modal
+          createPost={methods.handleSubmit(sendPostCallBack)}
+          isOpen={isOpenStepsPostModal}
+          isStepMode
+          onClose={() => setIsOpenStepsPostModal(false)}
+          steps={[
+            <CroppingPhotoStep
+              images={imageWithPreview}
+              key={1}
+              onSaveCroppedImage={onSaveCroppedImage}
+              setImageWithPreview={setImageWithPreview}
+            />,
+            <FiltersPhotoStep images={imageWithPreview} key={2} />,
+            <PublushPhotoStep images={imageWithPreview} key={3} onSubmit={sendPostCallBack} />,
+          ]}
+          title={['Cropping', 'Filters', 'Publication']}
+        />
+      </FormProvider>
     </div>
   )
 }
