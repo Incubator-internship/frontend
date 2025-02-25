@@ -1,6 +1,9 @@
 'use client'
 import React, { useState } from 'react'
 
+import { useDeletePostMutation } from '@/app/api/posts/postsApi'
+import { useParams } from 'next/navigation'
+
 import { Button } from '../../button/Button'
 import { Typography } from '../../typography/Typography'
 import { Modal } from '../Modal'
@@ -12,10 +15,24 @@ type ModalCloseDeleteUnfollowPostProps = {
 export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPostProps> = ({
   variant,
 }) => {
+  const params = useParams()
+  const postId = params.id
   const [isOpen, setIsOpen] = useState<boolean>(true)
 
   const handleClose = () => {
     setIsOpen(false)
+  }
+  const [deletePost] = useDeletePostMutation()
+
+  const handleDeletePost = async () => {
+    if (postId) {
+      try {
+        await deletePost({ id: +postId }).unwrap()
+        handleClose()
+      } catch (error) {
+        console.error('Failed to delete the post:', error)
+      }
+    }
   }
 
   let title = 'Close Post'
@@ -47,7 +64,11 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
             </Typography>
           </div>
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '15px' }}>
-            <Button style={{ marginTop: '20px', padding: '6px 36px' }} variant={'transparent'}>
+            <Button
+              onClick={variant === 'delete' ? handleDeletePost : handleClose}
+              style={{ marginTop: '20px', padding: '6px 36px' }}
+              variant={'transparent'}
+            >
               Yes
             </Button>
             <Button

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 
 import { useGetMeQuery } from '@/app/api/auth/authApi'
 import { selectAuthState } from '@/app/config/store/authSlice'
+import FollowIcon from '@/shared/assets/icons/FollowIcon'
 import UnfollowIcon from '@/shared/assets/icons/UnfollowIcon'
 import { DataPost } from '@/views/publicPageModal/DataArray'
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu'
@@ -22,7 +23,7 @@ type CommentsHeaderProps = {
 }
 export const CommentsHeader: React.FC<CommentsHeaderProps> = ({ postUserId, profileData }) => {
   const isAuth = useSelector(selectAuthState)
-  const isFollow = false
+  const [isFollow, setIsFollow] = useState(false)
   const { data: userData } = useGetMeQuery()
   const myId = userData?.userId
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -31,29 +32,51 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({ postUserId, prof
   return (
     <div className={s.commentsHeader}>
       <ProfileData imageUrl={profileData?.imgProfile} profileUrl={profileData?.urlProfile} />
-      {!isAuth && (
-        <DropdownMenuDemo
-          content={[
-            {
-              icon: <UnfollowIcon />,
-              label: 'Unfollow',
-              onSelect: () => setIsOpenModal(true),
-            },
-            {
-              icon: <CopyIcon />,
-              label: 'Copy Link',
-              onSelect: async () => {
-                try {
-                  await navigator.clipboard.writeText(currentUrl)
-                } catch (err) {
-                  console.error('error:', err)
-                }
+      {!isAuth &&
+        (myId !== postUserId ? (
+          <DropdownMenuDemo
+            content={[
+              {
+                icon: <UnfollowIcon />,
+                label: 'Edit Post',
+                onSelect: () => setIsOpenModal(true),
               },
-            },
-          ]}
-        />
-      )}
-      {isOpenModal && <ModalCloseDeleteUnfollowPost variant={'unfollow'} />}
+              {
+                icon: <CopyIcon />,
+                label: 'Delete Post',
+                onSelect: () => setIsOpenModal(true),
+              },
+            ]}
+          />
+        ) : (
+          <DropdownMenuDemo
+            content={[
+              {
+                icon: isFollow ? <UnfollowIcon /> : <FollowIcon />,
+                label: isFollow ? 'Unfollow' : 'Follow',
+                onSelect: () => {
+                  if (isFollow) {
+                    setIsFollow(false)
+                  } else {
+                    setIsFollow(true)
+                  }
+                },
+              },
+              {
+                icon: <CopyIcon />,
+                label: 'Copy Link',
+                onSelect: async () => {
+                  try {
+                    await navigator.clipboard.writeText(currentUrl)
+                  } catch (err) {
+                    console.error('error:', err)
+                  }
+                },
+              },
+            ]}
+          />
+        ))}
+      {isOpenModal && <ModalCloseDeleteUnfollowPost variant={'delete'} />}
     </div>
   )
 }
