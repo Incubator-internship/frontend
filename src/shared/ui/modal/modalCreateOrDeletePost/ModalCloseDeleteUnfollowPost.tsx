@@ -4,15 +4,23 @@ import React, { useState } from 'react'
 import { useDeletePostMutation } from '@/app/api/posts/postsApi'
 import { useParams } from 'next/navigation'
 
+import s from './modalCloseDeleteUnfollowPost.module.scss'
+
 import { Button } from '../../button/Button'
 import { Typography } from '../../typography/Typography'
 import { Modal } from '../Modal'
 
 type ModalCloseDeleteUnfollowPostProps = {
+  isOpenPublickModal: boolean
+  onClosePublickModal: () => void
+  onDelete: () => void
   variant: 'close' | 'delete' | 'unfollow'
 }
 
 export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPostProps> = ({
+  isOpenPublickModal,
+  onClosePublickModal,
+  onDelete,
   variant,
 }) => {
   const params = useParams()
@@ -55,7 +63,7 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
   }
 
   return (
-    <div style={{ maxWidth: '380px' }}>
+    <div className={s.modal} style={{ maxWidth: '380px' }}>
       <Modal isOpen={isOpen} onClose={handleClose} title={title}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ alignItems: 'center', display: 'flex' }}>

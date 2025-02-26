@@ -1,13 +1,17 @@
 'use client'
 
 import { useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
 import { useGetMeQuery } from '@/app/api/auth/authApi'
 import { selectAuthState } from '@/app/config/store/authSlice'
 import FollowIcon from '@/shared/assets/icons/FollowIcon'
 import UnfollowIcon from '@/shared/assets/icons/UnfollowIcon'
+import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/schemas'
+import { EdditPostModal } from '@/views/editPostModal/EdditPostModal'
 import { DataPost } from '@/views/publicPageModal/DataArray'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { DropdownMenu } from '@radix-ui/react-dropdown-menu'
 import { CopyIcon } from '@radix-ui/react-icons'
 
@@ -24,10 +28,20 @@ type CommentsHeaderProps = {
 export const CommentsHeader: React.FC<CommentsHeaderProps> = ({ postUserId, profileData }) => {
   const isAuth = useSelector(selectAuthState)
   const [isFollow, setIsFollow] = useState(false)
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false)
   const { data: userData } = useGetMeQuery()
   const myId = userData?.userId
-  const [isOpenModal, setIsOpenModal] = useState(false)
   const currentUrl = window.location.href
+  const methods = useForm<PostFormData>({
+    defaultValues: { description: '' },
+    resolver: zodResolver(maximumCharactersSchema),
+  })
+
+  const handleDeletePost = () => {
+    console.log('Post deleted')
+    setIsOpenModal(false)
+  }
 
   return (
     <div className={s.commentsHeader}>
@@ -39,7 +53,7 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({ postUserId, prof
               {
                 icon: <UnfollowIcon />,
                 label: 'Edit Post',
-                onSelect: () => setIsOpenModal(true),
+                onSelect: () => setIsOpenEditModal(true),
               },
               {
                 icon: <CopyIcon />,
@@ -76,7 +90,19 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({ postUserId, prof
             ]}
           />
         ))}
-      {isOpenModal && <ModalCloseDeleteUnfollowPost variant={'delete'} />}
+      {isOpenModal && (
+        <ModalCloseDeleteUnfollowPost
+          isOpenPublickModal={isOpenModal}
+          onClosePublickModal={() => setIsOpenModal(false)}
+          onDelete={handleDeletePost}
+          variant={'delete'}
+        />
+      )}
+      {isOpenEditModal && (
+        <FormProvider {...methods}>
+          <EdditPostModal isOpen={isOpenEditModal} onClose={() => setIsOpenEditModal(false)} />
+        </FormProvider>
+      )}
     </div>
   )
 }
