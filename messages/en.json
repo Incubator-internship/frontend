@@ -7,6 +7,20 @@
     "SignUp": "Sign up",
     "Login": "Log in"
   },
+  "Modal": {
+    "NextBtn": "Next",
+    "PublishBtn": "Publish"
+  },
+  "Sidebar": {
+    "Home": "Home",
+    "Create": "Create",
+    "Profile": "My Profile",
+    "Messenger": "Messenger",
+    "Search": "Search",
+    "Statistics": "Statistics",
+    "Favorites": "Favorites",
+    "Logout": "Log Out"
+  },
   "NewPasswordPage": {
     "CreateNewPasswordTitle": "Create new password",
     "NewPassword": "New password",
@@ -98,7 +112,13 @@
   "AddPostModal": {
     "MainModalTitle": "Add Photo",
     "MainModalBtn1": "Select from Computer",
-    "MainModalBtn2": "Open Draft"
+    "MainModalBtn2": "Open Draft",
+    "CroppingPhotoTitle": "Cropping",
+    "CroppingPhotoSettingsText": "Original",
+    "FiltersPhotoTitle": "Filters",
+    "PublishPhotoTitle": "Publication",
+    "PublishPhotoLabelTextarea": "Add publication descriptions",
+    "PublishPhotoLabelLocation": "Add location"
   },
   "HomePage": {
     "View All Comments": "View All Comments",
