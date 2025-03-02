@@ -20,11 +20,9 @@
 
   overflow: hidden;
 
-  // width: 100%;widthwidth
+  width: 100%;
   min-width: 378px;
-
-  // max-width: 500px;max-widthmax-width
-  min-height: 230px;
+  max-width: 500px;
 
   background-color: var(--color-dark-300);
   border: 1px solid var(--color-dark-100);
@@ -67,7 +65,7 @@
 }
 
 .body {
-  // padding: 12px 24px;padding
+  padding: 12px 24px 36px;
 
   color: var(--color-light-100);
   word-wrap: break-word;
@@ -75,6 +73,6 @@
   white-space: normal;
 }
 
-.btnPublish{
+.btnPublish {
   color: var(--color-accent-500);
 }
