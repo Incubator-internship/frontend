@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import russianFlag from '@/shared/assets/images/flag-1.png'
 import Image from 'next/image'
 
-import russianFlag from '../../assets/svg/Flag Russia.svg'
 import { Button } from './'
 
 const meta = {

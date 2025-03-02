@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ComponentPropsWithoutRef, PropsWithoutRef, useState } from 'react'
 
 import ArrowLeft from '@/shared/assets/icons/ArrowLeft'
 import Close from '@/shared/assets/icons/Close'
@@ -11,6 +11,7 @@ import { Typography } from '../typography'
 
 export type ModalProps = {
   children?: React.ReactNode
+  className?: string
   createPost?: () => void
   isOpen?: boolean
   isStepMode?: boolean
@@ -23,6 +24,7 @@ export type ModalProps = {
 
 export const Modal = ({
   children,
+  className,
   createPost,
   isOpen = true,
   isStepMode = false,
@@ -57,8 +59,8 @@ export const Modal = ({
   }
 
   return (
-    <div className={clsx(s.backdrop)} onClick={handleBackdropClick}>
-      <div className={s.modal}>
+    <div className={s.backdrop} onClick={handleBackdropClick}>
+      <div className={clsx(s.modal, className)}>
         <div className={clsx(s.head)}>
           {isStepMode ? (
             <div className={s.headWrapp}>

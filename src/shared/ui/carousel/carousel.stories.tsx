@@ -26,10 +26,10 @@ type Story = StoryObj<typeof Carousel>
 export const DefaultWithPhotos: Story = {
   render: () => {
     const photos: Photos[] = [
-      { id: 1, postId: 1, url: image1.src },
-      { id: 2, postId: 1, url: image2.src },
-      { id: 3, postId: 1, url: image3.src },
-      { id: 4, postId: 1, url: image4.src },
+      { id: '1', postId: '1', url: image1.src },
+      { id: '2', postId: '1', url: image2.src },
+      { id: '3', postId: '1', url: image3.src },
+      { id: '4', postId: '1', url: image4.src },
     ]
 
     return <Carousel photos={photos} />
@@ -46,7 +46,7 @@ export const DefaultWithArrayStrings: Story = {
 
 export const SingleImageWithArrayPhotos: Story = {
   render: () => {
-    const singlePhoto: Photos[] = [{ id: 1, postId: 1, url: image1.src }]
+    const singlePhoto: Photos[] = [{ id: '1', postId: '1', url: image1.src }]
 
     return <Carousel photos={singlePhoto} />
   },

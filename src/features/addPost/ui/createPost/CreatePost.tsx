@@ -10,6 +10,8 @@ import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/sc
 import { Modal } from '@/shared/ui/modal'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import s from './createPost.module.scss'
+
 import { convertPreviewToFile } from '../../utils/photoUtils'
 import PublushPhotoStep from '../publishPhotoStep/PublushPhotoStep'
 
@@ -86,6 +88,7 @@ export default function CreatePost({
       </Modal>
       <FormProvider {...methods}>
         <Modal
+          className={s.createPostModal}
           createPost={methods.handleSubmit(sendPostCallBack)}
           isOpen={isOpenStepsPostModal}
           isStepMode

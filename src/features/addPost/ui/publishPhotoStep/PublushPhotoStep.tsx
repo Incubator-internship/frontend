@@ -28,7 +28,7 @@ export default function PublushPhotoStep({ images }: Props) {
   return (
     <div>
       <div className={s.wrapper}>
-        <Carousel photos={photosForCarousel} />
+        <Carousel className={s.carousel} photos={photosForCarousel} />
         <div className={s.userPostWrapper}>
           <div className={s.userPost}>
             <div className={s.userProfile}>

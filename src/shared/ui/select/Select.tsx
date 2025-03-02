@@ -3,6 +3,8 @@ import * as React from 'react'
 import { ComponentPropsWithoutRef, ElementRef, forwardRef, useId } from 'react'
 
 import Arrow from '@/shared/assets/icons/Arrow'
+import FlagRus from '@/shared/assets/images/flag-1.png'
+import FlagUk from '@/shared/assets/images/flag-2.png'
 import { SelectItem } from '@/shared/ui/select/selectItem/SelectItem'
 import * as RadixSelect from '@radix-ui/react-select'
 import clsx from 'clsx'
@@ -12,8 +14,6 @@ import { useLocale, useTranslations } from 'next-intl'
 import s from './select.module.scss'
 import sItem from './selectItem/selectItem.module.scss'
 
-import FlagUk from '../..//assets/svg/Flag United Kingdom.svg'
-import FlagRus from '../../assets/svg/Flag Russia.svg'
 import { Typography } from '../typography'
 
 type selectItem = {

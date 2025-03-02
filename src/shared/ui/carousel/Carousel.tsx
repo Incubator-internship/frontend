@@ -8,10 +8,11 @@ import clsx from 'clsx'
 import s from './carousel.module.scss'
 
 type CarouselProps = {
+  className?: string
   photos: Photos[] | string[]
 }
 
-export const Carousel = ({ photos }: CarouselProps) => {
+export const Carousel = ({ className, photos }: CarouselProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const goToSlide = (index: number) => {
@@ -41,7 +42,7 @@ export const Carousel = ({ photos }: CarouselProps) => {
     : photos[currentImageIndex].url
 
   return (
-    <div className={s.carousel}>
+    <div className={clsx(s.carousel, className)}>
       <button className={s.prevButton} onClick={prevImage} type={'button'}>
         <ArrowLeft className={s.icon} />
       </button>
