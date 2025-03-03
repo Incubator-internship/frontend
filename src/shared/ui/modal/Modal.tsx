@@ -3,6 +3,7 @@ import React, { ComponentPropsWithoutRef, PropsWithoutRef, useState } from 'reac
 import ArrowLeft from '@/shared/assets/icons/ArrowLeft'
 import Close from '@/shared/assets/icons/Close'
 import clsx from 'clsx'
+import { useTranslations } from 'next-intl'
 
 import s from './modal.module.scss'
 
@@ -33,6 +34,7 @@ export const Modal = ({
   steps = [],
   title,
 }: ModalProps) => {
+  const t = useTranslations('Modal')
   const [step, setStep] = useState(0)
 
   if (!isOpen) {
@@ -72,12 +74,12 @@ export const Modal = ({
               <Typography as={'h2'}>{title && title[step]}</Typography>
               {step < steps.length - 1 && (
                 <Button onClick={goToNext} variant={'transparent'}>
-                  Next
+                  {t('NextBtn')}
                 </Button>
               )}
               {step === steps.length - 1 && (
                 <Button onClick={finishHandler} variant={'transparent'}>
-                  Publish
+                  {t('PublishBtn')}
                 </Button>
               )}
             </div>

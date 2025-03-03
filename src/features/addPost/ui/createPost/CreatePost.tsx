@@ -88,7 +88,7 @@ export default function CreatePost({
       <Modal
         isOpen={isOpenMainPostModal}
         onClose={() => setIsOpenMainPostModal(false)}
-        title={'Add Photo'}
+        title={t('MainModalTitle')}
       >
         <AddPhotoMainModal
           images={imageWithPreview}
@@ -114,7 +114,7 @@ export default function CreatePost({
             <FiltersPhotoStep images={imageWithPreview} key={2} />,
             <PublushPhotoStep images={imageWithPreview} key={3} onSubmit={sendPostCallBack} />,
           ]}
-          title={['Cropping', 'Filters', 'Publication']}
+          title={[t('CroppingPhotoTitle'), t('FiltersPhotoTitle'), t('PublishPhotoTitle')]}
         />
       </FormProvider>
       <Modal
