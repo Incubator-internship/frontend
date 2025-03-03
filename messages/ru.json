@@ -107,7 +107,12 @@
     "FiltersPhotoTitle": "Фильтры",
     "PublishPhotoTitle": "Публикация",
     "PublishPhotoLabelTextarea": "Добавить описание публикаций",
-    "PublishPhotoLabelLocation": "Добавить местоположение"
+    "PublishPhotoLabelLocation": "Добавить местоположение",
+    "AddPhotoErrorTitle": "Ошибка",
+    "AddPhotoErrorText1": "Фотография должна быть меньше 2 Мб",
+    "AddPhotoErrorText2": "Фотография должна быть в формате JPEG или PNG",
+    "AddPhotoErrorText3": "Допустимое количество фотографий",
+    "AddPhotoErrorBtn": "Хорошо"
   },
   "HomePage": {
     "View All Comments": "Показать все комментарии",

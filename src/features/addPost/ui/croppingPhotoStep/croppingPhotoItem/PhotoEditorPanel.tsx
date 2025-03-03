@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
 import AddImageIcon from '@/shared/assets/icons/AddImageIcon'
@@ -6,7 +6,6 @@ import Crop11 from '@/shared/assets/icons/Crop11'
 import Crop45 from '@/shared/assets/icons/Crop45'
 import Crop169 from '@/shared/assets/icons/Crop169'
 import Cropping from '@/shared/assets/icons/Cropping'
-import ImageIcon from '@/shared/assets/icons/ImageIcon'
 import Scale from '@/shared/assets/icons/Scale'
 import { getCroppedImg } from '@/shared/utils/cropImageUtils'
 import { useTranslations } from 'next-intl'
@@ -25,6 +24,7 @@ type Props = {
   setCrop: Dispatch<SetStateAction<{ x: number; y: number }>>
   setCroppedAreaPixels: Dispatch<SetStateAction<Area | null>>
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
+  setTextErrorModal?: (error: string) => void
   setZoom?: Dispatch<SetStateAction<number>>
   zoom?: number
 }
@@ -38,6 +38,7 @@ export const PhotoEditorPanel = ({
   setCrop,
   setCroppedAreaPixels,
   setImageWithPreview,
+  setTextErrorModal,
   setZoom,
   zoom,
 }: Props) => {
@@ -177,7 +178,11 @@ export const PhotoEditorPanel = ({
         </div>
       )}
       {showAddingWindow && (
-        <AddingWindow images={images} setImageWithPreview={setImageWithPreview} />
+        <AddingWindow
+          images={images}
+          setImageWithPreview={setImageWithPreview}
+          setTextErrorModal={setTextErrorModal}
+        />
       )}
     </div>
   )

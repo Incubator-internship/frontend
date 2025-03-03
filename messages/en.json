@@ -118,7 +118,12 @@
     "FiltersPhotoTitle": "Filters",
     "PublishPhotoTitle": "Publication",
     "PublishPhotoLabelTextarea": "Add publication descriptions",
-    "PublishPhotoLabelLocation": "Add location"
+    "PublishPhotoLabelLocation": "Add location",
+    "AddPhotoErrorTitle": "Error",
+    "AddPhotoErrorText1": "The photo must be less than 2 Mb",
+    "AddPhotoErrorText2": "The photo must be have JPEG or PNG format",
+    "AddPhotoErrorText3": "Number of photos allowed",
+    "AddPhotoErrorBtn": "Ok"
   },
   "HomePage": {
     "View All Comments": "View All Comments",
