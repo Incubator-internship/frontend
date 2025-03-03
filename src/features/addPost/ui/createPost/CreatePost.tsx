@@ -3,12 +3,14 @@ import { FileWithPath } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
 
 import { useCreatePostMutation } from '@/app/api/posts/postsApi'
+import { AddPhotoErrorModal } from '@/features/addPost/ui/addPhotoErrorModal/addPhotoErrorModal'
 import { AddPhotoMainModal } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoStep'
 import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
 import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/schemas'
 import { Modal } from '@/shared/ui/modal'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslations } from 'next-intl'
 
 import s from './createPost.module.scss'
 
@@ -29,7 +31,10 @@ export default function CreatePost({
   setIsOpenMainPostModal,
   setIsOpenStepsPostModal,
 }: Props) {
+  const t = useTranslations('AddPostModal')
+
   const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[]>([])
+  const [textErrorModal, setTextErrorModal] = useState('')
   const [createPost] = useCreatePostMutation()
 
   const methods = useForm<PostFormData>({
@@ -84,7 +89,19 @@ export default function CreatePost({
         onClose={() => setIsOpenMainPostModal(false)}
         title={'Add Photo'}
       >
-        <AddPhotoMainModal images={imageWithPreview} setImages={setImageWithPreview} />
+        <AddPhotoMainModal
+          images={imageWithPreview}
+          setImages={setImageWithPreview}
+          setTextErrorModal={setTextErrorModal}
+        />
+      </Modal>
+      <Modal
+        className={s.errorModal}
+        isOpen={!!textErrorModal}
+        onClose={() => setTextErrorModal('')}
+        title={t('AddPhotoErrorTitle')}
+      >
+        <AddPhotoErrorModal errorText={textErrorModal} setTextErrorModal={setTextErrorModal} />
       </Modal>
       <FormProvider {...methods}>
         <Modal

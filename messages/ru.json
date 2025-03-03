@@ -87,7 +87,12 @@
   "AddPostModal": {
     "MainModalTitle": "Добавить фото",
     "MainModalBtn1": "Выбрать с компьютера",
-    "MainModalBtn2": "Открыть черновик"
+    "MainModalBtn2": "Открыть черновик",
+    "AddPhotoErrorTitle": "Ошибка",
+    "AddPhotoErrorText1": "Фотография должна быть меньше 2 Мб",
+    "AddPhotoErrorText2": "Фотография должна быть в формате JPEG или PNG",
+    "AddPhotoErrorText3": "Допустимое количество фотографий",
+    "AddPhotoErrorBtn": "Хорошо"
   },
   "HomePage": {
     "View All Comments": "Показать все комментарии",

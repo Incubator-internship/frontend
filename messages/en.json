@@ -98,7 +98,12 @@
   "AddPostModal": {
     "MainModalTitle": "Add Photo",
     "MainModalBtn1": "Select from Computer",
-    "MainModalBtn2": "Open Draft"
+    "MainModalBtn2": "Open Draft",
+    "AddPhotoErrorTitle": "Error",
+    "AddPhotoErrorText1": "The photo must be less than 2 Mb",
+    "AddPhotoErrorText2": "The photo must be have JPEG or PNG format",
+    "AddPhotoErrorText3": "Number of photos allowed",
+    "AddPhotoErrorBtn": "Ok"
   },
   "HomePage": {
     "View All Comments": "View All Comments",

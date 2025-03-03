@@ -12,20 +12,23 @@ import s from './addPhotoMainModal.module.scss'
 type Props = {
   images: FileWithPreview[]
   setImages: Dispatch<SetStateAction<FileWithPreview[]>>
+  setTextErrorModal?: (error: string) => void
 }
 
 export const MAX_IMAGES = 10
 
-export const AddPhotoMainModal = ({ images, setImages }: Props) => {
+export const AddPhotoMainModal = ({ images, setImages, setTextErrorModal }: Props) => {
   const t = useTranslations('AddPostModal')
   const [error, setError] = useState('')
 
   const { acceptedFiles, getInputProps, getRootProps, open } = useDropzone({
     accept: { 'image/jpeg': [], 'image/png': [] },
-    maxSize: 20 * 1024 * 1024, // 20 MB in bytes
+    maxSize: 2 * 1024 * 1024, // 2 MB in bytes
     onDrop: acceptedFiles => {
-      if (images.length + acceptedFiles.length > MAX_IMAGES) {
-        setError(`You can only add up to ${MAX_IMAGES} images.`)
+      const totalImages = images.length + acceptedFiles.length
+
+      if (totalImages > MAX_IMAGES) {
+        setTextErrorModal?.(`${t('AddPhotoErrorText3')} - ${MAX_IMAGES}`)
 
         return
       }
@@ -42,17 +45,23 @@ export const AddPhotoMainModal = ({ images, setImages }: Props) => {
       setError('')
     },
     onDropRejected: fileRejections => {
-      const errorMessage = fileRejections
-        .map(fileRejection => {
-          if (fileRejection.errors[0].code === 'file-too-large') {
-            return 'File is too large. Maximum size is 20 MB.'
+      let errorMessage = ''
+
+      if (images.length + fileRejections.length > MAX_IMAGES) {
+        errorMessage = `${t('AddPhotoErrorText3')} - ${MAX_IMAGES}`
+      } else {
+        fileRejections.forEach(fileRejection => {
+          if (fileRejection.errors.some(error => error.code === 'file-too-large')) {
+            errorMessage = t('AddPhotoErrorText1')
           } else {
-            return 'Only JPEG and PNG images are allowed.'
+            errorMessage = t('AddPhotoErrorText2')
           }
         })
-        .join(' ')
+      }
 
-      setError(errorMessage)
+      if (errorMessage) {
+        setTextErrorModal?.(errorMessage)
+      }
     },
   })
 
@@ -62,7 +71,6 @@ export const AddPhotoMainModal = ({ images, setImages }: Props) => {
         <div {...getRootProps({ className: s.dropzone })}>
           <input {...getInputProps()} />
           <ImageIcon />
-          {error && <p style={{ color: 'red' }}>{error}</p>}
         </div>
       </div>
 
