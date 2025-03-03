@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction } from 'react'
 
 import { FileWithPreview } from '@/features/addPost/ui/createPost/CreatePost'
 import { PhotoEditorPanel } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoItem/PhotoEditorPanel'
-import { CroppingPhotoItem } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoItem/croppingPhotoItem'
 import { mapPhotosToCarouselItems } from '@/features/addPost/utils/photoUtils'
 import { Carousel } from '@/shared/ui/carousel'
 
@@ -14,9 +13,15 @@ type Props = {
   images: FileWithPreview[]
   onSaveCroppedImage: (newImgWithPreview: FileWithPreview) => void
   setImageWithPreview: Dispatch<SetStateAction<FileWithPreview[]>>
+  setTextErrorModal?: (error: string) => void
 }
 
-export const CroppingPhotoStep = ({ images, onSaveCroppedImage, setImageWithPreview }: Props) => {
+export const CroppingPhotoStep = ({
+  images,
+  onSaveCroppedImage,
+  setImageWithPreview,
+  setTextErrorModal,
+}: Props) => {
   const {
     aspect,
     crop,
@@ -43,6 +48,7 @@ export const CroppingPhotoStep = ({ images, onSaveCroppedImage, setImageWithPrev
           setCrop={setCrop}
           setCroppedAreaPixels={setCroppedAreaPixels}
           setImageWithPreview={setImageWithPreview}
+          setTextErrorModal={setTextErrorModal}
           setZoom={setZoom}
           zoom={zoom}
         />

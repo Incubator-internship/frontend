@@ -3,7 +3,7 @@ import { FileWithPath } from 'react-dropzone'
 import { FormProvider, useForm } from 'react-hook-form'
 
 import { useCreatePostMutation } from '@/app/api/posts/postsApi'
-import { AddPhotoErrorModal } from '@/features/addPost/ui/addPhotoErrorModal/addPhotoErrorModal'
+import { AddPhotoErrorModal } from '@/features/addPost/ui/addPhotoErrorModal/AddPhotoErrorModal'
 import { AddPhotoMainModal } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoStep'
 import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
@@ -35,6 +35,7 @@ export default function CreatePost({
 
   const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[]>([])
   const [textErrorModal, setTextErrorModal] = useState('')
+
   const [createPost] = useCreatePostMutation()
 
   const methods = useForm<PostFormData>({
@@ -95,14 +96,6 @@ export default function CreatePost({
           setTextErrorModal={setTextErrorModal}
         />
       </Modal>
-      <Modal
-        className={s.errorModal}
-        isOpen={!!textErrorModal}
-        onClose={() => setTextErrorModal('')}
-        title={t('AddPhotoErrorTitle')}
-      >
-        <AddPhotoErrorModal errorText={textErrorModal} setTextErrorModal={setTextErrorModal} />
-      </Modal>
       <FormProvider {...methods}>
         <Modal
           className={s.createPostModal}
@@ -116,6 +109,7 @@ export default function CreatePost({
               key={1}
               onSaveCroppedImage={onSaveCroppedImage}
               setImageWithPreview={setImageWithPreview}
+              setTextErrorModal={setTextErrorModal}
             />,
             <FiltersPhotoStep images={imageWithPreview} key={2} />,
             <PublushPhotoStep images={imageWithPreview} key={3} onSubmit={sendPostCallBack} />,
@@ -123,6 +117,14 @@ export default function CreatePost({
           title={['Cropping', 'Filters', 'Publication']}
         />
       </FormProvider>
+      <Modal
+        className={s.errorModal}
+        isOpen={!!textErrorModal}
+        onClose={() => setTextErrorModal('')}
+        title={t('AddPhotoErrorTitle')}
+      >
+        <AddPhotoErrorModal errorText={textErrorModal} setTextErrorModal={setTextErrorModal} />
+      </Modal>
     </div>
   )
 }
