@@ -7,6 +7,20 @@
     "SignUp": "Зарегистрироваться",
     "Login": "Войти"
   },
+  "Modal": {
+    "NextBtn": "Следующий шаг",
+    "PublishBtn": "Опубликовать"
+  },
+  "Sidebar": {
+    "Home": "Главная",
+    "Create": "Создать",
+    "Profile": "Мой профиль",
+    "Messenger": "Мессенджер",
+    "Search": "Поиск",
+    "Statistics": "Статистика",
+    "Favorites": "Избранное",
+    "Logout": "Выйти"
+  },
   "NewPasswordPage": {
     "CreateNewPasswordTitle": "Создать новый пароль",
     "NewPassword": "Новый пароль",
@@ -87,7 +101,13 @@
   "AddPostModal": {
     "MainModalTitle": "Добавить фото",
     "MainModalBtn1": "Выбрать с компьютера",
-    "MainModalBtn2": "Открыть черновик"
+    "MainModalBtn2": "Открыть черновик",
+    "CroppingPhotoTitle": "Обрезка",
+    "CroppingPhotoSettingsText": "Оригинал",
+    "FiltersPhotoTitle": "Фильтры",
+    "PublishPhotoTitle": "Публикация",
+    "PublishPhotoLabelTextarea": "Добавить описание публикаций",
+    "PublishPhotoLabelLocation": "Добавить местоположение"
   },
   "HomePage": {
     "View All Comments": "Показать все комментарии",

@@ -18,6 +18,7 @@ import {
   TrendingUpIcon,
   TrendingUpOutlineIcon,
 } from '@/shared/assets/icons'
+import { useTranslations } from 'next-intl'
 
 export type MenuItem = {
   Icon: React.ComponentType<{}>

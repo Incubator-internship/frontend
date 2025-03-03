@@ -9,6 +9,7 @@ import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filters
 import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/schemas'
 import { Modal } from '@/shared/ui/modal'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslations } from 'next-intl'
 
 import s from './createPost.module.scss'
 
@@ -29,6 +30,8 @@ export default function CreatePost({
   setIsOpenMainPostModal,
   setIsOpenStepsPostModal,
 }: Props) {
+  const t = useTranslations('AddPostModal')
+
   const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[]>([])
   const [createPost] = useCreatePostMutation()
 
@@ -82,7 +85,7 @@ export default function CreatePost({
       <Modal
         isOpen={isOpenMainPostModal}
         onClose={() => setIsOpenMainPostModal(false)}
-        title={'Add Photo'}
+        title={t('MainModalTitle')}
       >
         <AddPhotoMainModal images={imageWithPreview} setImages={setImageWithPreview} />
       </Modal>
@@ -103,7 +106,7 @@ export default function CreatePost({
             <FiltersPhotoStep images={imageWithPreview} key={2} />,
             <PublushPhotoStep images={imageWithPreview} key={3} onSubmit={sendPostCallBack} />,
           ]}
-          title={['Cropping', 'Filters', 'Publication']}
+          title={[t('CroppingPhotoTitle'), t('FiltersPhotoTitle'), t('PublishPhotoTitle')]}
         />
       </FormProvider>
     </div>

@@ -10,6 +10,7 @@ import { Carousel } from '@/shared/ui/carousel'
 import { TextareaWithControl } from '@/shared/ui/textareaControl'
 import { Typography } from '@/shared/ui/typography'
 import clsx from 'clsx'
+import { useTranslations } from 'next-intl'
 
 import s from './publishPhotoStep.module.scss'
 
@@ -21,6 +22,7 @@ type Props = {
 }
 
 export default function PublushPhotoStep({ images }: Props) {
+  const t = useTranslations('AddPostModal')
   const { control, watch } = useFormContext<PostFormData>()
   const descriptionValue = watch('description') || ''
   const photosForCarousel = mapPhotosToCarouselItems(images ?? [])
@@ -43,10 +45,9 @@ export default function PublushPhotoStep({ images }: Props) {
             <form>
               <TextareaWithControl
                 control={control}
-                label={'Add publication descriptions'}
+                label={t('PublishPhotoLabelTextarea')}
                 maxLength={500}
                 name={'description'}
-                placeholder={'Text-area'}
               />
               <Typography
                 className={clsx(s.count, { [s.maxCharacters]: descriptionValue.length >= 500 })}
@@ -58,7 +59,7 @@ export default function PublushPhotoStep({ images }: Props) {
           </div>
           <div className={s.userLocation}>
             <Typography as={'span'} className={s.locationCity} variant={'caption'}>
-              Add location
+              {t('PublishPhotoLabelLocation')}
             </Typography>
             <Typography className={s.locationDetail} variant={'regularText14'}>
               New York

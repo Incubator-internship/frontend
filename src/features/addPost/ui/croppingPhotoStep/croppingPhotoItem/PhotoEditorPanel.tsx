@@ -9,6 +9,7 @@ import Cropping from '@/shared/assets/icons/Cropping'
 import ImageIcon from '@/shared/assets/icons/ImageIcon'
 import Scale from '@/shared/assets/icons/Scale'
 import { getCroppedImg } from '@/shared/utils/cropImageUtils'
+import { useTranslations } from 'next-intl'
 
 import s from './croppingPhotoItem.module.scss'
 
@@ -40,6 +41,8 @@ export const PhotoEditorPanel = ({
   setZoom,
   zoom,
 }: Props) => {
+  const t = useTranslations('AddPostModal')
+
   const [originalImages, setOriginalImages] = useState<Map<string, string>>(new Map())
   const [showAddingWindow, setShowAddingWindow] = useState<boolean>(false)
   const [showScaleWindow, setShowScaleWindow] = useState<boolean>(false)
@@ -142,7 +145,7 @@ export const PhotoEditorPanel = ({
       {showCroppingWindow && (
         <div className={s.settingsCrop}>
           <div className={s.settingsCropBtn} onClick={resetToOriginal}>
-            Original
+            {t('CroppingPhotoSettingsText')}
           </div>
           <div
             className={s.settingsCropBtn}
