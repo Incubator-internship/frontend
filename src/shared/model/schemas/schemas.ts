@@ -16,6 +16,7 @@ export const usernameSchema = z
 export const createUsernameSchema = (t: (key: string) => string) =>
   z
     .string()
+    .trim()
     .min(6, { message: t('UsernameMin') })
     .max(30, { message: t('UsernameMax') })
     .regex(/^[A-Za-z0-9_-]+$/, {

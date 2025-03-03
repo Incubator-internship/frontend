@@ -24,7 +24,7 @@ export const Header = () => {
   return (
     <header className={s.header}>
       <Link className={s.logo} href={'/'}>
-        Instagram
+        Inctagram
       </Link>
       <div className={s.container}>
         <Select defaultValue={'2'} items={[]} variant={'narrow'} />

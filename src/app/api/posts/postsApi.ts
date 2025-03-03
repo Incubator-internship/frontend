@@ -1,7 +1,6 @@
 import { inctagramApi } from '../inctagramApi'
 import {
   AllPosts,
-  CreatePost,
   CreatePostResponse,
   DeletePost,
   PostDataByUserId,

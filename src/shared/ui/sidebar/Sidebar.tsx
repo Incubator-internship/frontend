@@ -8,10 +8,9 @@ import React, {
 } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { useLogoutMutation } from '@/app/api/auth/authApi'
+import { useGetMeQuery, useLogoutMutation } from '@/app/api/auth/authApi'
 import { logoutStore, selectAuthState } from '@/app/config/store/authSlice'
 import CreatePost from '@/features/addPost/ui/createPost/CreatePost'
-import { LogOutOutlineIcon } from '@/shared/assets/icons'
 import { Portal } from '@/shared/ui/portal/Portal'
 import clsx from 'clsx'
 import { usePathname, useRouter } from 'next/navigation'
@@ -33,6 +32,8 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
   const dispatch = useDispatch()
   const locale = useLocale()
   const pathname = usePathname()
+
+  const { data: me } = useGetMeQuery()
 
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false)
   // const [isCreateModalOpen, setCreateModalOpen] = useState(false)
@@ -72,9 +73,14 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
       </div>
 
       {/* Modal Logout */}
-      <Modal isOpen={isLogoutModalOpen} onClose={toggleLogoutModal} title={'Log Out'}>
+      <Modal
+        className={s.sidebarModal}
+        isOpen={isLogoutModalOpen}
+        onClose={toggleLogoutModal}
+        title={'Log Out'}
+      >
         <Typography as={'p'} className={s.sidebarModalText} variant={'body1'}>
-          Are you really want to log out of your account “Epam@epam.com”?
+          Are you really want to log out of your account <b>{me?.email}</b>?
         </Typography>
         <div className={s.buttonWrapper}>
           <Button className={s.sidebarModalButton} onClick={handleLogoutConfirm}>

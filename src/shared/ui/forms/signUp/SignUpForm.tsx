@@ -26,7 +26,7 @@ const createSignUpFormSchema = (t: (key: string) => string) =>
   z
     .object({
       agree: createAgreeSchema(t),
-      confirmPassword: createPasswordSchema(t),
+      confirmPassword: z.string(),
       email: createEmailSchema(t),
       password: createPasswordSchema(t),
       username: createUsernameSchema(t),
@@ -34,6 +34,18 @@ const createSignUpFormSchema = (t: (key: string) => string) =>
     .refine(data => data.password === data.confirmPassword, {
       message: t('PasswordMatch'),
       path: ['confirmPassword'],
+    })
+    .superRefine((data, ctx) => {
+      const confirmPasswordValidation = createPasswordSchema(t).safeParse(data.confirmPassword)
+
+      if (!confirmPasswordValidation.success) {
+        for (const issue of confirmPasswordValidation.error.issues) {
+          ctx.addIssue({
+            ...issue,
+            path: ['confirmPassword'],
+          })
+        }
+      }
     })
 
 export type SignUpFormValues = z.infer<ReturnType<typeof createSignUpFormSchema>>
