@@ -1,8 +1,6 @@
 'use client'
 
-import { useSelector } from 'react-redux'
-
-import { selectAuthState } from '@/app/config/store/authSlice'
+import { useGetMeQuery } from '@/app/api/auth/authApi'
 import BellOutline from '@/shared/assets/icons/BellOutline'
 import { Button } from '@/shared/ui/button'
 import { Select } from '@/shared/ui/select'
@@ -14,9 +12,9 @@ import s from './header.module.scss'
 export const Header = () => {
   const locale = useLocale()
 
-  const isAuth = useSelector(selectAuthState)
+  const { data: userData } = useGetMeQuery()
+  const isAuth = !!userData
 
-  // FIX: (здесь ниже заглушка, но можно подключить селектор для получения реального значения)
   const count = 3
 
   const t = useTranslations('Header')
