@@ -7,13 +7,12 @@ import { redirect } from 'next/navigation'
 import PublicPage from './publicPage/ui/PublicPage'
 
 export default async function Home() {
-  const { isAuth } = await checkAuth()
+  const { isAuth, userId } = await checkAuth()
   const locale = cookies().get('NEXT_LOCALE')?.value || 'en'
 
   if (isAuth) {
-    redirect(`/${locale}/profile`)
+    redirect(`/${locale}/profile/${userId}`)
   }
-  console.log(isAuth)
 
   return <PublicPage />
 }
