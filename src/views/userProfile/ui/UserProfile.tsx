@@ -2,6 +2,7 @@ import React from 'react'
 
 import AvatarImg from '@/shared/assets/images/userProfile/profileAvatar.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
+import { Button } from '@/shared/ui/button'
 import { Sidebar } from '@/shared/ui/sidebar'
 import { Typography } from '@/shared/ui/typography'
 import { checkAuth } from '@/shared/utils/checkAuth'
@@ -14,7 +15,7 @@ import s from './userProfile.module.scss'
 export default async function UserProfile({ params }: { params: { userId: string } }) {
   const { isAuth, userId: authUserId } = await checkAuth()
 
-  const userId = params?.userId || authUserId
+  const userId = isAuth ? authUserId : params?.userId
 
   const { posts } = await getPostsByUserId(`${userId}`)
 
@@ -23,7 +24,7 @@ export default async function UserProfile({ params }: { params: { userId: string
   )
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div className={s.userPage}>
       {isAuth && <Sidebar />}
       <section className={s.userProfile}>
         <div className={s.info}>
@@ -34,6 +35,9 @@ export default async function UserProfile({ params }: { params: { userId: string
           <div className={s.bio}>
             <h2 className={s.username}>
               URLProfile{userId} - Auth:{isAuth ? 'true' : 'false'}
+              {Number(params?.userId) === authUserId && (
+                <Button variant={'secondary'}>Profile Settings</Button>
+              )}
             </h2>
             <div className={s.stats}>
               <div>
