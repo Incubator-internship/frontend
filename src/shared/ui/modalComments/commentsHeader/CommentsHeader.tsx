@@ -40,15 +40,14 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({ postUserId, prof
   })
 
   const handleDeletePost = () => {
-    console.log('Post deleted')
     setIsOpenModal(false)
   }
 
   return (
     <div className={s.commentsHeader}>
       <ProfileData imageUrl={profileData?.imgProfile} profileUrl={profileData?.urlProfile} />
-      {isAuth &&
-        (myId !== postUserId ? (
+      {!isAuth &&
+        (myId === postUserId ? (
           <DropdownMenuDemo
             content={[
               {
@@ -93,8 +92,8 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({ postUserId, prof
         ))}
       {isOpenModal && (
         <ModalCloseDeleteUnfollowPost
-          isOpenPublickModal={isOpenModal}
-          onClosePublickModal={() => setIsOpenModal(false)}
+          isOpenModal={isOpenModal}
+          onCloseModal={() => setIsOpenModal(false)}
           onDelete={handleDeletePost}
           variant={'delete'}
         />

@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 
 import { useDeletePostMutation } from '@/app/api/posts/postsApi'
-import { useParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 import s from './modalCloseDeleteUnfollowPost.module.scss'
 
@@ -11,32 +11,28 @@ import { Typography } from '../../typography/Typography'
 import { Modal } from '../Modal'
 
 type ModalCloseDeleteUnfollowPostProps = {
-  isOpenPublickModal: boolean
-  onClosePublickModal: () => void
+  isOpenModal: boolean
+  onCloseModal: () => void
   onDelete: () => void
   variant: 'close' | 'delete' | 'unfollow'
 }
 
 export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPostProps> = ({
-  isOpenPublickModal,
-  onClosePublickModal,
+  isOpenModal,
+  onCloseModal,
   onDelete,
   variant,
 }) => {
-  const params = useParams()
-  const postId = params.id
-  const [isOpen, setIsOpen] = useState<boolean>(true)
-
-  const handleClose = () => {
-    setIsOpen(false)
-  }
+  const params = useSearchParams()
+  const postId = params.get('postId')
   const [deletePost] = useDeletePostMutation()
 
   const handleDeletePost = async () => {
     if (postId) {
       try {
         await deletePost({ id: +postId }).unwrap()
-        handleClose()
+        onDelete()
+        onCloseModal()
       } catch (error) {
         console.error('Failed to delete the post:', error)
       }
@@ -64,7 +60,7 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
 
   return (
     <div className={s.modal} style={{ maxWidth: '380px' }}>
-      <Modal isOpen={isOpen} onClose={handleClose} title={title}>
+      <Modal isOpen={isOpenModal} onClose={onCloseModal} title={title}>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <div style={{ alignItems: 'center', display: 'flex' }}>
             <Typography as={'p'} style={{ marginLeft: '15px' }} variant={'body1'}>
@@ -73,14 +69,14 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
           </div>
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '15px' }}>
             <Button
-              onClick={variant === 'delete' ? handleDeletePost : handleClose}
+              onClick={variant === 'delete' ? handleDeletePost : onCloseModal}
               style={{ marginTop: '20px', padding: '6px 36px' }}
               variant={'transparent'}
             >
               Yes
             </Button>
             <Button
-              onClick={handleClose}
+              onClick={onCloseModal}
               style={{ marginLeft: '15px', marginTop: '20px', padding: '6px 36px' }}
             >
               No
