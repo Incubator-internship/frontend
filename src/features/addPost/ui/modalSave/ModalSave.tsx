@@ -9,10 +9,9 @@ type Props = {
   onClose?: () => void
   onDiscard?: () => void
   onSaveDraft?: () => void
-  stateModal?: boolean
 }
 
-export const ModalSave = ({ isOpen, onClose, onDiscard, onSaveDraft, stateModal }: Props) => {
+export const ModalSave = ({ isOpen, onClose, onDiscard, onSaveDraft }: Props) => {
   return (
     <div>
       <Modal isOpen={isOpen} onClose={onClose} title={'Close'}>
