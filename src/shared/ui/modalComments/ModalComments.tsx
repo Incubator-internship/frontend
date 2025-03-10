@@ -11,15 +11,16 @@ import { CommentsFooter } from './commentsFooter'
 import { CommentsHeader } from './commentsHeader'
 
 type ModalCommentsProps = {
+  onClose: () => void
   post?: PostsDataByPostId
 }
 
-export const ModalComments = ({ post }: ModalCommentsProps) => {
+export const ModalComments = ({ onClose, post }: ModalCommentsProps) => {
   const post2 = DataArray
 
   return (
     <div className={s.modalComments}>
-      <CommentsHeader postUserId={post?.userId} profileData={post2.dataPost} />
+      <CommentsHeader onClose={onClose} postUserId={post?.userId} profileData={post2.dataPost} />
       <CommentBlock comments={post2.comments} contentData={post} />
       <CommentsFooter
         datePost={post?.createdAt}

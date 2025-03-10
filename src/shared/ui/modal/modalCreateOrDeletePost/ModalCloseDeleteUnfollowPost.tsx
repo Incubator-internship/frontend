@@ -13,6 +13,7 @@ import { Modal } from '../Modal'
 type ModalCloseDeleteUnfollowPostProps = {
   isOpenModal: boolean
   onCloseModal: () => void
+  onCloseParentModal: () => void
   onDelete: () => void
   variant: 'close' | 'delete' | 'unfollow'
 }
@@ -20,6 +21,7 @@ type ModalCloseDeleteUnfollowPostProps = {
 export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPostProps> = ({
   isOpenModal,
   onCloseModal,
+  onCloseParentModal,
   onDelete,
   variant,
 }) => {
@@ -33,6 +35,7 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
         await deletePost({ id: +postId }).unwrap()
         onDelete()
         onCloseModal()
+        onCloseParentModal()
       } catch (error) {
         console.error('Failed to delete the post:', error)
       }

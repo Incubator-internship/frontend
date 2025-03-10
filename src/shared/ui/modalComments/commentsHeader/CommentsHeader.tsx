@@ -23,10 +23,15 @@ import { ModalCloseDeleteUnfollowPost } from '../../modal/modalCreateOrDeletePos
 import { ProfileData } from '../profileData'
 
 type CommentsHeaderProps = {
+  onClose: () => void
   postUserId?: number
   profileData?: DataPost
 }
-export const CommentsHeader: React.FC<CommentsHeaderProps> = ({ postUserId, profileData }) => {
+export const CommentsHeader: React.FC<CommentsHeaderProps> = ({
+  onClose,
+  postUserId,
+  profileData,
+}) => {
   const isAuth = useSelector(selectAuthState)
   const [isFollow, setIsFollow] = useState(false)
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -94,6 +99,7 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({ postUserId, prof
         <ModalCloseDeleteUnfollowPost
           isOpenModal={isOpenModal}
           onCloseModal={() => setIsOpenModal(false)}
+          onCloseParentModal={onClose}
           onDelete={handleDeletePost}
           variant={'delete'}
         />
