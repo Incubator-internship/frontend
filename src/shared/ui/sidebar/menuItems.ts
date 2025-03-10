@@ -31,48 +31,49 @@ export type MenuItem = {
 
 export const getMenuItems = (
   toggleCreateModal: () => void,
-  toggleLogoutModal: () => void
+  toggleLogoutModal: () => void,
+  t: (key: string) => string
 ): MenuItem[] => [
-  { Icon: HomeIcon, IconOutline: HomeOutlineIcon, label: 'Home', path: '/home' },
+  { Icon: HomeIcon, IconOutline: HomeOutlineIcon, label: t('Home'), path: '/home' },
   {
     Icon: PlusSquareIcon,
     IconOutline: PlusSquareOutlineIcon,
-    label: 'Create',
+    label: t('Create'),
     onClick: toggleCreateModal,
     path: '',
   },
-  { Icon: PersonIcon, IconOutline: PersonOutlineIcon, label: 'My Profile', path: '/profile' },
+  { Icon: PersonIcon, IconOutline: PersonOutlineIcon, label: t('My Profile'), path: '/profile' },
   {
     Icon: MessageCircleIcon,
     IconOutline: MessageCircleOutlineIcon,
     disabled: true,
-    label: 'Messenger',
+    label: t('Messenger'),
     path: '/messenger',
   },
   {
     Icon: SearchIcon,
     IconOutline: SearchOutlineIcon,
     disabled: true,
-    label: 'Search',
+    label: t('Search'),
     path: '/search',
   },
   {
     Icon: TrendingUpIcon,
     IconOutline: TrendingUpOutlineIcon,
-    label: 'Statistics',
+    label: t('Statistics'),
     path: '/statistics',
   },
   {
     Icon: BookmarkIcon,
     IconOutline: BookmarkOutlineIcon,
     disabled: true,
-    label: 'Favourites',
+    label: t('Favorites'),
     path: '/favourites',
   },
   {
     Icon: LogOutIcon,
     IconOutline: LogOutOutlineIcon,
-    label: 'Log Out',
+    label: t('Logout'),
     onClick: toggleLogoutModal,
     path: '',
   },

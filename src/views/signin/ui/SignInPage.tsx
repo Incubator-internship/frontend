@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { useLoginMutation } from '@/app/api/auth/authApi'
+import { useGetMeQuery, useLoginMutation } from '@/app/api/auth/authApi'
 import { LoginData } from '@/app/api/auth/authApi.types'
 import { loginStore, logoutStore, selectAuthState } from '@/app/config/store/authSlice'
 import { Schema, SignInForm } from '@/shared/ui/forms/signIn'
@@ -16,10 +16,14 @@ import s from './signInPage.module.scss'
 
 export default function SignInPage() {
   const [login, { data, isError, isLoading, isSuccess }] = useLoginMutation()
+
   const router = useRouter()
 
   const dispatch = useDispatch()
   const locale = useLocale()
+
+  const { data: userData, isError: isMeError, isLoading: isMeLoading } = useGetMeQuery()
+  const userId = userData?.userId
 
   const handleSubmit = (data: Schema) => {
     const loginDataForRequest: LoginData = {
@@ -31,12 +35,12 @@ export default function SignInPage() {
   }
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && userId) {
       localStorage.setItem('accessToken', data.accessToken)
       dispatch(loginStore())
-      router.push(`/${locale}/profile`)
+      router.push(`/${locale}/profile/${userId}`)
     }
-  }, [data, isSuccess, router, locale, dispatch])
+  }, [data, isSuccess, router, locale, dispatch, userId])
 
   const renderContent = () => {
     if (isLoading) {

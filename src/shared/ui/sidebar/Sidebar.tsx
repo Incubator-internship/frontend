@@ -14,7 +14,7 @@ import CreatePost from '@/features/addPost/ui/createPost/CreatePost'
 import { Portal } from '@/shared/ui/portal/Portal'
 import clsx from 'clsx'
 import { usePathname, useRouter } from 'next/navigation'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 import s from './sidebar.module.scss'
 
@@ -32,6 +32,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
   const dispatch = useDispatch()
   const locale = useLocale()
   const pathname = usePathname()
+  const t = useTranslations('Sidebar')
 
   const { data: me } = useGetMeQuery()
 
@@ -53,7 +54,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
     toggleLogoutModal()
   }
 
-  const menuItems = getMenuItems(toggleCreateModal, toggleLogoutModal)
+  const menuItems = getMenuItems(toggleCreateModal, toggleLogoutModal, t)
 
   return (
     <nav className={clsx(s.nav, className)} ref={ref} {...rest}>
@@ -80,14 +81,14 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
         title={'Log Out'}
       >
         <Typography as={'p'} className={s.sidebarModalText} variant={'body1'}>
-          Are you really want to log out of your account <b>{me?.email}</b>?
+          {t('Are you really want to log out of your account')} <b>{me?.email}</b>?
         </Typography>
         <div className={s.buttonWrapper}>
           <Button className={s.sidebarModalButton} onClick={handleLogoutConfirm}>
-            Yes
+            {t('Yes')}
           </Button>
           <Button className={s.sidebarModalButton} onClick={toggleLogoutModal}>
-            No
+            {t('No')}
           </Button>
         </div>
       </Modal>

@@ -1,40 +1,17 @@
-'use client'
-
-import { useEffect, useState } from 'react'
-
-import { useGetMeQuery } from '@/app/api/auth/authApi'
-import { useGetUsersQuery } from '@/app/api/inctagramApi'
-import CreatePost from '@/features/addPost/ui/createPost/CreatePost'
-import { Button } from '@/shared/ui/button'
-import { Portal } from '@/shared/ui/portal/Portal'
-import { Sidebar } from '@/shared/ui/sidebar'
+import { checkAuth } from '@/shared/utils/checkAuth'
+import PublicPage from '@/views/publicPage/ui/PublicPage'
 import UserProfile from '@/views/userProfile/ui/UserProfile'
 
-export default function ProfilePage() {
-  // const { data: me } = useGetMeQuery()
-  // const { data: users } = useGetUsersQuery()
+export default async function ProfilePage() {
+  const { isAuth, userId } = await checkAuth()
 
-  // const [isOpenMainPostModal, setIsOpenMainPostModal] = useState<boolean>(false)
-  // const [isOpenStepsPostModal, setIsOpenStepsPostModal] = useState<boolean>(false)
+  if (!isAuth) {
+    return <PublicPage />
+  }
 
   return (
     <div style={{ display: 'flex' }}>
-      <Sidebar />
-      <UserProfile />
-      {/* <div>
-        Profile Page - <b>{me?.login}</b>
-        <Button onClick={() => setIsOpenMainPostModal(true)}>addpost</Button>
-        {setIsOpenMainPostModal && (
-          <Portal containerId={'portal'}>
-            <CreatePost
-              isOpenMainPostModal={isOpenMainPostModal}
-              isOpenStepsPostModal={isOpenStepsPostModal}
-              setIsOpenMainPostModal={setIsOpenMainPostModal}
-              setIsOpenStepsPostModal={setIsOpenStepsPostModal}
-            />
-          </Portal>
-        )}
-      </div> */}
+      <UserProfile params={{ userId: userId }} />
     </div>
   )
 }
