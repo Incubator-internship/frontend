@@ -12,7 +12,7 @@ const PublicPage = async () => {
   const t = await getTranslations('PublicPage')
   const { posts } = data
 
-  // const { nextCursor, posts } = data //NOTE: for future pagination
+  // const { nextCursor, posts } = data //TODO: for future pagination
 
   //TODO: fetch users count
   const numberOfUsers: string = '9213'
@@ -26,7 +26,7 @@ const PublicPage = async () => {
             .padStart(numberOfUsers.length + 2, '0')
             .split('')
             .map((number, i) => (
-              <span className={s.el} key={number + i}>
+              <span className={s.el} key={i}>
                 {number}
               </span>
             ))}

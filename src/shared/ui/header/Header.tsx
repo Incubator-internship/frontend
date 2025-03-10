@@ -2,6 +2,7 @@
 
 import { useSelector } from 'react-redux'
 
+import { useGetMeQuery } from '@/app/api/auth/authApi'
 import { selectAuthState } from '@/app/config/store/authSlice'
 import BellOutline from '@/shared/assets/icons/BellOutline'
 import { Button } from '@/shared/ui/button'
@@ -15,6 +16,9 @@ export const Header = () => {
   const locale = useLocale()
 
   const isAuth = useSelector(selectAuthState)
+
+  // const { data: userData, isLoading, isError } = useGetMeQuery();
+  // const isAuth = !!userData;
 
   // FIX: (здесь ниже заглушка, но можно подключить селектор для получения реального значения)
   const count = 3

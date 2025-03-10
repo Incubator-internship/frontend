@@ -1,8 +1,13 @@
+.userPage {
+  display: flex;
+  justify-content: center;
+}
+
 .userProfile {
   display: grid;
   grid-template:
-    "info" auto
-    "gallery" auto /
+    'info' auto
+    'gallery' auto /
     936px;
   gap: var(--font-size-xxl);
   justify-content: center;
@@ -37,6 +42,8 @@
       font-size: var(--font-size-xxl);
       font-weight: var(--font-weight-bold);
       line-height: var(--line-height-l);
+      display: flex;
+      justify-content: space-between;
     }
 
     .stats {
@@ -68,25 +75,16 @@
     gap: 12px;
     justify-content: space-between;
 
-
-
     .cardItemImage {
       position: relative;
       width: 100%;
       min-height: 240px;
     }
 
-    .cardItemImage img{
+    .cardItemImage img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
 }
-
-
-  
-  
-  
-  
-  

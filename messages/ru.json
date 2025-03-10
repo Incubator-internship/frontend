@@ -14,12 +14,15 @@
   "Sidebar": {
     "Home": "Главная",
     "Create": "Создать",
-    "Profile": "Мой профиль",
+    "My Profile": "Мой профиль",
     "Messenger": "Мессенджер",
     "Search": "Поиск",
     "Statistics": "Статистика",
     "Favorites": "Избранное",
-    "Logout": "Выйти"
+    "Logout": "Выйти",
+    "Are you really want to log out of your account": "Вы действительно хотите выйти из своего аккаунта",
+    "Yes": "Да",
+    "No": "Нет"
   },
   "NewPasswordPage": {
     "CreateNewPasswordTitle": "Создать новый пароль",

@@ -5,7 +5,8 @@
   },
   "Header": {
     "SignUp": "Sign up",
-    "Login": "Log in"
+    "Login": "Log in",
+    "locale": "en"
   },
   "Modal": {
     "NextBtn": "Next",
@@ -14,12 +15,15 @@
   "Sidebar": {
     "Home": "Home",
     "Create": "Create",
-    "Profile": "My Profile",
+    "My Profile": "My Profile",
     "Messenger": "Messenger",
     "Search": "Search",
     "Statistics": "Statistics",
     "Favorites": "Favorites",
-    "Logout": "Log Out"
+    "Logout": "Log Out",
+    "Are you really want to log out of your account": "Are you really want to log out of your account",
+    "Yes": "Да",
+    "No": "Нет"
   },
   "NewPasswordPage": {
     "CreateNewPasswordTitle": "Create new password",

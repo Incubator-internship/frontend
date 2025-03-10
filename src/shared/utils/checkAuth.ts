@@ -19,8 +19,13 @@ export async function checkAuth() {
     if (!res.ok) {
       return { isAuth: false }
     }
+    const data = await res.json()
 
-    return { isAuth: true }
+    if (!data || !data.userId) {
+      return { isAuth: false }
+    }
+
+    return { isAuth: true, userId: data.userId }
   } catch (err) {
     console.error('Auth check failed:', err)
 
