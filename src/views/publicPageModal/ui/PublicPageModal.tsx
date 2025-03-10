@@ -1,10 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-
 import { useGetPostsIdQuery } from '@/app/api/posts/postsApi'
 import Close from '@/shared/assets/icons/Close'
-import { ModalCloseDeleteUnfollowPost } from '@/shared/ui/modal/modalCreateOrDeletePost'
 import { skipToken } from '@reduxjs/toolkit/query'
 
 import s from './publicPageModal.module.scss'
@@ -20,7 +17,6 @@ export type PublicPageModalProps = {
 
 export const PublicPageModal = ({ isOpen = true, onClose, postId }: PublicPageModalProps) => {
   const { data, isError, isLoading } = useGetPostsIdQuery(postId !== null ? postId : skipToken)
-  const [isCloseModalOpen, setIsCloseModalOpen] = useState(false)
 
   if (!isOpen) {
     return null
@@ -28,13 +24,8 @@ export const PublicPageModal = ({ isOpen = true, onClose, postId }: PublicPageMo
 
   const handleBackdropClick = (event: React.MouseEvent) => {
     if (event.target === event.currentTarget) {
-      setIsCloseModalOpen(true)
+      onClose?.()
     }
-  }
-
-  const handleCloseModal = () => {
-    setIsCloseModalOpen(false)
-    onClose?.()
   }
 
   if (isLoading) {
@@ -52,21 +43,12 @@ export const PublicPageModal = ({ isOpen = true, onClose, postId }: PublicPageMo
   return (
     <div className={s.backdrop} onClick={handleBackdropClick}>
       <div className={s.publicPageModule} onClick={e => e.stopPropagation()}>
-        <button onClick={() => setIsCloseModalOpen(true)} type={'button'}>
+        <button onClick={onClose} type={'button'}>
           <Close className={s.close}></Close>
         </button>
         <Carousel photos={data.photos} />
         <ModalComments post={data} />
       </div>
-
-      {isCloseModalOpen && (
-        <ModalCloseDeleteUnfollowPost
-          isOpenPublickModal={isCloseModalOpen}
-          onClosePublickModal={() => setIsCloseModalOpen(false)}
-          onDelete={handleCloseModal}
-          variant={'close'}
-        />
-      )}
     </div>
   )
 }

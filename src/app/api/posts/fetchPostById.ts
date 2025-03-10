@@ -2,9 +2,7 @@ import { PostsDataByPostId } from './postsApi.types'
 
 export default async function fetchPostById(postId: number): Promise<PostsDataByPostId | null> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/posts/${postId}`, {
-      cache: 'no-store',
-    })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/posts/${postId}`)
 
     if (!res.ok) {
       throw new Error(`Failed to fetch: ${res.statusText}`)

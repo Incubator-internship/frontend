@@ -7,12 +7,13 @@ import { useSelector } from 'react-redux'
 import { useGetMeQuery } from '@/app/api/auth/authApi'
 import { selectAuthState } from '@/app/config/store/authSlice'
 import FollowIcon from '@/shared/assets/icons/FollowIcon'
+import PensilIcon from '@/shared/assets/icons/PensilIcon'
+import TrashIcon from '@/shared/assets/icons/TrashIcon'
 import UnfollowIcon from '@/shared/assets/icons/UnfollowIcon'
 import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/schemas'
 import { EdditPostModal } from '@/views/editPostModal/EdditPostModal'
 import { DataPost } from '@/views/publicPageModal/DataArray'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { DropdownMenu } from '@radix-ui/react-dropdown-menu'
 import { CopyIcon } from '@radix-ui/react-icons'
 
 import s from './commentsHeader.module.scss'
@@ -46,17 +47,17 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({ postUserId, prof
   return (
     <div className={s.commentsHeader}>
       <ProfileData imageUrl={profileData?.imgProfile} profileUrl={profileData?.urlProfile} />
-      {!isAuth &&
+      {isAuth &&
         (myId !== postUserId ? (
           <DropdownMenuDemo
             content={[
               {
-                icon: <UnfollowIcon />,
+                icon: <PensilIcon />,
                 label: 'Edit Post',
-                onSelect: () => setIsOpenEditModal(true),
+                onSelect: () => alert('Edit Post'),
               },
               {
-                icon: <CopyIcon />,
+                icon: <TrashIcon />,
                 label: 'Delete Post',
                 onSelect: () => setIsOpenModal(true),
               },

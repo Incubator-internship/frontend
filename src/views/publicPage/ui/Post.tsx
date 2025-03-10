@@ -1,5 +1,6 @@
 'use client'
-import React, { useRef, useState } from 'react'
+
+import { useEffect, useRef, useState } from 'react'
 
 import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
@@ -10,34 +11,44 @@ import { ShowMore, type ShowMoreRef, type ShowMoreToggleLinesFn } from '@re-dev/
 import { formatDistanceToNow } from 'date-fns'
 import { enGB, ru } from 'date-fns/locale'
 import Image from 'next/image'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/swiper-bundle.css'
-//NOTE: node_modules\swiper\swiper-bundle.css rewriting
+// //NOTE: node_modules\swiper\swiper-bundle.css rewriting
 import './publicPage.scss'
 
 import s from './publicPage.module.scss'
 
 const Post = ({ post }: { post: PostsDataByPostId }) => {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const t = useTranslations('PublicPage')
   const showMoreRef = useRef<ShowMoreRef>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedPostId, setSelectedPostId] = useState<null | number>(null)
 
-  const toggleLines: ShowMoreToggleLinesFn = e => {
-    showMoreRef.current?.toggleLines(e)
-  }
+  useEffect(() => {
+    const postId = searchParams.get('postId')
+
+    if (postId && Number(postId) === post.id) {
+      setIsModalOpen(true)
+      setSelectedPostId(post.id)
+    }
+  }, [searchParams, post.id])
 
   const handlePostClick = (postId: number) => {
     setIsModalOpen(true)
     setSelectedPostId(postId)
+    router.push(`?postId=${postId}`)
   }
 
   const closeModal = () => {
     setIsModalOpen(false)
     setSelectedPostId(null)
+    router.push('/')
   }
 
   return (
@@ -51,7 +62,7 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
           spaceBetween={20}
         >
           {post.photos.map(photo => (
-            <SwiperSlide key={photo.id} onClick={() => handlePostClick(post.id)}>
+            <SwiperSlide key={photo.id}>
               <Image
                 alt={`Photo ${photo.id}`}
                 height={240}
@@ -89,7 +100,7 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
               color={'link'}
               onClick={e => {
                 e.stopPropagation()
-                toggleLines(e)
+                showMoreRef.current?.toggleLines(e)
               }}
               variant={'regularLink'}
             >
@@ -106,7 +117,7 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
                 color={'link'}
                 onClick={e => {
                   e.stopPropagation()
-                  toggleLines(e)
+                  showMoreRef.current?.toggleLines(e)
                 }}
                 variant={'regularLink'}
               >
@@ -120,7 +131,7 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
         </ShowMore>
       </Typography>
 
-      <PublicPageModal isOpen={isModalOpen} onClose={closeModal} postId={post.id} />
+      <PublicPageModal isOpen={isModalOpen} onClose={closeModal} postId={selectedPostId} />
     </div>
   )
 }
