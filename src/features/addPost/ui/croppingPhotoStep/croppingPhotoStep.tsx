@@ -7,6 +7,7 @@ import { Carousel } from '@/shared/ui/carousel'
 
 import s from './croppingPhotoStep.module.scss'
 
+import { ModalSave } from '../modalSave/ModalSave'
 import { useCroppSettings } from './croppingPhotoItem/hooks/useCroppSettings'
 
 type Props = {
