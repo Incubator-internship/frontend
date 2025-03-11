@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
 
   const t = useTranslations<'HomePage'>('HomePage')
 
-  const { data: posts, error, isLoading } = useGetPostsUserIdQuery(23)
+  const { data: posts, error, isLoading } = useGetPostsUserIdQuery(7)
 
   const updatedAt = posts && posts[0]?.updatedAt
 

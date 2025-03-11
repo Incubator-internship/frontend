@@ -15,7 +15,8 @@ import s from './userProfile.module.scss'
 export default async function UserProfile({ params }: { params: { userId: string } }) {
   const { isAuth, userId: authUserId } = await checkAuth()
 
-  const userId = isAuth ? authUserId : params?.userId
+  // const userId = isAuth ? authUserId : params?.userId
+  const userId = params?.userId
 
   const { posts } = await getPostsByUserId(`${userId}`)
 
