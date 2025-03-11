@@ -12,10 +12,10 @@ import { useLocale, useTranslations } from 'next-intl'
 
 import s from './header.module.scss'
 
-export const Header = () => {
+export const Header = ({ isAuth }: { isAuth: boolean }) => {
   const locale = useLocale()
 
-  const isAuth = useSelector(selectAuthState)
+  // const isAuth = useSelector(selectAuthState)
 
   // const { data: userData, isLoading, isError } = useGetMeQuery();
   // const isAuth = !!userData;
