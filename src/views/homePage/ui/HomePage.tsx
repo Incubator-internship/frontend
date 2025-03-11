@@ -10,7 +10,7 @@ import {
   PaperPlaneOutlineIcon,
 } from '@/shared/assets/icons'
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
-import AddCommentBlock from '@/shared/ui/addCommentBlock/AddCommentBlock'
+import { AddCommentBlock } from '@/shared/ui/addCommentBlock/AddCommentBlock'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Sidebar } from '@/shared/ui/sidebar'
 import { Typography } from '@/shared/ui/typography'

@@ -3,11 +3,11 @@
 import { useSelector } from 'react-redux'
 
 import { selectAuthState } from '@/app/config/store/authSlice'
+import { AddCommentBlock } from '@/shared/ui/addCommentBlock/AddCommentBlock'
 import { LikesPost } from '@/views/publicPageModal/DataArray'
 
 import s from './commentsFooter.module.scss'
 
-import AddCommentBlock from '../../addCommentBlock/AddCommentBlock'
 import { DatePost } from '../datePost'
 type CommentsFooterProps = {
   datePost?: string

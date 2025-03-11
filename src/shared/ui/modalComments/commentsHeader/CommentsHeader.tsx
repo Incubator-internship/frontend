@@ -11,7 +11,6 @@ import PensilIcon from '@/shared/assets/icons/PensilIcon'
 import TrashIcon from '@/shared/assets/icons/TrashIcon'
 import UnfollowIcon from '@/shared/assets/icons/UnfollowIcon'
 import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/schemas'
-import { EdditPostModal } from '@/views/editPostModal/EdditPostModal'
 import { DataPost } from '@/views/publicPageModal/DataArray'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CopyIcon } from '@radix-ui/react-icons'
@@ -103,11 +102,6 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({
           onDelete={handleDeletePost}
           variant={'delete'}
         />
-      )}
-      {isOpenEditModal && (
-        <FormProvider {...methods}>
-          <EdditPostModal isOpen={isOpenEditModal} onClose={() => setIsOpenEditModal(false)} />
-        </FormProvider>
       )}
     </div>
   )
