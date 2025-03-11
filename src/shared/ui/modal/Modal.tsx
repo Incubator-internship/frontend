@@ -30,7 +30,7 @@ export const Modal = ({
   isOpen = true,
   isStepMode = false,
   onClose,
-  // onNext,
+  onFinish,
   steps = [],
   title,
 }: ModalProps) => {
@@ -56,8 +56,12 @@ export const Modal = ({
   }
 
   const finishHandler = () => {
-    onClose?.()
-    createPost?.()
+    if (onFinish) {
+      onFinish()
+    } else {
+      onClose?.()
+      createPost?.()
+    }
   }
 
   return (
