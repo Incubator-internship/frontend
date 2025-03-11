@@ -11,7 +11,7 @@ import { ModalComments } from '../../../shared/ui/modalComments'
 
 export type PublicPageModalProps = {
   isOpen?: boolean
-  onClose?: () => void
+  onClose: () => void
   postId: null | number
 }
 
@@ -47,7 +47,7 @@ export const PublicPageModal = ({ isOpen = true, onClose, postId }: PublicPageMo
           <Close className={s.close}></Close>
         </button>
         <Carousel photos={data.photos} />
-        <ModalComments post={data} />
+        <ModalComments onClose={onClose} post={data} />
       </div>
     </div>
   )

@@ -18,7 +18,7 @@ const postsApi = inctagramApi.injectEndpoints({
       }),
     }),
     deletePost: builder.mutation<void, DeletePost>({
-      query: id => ({
+      query: ({ id }) => ({
         method: 'DELETE',
         url: `/v1/posts/${id}`,
       }),

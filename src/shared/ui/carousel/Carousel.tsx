@@ -14,7 +14,7 @@ type CarouselProps = {
 
 export const Carousel = ({ className, photos }: CarouselProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-
+  const photosLength = photos.length
   const goToSlide = (index: number) => {
     setCurrentImageIndex(index)
   }
@@ -43,14 +43,22 @@ export const Carousel = ({ className, photos }: CarouselProps) => {
 
   return (
     <div className={clsx(s.carousel, className)}>
-      <button className={s.prevButton} onClick={prevImage} type={'button'}>
+      <button
+        className={photosLength > 1 ? s.prevButton : s.hidden}
+        onClick={prevImage}
+        type={'button'}
+      >
         <ArrowLeft className={s.icon} />
       </button>
       <img alt={'img'} className={s.image} src={currentImageUrl} />
-      <button className={s.nextButton} onClick={nextImage} type={'button'}>
+      <button
+        className={photosLength > 1 ? s.nextButton : s.hidden}
+        onClick={nextImage}
+        type={'button'}
+      >
         <ArrowRight className={s.icon} />
       </button>
-      <ul className={s.dots}>
+      <ul className={photosLength > 1 ? s.dots : s.hidden}>
         {photos.map((_, index) => {
           return (
             <li
