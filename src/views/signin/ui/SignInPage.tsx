@@ -9,7 +9,7 @@ import { loginStore, logoutStore, selectAuthState } from '@/app/config/store/aut
 import { Schema, SignInForm } from '@/shared/ui/forms/signIn'
 import { clsx } from 'clsx'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
 
 import s from './signInPage.module.scss'
@@ -38,7 +38,8 @@ export default function SignInPage() {
     if (isSuccess && userId) {
       localStorage.setItem('accessToken', data.accessToken)
       dispatch(loginStore())
-      router.push(`/${locale}/profile/${userId}`)
+      // router.push(`/${locale}/profile`)
+      redirect(`/${locale}/profile`)
     }
   }, [data, isSuccess, router, locale, dispatch, userId])
 
