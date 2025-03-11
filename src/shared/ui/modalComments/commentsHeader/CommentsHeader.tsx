@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 
 import { useGetMeQuery } from '@/app/api/auth/authApi'
@@ -11,8 +11,9 @@ import PensilIcon from '@/shared/assets/icons/PensilIcon'
 import TrashIcon from '@/shared/assets/icons/TrashIcon'
 import UnfollowIcon from '@/shared/assets/icons/UnfollowIcon'
 import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/schemas'
-import { EdditPostModal } from '@/views/editPostModal/EdditPostModal'
+import { Modal } from '@/shared/ui/modal'
 import { DataPost } from '@/views/publicPageModal/DataArray'
+import { UpdatePostModal } from '@/views/publicPageModal/ui/updatePostModal/UpdatePostModal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CopyIcon } from '@radix-ui/react-icons'
 
@@ -58,7 +59,7 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({
               {
                 icon: <PensilIcon />,
                 label: 'Edit Post',
-                onSelect: () => alert('Edit Post'),
+                onSelect: () => setIsOpenEditModal(true),
               },
               {
                 icon: <TrashIcon />,
@@ -105,9 +106,14 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({
         />
       )}
       {isOpenEditModal && (
-        <FormProvider {...methods}>
-          <EdditPostModal isOpen={isOpenEditModal} onClose={() => setIsOpenEditModal(false)} />
-        </FormProvider>
+        <Modal
+          className={s.editModal}
+          isOpen={isOpenEditModal}
+          onClose={() => setIsOpenEditModal(false)}
+          title={'Edit Post'}
+        >
+          <UpdatePostModal setIsOpenEditModal={setIsOpenEditModal} />
+        </Modal>
       )}
     </div>
   )

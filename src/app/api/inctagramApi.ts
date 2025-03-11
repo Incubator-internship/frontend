@@ -10,6 +10,7 @@ export const inctagramApi = createApi({
     }),
   }),
   reducerPath: 'inctagramApi',
+  tagTypes: ['Post', 'Posts', 'UserPosts'],
 })
 
 export const { useGetUsersQuery } = inctagramApi
