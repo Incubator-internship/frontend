@@ -4,6 +4,7 @@ import React, { Suspense } from 'react'
 
 import StoreProvider from '@/app/config/store/storeProvider'
 import { Header } from '@/shared/ui/header'
+import { checkAuth } from '@/shared/utils/checkAuth'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
@@ -28,6 +29,7 @@ export default async function RootLayout({
   children: React.ReactNode
   params: { locale: Locale }
 }>) {
+  const { isAuth } = await checkAuth()
   const { locale } = await params
 
   if (!routing.locales.includes(locale as Locale)) {
@@ -44,7 +46,7 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <StoreProvider>
             <Suspense fallback={<div>Loading...</div>}>
-              <Header />
+              <Header isAuth={isAuth} />
               <main>{children}</main>
             </Suspense>
           </StoreProvider>

@@ -13,7 +13,7 @@ import { logoutStore, selectAuthState } from '@/app/config/store/authSlice'
 import CreatePost from '@/features/addPost/ui/createPost/CreatePost'
 import { Portal } from '@/shared/ui/portal/Portal'
 import clsx from 'clsx'
-import { usePathname, useRouter } from 'next/navigation'
+import { redirect, usePathname, useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 
 import s from './sidebar.module.scss'
@@ -47,9 +47,9 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
 
   const handleLogoutConfirm = () => {
     logout()
-    dispatch(logoutStore())
+    // dispatch(logoutStore())
     router.push(`/${locale}/`)
-    toggleLogoutModal()
+    redirect(`/${locale}`)
   }
 
   const menuItems = getMenuItems(toggleCreateModal, toggleLogoutModal, t)
