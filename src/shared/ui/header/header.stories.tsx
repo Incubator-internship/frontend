@@ -18,14 +18,12 @@ export const HeaderAuthFalse: Story = {
 
 export const HeaderAuth: Story = {
   args: {
-    count: 0,
     isAuth: true,
   },
 }
 
 export const HeaderAuthNotification: Story = {
   args: {
-    count: 3,
     isAuth: true,
   },
 }
