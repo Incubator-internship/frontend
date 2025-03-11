@@ -77,7 +77,7 @@ type CommentContainerProps = {
 }
 
 export const CommentContainer = ({
-  answers,
+  answers = [],
   content,
   dataPost,
   datePost,
