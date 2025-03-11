@@ -37,7 +37,6 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
   const { data: me } = useGetMeQuery()
 
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false)
-  // const [isCreateModalOpen, setCreateModalOpen] = useState(false)
   const [isOpenMainPostModal, setIsOpenMainPostModal] = useState<boolean>(false)
   const [isOpenStepsPostModal, setIsOpenStepsPostModal] = useState<boolean>(false)
   const openPostModal = isOpenMainPostModal || isOpenStepsPostModal
@@ -45,12 +44,11 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
 
   const toggleCreateModal = () => setIsOpenMainPostModal(prev => !prev)
   const toggleLogoutModal = () => setLogoutModalOpen(prev => !prev)
-  // const toggleCreateModal = () => setCreateModalOpen(prev => !prev)
 
   const handleLogoutConfirm = () => {
     logout()
     dispatch(logoutStore())
-    router.push(`/${locale}`)
+    router.push(`/${locale}/`)
     toggleLogoutModal()
   }
 
