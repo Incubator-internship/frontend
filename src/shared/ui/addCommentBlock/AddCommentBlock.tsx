@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl'
 
 import s from './addCommentBlock.module.scss'
 
-const AddCommentBlock: React.FC = () => {
+export const AddCommentBlock: React.FC = () => {
   const t = useTranslations<'HomePage'>('HomePage')
 
   return (
@@ -19,5 +19,3 @@ const AddCommentBlock: React.FC = () => {
     </div>
   )
 }
-
-export default AddCommentBlock
