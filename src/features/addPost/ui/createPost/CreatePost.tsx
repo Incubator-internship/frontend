@@ -85,6 +85,11 @@ export default function CreatePost({
     }
   }
 
+  const finishPublishing = () => {
+    methods.handleSubmit(sendPostCallBack)()
+    setIsOpenStepsPostModal(false)
+  }
+
   const handleModalClose = () => {
     if (imageWithPreview.length > 0) {
       setIsModalSaveOpen(true)
@@ -124,6 +129,7 @@ export default function CreatePost({
           isOpen={isOpenStepsPostModal}
           isStepMode
           onClose={handleModalClose}
+          onFinish={finishPublishing}
           steps={[
             <CroppingPhotoStep
               images={imageWithPreview}
