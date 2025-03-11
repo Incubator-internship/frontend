@@ -7,6 +7,8 @@ import { AddPhotoErrorModal } from '@/features/addPost/ui/addPhotoErrorModal/Add
 import { AddPhotoMainModal } from '@/features/addPost/ui/addPhotoMainModal/addPhotoMainModal'
 import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoStep'
 import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
+import { ModalSave } from '@/features/addPost/ui/modalSave/ModalSave'
+import { convertPreviewToFile } from '@/features/addPost/utils/photoUtils'
 import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/schemas'
 import { Modal } from '@/shared/ui/modal'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,7 +16,6 @@ import { useTranslations } from 'next-intl'
 
 import s from './createPost.module.scss'
 
-import { convertPreviewToFile } from '../../utils/photoUtils'
 import PublushPhotoStep from '../publishPhotoStep/PublushPhotoStep'
 
 type Props = {
@@ -35,6 +36,7 @@ export default function CreatePost({
 
   const [imageWithPreview, setImageWithPreview] = useState<FileWithPreview[]>([])
   const [textErrorModal, setTextErrorModal] = useState('')
+  const [isModalSaveOpen, setIsModalSaveOpen] = useState(false)
 
   const [createPost] = useCreatePostMutation()
 
@@ -71,7 +73,7 @@ export default function CreatePost({
     try {
       const files = await Promise.all(imageWithPreview.map(convertPreviewToFile))
 
-      files.forEach((file, index) => {
+      files.forEach(file => {
         bodyFormData.append('photos', file)
       })
 
@@ -83,13 +85,32 @@ export default function CreatePost({
     }
   }
 
+  const handleModalClose = () => {
+    if (imageWithPreview.length > 0) {
+      setIsModalSaveOpen(true)
+    } else {
+      setIsOpenMainPostModal(false)
+      setIsOpenStepsPostModal(false)
+    }
+  }
+
+  const handleDiscard = () => {
+    setImageWithPreview([])
+    setIsModalSaveOpen(false)
+    setIsOpenMainPostModal(false)
+    setIsOpenStepsPostModal(false)
+  }
+
+  const handleSaveDraft = () => {
+    // console.log('Draft saved')
+    setIsModalSaveOpen(false)
+    setIsOpenMainPostModal(false)
+    setIsOpenStepsPostModal(false)
+  }
+
   return (
     <div>
-      <Modal
-        isOpen={isOpenMainPostModal}
-        onClose={() => setIsOpenMainPostModal(false)}
-        title={t('MainModalTitle')}
-      >
+      <Modal isOpen={isOpenMainPostModal} onClose={handleModalClose} title={t('MainModalTitle')}>
         <AddPhotoMainModal
           images={imageWithPreview}
           setImages={setImageWithPreview}
@@ -102,7 +123,7 @@ export default function CreatePost({
           createPost={methods.handleSubmit(sendPostCallBack)}
           isOpen={isOpenStepsPostModal}
           isStepMode
-          onClose={() => setIsOpenStepsPostModal(false)}
+          onClose={handleModalClose}
           steps={[
             <CroppingPhotoStep
               images={imageWithPreview}
@@ -125,6 +146,12 @@ export default function CreatePost({
       >
         <AddPhotoErrorModal errorText={textErrorModal} setTextErrorModal={setTextErrorModal} />
       </Modal>
+      <ModalSave
+        isOpen={isModalSaveOpen}
+        onClose={() => setIsModalSaveOpen(false)}
+        onDiscard={handleDiscard}
+        onSaveDraft={handleSaveDraft}
+      />
     </div>
   )
 }
