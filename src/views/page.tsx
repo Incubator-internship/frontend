@@ -10,9 +10,9 @@ export default async function Home() {
   const { isAuth, userId } = await checkAuth()
   const locale = cookies().get('NEXT_LOCALE')?.value || 'en'
 
-  if (isAuth) {
-    redirect(`/${locale}/profile`)
-  }
+  // if (isAuth) {
+  //   redirect(`/${locale}/profile`)
+  // }
 
   return <PublicPage />
 }
