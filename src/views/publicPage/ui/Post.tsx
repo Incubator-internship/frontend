@@ -7,7 +7,7 @@ import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Typography } from '@/shared/ui/typography'
 import { PublicPageModal } from '@/views/publicPageModal/ui/PublicPageModal'
-import { ShowMore, type ShowMoreRef, type ShowMoreToggleLinesFn } from '@re-dev/react-truncate'
+import { ShowMore, type ShowMoreRef } from '@re-dev/react-truncate'
 import { formatDistanceToNow } from 'date-fns'
 import { enGB, ru } from 'date-fns/locale'
 import Image from 'next/image'
@@ -17,7 +17,7 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/swiper-bundle.css'
-// //NOTE: node_modules\swiper\swiper-bundle.css rewriting
+//NOTE: node_modules\swiper\swiper-bundle.css rewriting
 import './publicPage.scss'
 
 import s from './publicPage.module.scss'
@@ -27,17 +27,19 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
   const searchParams = useSearchParams()
   const t = useTranslations('PublicPage')
   const showMoreRef = useRef<ShowMoreRef>(null)
+  const postIdFromUrl = searchParams.get('postId')
+  const postIdNumber = postIdFromUrl ? Number(postIdFromUrl) : null
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedPostId, setSelectedPostId] = useState<null | number>(null)
 
   useEffect(() => {
-    const postId = searchParams.get('postId')
-
-    if (postId && Number(postId) === post.id) {
+    if (postIdNumber !== null) {
       setIsModalOpen(true)
-      setSelectedPostId(post.id)
+      setSelectedPostId(postIdNumber)
+    } else if (postIdNumber === null) {
+      setIsModalOpen(false)
     }
-  }, [searchParams, post.id])
+  }, [postIdNumber])
 
   const handlePostClick = (postId: number) => {
     setIsModalOpen(true)
@@ -131,7 +133,9 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
         </ShowMore>
       </Typography>
 
-      <PublicPageModal isOpen={isModalOpen} onClose={closeModal} postId={selectedPostId} />
+      {isModalOpen && (
+        <PublicPageModal isOpen={isModalOpen} onClose={closeModal} postId={selectedPostId} />
+      )}
     </div>
   )
 }

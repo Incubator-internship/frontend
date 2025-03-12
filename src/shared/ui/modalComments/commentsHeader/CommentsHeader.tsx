@@ -52,7 +52,7 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({
   return (
     <div className={s.commentsHeader}>
       <ProfileData imageUrl={profileData?.imgProfile} profileUrl={profileData?.urlProfile} />
-      {isAuth &&
+      {!isAuth &&
         (myId === postUserId ? (
           <DropdownMenuDemo
             content={[

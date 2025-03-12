@@ -37,7 +37,7 @@ export const PublicPageModal = ({ isOpen = true, onClose, postId }: PublicPageMo
   }
 
   if (!data || !data.photos) {
-    return <div>No data</div>
+    return
   }
 
   return (
