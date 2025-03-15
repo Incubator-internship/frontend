@@ -15,7 +15,7 @@ type ModalCloseDeleteUnfollowPostProps = {
   onCloseModal: () => void
   onCloseParentModal: () => void
   onDelete: () => void
-  variant: 'close' | 'delete' | 'unfollow'
+  variant: 'close' | 'deletePhoto' | 'deletePost'
 }
 
 export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPostProps> = ({
@@ -28,6 +28,7 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
   const params = useSearchParams()
   const postId = params.get('postId')
   const [deletePost] = useDeletePostMutation()
+  //const [deletePhoto] = useDeletePhotoMutation()
 
   const handleDeletePost = async () => {
     if (postId) {
@@ -42,6 +43,18 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
     }
   }
 
+  const handleDeletePhoto = async () => {
+    console.log('handleDeletePhoto')
+    // if(userId) {
+    //   try {
+    //     await deletePhoto( {id: +photoId}).unwrap()
+    //     onCloseModal()
+    //   } catch (error) {
+    //     console.error('Failed to delete the post:', error)
+    //   }
+    // }
+  }
+
   let title = 'Close Post'
   let message =
     'Do you really want to close the edition of the publication? If you close changes won’t be saved'
@@ -51,14 +64,20 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
       title
       message
       break
-    case 'delete':
+    case 'deletePost':
       title = 'Delete Post'
       message = 'Are you sure you want to delete this post?'
       break
-    case 'unfollow':
-      title = 'Unfollow'
-      message = 'Do you really want to unfollow from this user?'
+    case 'deletePhoto':
+      title = 'Delete Photo'
+      message = 'Are you sure you want to delete this photo?'
       break
+  }
+
+  const variantHandlers = {
+    close: onCloseModal,
+    deletePhoto: handleDeletePhoto,
+    deletePost: handleDeletePost,
   }
 
   return (
@@ -72,7 +91,7 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
           </div>
           <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '15px' }}>
             <Button
-              onClick={variant === 'delete' ? handleDeletePost : onCloseModal}
+              onClick={variantHandlers[variant]}
               style={{ marginTop: '20px', padding: '6px 36px' }}
               variant={'transparent'}
             >

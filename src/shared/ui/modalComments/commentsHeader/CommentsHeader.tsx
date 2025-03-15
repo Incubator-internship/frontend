@@ -102,7 +102,7 @@ export const CommentsHeader: React.FC<CommentsHeaderProps> = ({
           onCloseModal={() => setIsOpenModal(false)}
           onCloseParentModal={onClose}
           onDelete={handleDeletePost}
-          variant={'delete'}
+          variant={'deletePost'}
         />
       )}
       {isOpenEditModal && (
