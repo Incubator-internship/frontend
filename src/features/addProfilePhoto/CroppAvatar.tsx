@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
-import Cropper from 'react-easy-crop'
+import Cropper, { Area } from 'react-easy-crop'
 
 import s from './avatarUploadModal.module.scss'
 
@@ -18,12 +18,15 @@ export const CroppAvatar = ({ image, setCroppedAreaPixels }: Props) => {
     setCrop(crop)
   }
 
-  const onCropComplete = (croppedAreaPixels: {
-    height: number
-    width: number
-    x: number
-    y: number
-  }) => {
+  const onCropComplete = (
+    _croppedArea: Area,
+    croppedAreaPixels: {
+      height: number
+      width: number
+      x: number
+      y: number
+    }
+  ) => {
     // console.log(croppedAreaPixels)
     setCroppedAreaPixels(croppedAreaPixels)
   }
