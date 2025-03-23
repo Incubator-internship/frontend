@@ -8,47 +8,57 @@ import { v4 as uuidv4 } from 'uuid'
 export const MAX_IMAGES = 10
 
 type UseDropzoneOptions = {
-  images: FileWithPreview[]
+  image?: FileWithPreview
+  images?: FileWithPreview[]
   setImages: Dispatch<SetStateAction<FileWithPreview[]>>
   setTextErrorModal?: (error: string) => void
 }
 
-export const useImageDropzone = ({ images, setImages, setTextErrorModal }: UseDropzoneOptions) => {
+export const useImageDropzone = ({
+  image,
+  images,
+  setImages,
+  setTextErrorModal,
+}: UseDropzoneOptions) => {
   const t = useTranslations('AddPostModal')
 
   const onDrop = (acceptedFiles: File[]) => {
-    const totalImages = images.length + acceptedFiles.length
-
-    if (totalImages > MAX_IMAGES) {
+    if (images && images.length + acceptedFiles.length > MAX_IMAGES) {
       setTextErrorModal?.(`${t('AddPhotoErrorText3')} - ${MAX_IMAGES}`)
 
       return
     }
 
-    const chosenImages = acceptedFiles.map(
-      (image: FileWithPath): FileWithPreview => ({
-        ...image,
+    const newImages = acceptedFiles.map(
+      (file: FileWithPath): FileWithPreview => ({
+        ...file,
         id: uuidv4(),
-        preview: URL.createObjectURL(image),
+        preview: URL.createObjectURL(file),
       })
     )
 
-    setImages([...images, ...chosenImages])
+    if (images) {
+      setImages([...images, ...newImages])
+    } else if (image && acceptedFiles.length > 0) {
+      // const chosenImage = newImages[0]
+    }
   }
 
   const onDropRejected = (fileRejections: any) => {
     let errorMessage = ''
 
-    if (images.length + fileRejections.length > MAX_IMAGES) {
-      errorMessage = `${t('AddPhotoErrorText3')} - ${MAX_IMAGES}`
-    } else {
-      fileRejections.forEach((fileRejection: any) => {
-        if (fileRejection.errors.some((error: any) => error.code === 'file-too-large')) {
-          errorMessage = t('AddPhotoErrorText1')
-        } else {
-          errorMessage = t('AddPhotoErrorText2')
-        }
-      })
+    if (images) {
+      if (images.length + fileRejections.length > MAX_IMAGES) {
+        errorMessage = `${t('AddPhotoErrorText3')} - ${MAX_IMAGES}`
+      } else {
+        fileRejections.forEach((fileRejection: any) => {
+          if (fileRejection.errors.some((error: any) => error.code === 'file-too-large')) {
+            errorMessage = t('AddPhotoErrorText1')
+          } else {
+            errorMessage = t('AddPhotoErrorText2')
+          }
+        })
+      }
     }
 
     if (errorMessage) {
