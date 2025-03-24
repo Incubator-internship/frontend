@@ -1,0 +1,28 @@
+.tabs {
+  padding: 40px 25px;
+
+  > div:first-child {
+    button {
+      width: 25%;
+    }
+  }
+}
+
+.tabsContent {
+  padding: 25px 0;
+}
+
+.profileInformation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profileInformationAvatar {
+  width: 100%;
+  max-width: 11%;
+}
+
+.profileInformationForm {
+  width: 100%;
+  max-width: 85%;
+}
