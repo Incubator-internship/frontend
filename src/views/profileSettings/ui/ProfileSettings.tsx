@@ -2,10 +2,13 @@
 import { ProfilePhoto } from '@/features/profilePhoto'
 import { Tabs } from '@/shared/ui/tabs'
 import { clsx } from 'clsx'
+import { useTranslations } from 'next-intl'
 
 import s from './profileSettings.module.scss'
 
 export default function ProfileSettings() {
+  const t = useTranslations('ProfileSettingsPage')
+
   return (
     <div>
       <Tabs
@@ -23,22 +26,22 @@ export default function ProfileSettings() {
                 </div>
               </div>
             ),
-            title: 'General information',
+            title: t('Tab1'),
             value: '1',
           },
           {
             content: <div className={s.tabsContent}>Devices Content</div>,
-            title: 'Devices',
+            title: t('Tab2'),
             value: '2',
           },
           {
             content: <div className={s.tabsContent}>Account Management Content</div>,
-            title: 'Account Management',
+            title: t('Tab3'),
             value: '3',
           },
           {
             content: <div className={s.tabsContent}>My payments Content</div>,
-            title: 'My payments',
+            title: t('Tab4'),
             value: '4',
           },
         ]}
