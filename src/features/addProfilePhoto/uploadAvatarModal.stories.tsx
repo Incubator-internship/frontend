@@ -13,7 +13,7 @@ const meta: Meta<typeof AvatarUploadModal> = {
     onSave: { action: 'saved' },
   },
   component: AvatarUploadModal,
-  title: 'Components/AvatarUploadModal',
+  title: 'General information/AvatarUploadModal',
 }
 
 export default meta
