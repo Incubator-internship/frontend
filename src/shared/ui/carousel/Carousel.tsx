@@ -15,20 +15,19 @@ type CarouselProps = {
 export const Carousel = ({ className, photos }: CarouselProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const photosLength = photos.length
+  const index = photosLength > 0 ? Math.min(currentImageIndex, photosLength - 1) : 0
   const goToSlide = (index: number) => {
     setCurrentImageIndex(index)
   }
 
   const nextImage = () => {
-    const photosLength = photos?.length
-
-    if (currentImageIndex < photosLength - 1) {
+    if (index < photosLength - 1) {
       setCurrentImageIndex(prevIndex => prevIndex + 1)
     }
   }
 
   const prevImage = () => {
-    if (currentImageIndex > 0) {
+    if (index > 0) {
       setCurrentImageIndex(prevIndex => prevIndex - 1)
     }
   }
@@ -37,9 +36,7 @@ export const Carousel = ({ className, photos }: CarouselProps) => {
     return typeof photos[0] === 'string'
   }
 
-  const currentImageUrl = isImagesType(photos)
-    ? photos[currentImageIndex]
-    : photos[currentImageIndex].url
+  const currentImageUrl = isImagesType(photos) ? photos[index] : photos[index]?.url
 
   return (
     <div className={clsx(s.carousel, className)}>

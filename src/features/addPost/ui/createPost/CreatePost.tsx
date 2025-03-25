@@ -117,6 +117,7 @@ export default function CreatePost({
     <div>
       <Modal isOpen={isOpenMainPostModal} onClose={handleModalClose} title={t('MainModalTitle')}>
         <AddPhotoMainModal
+          draftOption
           images={imageWithPreview}
           setImages={setImageWithPreview}
           setTextErrorModal={setTextErrorModal}
