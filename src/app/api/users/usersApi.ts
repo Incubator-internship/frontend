@@ -19,7 +19,7 @@ export const usersApi = inctagramApi.injectEndpoints({
       }),
     }),
     getProfile: builder.query<UserProfileResponse, number>({
-      providesTags: ['UserPosts'],
+      providesTags: ['UserProfile'],
       query: id => `/v1/users/profile/${id}`,
     }),
     uploadAvatar: builder.mutation<void, UploadAvatar>({
