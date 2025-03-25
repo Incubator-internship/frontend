@@ -1,7 +1,6 @@
 'use client'
-import React, { useState } from 'react'
-
 import { useDeletePostMutation } from '@/app/api/posts/postsApi'
+import { useDeleteAvatarMutation } from '@/app/api/users/usersApi'
 import { useSearchParams } from 'next/navigation'
 
 import s from './modalCloseDeleteUnfollowPost.module.scss'
@@ -27,8 +26,9 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
 }) => {
   const params = useSearchParams()
   const postId = params.get('postId')
+  const userId = params.get('userId')
   const [deletePost] = useDeletePostMutation()
-  //const [deletePhoto] = useDeletePhotoMutation()
+  const [deletePhoto] = useDeleteAvatarMutation()
 
   const handleDeletePost = async () => {
     if (postId) {
@@ -44,15 +44,14 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
   }
 
   const handleDeletePhoto = async () => {
-    console.log('handleDeletePhoto')
-    // if(userId) {
-    //   try {
-    //     await deletePhoto( {id: +photoId}).unwrap()
-    //     onCloseModal()
-    //   } catch (error) {
-    //     console.error('Failed to delete the post:', error)
-    //   }
-    // }
+    if (userId) {
+      try {
+        await deletePhoto({ id: +userId }).unwrap()
+        onCloseModal()
+      } catch (error) {
+        console.error('Failed to delete the post:', error)
+      }
+    }
   }
 
   let title = 'Close Post'
