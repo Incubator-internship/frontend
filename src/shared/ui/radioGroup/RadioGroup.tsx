@@ -2,6 +2,7 @@ import React, { ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import { Typography } from '@/shared/ui/typography'
 import * as RadioGroup from '@radix-ui/react-radio-group'
+import { clsx } from 'clsx'
 
 import s from './radioGroup.module.scss'
 
@@ -19,6 +20,7 @@ export type RadioGroupProps = {
 
 export const FormRadioGroup = forwardRef(function FormRadioGroup(
   {
+    className,
     defaultValue,
     disabled,
     onChange,
@@ -31,7 +33,7 @@ export const FormRadioGroup = forwardRef(function FormRadioGroup(
   return (
     <RadioGroup.Root
       aria-label={'View density'}
-      className={s.RadioGroupRoot}
+      className={clsx(s.RadioGroupRoot, className)}
       defaultValue={defaultValue}
       onValueChange={onChange}
       orientation={orientation}

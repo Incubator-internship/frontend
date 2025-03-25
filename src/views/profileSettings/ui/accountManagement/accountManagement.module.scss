@@ -1,0 +1,26 @@
+.profileManagement {
+}
+
+.block {
+  &:not(:last-child) {
+    margin-bottom: 42px;
+  }
+}
+
+.radioGroupTitle {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.radioGroupWrapp {
+  width: 100%;
+  padding: 20px;
+
+  background: var(--color-dark-500);
+  border: 1px solid var(--color-dark-300);
+  border-radius: 2px;
+}
+
+.radioGroup {
+  gap: 20px;
+}
