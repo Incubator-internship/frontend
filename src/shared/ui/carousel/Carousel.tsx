@@ -9,10 +9,12 @@ import s from './carousel.module.scss'
 
 type CarouselProps = {
   className?: string
+  imageStyle?: React.CSSProperties
+  onSlideChange?: (index: number) => void
   photos: Photos[] | string[]
 }
 
-export const Carousel = ({ className, photos }: CarouselProps) => {
+export const Carousel = ({ className, imageStyle, onSlideChange, photos }: CarouselProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const photosLength = photos.length
   const index = photosLength > 0 ? Math.min(currentImageIndex, photosLength - 1) : 0
@@ -22,13 +24,19 @@ export const Carousel = ({ className, photos }: CarouselProps) => {
 
   const nextImage = () => {
     if (index < photosLength - 1) {
-      setCurrentImageIndex(prevIndex => prevIndex + 1)
+      const newIndex = currentImageIndex + 1
+
+      setCurrentImageIndex(newIndex)
+      onSlideChange && onSlideChange(newIndex)
     }
   }
 
   const prevImage = () => {
     if (index > 0) {
-      setCurrentImageIndex(prevIndex => prevIndex - 1)
+      const newIndex = currentImageIndex - 1
+
+      setCurrentImageIndex(newIndex)
+      onSlideChange && onSlideChange(newIndex)
     }
   }
 
@@ -47,7 +55,7 @@ export const Carousel = ({ className, photos }: CarouselProps) => {
       >
         <ArrowLeft className={s.icon} />
       </button>
-      <img alt={'img'} className={s.image} src={currentImageUrl} />
+      <img alt={'img'} className={s.image} src={currentImageUrl} style={imageStyle} />
       <button
         className={photosLength > 1 ? s.nextButton : s.hidden}
         onClick={nextImage}
