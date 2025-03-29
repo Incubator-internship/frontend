@@ -47,11 +47,9 @@ export const Carousel = ({ className, imageStyle, onSlideChange, photos }: Carou
   const currentPhoto = photos[index]
 
   const combinedStyle = isExtendedPhoto(currentPhoto)
-    ? // ? { ...imageStyle, ...currentPhoto?.style }
-      { ...imageStyle, ...currentPhoto.style }
+    ? { ...imageStyle, ...currentPhoto?.style }
     : imageStyle
 
-  // const currentImageUrl = isExtendedPhoto(currentPhoto) ? currentPhoto?.url : currentPhoto
   const currentImageUrl = isExtendedPhoto(currentPhoto) ? currentPhoto?.url : currentPhoto
 
   return (
