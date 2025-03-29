@@ -7,17 +7,20 @@ import Image from 'next/image'
 
 import s from './filtersPhotoStep.module.scss'
 
-import { useFilters } from '../../hooks/useFilter'
+type FiltersHook = {
+  applyFilter: (imageIndex: number, filter: string) => void
+  filters: { filter: string; name: string }[]
+  filtersForImages: Record<number, string>
+}
 
 type Props = {
+  filtersHook: FiltersHook
   images?: FileWithPreview[]
 }
 
-export const FiltersPhotoStep = ({ images }: Props) => {
-  const [selectedFilter, setSelectedFilter] = useState('none')
-  const { applyFilter, filters, filtersForImages } = useFilters()
+export const FiltersPhotoStep = ({ filtersHook, images }: Props) => {
+  const { applyFilter, filters, filtersForImages } = filtersHook
   const [currentSlide, setCurrentSlide] = useState(0)
-  // const [filtersForImages, setFiltersForImages] = useState<Record<number, string>>({})
 
   const photos = images?.map(file => file.preview) || []
   const currentFilter = filtersForImages[currentSlide] || 'none'
