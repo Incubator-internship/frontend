@@ -10,12 +10,9 @@ import {
 import { Button } from '@/shared/ui/button'
 import { DatePickerControl } from '@/shared/ui/datePickerControl'
 import { InputControl } from '@/shared/ui/inputControl'
-import { SelectController } from '@/shared/ui/selectController'
 import { TextareaWithControl } from '@/shared/ui/textareaControl'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SerializedError } from '@reduxjs/toolkit'
-import { format } from 'date-fns'
-import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { z } from 'zod'
 
@@ -50,7 +47,6 @@ type Props = {
 }
 
 export const UserInformationForm = ({ onSubmit }: Props) => {
-  const router = useRouter()
   const t = useTranslations('ProfileSettingsPage')
   const tErrors = useTranslations('FormsErrors')
 
@@ -83,31 +79,31 @@ export const UserInformationForm = ({ onSubmit }: Props) => {
       firstName: data.firstName,
       lastName: data.lastName,
       username: data.username,
-      country: data.country,
-      city: data.city,
+      country: 'data.country',
+      city: 'data.city',
     })
 
-    //   if (result?.error) {
-    //     if ('status' in result.error) {
-    //       if (result.error.status === 400) {
-    //         const errorMessage = result.error.data?.errorsMessages?.[0] || ''
-    //
-    //         if (errorMessage.includes('userName')) {
-    //           setError('username', {
-    //             message: t('ErrorUsername'),
-    //             type: 'manual',
-    //           })
-    //         } else if (errorMessage.includes('email')) {
-    //           setError('email', {
-    //             message: t('ErrorEmail'),
-    //             type: 'manual',
-    //           })
-    //         }
-    //       }
-    //     }
-    //   } else {
-    //     reset()
-    //   }
+    if (result?.error) {
+      if ('status' in result.error) {
+        if (result.error.status === 400) {
+          const errorMessage = result.error.data?.errorsMessages?.[0] || ''
+
+          if (errorMessage.includes('userName')) {
+            setError('username', {
+              message: t('ErrorUsername'),
+              type: 'manual',
+            })
+          } else if (errorMessage.includes('age')) {
+            setError('dateOfBirth', {
+              message: t('ErrorDateOfBirth'),
+              type: 'manual',
+            })
+          }
+        }
+      }
+    } else {
+      reset()
+    }
   })
 
   return (

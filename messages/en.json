@@ -153,6 +153,8 @@
     "CountrySelect": "Select your country",
     "CitySelect": "Select your city",
     "AboutMeInput": "About Me",
-    "UserInformationFormBtn": "Save Changes"
+    "UserInformationFormBtn": "Save Changes",
+    "ErrorUsername": "User with this user name already exist",
+    "ErrorDateOfBirth": "The user`s age cannot be more than 100 or less than 13 years old"
   }
 }

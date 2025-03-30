@@ -141,6 +141,8 @@
     "CountrySelect": "Выберите свою страну",
     "CitySelect": "Выберите свой город",
     "AboutMeInput": "Обо мне",
-    "UserInformationFormBtn": "Сохранить изменения"
+    "UserInformationFormBtn": "Сохранить изменения",
+    "ErrorUsername": "Пользователь с таким именем уже существует",
+    "ErrorDateOfBirth": "Возраст пользователя не может быть больше 100 и меньше 13 лет"
   }
 }
