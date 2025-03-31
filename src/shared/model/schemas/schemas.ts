@@ -5,6 +5,10 @@ const PASSWORD_REQUIREMENTS_MESSAGE =
 
 const PASSWORD_SYMBOLS = '! # $ % & ( ) * + , - . / : ; < = > ? @ [ \\ ] _` { | } ~'
 
+const MIN_AGE_DATE = new Date()
+
+MIN_AGE_DATE.setFullYear(MIN_AGE_DATE.getFullYear() - 13)
+
 export const usernameSchema = z
   .string()
   .min(6, { message: 'Minimum number of characters 6' })
@@ -82,3 +86,50 @@ export const maximumCharactersSchema = z.object({
 })
 
 export type PostFormData = z.infer<typeof maximumCharactersSchema>
+
+export const createFirstNameSchema = (t: (key: string) => string) =>
+  z
+    .string()
+    .trim()
+    .min(1, { message: t('FirstNameMin') })
+    .max(50, { message: t('FirstNameMax') })
+    .regex(/^[A-Za-zА-Яа-яЁё]+$/, {
+      message: t('FirstNameRegex'),
+    })
+    .optional()
+    .nullable()
+
+export const createLastNameSchema = (t: (key: string) => string) =>
+  z
+    .string()
+    .trim()
+    .min(1, { message: t('LastNameMin') })
+    .max(50, { message: t('LastNameMax') })
+    .regex(/^[A-Za-zА-Яа-яЁё]+$/, {
+      message: t('LastNameRegex'),
+    })
+    .optional()
+    .nullable()
+
+export const createAboutMeSchema = (t: (key: string) => string) =>
+  z
+    .string()
+    .trim()
+    .max(200, { message: t('AboutMeMax') })
+    .regex(/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=[\]{};:'"\\|,.<>/?`~]+$/, {
+      message: t('AboutMeRegex'),
+    })
+    .optional()
+    .nullable()
+
+export const createDateOfBirthSchema = (t: (key: string) => string) =>
+  z.coerce
+    .date()
+    .max(MIN_AGE_DATE, { message: t('AgeRestriction') })
+    .transform(date => {
+      const day = String(date.getDate()).padStart(2, '0')
+      const month = String(date.getMonth() + 1).padStart(2, '0') // Январь = 0
+      const year = date.getFullYear()
+
+      return `${day}.${month}.${year}`
+    })
