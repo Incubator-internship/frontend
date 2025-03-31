@@ -18,15 +18,17 @@ import { z } from 'zod'
 
 import s from './userInformationForm.module.scss'
 
+import SelectCountryCity from '../../selectCountryCity/SelectCountryCity'
+
 const createUserInformationFormSchema = (t: (key: string) => string) =>
   z.object({
     aboutMe: createAboutMeSchema(t),
+    city: z.string(),
+    country: z.string(),
     dateOfBirth: createDateOfBirthSchema(t),
     firstName: createFirstNameSchema(t),
     lastName: createLastNameSchema(t),
     username: createUsernameSchema(t),
-    country: z.string(),
-    city: z.string(),
   })
 
 export type UserInformationFormValues = z.infer<ReturnType<typeof createUserInformationFormSchema>>
@@ -61,12 +63,12 @@ export const UserInformationForm = ({ onSubmit }: Props) => {
   } = useForm<UserInformationFormValues>({
     defaultValues: {
       aboutMe: '',
+      city: '',
+      country: '',
       dateOfBirth: '',
       firstName: '',
       lastName: '',
       username: '',
-      country: '',
-      city: '',
     },
     mode: 'onBlur',
     resolver: zodResolver(UserInformationFormSchema),
@@ -75,12 +77,12 @@ export const UserInformationForm = ({ onSubmit }: Props) => {
   const onSubmitForm = handleSubmit(async data => {
     const result = await onSubmit({
       aboutMe: data.aboutMe,
+      city: 'data.city',
+      country: 'data.country',
       dateOfBirth: data.dateOfBirth,
       firstName: data.firstName,
       lastName: data.lastName,
       username: data.username,
-      country: 'data.country',
-      city: 'data.city',
     })
 
     if (result?.error) {
@@ -126,27 +128,10 @@ export const UserInformationForm = ({ onSubmit }: Props) => {
         label={t('LastNameInput')}
         name={'lastName'}
       />
-      <DatePickerControl name={'dateOfBirth'} control={control} label={t('DateOfBirthInput')} />
-      {/*<SelectController*/}
-      {/*  items={[*/}
-      {/*    { title: 'country1', value: 'country1' },*/}
-      {/*    { title: 'country2', value: 'country2' },*/}
-      {/*  ]}*/}
-      {/*  name={'country'}*/}
-      {/*  control={control}*/}
-      {/*  variant={'wide'}*/}
-      {/*  label={t('CountrySelect')}*/}
-      {/*/>*/}
-      {/*<SelectController*/}
-      {/*  items={[*/}
-      {/*    { title: 'city1', value: 'city1' },*/}
-      {/*    { title: 'city2', value: 'city2' },*/}
-      {/*  ]}*/}
-      {/*  name={'city'}*/}
-      {/*  variant={'wide'}*/}
-      {/*  control={control}*/}
-      {/*  label={t('CitySelect')}*/}
-      {/*/>*/}
+      <DatePickerControl control={control} label={t('DateOfBirthInput')} name={'dateOfBirth'} />
+
+      <SelectCountryCity cityName={'city'} control={control} countryName={'country'} />
+
       <TextareaWithControl
         className={s.input}
         control={control}

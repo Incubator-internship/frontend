@@ -144,5 +144,9 @@
     "UserInformationFormBtn": "Сохранить изменения",
     "ErrorUsername": "Пользователь с таким именем уже существует",
     "ErrorDateOfBirth": "Возраст пользователя не может быть больше 100 и меньше 13 лет"
+  },
+  "SelectCountryCity": {
+    "Select your city": "Выберите город",
+    "Select your country": "Выберите страну"
   }
 }

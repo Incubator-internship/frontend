@@ -156,5 +156,9 @@
     "UserInformationFormBtn": "Save Changes",
     "ErrorUsername": "User with this user name already exist",
     "ErrorDateOfBirth": "The user`s age cannot be more than 100 or less than 13 years old"
+  },
+  "SelectCountryCity": {
+    "Select your city": "Select your city",
+    "Select your country": "Select your country"
   }
 }
