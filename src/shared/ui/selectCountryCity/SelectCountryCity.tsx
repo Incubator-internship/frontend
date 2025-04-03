@@ -87,7 +87,7 @@ const SelectCountryCity = <T extends FieldValues>({
             <select className={s.selectInput} {...field}>
               <option value={''}>-- Country --</option>
               {countries.map(country => (
-                <option key={country.iso2} value={country.name}>
+                <option key={country.name} value={country.name}>
                   {country.name}
                 </option>
               ))}
@@ -108,7 +108,7 @@ const SelectCountryCity = <T extends FieldValues>({
             >
               <option value={''}>-- City --</option>
               {cities.map((city, index) => (
-                <option key={index} value={city}>
+                <option key={'city' + index} value={city}>
                   {city}
                 </option>
               ))}
