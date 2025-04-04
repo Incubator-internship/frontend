@@ -1,0 +1,18 @@
+.selectForm {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 24px 0 24px;
+}
+
+.selectInput {
+  background-color: var(--color-dark-500);
+  border: 1px solid var(--color-dark-100);
+}
+
+.selectLabel {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
