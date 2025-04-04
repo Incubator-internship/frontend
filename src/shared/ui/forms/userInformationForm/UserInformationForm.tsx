@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -46,9 +47,18 @@ export type UserInformationResponse =
 
 type Props = {
   onSubmit: (data: UserInformationFormValues) => Promise<UserInformationResponse> | void
+  userInformation?: {
+    aboutMe: string | undefined
+    city: string | undefined
+    country: string | undefined
+    dateOfBirth: string | undefined
+    firstName: string | undefined
+    lastName: string | undefined
+    username: string | undefined
+  }
 }
 
-export const UserInformationForm = ({ onSubmit }: Props) => {
+export const UserInformationForm = ({ onSubmit, userInformation }: Props) => {
   const t = useTranslations('ProfileSettingsPage')
   const tErrors = useTranslations('FormsErrors')
 
@@ -62,13 +72,13 @@ export const UserInformationForm = ({ onSubmit }: Props) => {
     setError,
   } = useForm<UserInformationFormValues>({
     defaultValues: {
-      aboutMe: '',
-      city: '',
-      country: '',
-      dateOfBirth: '',
-      firstName: '',
-      lastName: '',
-      username: '',
+      aboutMe: userInformation?.aboutMe,
+      city: userInformation?.city,
+      country: userInformation?.country,
+      dateOfBirth: userInformation?.dateOfBirth,
+      firstName: userInformation?.firstName,
+      lastName: userInformation?.lastName,
+      username: userInformation?.username,
     },
     mode: 'onBlur',
     resolver: zodResolver(UserInformationFormSchema),
@@ -77,8 +87,8 @@ export const UserInformationForm = ({ onSubmit }: Props) => {
   const onSubmitForm = handleSubmit(async data => {
     const result = await onSubmit({
       aboutMe: data.aboutMe,
-      city: 'data.city',
-      country: 'data.country',
+      city: data.city,
+      country: data.country,
       dateOfBirth: data.dateOfBirth,
       firstName: data.firstName,
       lastName: data.lastName,

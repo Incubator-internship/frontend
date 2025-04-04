@@ -9,6 +9,7 @@ import { checkAuth } from '@/shared/utils/checkAuth'
 import { getPostsByUserId } from '@/shared/utils/getPostsByUserId'
 import clsx from 'clsx'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import s from './userProfile.module.scss'
 
@@ -37,7 +38,9 @@ export default async function UserProfile({ params }: { params: { userId: string
             <h2 className={s.username}>
               URLProfile{userId} - Auth:{isAuth ? 'true' : 'false'}
               {Number(params?.userId) === authUserId && (
-                <Button variant={'secondary'}>Profile Settings</Button>
+                <Button as={Link} href={'/profile-settings'} variant={'secondary'}>
+                  Profile Settings
+                </Button>
               )}
             </h2>
             <div className={s.stats}>

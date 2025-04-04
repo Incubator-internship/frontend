@@ -146,6 +146,10 @@
     "Add a Comment": "Add a Comment..."
   },
   "ProfileSettingsPage": {
+    "Tab1": "General information",
+    "Tab2": "Devices",
+    "Tab3": "Account Management",
+    "Tab4": "My payments",
     "UsernameInput": "Username",
     "FirstNameInput": "First Name",
     "LastNameInput": "Last Name",

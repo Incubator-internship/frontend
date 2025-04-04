@@ -1,9 +1,8 @@
-type DateString = `${number}.${number}.${number}`
 export type UserProfileRequest = {
   aboutMe: string
   city: string
   country: string
-  dateOfBirthday: DateString
+  dateOfBirthday: string
   firstName: string
   lastName: string
   userName: string
@@ -14,7 +13,7 @@ export type UserProfileResponse = {
   city: string
   country: string
   createdAt: string
-  dateOfBirthday: DateString
+  dateOfBirthday: string
   firstName: string
   lastName: string
   originalAvatarUrl: string
