@@ -26,7 +26,7 @@ export default async function UserProfile({ params }: { params: { userId: string
 
   return (
     <div className={s.userPage}>
-      {isAuth && <Sidebar />}
+      {isAuth && <Sidebar className={s.sidebar} />}
       <section className={s.userProfile}>
         <div className={s.info}>
           <Avatar className={s.ava}>
