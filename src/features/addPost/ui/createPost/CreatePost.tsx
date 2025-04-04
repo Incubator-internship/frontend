@@ -8,7 +8,7 @@ import { AddPhotoMainModal } from '@/features/addPost/ui/addPhotoMainModal/addPh
 import { CroppingPhotoStep } from '@/features/addPost/ui/croppingPhotoStep/croppingPhotoStep'
 import { FiltersPhotoStep } from '@/features/addPost/ui/filtersPhotoStep/filtersPhotoStep'
 import { ModalSave } from '@/features/addPost/ui/modalSave/ModalSave'
-import { convertPreviewToFile } from '@/features/addPost/utils/photoUtils'
+import { applyFilterToImage, convertPreviewToFile } from '@/features/addPost/utils/photoUtils'
 import { PostFormData, maximumCharactersSchema } from '@/shared/model/schemas/schemas'
 import { Modal } from '@/shared/ui/modal'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,6 +16,7 @@ import { useTranslations } from 'next-intl'
 
 import s from './createPost.module.scss'
 
+import { useFilters } from '../../hooks/useFilter'
 import PublushPhotoStep from '../publishPhotoStep/PublushPhotoStep'
 
 type Props = {
@@ -44,6 +45,7 @@ export default function CreatePost({
     defaultValues: { description: '' },
     resolver: zodResolver(maximumCharactersSchema),
   })
+  const filtersHook = useFilters()
 
   useEffect(() => {
     if (imageWithPreview?.length) {
@@ -71,14 +73,22 @@ export default function CreatePost({
     const bodyFormData = new FormData()
 
     try {
-      const files = await Promise.all(imageWithPreview.map(convertPreviewToFile))
+      const files = await Promise.all(
+        imageWithPreview.map(async (image, index) => {
+          const filter = filtersHook.filtersForImages[index] || 'none'
+
+          if (filter === 'none') {
+            return await convertPreviewToFile(image)
+          } else {
+            return await applyFilterToImage(image.preview, filter)
+          }
+        })
+      )
 
       files.forEach(file => {
         bodyFormData.append('photos', file)
       })
-
       bodyFormData.append('content', data.description)
-
       await createPost(bodyFormData).unwrap()
     } catch (error) {
       console.error(error)
@@ -139,8 +149,13 @@ export default function CreatePost({
               setImageWithPreview={setImageWithPreview}
               setTextErrorModal={setTextErrorModal}
             />,
-            <FiltersPhotoStep images={imageWithPreview} key={2} />,
-            <PublushPhotoStep images={imageWithPreview} key={3} onSubmit={sendPostCallBack} />,
+            <FiltersPhotoStep filtersHook={filtersHook} images={imageWithPreview} key={2} />,
+            <PublushPhotoStep
+              filtersForImages={filtersHook.filtersForImages}
+              images={imageWithPreview}
+              key={3}
+              onSubmit={sendPostCallBack}
+            />,
           ]}
           title={[t('CroppingPhotoTitle'), t('FiltersPhotoTitle'), t('PublishPhotoTitle')]}
         />

@@ -38,7 +38,7 @@ export type CreatePostResponse = {
   postId: number
 }
 
-export type Error = {
+export type ErrorMessagePost = {
   errorsMessages: ErrorData[]
 }
 

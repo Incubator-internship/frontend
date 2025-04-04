@@ -94,7 +94,17 @@
     "PasswordRegex": "Password must contain 0-9, a-z, A-Z, and at least one of the following symbols: ",
     "PasswordMatch": "Passwords must match",
     "AgreeMessage": "You must agree to the terms",
-    "Recaptcha": "Required reCAPTCHA"
+    "Recaptcha": "Required reCAPTCHA",
+    "FirstNameMin": "Minimum number of characters 1",
+    "FirstNameMax": "Maximum number of characters 50",
+    "FirstNameRegex": "First Name must contain A-Z; a-z; А-Я; а-я",
+    "LastNameMin": "Minimum number of characters 1",
+    "LastNameMax": "Maximum number of characters 50",
+    "LastNameRegex": "First Name must contain A-Z; a-z; А-Я; а-я",
+    "AboutMeMax": "Maximum number of characters 200",
+    "AboutMeRegex": "About Me must contain A-Z; a-z; А-Я; а-я + special characters",
+    "InvalidDateFormat": "dd.mm.xxxx - date format",
+    "AgeRestriction": "A user under 13 cannot create a profile. Privacy Policy"
   },
   "PublicPage": {
     "Registered users:": "Registered users:",
@@ -140,5 +150,21 @@
     "Tab2": "Devices",
     "Tab3": "Account Management",
     "Tab4": "My payments"
+  },
+  "ProfileSettingsPage": {
+    "UsernameInput": "Username",
+    "FirstNameInput": "First Name",
+    "LastNameInput": "Last Name",
+    "DateOfBirthInput": "Date of birth",
+    "CountrySelect": "Select your country",
+    "CitySelect": "Select your city",
+    "AboutMeInput": "About Me",
+    "UserInformationFormBtn": "Save Changes",
+    "ErrorUsername": "User with this user name already exist",
+    "ErrorDateOfBirth": "The user`s age cannot be more than 100 or less than 13 years old"
+  },
+  "SelectCountryCity": {
+    "Select your city": "Select your city",
+    "Select your country": "Select your country"
   }
 }
