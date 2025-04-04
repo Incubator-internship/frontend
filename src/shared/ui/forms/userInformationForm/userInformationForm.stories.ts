@@ -17,8 +17,23 @@ const handleSignUp = (data: UserInformationFormValues) => {
   console.log('Form Data:', data)
 }
 
-export const SignUp: Story = {
+export const UserInformation: Story = {
   args: {
     onSubmit: handleSignUp,
+  },
+}
+
+export const UserInformationWithDefaultValues: Story = {
+  args: {
+    onSubmit: handleSignUp,
+    userInformation: {
+      aboutMe: 'Hi!',
+      city: '',
+      country: '',
+      dateOfBirth: '04.04.2000',
+      firstName: 'Ivan',
+      lastName: 'Ivanov',
+      username: 'Ivan',
+    },
   },
 }

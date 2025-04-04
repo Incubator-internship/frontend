@@ -137,9 +137,7 @@
     "Tab1": "Общая информация",
     "Tab2": "Устройства",
     "Tab3": "Управление аккаунтом",
-    "Tab4": "Мои платежи"
-  },
-  "ProfileSettingsPage": {
+    "Tab4": "Мои платежи",
     "UsernameInput": "Имя пользователя",
     "FirstNameInput": "Имя",
     "LastNameInput": "Фамилия",
