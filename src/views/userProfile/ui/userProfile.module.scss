@@ -1,9 +1,19 @@
 .userPage {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 100%;
+  position: relative;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
 .userProfile {
+  overflow-y: auto;
+  height: auto;
   display: grid;
   grid-template:
     'info' auto
