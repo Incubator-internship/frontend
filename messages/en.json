@@ -139,6 +139,12 @@
     "AddPhotoErrorText3": "Number of photos allowed",
     "AddPhotoErrorBtn": "Ok"
   },
+  "modalClosePost": {
+    "title": "Сlose",
+    "body": "Do you really want to close the creation of a publication?If you close everything will be deleted",
+    "btnDiscard": "Discard",
+    "btnSavedraft": "Save draft"
+  },
   "HomePage": {
     "View All Comments": "View All Comments",
     "Publish": "Publish",
