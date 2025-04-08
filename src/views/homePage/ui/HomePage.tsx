@@ -12,7 +12,6 @@ import {
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
 import { AddCommentBlock } from '@/shared/ui/addCommentBlock/AddCommentBlock'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
-import { Sidebar } from '@/shared/ui/sidebar'
 import { Typography } from '@/shared/ui/typography'
 import { formatDistanceToNow } from 'date-fns'
 import { enGB, ru } from 'date-fns/locale'
@@ -31,7 +30,6 @@ const HomePage: React.FC = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <Sidebar />
       <div className={s.postWrapper}>
         <div className={s.postAvatarTitle}>
           <Avatar>

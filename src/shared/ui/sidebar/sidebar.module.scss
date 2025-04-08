@@ -1,4 +1,9 @@
 .nav {
+  position: sticky;
+  left: 0;
+  top: 60px;
+  z-index: 1000;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
