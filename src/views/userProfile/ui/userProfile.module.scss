@@ -1,9 +1,10 @@
 .userPage {
-  display: flex;
-  justify-content: center;
+  position: relative;
 }
 
 .userProfile {
+  overflow-y: auto;
+  height: auto;
   display: grid;
   grid-template:
     'info' auto
@@ -31,6 +32,7 @@
     height: 204px;
     background-color: #ccc;
     border-radius: var(--border-radius-rounded);
+    z-index: -1;
   }
 
   .bio {
@@ -80,12 +82,7 @@
       width: 100%;
       min-height: 240px;
       cursor: pointer;
-    }
-
-    .cardItemImage img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      z-index: -1;
     }
   }
 }

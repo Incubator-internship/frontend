@@ -93,7 +93,17 @@
     "PasswordRegex": "Пароль должен содержать цифры 0–9, a–z, A–Z и хотя бы один из следующих символов: ",
     "PasswordMatch": "Пароли должны совпадать",
     "AgreeMessage": "Вы должны согласиться с условиями",
-    "Recaptcha": "Требуется reCAPTCHA"
+    "Recaptcha": "Требуется reCAPTCHA",
+    "FirstNameMin": "Минимальное количество символов 1",
+    "FirstNameMax": "Максимальное количество символов 50",
+    "FirstNameRegex": "Имя должно содержать только символы A-Z; a-z; А-Я; а-я",
+    "LastNameMin": "Минимальное количество символов 1",
+    "LastNameMax": "Максимальное количество символов 50",
+    "LastNameRegex": "Фамилия должна содержать только символы A-Z; a-z; А-Я; а-я",
+    "AboutMeMax": "Минимальное количество символов 200",
+    "AboutMeRegex": "Поле обо мне должно содержать только символы A-Z; a-z; А-Я; а-я + специальные символы",
+    "InvalidDateFormat": "dd.mm.xxxx - формат даты",
+    "AgeRestriction": "Пользователь младше 13 лет не может создать профиль. Политика конфиденциальности"
   },
   "PublicPage": {
     "Registered users:": "Зарегистрировано пользователей:",
@@ -117,10 +127,36 @@
     "AddPhotoErrorText3": "Допустимое количество фотографий",
     "AddPhotoErrorBtn": "Хорошо"
   },
+  "modalClosePost": {
+    "title": "Закрыть",
+    "body": "Вы действительно хотите закрыть создание публикации?Если вы закроете, все будет удалено",
+    "btnDiscard": "Отказаться",
+    "btnSavedraft": "Сохранить черновик"
+  },
   "HomePage": {
     "View All Comments": "Показать все комментарии",
     "Publish": "Опубликовать",
     "locale": "ru",
     "Add a Comment": "Добавить комментарий..."
+  },
+  "ProfileSettingsPage": {
+    "Tab1": "Общая информация",
+    "Tab2": "Устройства",
+    "Tab3": "Управление аккаунтом",
+    "Tab4": "Мои платежи",
+    "UsernameInput": "Имя пользователя",
+    "FirstNameInput": "Имя",
+    "LastNameInput": "Фамилия",
+    "DateOfBirthInput": "Дата рождения",
+    "CountrySelect": "Выберите свою страну",
+    "CitySelect": "Выберите свой город",
+    "AboutMeInput": "Обо мне",
+    "UserInformationFormBtn": "Сохранить изменения",
+    "ErrorUsername": "Пользователь с таким именем уже существует",
+    "ErrorDateOfBirth": "Возраст пользователя не может быть больше 100 и меньше 13 лет"
+  },
+  "SelectCountryCity": {
+    "Select your city": "Выберите город",
+    "Select your country": "Выберите страну"
   }
 }

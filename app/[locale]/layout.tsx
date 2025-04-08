@@ -4,6 +4,7 @@ import React, { Suspense } from 'react'
 
 import StoreProvider from '@/app/config/store/storeProvider'
 import { Header } from '@/shared/ui/header'
+import { Sidebar } from '@/shared/ui/sidebar'
 import { checkAuth } from '@/shared/utils/checkAuth'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
@@ -15,6 +16,8 @@ import '@fontsource/inter/400.css'
 import '@fontsource/inter/500.css'
 import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
+
+import s from './layout.module.scss'
 
 import { Locale, routing } from '../../src/i18n/routing'
 
@@ -47,7 +50,10 @@ export default async function RootLayout({
           <StoreProvider>
             <Suspense fallback={<div>Loading...</div>}>
               <Header isAuth={isAuth} />
-              <main>{children}</main>
+              <div className={s.wrapper}>
+                {isAuth && <Sidebar />}
+                <main className={s.main}>{children}</main>
+              </div>
             </Suspense>
           </StoreProvider>
         </NextIntlClientProvider>

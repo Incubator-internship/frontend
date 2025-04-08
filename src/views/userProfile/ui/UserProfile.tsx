@@ -3,12 +3,12 @@ import React from 'react'
 import AvatarImg from '@/shared/assets/images/userProfile/profileAvatar.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
-import { Sidebar } from '@/shared/ui/sidebar'
 import { Typography } from '@/shared/ui/typography'
 import { checkAuth } from '@/shared/utils/checkAuth'
 import { getPostsByUserId } from '@/shared/utils/getPostsByUserId'
 import clsx from 'clsx'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import s from './userProfile.module.scss'
 
@@ -26,7 +26,6 @@ export default async function UserProfile({ params }: { params: { userId: string
 
   return (
     <div className={s.userPage}>
-      {isAuth && <Sidebar />}
       <section className={s.userProfile}>
         <div className={s.info}>
           <Avatar className={s.ava}>
@@ -37,7 +36,9 @@ export default async function UserProfile({ params }: { params: { userId: string
             <h2 className={s.username}>
               URLProfile{userId} - Auth:{isAuth ? 'true' : 'false'}
               {Number(params?.userId) === authUserId && (
-                <Button variant={'secondary'}>Profile Settings</Button>
+                <Button as={Link} href={'/profile-settings'} variant={'secondary'}>
+                  Profile Settings
+                </Button>
               )}
             </h2>
             <div className={s.stats}>

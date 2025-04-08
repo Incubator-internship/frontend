@@ -1,42 +1,56 @@
-import { useState } from 'react'
+import { CSSProperties, useState } from 'react'
 
-import { Photos } from '@/app/api/posts/postsApi.types'
 import ArrowLeft from '@/shared/assets/icons/ArrowLeft'
 import ArrowRight from '@/shared/assets/icons/ArrowRight'
 import clsx from 'clsx'
 
 import s from './carousel.module.scss'
-
+export type ExtendPhoto = {
+  style?: CSSProperties
+  url: string
+}
 type CarouselProps = {
   className?: string
-  photos: Photos[] | string[]
+  imageStyle?: CSSProperties
+  onSlideChange?: (index: number) => void
+  photos: (ExtendPhoto | string)[]
 }
+const isExtendedPhoto = (photo: ExtendPhoto | string): photo is ExtendPhoto =>
+  typeof photo !== 'string'
 
-export const Carousel = ({ className, photos }: CarouselProps) => {
+export const Carousel = ({ className, imageStyle, onSlideChange, photos }: CarouselProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const photosLength = photos.length
   const index = photosLength > 0 ? Math.min(currentImageIndex, photosLength - 1) : 0
   const goToSlide = (index: number) => {
     setCurrentImageIndex(index)
+    onSlideChange && onSlideChange(index)
   }
 
   const nextImage = () => {
     if (index < photosLength - 1) {
-      setCurrentImageIndex(prevIndex => prevIndex + 1)
+      const newIndex = currentImageIndex + 1
+
+      setCurrentImageIndex(newIndex)
+      onSlideChange && onSlideChange(newIndex)
     }
   }
 
   const prevImage = () => {
     if (index > 0) {
-      setCurrentImageIndex(prevIndex => prevIndex - 1)
+      const newIndex = currentImageIndex - 1
+
+      setCurrentImageIndex(newIndex)
+      onSlideChange && onSlideChange(newIndex)
     }
   }
+  const currentPhoto = photos[index]
 
-  const isImagesType = (photos: Photos[] | string[]): photos is string[] => {
-    return typeof photos[0] === 'string'
-  }
+  const combinedStyle = isExtendedPhoto(currentPhoto)
+    ? { ...imageStyle, ...currentPhoto?.style }
+    : imageStyle
 
-  const currentImageUrl = isImagesType(photos) ? photos[index] : photos[index]?.url
+  const currentImageUrl = isExtendedPhoto(currentPhoto) ? currentPhoto?.url : currentPhoto
 
   return (
     <div className={clsx(s.carousel, className)}>
@@ -47,7 +61,7 @@ export const Carousel = ({ className, photos }: CarouselProps) => {
       >
         <ArrowLeft className={s.icon} />
       </button>
-      <img alt={'img'} className={s.image} src={currentImageUrl} />
+      <img alt={'img'} className={s.image} src={currentImageUrl} style={combinedStyle} />
       <button
         className={photosLength > 1 ? s.nextButton : s.hidden}
         onClick={nextImage}
