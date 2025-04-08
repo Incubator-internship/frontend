@@ -3,7 +3,6 @@ import React from 'react'
 import AvatarImg from '@/shared/assets/images/userProfile/profileAvatar.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
-import { Sidebar } from '@/shared/ui/sidebar'
 import { Typography } from '@/shared/ui/typography'
 import { checkAuth } from '@/shared/utils/checkAuth'
 import { getPostsByUserId } from '@/shared/utils/getPostsByUserId'
@@ -27,7 +26,6 @@ export default async function UserProfile({ params }: { params: { userId: string
 
   return (
     <div className={s.userPage}>
-      {isAuth && <Sidebar className={s.sidebar} />}
       <section className={s.userProfile}>
         <div className={s.info}>
           <Avatar className={s.ava}>

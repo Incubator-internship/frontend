@@ -1,5 +1,5 @@
 'use client'
-import { Sidebar } from '@/shared/ui/sidebar'
+
 import StatisticScreen from '@/shared/ui/statisticScreen/StatisticScreen'
 import { Typography } from '@/shared/ui/typography'
 import { useTranslations } from 'next-intl'
@@ -16,7 +16,6 @@ export default function StatisticsPage() {
 
   return (
     <div style={{ display: 'flex' }}>
-      <Sidebar />
       <div className={s.statisticsPage}>
         <Typography className={s.header}>{t('Statistics')}</Typography>
         <StatisticScreen category={categories.like} />
