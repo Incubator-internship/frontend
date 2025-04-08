@@ -9,7 +9,6 @@ import { checkAuth } from '@/shared/utils/checkAuth'
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
-import s from './layout.module.scss'
 
 import '@/shared/styles/index.scss'
 import '@fontsource/inter/300.css'
@@ -17,6 +16,8 @@ import '@fontsource/inter/400.css'
 import '@fontsource/inter/500.css'
 import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
+
+import s from './layout.module.scss'
 
 import { Locale, routing } from '../../src/i18n/routing'
 
@@ -49,11 +50,9 @@ export default async function RootLayout({
           <StoreProvider>
             <Suspense fallback={<div>Loading...</div>}>
               <Header isAuth={isAuth} />
-              <div className={s.wrapper} >
+              <div className={s.wrapper}>
                 {isAuth && <Sidebar />}
-                <main className={s.main}>
-                  {children}
-                </main>
+                <main className={s.main}>{children}</main>
               </div>
             </Suspense>
           </StoreProvider>
@@ -62,5 +61,3 @@ export default async function RootLayout({
     </html>
   )
 }
-
-
