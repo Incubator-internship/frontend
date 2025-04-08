@@ -34,7 +34,7 @@ export const AccountInformation = ({ className, ...rest }: Props) => {
         aboutMe: data.aboutMe ?? '',
         city: data.city,
         country: data.country,
-        dateOfBirthday: data.dateOfBirth,
+        dateOfBirthday: data.dateOfBirth as `${number}.${number}.${number}`,
         firstName: data.firstName ?? '',
         lastName: data.lastName ?? '',
         userName: data.username ?? '',
