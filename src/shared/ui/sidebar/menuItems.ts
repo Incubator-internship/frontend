@@ -3,8 +3,8 @@ import React from 'react'
 import {
   BookmarkIcon,
   BookmarkOutlineIcon,
-  HomeIcon,
-  HomeOutlineIcon,
+  FeedIcon,
+  FeedOutlineIcon,
   LogOutIcon,
   LogOutOutlineIcon,
   MessageCircleIcon,
@@ -34,7 +34,7 @@ export const getMenuItems = (
   toggleLogoutModal: () => void,
   t: (key: string) => string
 ): MenuItem[] => [
-  { Icon: HomeIcon, IconOutline: HomeOutlineIcon, label: t('Home'), path: '/home' },
+  { Icon: FeedIcon, IconOutline: FeedOutlineIcon, label: t('Feed'), path: '/feed' },
   {
     Icon: PlusSquareIcon,
     IconOutline: PlusSquareOutlineIcon,

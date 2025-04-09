@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl'
 import s from './addCommentBlock.module.scss'
 
 export const AddCommentBlock: React.FC = () => {
-  const t = useTranslations<'HomePage'>('HomePage')
+  const t = useTranslations<'FeedPage'>('FeedPage')
 
   return (
     <div className={s.postAddComment}>

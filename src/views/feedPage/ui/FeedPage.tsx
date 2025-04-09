@@ -17,12 +17,12 @@ import { formatDistanceToNow } from 'date-fns'
 import { enGB, ru } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
 
-import s from './homePage.module.scss'
+import s from './feedPage.module.scss'
 
-const HomePage: React.FC = () => {
+const FeedPage: React.FC = () => {
   //TODO: id users which is following
 
-  const t = useTranslations<'HomePage'>('HomePage')
+  const t = useTranslations<'FeedPage'>('FeedPage')
 
   const { data: posts, error, isLoading } = useGetPostsUserIdQuery(7)
 
@@ -92,4 +92,4 @@ const HomePage: React.FC = () => {
   )
 }
 
-export default HomePage
+export default FeedPage

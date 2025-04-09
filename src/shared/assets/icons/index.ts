@@ -4,9 +4,9 @@ export { default as BookmarkOutlineIcon } from './BookmarkOutlineIcon'
 export { default as CheckmarkOutlineIcon } from './CheckmarkOutlineIcon'
 
 export { default as HeartOutlineIcon } from './HeartOutlineIcon'
-export { default as HomeIcon } from './HomeIcon'
+export { default as FeedIcon } from './FeedIcon'
 
-export { default as HomeOutlineIcon } from './HomeOutlineIcon'
+export { default as FeedOutlineIcon } from './FeedOutlineIcon'
 export { default as LogOutIcon } from './LogOutIcon'
 
 export { default as LogOutOutlineIcon } from './LogOutOutlineIcon'
