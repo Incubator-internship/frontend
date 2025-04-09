@@ -37,10 +37,9 @@ export default function SignInPage() {
   useEffect(() => {
     if (isSuccess && userId) {
       localStorage.setItem('accessToken', data.accessToken)
-      // dispatch(loginStore())
+
       router.push(`/${locale}`)
       router.refresh()
-      // redirect(`/${locale}/profile`)
     }
   }, [data, isSuccess, router, locale, dispatch, userId])
 
