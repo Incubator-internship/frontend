@@ -28,7 +28,7 @@ export default function SignUp() {
       setIsOpenModal(true)
       setUserEmail(data.email)
     } else {
-      console.log(result.error)
+      console.error(result.error)
     }
 
     return result as SignUpResponse
