@@ -36,7 +36,7 @@ export default function ConfirmEmail() {
     if (code && initialLoading) {
       confirmEmail({ code }).finally(() => setInitialLoading(false))
     }
-  }, [code, initialLoading])
+  }, [code, initialLoading, confirmEmail])
 
   if (initialLoading || isLoading) {
     return <>Loading...</>

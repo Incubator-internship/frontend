@@ -22,14 +22,14 @@ export const PostsDropdownMenu: Story = {
         icon: <PensilIcon />,
         label: 'Edit Post',
         onSelect: value => {
-          console.log('click Edit Post', value)
+          // console.log('click Edit Post', value)
         },
       },
       {
         icon: <TrashIcon />,
         label: 'Delete Post',
         onSelect: value => {
-          console.log('click Delete Post', value)
+          // console.log('click Delete Post', value)
         },
       },
     ],

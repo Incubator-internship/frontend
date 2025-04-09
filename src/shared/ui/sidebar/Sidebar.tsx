@@ -48,7 +48,7 @@ export const Sidebar = forwardRef<SidebarRef, SidebarProps>(({ className, ...res
   const handleLogoutConfirm = () => {
     logout()
 
-    router.replace(`/${locale}`)
+    router.push(`/${locale}`)
     router.refresh()
     toggleLogoutModal()
   }

@@ -38,7 +38,7 @@ const CommentsStDate = StatisticData.comments.map(item => item.date)
 const PublicViewsStPublication = StatisticData.publicationViews.map(item => item.publicationViews)
 const PublicViewsStDate = StatisticData.publicationViews.map(item => item.date)
 
-export const StatisticScreen = ({ category }: StatisticScreenProps) => {
+const StatisticScreen = ({ category }: StatisticScreenProps) => {
   const [borderColor, setBorderColor] = useState('')
   const [lineColor, setLineColor] = useState('')
   const [dataSt, setDataSt] = useState<number[]>([])

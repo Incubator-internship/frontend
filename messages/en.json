@@ -13,7 +13,7 @@
     "PublishBtn": "Publish"
   },
   "Sidebar": {
-    "Home": "Home",
+    "Feed": "Feed",
     "Create": "Create",
     "My Profile": "My Profile",
     "Messenger": "Messenger",
@@ -145,7 +145,7 @@
     "btnDiscard": "Discard",
     "btnSavedraft": "Save draft"
   },
-  "HomePage": {
+  "FeedPage": {
     "View All Comments": "View All Comments",
     "Publish": "Publish",
     "locale": "en",

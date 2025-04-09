@@ -12,7 +12,7 @@
     "PublishBtn": "Опубликовать"
   },
   "Sidebar": {
-    "Home": "Главная",
+    "Feed": "Лента",
     "Create": "Создать",
     "My Profile": "Мой профиль",
     "Messenger": "Мессенджер",
@@ -133,7 +133,7 @@
     "btnDiscard": "Отказаться",
     "btnSavedraft": "Сохранить черновик"
   },
-  "HomePage": {
+  "FeedPage": {
     "View All Comments": "Показать все комментарии",
     "Publish": "Опубликовать",
     "locale": "ru",

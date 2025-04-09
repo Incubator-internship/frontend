@@ -1,40 +1,39 @@
 .createAvatar {
-    width: auto;
-    max-width: 972px;
-  
-    > div:nth-child(2) {
-      padding: 0;
-    }
-  }
-  
-  .errorModal {
-    max-width: 380px;
-  }
+  width: auto;
+  max-width: 972px;
 
-.save{
+  > div:nth-child(2) {
+    padding: 0;
+  }
+}
+
+.errorModal {
+  max-width: 380px;
+}
+
+.save {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-top: 30px;
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.alert{
+.alert {
   margin-top: 20px;
 }
 
-.croppWrapper{
+.croppWrapper {
   max-width: 300px;
 }
 
-.cropper{
+.cropper {
   position: relative;
   transform: translateX(25%);
-
 
   overflow: hidden;
 
