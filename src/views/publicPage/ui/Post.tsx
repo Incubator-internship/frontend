@@ -72,6 +72,10 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
                 src={photo.url}
                 style={{ objectFit: 'cover' }}
                 width={234}
+                onClick={e => {
+                  e.stopPropagation()
+                  handlePostClick(post.id)
+                }}
               />
             </SwiperSlide>
           ))}
