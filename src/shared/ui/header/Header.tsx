@@ -31,13 +31,13 @@ export const Header = ({ isAuth }: { isAuth: boolean }) => {
         Inctagram
       </Link>
       <div className={s.container}>
-        <Select defaultValue={'2'} items={[]} variant={'narrow'} />
         {isAuth && (
           <div className={s.ball}>
             <BellOutline />
             {count > 0 && <div className={s.count}>{count}</div>}
           </div>
         )}
+        <Select defaultValue={'2'} items={[]} variant={'narrow'} />
         {!isAuth && (
           <div className={s.buttons}>
             <Button as={Link} href={`/${locale}/signin`} variant={'transparent'}>

@@ -37,9 +37,9 @@ export default function SignInPage() {
   useEffect(() => {
     if (isSuccess && userId) {
       localStorage.setItem('accessToken', data.accessToken)
-      // dispatch(loginStore())
-      router.push(`/${locale}/profile`)
-      redirect(`/${locale}/profile`)
+
+      router.push(`/${locale}`)
+      router.refresh()
     }
   }, [data, isSuccess, router, locale, dispatch, userId])
 
@@ -48,7 +48,7 @@ export default function SignInPage() {
       return <div className={clsx(s.loading)}>Loading...</div>
     }
     if (isSuccess) {
-      return <Link href={`${locale}/profile`} />
+      return <Link href={`${locale}`} />
     } else {
       return (
         <div className={clsx(s.formWrapper)}>

@@ -22,8 +22,8 @@
     "Favorites": "Favorites",
     "Logout": "Log Out",
     "Are you really want to log out of your account": "Are you really want to log out of your account",
-    "Yes": "Да",
-    "No": "Нет"
+    "Yes": "Yes",
+    "No": "No"
   },
   "NewPasswordPage": {
     "CreateNewPasswordTitle": "Create new password",
