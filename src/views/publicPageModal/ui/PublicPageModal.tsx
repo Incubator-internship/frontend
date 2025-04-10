@@ -8,6 +8,7 @@ import s from './publicPageModal.module.scss'
 
 import { Carousel } from '../../../shared/ui/carousel'
 import { ModalComments } from '../../../shared/ui/modalComments'
+import { PublicPageModalServer } from './PublicPageModalServer'
 
 export type PublicPageModalProps = {
   isOpen?: boolean
@@ -22,12 +23,6 @@ export const PublicPageModal = ({ isOpen = true, onClose, postId }: PublicPageMo
     return null
   }
 
-  const handleBackdropClick = (event: React.MouseEvent) => {
-    if (event.target === event.currentTarget) {
-      onClose?.()
-    }
-  }
-
   if (isLoading) {
     return <div>Loading...</div>
   }
@@ -40,15 +35,5 @@ export const PublicPageModal = ({ isOpen = true, onClose, postId }: PublicPageMo
     return
   }
 
-  return (
-    <div className={s.backdrop} onClick={handleBackdropClick}>
-      <div className={s.publicPageModule} onClick={e => e.stopPropagation()}>
-        <button onClick={onClose} type={'button'}>
-          <Close className={s.close}></Close>
-        </button>
-        <Carousel photos={data.photos} />
-        <ModalComments onClose={onClose} post={data} />
-      </div>
-    </div>
-  )
+  return <PublicPageModalServer photos={data.photos} postData={data} onClose={onClose} />
 }
