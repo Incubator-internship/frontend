@@ -6,6 +6,7 @@ import { Button } from '@/shared/ui/button'
 import { Typography } from '@/shared/ui/typography'
 import { checkAuth } from '@/shared/utils/checkAuth'
 import { getPostsByUserId } from '@/shared/utils/getPostsByUserId'
+import Post from '@/views/publicPage/ui/Post'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,9 +21,9 @@ export default async function UserProfile({ params }: { params: { userId: string
 
   const { posts } = await getPostsByUserId(`${userId}`)
 
-  const galleryImages = posts.flatMap(post =>
-    post.photos.map((photo: { url: string }) => photo.url)
-  )
+  // const galleryImages = posts.flatMap(post =>
+  //   post.photos.map((photo: { url: string }) => photo.url)
+  // )
 
   return (
     <div className={s.userPage}>
@@ -72,7 +73,7 @@ export default async function UserProfile({ params }: { params: { userId: string
           </div>
         </div>
         <div className={s.gallery}>
-          {posts &&
+          {/* {posts &&
             galleryImages.map((image, index) => (
               <div className={s.cardItemImage} key={index}>
                 <Image
@@ -85,7 +86,8 @@ export default async function UserProfile({ params }: { params: { userId: string
                   }}
                 />
               </div>
-            ))}
+            ))} */}
+          {posts && posts.map(post => <Post key={post.id} post={post} />)}
         </div>
       </section>
     </div>
