@@ -23,7 +23,7 @@ export type UserProfileResponse = {
 }
 
 export type UploadAvatar = {
-  photo: File
+  avatar: File
 }
 export type DeleteUser = {
   id: number

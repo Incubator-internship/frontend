@@ -52,7 +52,7 @@ export const AccountInformation = ({ className, ...rest }: Props) => {
   return (
     <div className={clsx(s.profileInformation, className)}>
       <div className={s.profileInformationAvatar}>
-        <ProfilePhoto />
+        <ProfilePhoto userId={userInformation.profileId} />
       </div>
       <div className={s.profileInformationForm}>
         <UserInformationForm

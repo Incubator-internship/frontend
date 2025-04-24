@@ -24,10 +24,10 @@ export const usersApi = inctagramApi.injectEndpoints({
     }),
     uploadAvatar: builder.mutation<void, UploadAvatar>({
       invalidatesTags: ['UserProfile'],
-      query: ({ photo }) => {
+      query: ({ avatar }) => {
         const formData = new FormData()
 
-        formData.append('photo', photo)
+        formData.append('avatar', avatar)
 
         return {
           body: formData,

@@ -10,7 +10,7 @@ export const convertPreviewToFile = async (image: FileWithPreview): Promise<File
   const response = await fetch(image.preview)
   const blob = await response.blob()
 
-  return new File([blob], image.path || 'photo.jpg', { type: blob.type })
+  return new File([blob], image.path || 'photo.jpg' || 'photo.png', { type: blob.type })
 }
 
 export const applyFilterToImage = async (imageUrl: string, filter: string): Promise<File> => {
