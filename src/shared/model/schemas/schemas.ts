@@ -116,7 +116,7 @@ export const createAboutMeSchema = (t: (key: string) => string) =>
     .string()
     .trim()
     .max(200, { message: t('AboutMeMax') })
-    .regex(/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=[\]{};:'"\\|,.<>/?`~]+$/, {
+    .regex(/^[A-Za-zА-Яа-яЁё0-9\s!@#$%^&*()_+\-=[\]{};:'"\\|,.<>/?`~]+$/, {
       message: t('AboutMeRegex'),
     })
     .optional()

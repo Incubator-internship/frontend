@@ -14,6 +14,7 @@ import { InputControl } from '@/shared/ui/inputControl'
 import { TextareaWithControl } from '@/shared/ui/textareaControl'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SerializedError } from '@reduxjs/toolkit'
+import { parse } from 'date-fns'
 import { useTranslations } from 'next-intl'
 import { z } from 'zod'
 
@@ -32,7 +33,12 @@ const createUserInformationFormSchema = (t: (key: string) => string) =>
     username: createUsernameSchema(t),
   })
 
-export type UserInformationFormValues = z.infer<ReturnType<typeof createUserInformationFormSchema>>
+export type UserInformationFormValues = Omit<
+  z.infer<ReturnType<typeof createUserInformationFormSchema>>,
+  'dateOfBirth'
+> & {
+  dateOfBirth?: Date
+}
 
 type FetchBaseQueryErrorWithDetails = {
   data?: {
@@ -75,7 +81,9 @@ export const UserInformationForm = ({ onSubmit, userInformation }: Props) => {
       aboutMe: userInformation?.aboutMe,
       city: userInformation?.city,
       country: userInformation?.country,
-      dateOfBirth: userInformation?.dateOfBirth,
+      dateOfBirth: userInformation?.dateOfBirth
+        ? parse(userInformation.dateOfBirth, 'dd.MM.yyyy', new Date())
+        : undefined,
       firstName: userInformation?.firstName,
       lastName: userInformation?.lastName,
       username: userInformation?.username,
