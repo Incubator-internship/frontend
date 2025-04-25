@@ -158,5 +158,11 @@
   "SelectCountryCity": {
     "Select your city": "Выберите город",
     "Select your country": "Выберите страну"
+  },
+  "AvaDeleteModal": {
+    "title": "Удалить фото",
+    "body": "Вы уверены что хотети удалить фото?",
+    "btnDelete": "Да",
+    "btnDiscard": "Нет"
   }
 }
