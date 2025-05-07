@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { UserProfileResponse } from '@/app/api/users/usersApi.types'
 import AvatarImg from '@/shared/assets/images/userProfile/profileAvatar.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
@@ -12,10 +13,17 @@ import Link from 'next/link'
 
 import s from './userProfile.module.scss'
 
-export default async function UserProfile({ params }: { params: { userId: string } }) {
+export default async function UserProfile({
+  params,
+}: {
+  params: { userId: string; nickname: string; originalAvatarUrl: string; aboutMe: string }
+}) {
   const { isAuth, userId: authUserId } = await checkAuth()
 
   const userId = params?.userId
+  const aboutMe = params.aboutMe
+  const nickname = params.nickname
+  const avatar = params.originalAvatarUrl
 
   const { posts } = await getPostsByUserId(`${userId}`)
 
@@ -24,12 +32,12 @@ export default async function UserProfile({ params }: { params: { userId: string
       <section className={s.userProfile}>
         <div className={s.info}>
           <Avatar className={s.ava}>
-            <AvatarImage alt={'Profile avatar'} src={AvatarImg.src} />
+            <AvatarImage alt={'Profile avatar'} src={avatar} />
             <AvatarFallback>👹</AvatarFallback>
           </Avatar>
           <div className={s.bio}>
             <h2 className={s.username}>
-              URLProfile{userId} - Auth:{isAuth ? 'true' : 'false'}
+              {nickname}
               {Number(params?.userId) === authUserId && (
                 <Button as={Link} href={'/profile-settings'} variant={'secondary'}>
                   Profile Settings
@@ -57,12 +65,7 @@ export default async function UserProfile({ params }: { params: { userId: string
               </div>
             </div>
             <Typography as={'p'} className={clsx(s.description)} variant={'body1'}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco
-              <Typography as={'a'} variant={'link1'}>
-                laboris nisi ut aliquip ex ea commodo consequat.
-              </Typography>
+              {aboutMe}
             </Typography>
           </div>
         </div>

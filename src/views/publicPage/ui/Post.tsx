@@ -2,12 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+import { useGetMeQuery } from '@/app/api/auth/authApi'
 import { PostsDataByPostId } from '@/app/api/posts/postsApi.types'
+import { useGetProfileQuery } from '@/app/api/users/usersApi'
 import avatar1 from '@/shared/assets/images/avatars/avatar1.webp'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import { Typography } from '@/shared/ui/typography'
 import { PublicPageModal } from '@/views/publicPageModal/ui/PublicPageModal'
 import { ShowMore, type ShowMoreRef } from '@re-dev/react-truncate'
+import { skipToken } from '@reduxjs/toolkit/query'
 import { formatDistanceToNow } from 'date-fns'
 import { enGB, ru } from 'date-fns/locale'
 import Image from 'next/image'
@@ -16,9 +19,9 @@ import { useTranslations } from 'next-intl'
 import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import 'swiper/swiper-bundle.css'
 //NOTE: node_modules\swiper\swiper-bundle.css rewriting
 import './publicPage.scss'
+import 'swiper/swiper-bundle.css'
 
 import s from './publicPage.module.scss'
 
@@ -31,6 +34,10 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
   const postIdNumber = postIdFromUrl ? Number(postIdFromUrl) : null
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedPostId, setSelectedPostId] = useState<null | number>(null)
+  const { data: meData } = useGetMeQuery()
+  const { data: dataUser } = useGetProfileQuery(meData?.userId ?? skipToken)
+  const nickName = meData?.login
+  const avatarSmall = dataUser?.smallAvatarUrl
 
   useEffect(() => {
     if (postIdNumber !== null) {
@@ -84,10 +91,10 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
 
       <div className={s.postItemAvatarTitle}>
         <Avatar>
-          <AvatarImage alt={'Avatar1'} src={avatar1.src} />
-          <AvatarFallback>id{post.userId}</AvatarFallback>
+          <AvatarImage alt={'Avatar1'} src={avatarSmall} />
+          <AvatarFallback>👹</AvatarFallback>
         </Avatar>
-        <Typography variant={'h3'}>URLProfile</Typography>
+        <Typography variant={'h3'}>{nickName}</Typography>
       </div>
 
       <Typography color={'grey'} variant={'smallText'}>
