@@ -49,9 +49,7 @@ const FeedPage: React.FC = () => {
     return <div>Loading...</div>
   }
 
-  const handleDeletePost = () => {
-    setIsOpenModal(false)
-  }
+
 
   return (
     <div style={{ display: 'flex' }}>
