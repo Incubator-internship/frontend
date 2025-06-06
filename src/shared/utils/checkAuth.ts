@@ -8,6 +8,7 @@ export async function checkAuth() {
   }
 
   try {
+    // 1. Сначала проверяем авторизацию
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/me`, {
       credentials: 'include',
       headers: {
@@ -19,15 +20,42 @@ export async function checkAuth() {
     if (!res.ok) {
       return { isAuth: false }
     }
-    const data = await res.json()
 
-    if (!data || !data.userId) {
+    const authData = await res.json()
+
+    if (!authData?.userId) {
       return { isAuth: false }
     }
 
-    return { isAuth: true, userId: data.userId }
+    const profileRes = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/users/profile/${authData.userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${refreshToken.value}`,
+        },
+      }
+    )
+
+    if (!profileRes.ok) {
+      return {
+        isAuth: true,
+        userId: authData.userId,
+        firstName: null,
+        lastName: null,
+      }
+    }
+
+    const profile = await profileRes.json()
+
+    return {
+      isAuth: true,
+      userId: authData.userId,
+      nickname: authData.login,
+      aboutMe: profile.aboutMe,
+      originalAvatarUrl: profile.originalAvatarUrl,
+    }
   } catch (err) {
-    console.error('Auth check failed:', err)
+    console.error('Profile data error:', err)
 
     return { isAuth: false }
   }

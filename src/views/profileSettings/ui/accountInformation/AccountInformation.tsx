@@ -34,7 +34,7 @@ export const AccountInformation = ({ className, ...rest }: Props) => {
         aboutMe: data.aboutMe ?? '',
         city: data.city,
         country: data.country,
-        dateOfBirthday: data.dateOfBirth,
+        dateOfBirthday: data.dateOfBirth.toString(),
         firstName: data.firstName ?? '',
         lastName: data.lastName ?? '',
         userName: data.username ?? '',
@@ -52,7 +52,7 @@ export const AccountInformation = ({ className, ...rest }: Props) => {
   return (
     <div className={clsx(s.profileInformation, className)}>
       <div className={s.profileInformationAvatar}>
-        <ProfilePhoto />
+        <ProfilePhoto userId={userInformation.profileId} />
       </div>
       <div className={s.profileInformationForm}>
         <UserInformationForm

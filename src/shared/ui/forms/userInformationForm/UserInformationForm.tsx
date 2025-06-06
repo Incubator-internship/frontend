@@ -37,7 +37,7 @@ export type UserInformationFormValues = Omit<
   z.infer<ReturnType<typeof createUserInformationFormSchema>>,
   'dateOfBirth'
 > & {
-  dateOfBirth?: Date
+  dateOfBirth: Date
 }
 
 type FetchBaseQueryErrorWithDetails = {

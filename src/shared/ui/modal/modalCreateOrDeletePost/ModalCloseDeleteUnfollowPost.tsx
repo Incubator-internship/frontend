@@ -35,7 +35,7 @@ export const ModalCloseDeleteUnfollowPost: React.FC<ModalCloseDeleteUnfollowPost
         await deletePost({ id: +postId }).unwrap()
         onDelete()
         onCloseModal()
-        onCloseParentModal?.()
+        onCloseParentModal && onCloseParentModal()
       } catch (error) {
         console.error('Failed to delete the post:', error)
       }

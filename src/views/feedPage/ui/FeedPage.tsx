@@ -44,8 +44,13 @@ const FeedPage: React.FC = () => {
     setIsOpenModal(false)
   }
 
+
   if (isLoading) {
     return <div>Loading...</div>
+  }
+
+  const handleDeletePost = () => {
+    setIsOpenModal(false)
   }
 
   return (
@@ -114,6 +119,7 @@ const FeedPage: React.FC = () => {
         )}
         <div ref={loadMoreRef} style={{ height: '20px' }} />
         {isFetchingMore && <Loader />}
+
       </div>
 
       {isOpenModal && (

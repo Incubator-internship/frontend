@@ -170,5 +170,11 @@
   "SelectCountryCity": {
     "Select your city": "Select your city",
     "Select your country": "Select your country"
+  },
+  "AvaDeleteModal": {
+    "title": "Delete Photo",
+    "body": "Are you sure you want to delete the photo?",
+    "btnYes": "btnDelete",
+    "btnNo": "btnDiscard"
   }
 }
