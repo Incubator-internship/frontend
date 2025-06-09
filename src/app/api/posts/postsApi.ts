@@ -25,9 +25,18 @@ const postsApi = inctagramApi.injectEndpoints({
         url: `/v1/posts/${id}`,
       }),
     }),
-    getAllPosts: builder.query<AllPosts, void>({
+    getAllPosts: builder.query<AllPosts, { cursor: number | undefined; pageSize: number }>({
       providesTags: ['Posts'],
-      query: () => 'v1/posts/all-posts',
+      query: ({ cursor, pageSize }) => {
+        const params = new URLSearchParams()
+
+        if (cursor !== undefined) {
+          params.append('cursor', cursor.toString())
+        }
+        params.append('pageSize', pageSize.toString())
+
+        return `v1/posts/all-posts?${params.toString()}`
+      },
     }),
     getPostsId: builder.query<PostsDataByPostId, number>({
       providesTags: ['Post'],
