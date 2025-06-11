@@ -176,5 +176,12 @@
     "body": "Are you sure you want to delete the photo?",
     "btnYes": "btnDelete",
     "btnNo": "btnDiscard"
+  },
+  "UserProfile": {
+    "Profile Settings": "Profile Settings",
+    "Following": "Following",
+    "Followers": "Followers",
+    "Publications": "Publications"
   }
 }
+

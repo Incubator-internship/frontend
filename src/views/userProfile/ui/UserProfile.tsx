@@ -10,6 +10,7 @@ import { getPostsByUserId } from '@/shared/utils/getPostsByUserId'
 import Post from '@/views/publicPage/ui/Post'
 import clsx from 'clsx'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 
 import s from './userProfile.module.scss'
 
@@ -19,6 +20,7 @@ export default async function UserProfile({
   params: { userId: string; nickname: string; originalAvatarUrl: string; aboutMe: string }
 }) {
   const { isAuth, userId: authUserId } = await checkAuth()
+  const t = await getTranslations('UserProfile')
 
   const userId = params?.userId
   const aboutMe = params.aboutMe
@@ -40,7 +42,7 @@ export default async function UserProfile({
               {nickname}
               {Number(params?.userId) === authUserId && (
                 <Button as={Link} href={'/profile-settings'} variant={'secondary'}>
-                  Profile Settings
+                  {t('Profile Settings')}
                 </Button>
               )}
             </h2>
@@ -48,19 +50,19 @@ export default async function UserProfile({
               <div>
                 <span>2218</span>
                 <Typography as={'a'} href={'#'}>
-                  Following
+                  {t('Following')}
                 </Typography>
               </div>
               <div>
                 <span>2358</span>
                 <Typography as={'a'} href={'#'}>
-                  Followers
+                  {t('Followers')}
                 </Typography>
               </div>
               <div>
                 <span>2764</span>
                 <Typography as={'a'} href={'#'}>
-                  Publications
+                  {t('Publications')}
                 </Typography>
               </div>
             </div>
