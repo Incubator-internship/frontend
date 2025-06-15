@@ -24,3 +24,37 @@
 .radioGroup {
   gap: 20px;
 }
+
+.paymentMethods {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: end;
+  gap: 54px;
+  & > img {
+    cursor: pointer;
+  }
+}
+
+.subscriptionInfo {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: start;
+  gap: 54px;
+}
+
+.subscriptionInfo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.box {
+  padding-top: 19px;
+}
+
+.infoPaymentModal {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
