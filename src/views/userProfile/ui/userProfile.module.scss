@@ -73,9 +73,10 @@
   .gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    flex-wrap: wrap;
     gap: 12px;
-    justify-content: space-between;
+    box-sizing: border-box;
+    max-width: 100vw;
+    overflow-x: hidden;
 
     .cardItemImage {
       position: relative;
@@ -83,6 +84,7 @@
       min-height: 240px;
       cursor: pointer;
       z-index: -1;
+      box-sizing: border-box;
     }
   }
 }
