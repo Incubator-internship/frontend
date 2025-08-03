@@ -164,5 +164,11 @@
     "body": "Вы уверены что хотети удалить фото?",
     "btnDelete": "Да",
     "btnDiscard": "Нет"
+  },
+  "UserProfile": {
+    "Profile Settings": "Настройки профиля",
+    "Following": "Подписки",
+    "Followers": "Подписчики",
+    "Publications": "Публикации"
   }
 }
