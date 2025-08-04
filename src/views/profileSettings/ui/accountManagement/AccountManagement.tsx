@@ -11,6 +11,7 @@ import { clsx } from 'clsx'
 import Image from 'next/image'
 
 import s from './accountManagement.module.scss'
+import { usePaypalPayment } from '@/features/payment/usePaypalPayment'
 
 type Props = {} & ComponentPropsWithoutRef<'div'>
 
@@ -177,6 +178,20 @@ const CurrentSubscription = () => {
 export const AccountManagement = ({ className, ...rest }: Props) => {
   const [isBusinessAccount, setIsBusinessAccount] = useState<boolean>(false)
   const [isModal, setIsModal] = useState<boolean>(false)
+  const { pay, error, isLoading } = usePaypalPayment()
+
+  const handlePayment = async () => {
+    try {
+      await pay({
+        value: '2.00',
+        description: 'test buy',
+        subscriptionTerm: 'month',
+      })
+      setIsModal(false)
+    } catch (error) {
+      console.error('Ошибка платежа', error)
+    }
+  }
 
   return (
     <div className={clsx(s.profileManagement, className)}>
@@ -195,7 +210,7 @@ export const AccountManagement = ({ className, ...rest }: Props) => {
         </Typography>
         <div className={s.infoPaymentModal}>
           <Checkbox label={'I Agree'}></Checkbox>
-          <Button onClick={() => setIsModal(false)}>OK</Button>
+          <Button onClick={() => handlePayment()}>OK</Button>
         </div>
       </Modal>
     </div>
