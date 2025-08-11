@@ -41,7 +41,7 @@ export default function PublushPhotoStep({ filtersForImages, images }: Props) {
         <div className={s.userPostWrapper}>
           <div className={s.userPost}>
             <div className={s.userProfile}>
-              <Avatar>
+              <Avatar size='small'>
                 <AvatarImage alt={'ava'} src={image1.src} />
                 <AvatarFallback>404</AvatarFallback>
               </Avatar>

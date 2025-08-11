@@ -15,7 +15,7 @@ import TrashIcon from '@/shared/assets/icons/TrashIcon'
 import { AddCommentBlock } from '@/shared/ui/addCommentBlock/AddCommentBlock'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar/Avatar'
 import DropdownMenuDemo from '@/shared/ui/dropdownMenu/DropdownMenu'
-import Loader from '@/shared/ui/loader/Loader'
+import Loader, { MainLoader } from '@/shared/ui/loader/Loader'
 import { Modal } from '@/shared/ui/modal'
 import { ModalCloseDeleteUnfollowPost } from '@/shared/ui/modal/modalCreateOrDeletePost/ModalCloseDeleteUnfollowPost'
 import { Typography } from '@/shared/ui/typography'
@@ -27,6 +27,7 @@ import { enGB, ru } from 'date-fns/locale'
 import { useTranslations } from 'next-intl'
 
 import s from './feedPage.module.scss'
+import ImageIcon from '@/shared/assets/icons/ImageIcon'
 
 const FeedPage: React.FC = () => {
   //TODO: id users which is following
@@ -45,7 +46,10 @@ const FeedPage: React.FC = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', gap: '15px'}}>
+      Loading...
+      <MainLoader />
+      </div>
   }
 
   return (
@@ -60,9 +64,9 @@ const FeedPage: React.FC = () => {
           posts.map(post => (
             <div className={s.postItem} key={post.id}>
               <div className={s.postAvatarTitle}>
-                <Avatar>
+                <Avatar size='small'>
                   <AvatarImage alt={'Avatar'} src={avatarSmall} />
-                  <AvatarFallback>AF</AvatarFallback>
+                  <AvatarFallback><ImageIcon /></AvatarFallback>
                 </Avatar>
                 <Typography variant={'h3'}>{nickName}</Typography>
                 {post.updatedAt && (

@@ -20,6 +20,7 @@ import '@fontsource/inter/700.css'
 import s from './layout.module.scss'
 
 import { Locale, routing } from '../../src/i18n/routing'
+import { MainLoader } from '@/shared/ui/loader/Loader'
 
 export const metadata: Metadata = {
   description: 'Inctagram app',
@@ -48,7 +49,12 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <StoreProvider>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense 
+              fallback={
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', gap: '15px'}}>
+                  Loading...
+                  <MainLoader />
+                </div>}>
               <Header isAuth={isAuth} />
               <div className={s.wrapper}>
                 {isAuth && <Sidebar />}

@@ -1,14 +1,26 @@
 .profileInformation {
   display: flex;
+  gap: 20px; 
   justify-content: space-between;
 }
 
-.profileInformationAvatar {
-  width: 100%;
-  max-width: 11%;
+.profileInformationAvatar { 
+  flex-shrink: 0;
+
+  width: 204px; 
+  min-width: 204px; 
+  height: 204px;
+  min-height: 204px;
 }
 
 .profileInformationForm {
   width: 100%;
-  max-width: 85%;
+  max-width: calc(100% - 204px - 20px); 
+}
+
+.mainLoader{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }

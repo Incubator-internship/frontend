@@ -7,11 +7,13 @@ import clsx from 'clsx'
 
 import s from './avatar.module.scss'
 
+type AvatarSize = 'small' | 'large';
+
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Root className={clsx(s.avatar, className)} ref={ref} {...props} />
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> & {size?: AvatarSize}
+>(({ className, size = 'large', ...props }, ref) => (
+  <AvatarPrimitive.Root className={clsx(s.avatar, size && s[`avatar--${size}`], className)} ref={ref} {...props} />
 ))
 
 Avatar.displayName = AvatarPrimitive.Root.displayName
@@ -35,3 +37,4 @@ const AvatarFallback = React.forwardRef<
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
 
 export { Avatar, AvatarFallback, AvatarImage }
+

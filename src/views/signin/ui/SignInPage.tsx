@@ -13,6 +13,7 @@ import { redirect, useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
 
 import s from './signInPage.module.scss'
+import { MainLoader } from '@/shared/ui/loader/Loader'
 
 export default function SignInPage() {
   const [login, { data, isError, isLoading, isSuccess }] = useLoginMutation()
@@ -38,14 +39,17 @@ export default function SignInPage() {
     if (isSuccess && userId) {
       localStorage.setItem('accessToken', data.accessToken)
 
-      router.push(`/${locale}`)
-      router.refresh()
+      router.push(`/${locale}/profile`)
+      // router.refresh()
     }
   }, [data, isSuccess, router, locale, dispatch, userId])
 
   const renderContent = () => {
     if (isLoading) {
-      return <div className={clsx(s.loading)}>Loading...</div>
+      return <div className={clsx(s.loading)}>
+        Loading...
+        <MainLoader />
+        </div>
     }
     if (isSuccess) {
       return <Link href={`${locale}`} />

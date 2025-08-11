@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+// import Image from 'next/image'
 
 import {
   useDeleteAvatarMutation,
@@ -15,38 +16,42 @@ import { FileWithPreview } from '../addPost/ui/createPost/CreatePost'
 import { convertPreviewToFile } from '../addPost/utils/photoUtils'
 import { AvatarDeleteModal } from '../addProfilePhoto/AvatarDeleteModal'
 import { AvatarUploadModal } from '../addProfilePhoto/AvatarUploadModal'
+import { AvatarLoader } from '@/shared/ui/loader/Loader'
+import { useRouter } from 'next/navigation'
 
 type Props = {
   userId: number
 }
 
 export const ProfilePhoto = ({ userId }: Props) => {
-  const { data: profile, refetch: refetchProfile } = useGetProfileQuery(userId)
-  const [uploadAvatar] = useUploadAvatarMutation()
-  const [deleteAvatar] = useDeleteAvatarMutation()
+  const { data: profile, refetch: refetchProfile, isFetching: isProfileFetching } = useGetProfileQuery(userId)
+  const [uploadAvatar, { isLoading: isUploading }] = useUploadAvatarMutation()
+  const [deleteAvatar, { isLoading: isDeleting }] = useDeleteAvatarMutation()
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [isOpenCroppModal, setIsOpenCroppModal] = useState<boolean>(false)
   const [isOpenUploadModal, setIsOpenUploadModal] = useState<boolean>(true)
   const [isAvatarDelete, setIsAvatarDelete] = useState<boolean>(false)
+  const rouer = useRouter()
+  const isAnyLoading = isUploading || isDeleting || isProfileFetching
 
   const handleSaveAvatar = async (uploadAva: FileWithPreview) => {
     try {
       const file = await convertPreviewToFile(uploadAva)
-
       await uploadAvatar({ avatar: file }).unwrap()
+      await refetchProfile()
       setIsModalOpen(false)
     } catch (e) {
-      console.log(e)
+      console.error(e)
     }
   }
+
   const handleConfirmDelete = async () => {
     try {
       await deleteAvatar({ id: userId }).unwrap()
-
       await refetchProfile()
-      setIsAvatarDelete(false)
+      rouer.refresh()
     } catch (err) {
-      console.error('Delete avatar error:', err)
+      console.error(err)
     } finally {
       setIsAvatarDelete(false)
     }
@@ -55,15 +60,27 @@ export const ProfilePhoto = ({ userId }: Props) => {
   return (
     <div className={s.container}>
       <div className={s.avatarWrapper}>
-        {profile?.originalAvatarUrl ? (
+        {isAnyLoading ? (
+          <div className={s.avaLoader}>
+            <AvatarLoader />
+          </div>
+        ) : profile?.originalAvatarUrl ? (
           <>
-            <Avatar className={s.ava}>
+            <Avatar size='large' className={s.ava}>
               <AvatarImage alt={'Profile avatar'} src={profile.originalAvatarUrl} />
               <AvatarFallback>
                 <ImageIcon />
               </AvatarFallback>
             </Avatar>
-            <div className={s.closeButton} onClick={() => setIsAvatarDelete(el => !el)}>
+            {/* <Image
+              alt="Profile avatar"
+              className={s.ava}
+              width={204}
+              height={204}
+              src={profile.originalAvatarUrl}
+              style={{ objectFit: 'cover' }}
+            /> */}
+            <div className={s.closeButton} onClick={() => setIsAvatarDelete(true)}>
               ✖
             </div>
           </>
