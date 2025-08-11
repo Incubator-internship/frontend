@@ -22,3 +22,76 @@
    50% {clip-path: inset(0 0 0 0)     }
    83% {clip-path: inset(0 -100px 0 0)}
 }
+
+
+.loaderAvatar {
+  --b: 8px; 
+  
+  aspect-ratio: 1;
+  width: 50px;
+  padding: 1px;
+  border-radius: 50%;
+
+  background: conic-gradient(#0000 10%,#f03355) content-box;
+
+  mask:
+    repeating-conic-gradient(#0000 0deg,#000 1deg 20deg,#0000 21deg 36deg),
+    radial-gradient(farthest-side,#0000 calc(100% - var(--b) - 1px),#000 calc(100% - var(--b)));
+
+  animation:l4 1s infinite steps(10);
+
+  mask-composite: destination-in;
+  mask-composite: intersect;
+}
+
+@keyframes l4 {to{transform: rotate(1turn)}}
+
+
+
+
+
+.mainLoader {
+  --c:radial-gradient(farthest-side,#000 94%,#0000);
+
+  box-sizing: border-box;
+  width: 200px;
+  height: 100px;
+  border: 12.5px solid #538a2d;
+  border-top: 0;
+  border-radius: 0 0 100px 100px;
+
+  background:
+    radial-gradient(farthest-side at top,#0000 calc(100% - 12.5px),#e7ef9d calc(100% - 10px)), 
+    radial-gradient(5px 7.5px,#5c4037 89%,#0000) 0 0/42.5px 30px,
+    #ff1643;
+
+  mask:
+    linear-gradient(#000 0 0),
+    var(--c) 30px -20px,
+    var(--c) 72.5px -20px,
+    var(--c) 112.5px -15px,
+    var(--c) 55px -5px,
+    var(--c) 85px 15px, 
+    var(--c) 52.5px 15px,
+    linear-gradient(#0000 0 0);
+
+  animation: l8 3s infinite;
+
+  mask-composite:destination-out;
+  mask-composite:exclude,add,add,add,add,add,add;
+  mask-repeat: no-repeat;
+}
+
+@keyframes l8 {
+ 0%   {mask-size: auto,0 0,0 0,0 0,0 0,0 0,0 0}
+ 15%  {mask-size: auto,50px 50px,0 0,0 0,0 0,0 0,0 0}
+ 30%  {mask-size: auto,50px 50px,50px 50px,0 0,0 0,0 0,0 0}
+ 45%  {mask-size: auto,50px 50px,50px 50px,50px 50px,0 0,0 0,0 0}
+ 60%  {mask-size: auto,50px 50px,50px 50px,50px 50px,50px 50px,0 0,0 0}
+ 75%  {mask-size: auto,50px 50px,50px 50px,50px 50px,50px 50px,50px 50px,0 0}
+
+ 90%,
+ 100% {mask-size: auto,50px 50px,50px 50px,50px 50px,50px 50px,50px 50px,50px 50px}
+}
+
+

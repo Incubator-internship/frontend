@@ -24,6 +24,7 @@ import './publicPage.scss'
 import 'swiper/swiper-bundle.css'
 
 import s from './publicPage.module.scss'
+import ImageIcon from '@/shared/assets/icons/ImageIcon'
 
 const Post = ({ post }: { post: PostsDataByPostId }) => {
   const router = useRouter()
@@ -90,9 +91,9 @@ const Post = ({ post }: { post: PostsDataByPostId }) => {
       </div>
 
       <div className={s.postItemAvatarTitle}>
-        <Avatar>
+        <Avatar size='small'>
           <AvatarImage alt={'Avatar1'} src={avatarSmall} />
-          <AvatarFallback>👹</AvatarFallback>
+          <AvatarFallback><ImageIcon /></AvatarFallback>
         </Avatar>
         <Typography variant={'h3'}>{nickName}</Typography>
       </div>

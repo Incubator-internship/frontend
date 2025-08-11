@@ -19,6 +19,7 @@ import { clsx } from 'clsx'
 import { z } from 'zod'
 
 import s from './accountInformation.module.scss'
+import { MainLoader } from '@/shared/ui/loader/Loader'
 
 type Props = {} & ComponentPropsWithoutRef<'div'>
 
@@ -46,7 +47,7 @@ export const AccountInformation = ({ className, ...rest }: Props) => {
   }
 
   if (!me || !userInformation) {
-    return <div>Loading...</div>
+    return <div className={s.mainLoader}><MainLoader /></div>
   }
 
   return (

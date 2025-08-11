@@ -13,6 +13,7 @@ import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 
 import s from './userProfile.module.scss'
+import ImageIcon from '@/shared/assets/icons/ImageIcon'
 
 export default async function UserProfile({
   params,
@@ -35,7 +36,8 @@ export default async function UserProfile({
         <div className={s.info}>
           <Avatar className={s.ava}>
             <AvatarImage alt={'Profile avatar'} src={avatar} />
-            <AvatarFallback>👹</AvatarFallback>
+            {/* <AvatarFallback>👹</AvatarFallback> */}
+            <AvatarFallback><ImageIcon /></AvatarFallback>
           </Avatar>
           <div className={s.bio}>
             <h2 className={s.username}>
