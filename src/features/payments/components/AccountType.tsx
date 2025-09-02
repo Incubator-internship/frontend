@@ -1,16 +1,7 @@
 import s from '@/views/profileSettings/ui/accountManagement/accountManagement.module.scss'
 import { RadioGroupBlockPayment, RadioOptionPaymentType } from '@/features/payments'
+import {useTranslations} from 'next-intl'
 
-const ACCOUNT_OPTIONS: RadioOptionPaymentType[] = [
-  {
-    label: 'Personal',
-    value: 'personal',
-  },
-  {
-    label: 'Business',
-    value: 'business',
-  },
-]
 
 interface AccountManagementProps {
   setIsBusinessAccount: (isBusinessAccount: boolean) => void
@@ -26,14 +17,24 @@ export const AccountType = ({
   setIsBusinessAccount,
   isBusinessAccount,
 }: AccountManagementProps) => {
+  const t = useTranslations('AccountManagements')
+  const ACCOUNT_OPTIONS: RadioOptionPaymentType[] = [
+    {
+      label: t('Personal'),
+      value: 'personal',
+    },
+    {
+      label: t('Business'),
+      value: 'business',
+    },
+  ]
   const handleAccountTypeChange = (value: string) => {
     setIsBusinessAccount(value === AccountTypeValue.business)
   }
 
   return (
     <div className={s.block}>
-      <RadioGroupBlockPayment
-        title={'Account type:'}
+      <RadioGroupBlockPayment title={t('AccountType')}
         options={ACCOUNT_OPTIONS}
         value={isBusinessAccount ? AccountTypeValue.business : AccountTypeValue.personal}
         onChange={handleAccountTypeChange}

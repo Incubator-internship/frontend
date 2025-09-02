@@ -1,41 +1,45 @@
 import { useActiveSubscription } from '@/features/payments/hooks/useActiveSubscription'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import s from '@/views/profileSettings/ui/accountManagement/accountManagement.module.scss'
 import { Typography } from '@/shared/ui/typography'
 import { format, parseISO } from 'date-fns'
 import { Checkbox } from '@/shared/ui/checkbox'
 import { useToggleAutoPay } from '@/features/payments'
+import { useTranslations } from 'next-intl'
 
 export const CurrentSubscription = () => {
-  const { data: dataActiveSub } = useActiveSubscription()
-  const { isLoading: isLoadingEnableAutoRenew, enable } = useToggleAutoPay()
+  const t = useTranslations('AccountManagements')
+  const {
+    data: dataActiveSub,
+    hasActiveSub,
+    refetch: refActiveSub
+  } = useActiveSubscription()
+  const {
+    isLoading: isLoadingEnableAutoRenew,
+    toggleAutoPay
+  } = useToggleAutoPay()
   const sub = dataActiveSub?.[0]
   const [checked, setChecked] = useState<boolean>(sub?.autoPay || false)
-
-  const isDataInactive = !dataActiveSub
 
   const handleAutoRenewToggle = () => {
     const newValue = !checked
     setChecked(newValue)
-    enable(newValue)
+    toggleAutoPay(newValue)
+    refActiveSub()
   }
 
-  useEffect(() => {
-    setChecked(sub?.autoPay ?? false)
-  }, [sub])
-
-  if (isDataInactive) return null
-
+  if (!hasActiveSub) return null
+console.log(t)
   return (
     <div className={s.block}>
-      <Typography as="label" className={s.radioTitle} variant="h3">
-        Current Subscription:
+      <Typography as="label" className={s.radioGroupTitle} variant="h3">
+        {t('CurrentSub')}
       </Typography>
       <div className={s.radioGroupWrapp}>
         <div className={s.subscriptionInfo}>
           <div>
             <Typography as="span" variant="body2" color="grey">
-              Expire At
+              {t('ExpireAt')}
             </Typography>
             {sub?.ExpireAt && (
               <Typography as="span" variant="subtitle1">
@@ -45,7 +49,7 @@ export const CurrentSubscription = () => {
           </div>
           <div>
             <Typography as="span" variant="body2" color="grey">
-              Next Payment
+              {t('NextPayment')}
             </Typography>
             {sub?.nextPayment && (
               <Typography as="span" variant="subtitle1">
@@ -60,7 +64,7 @@ export const CurrentSubscription = () => {
           onCheckedChange={handleAutoRenewToggle}
           className={s.box}
           disabled={isLoadingEnableAutoRenew}
-          label={'Auto-Renewal'}
+          label={t('AutoRen')}
       />
     </div>
   )

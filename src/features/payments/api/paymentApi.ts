@@ -16,6 +16,7 @@ export const paymentApi = inctagramApi.injectEndpoints({
         method: 'POST',
         body,
       }),
+      invalidatesTags: ['Payment'],
     }),
     getActiveSubscription: builder.query<ActiveSubscriptionType[], void>({
       query: () => ({

@@ -10,6 +10,7 @@ import { Modal } from '@/shared/ui/modal'
 import { Checkbox } from '@/shared/ui/checkbox'
 import { Button } from '@/shared/ui/button'
 import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 
 const PAYMENT_IMAGE_SIZE = {
   width: 86,
@@ -22,7 +23,7 @@ export const PaymentMethodOption = () => {
     data: dataPaypalPayment,
     isLoading: isLoadingPaypalPayment,
   } = usePaypalPayment()
-
+  const t = useTranslations('AccountManagements')
   const [isModal, setIsModal] = useState<boolean>(false)
   const [isChecked, setIsChecked] = useState<boolean>(false)
 
@@ -58,7 +59,7 @@ export const PaymentMethodOption = () => {
         onClick={() => setIsModal(true)}
       />
       <Typography as={'span'} variant={'body2'}>
-        or
+        {t('Or')}
       </Typography>
       <Image
         src={stripe}
@@ -67,7 +68,7 @@ export const PaymentMethodOption = () => {
         alt={'Stripe icon'}
         onClick={() => setIsModal(true)}
       />
-      <Modal isOpen={isModal} title={'Create payments'} onClose={() => setIsModal(false)}>
+      <Modal isOpen={isModal} title={t('CreatePayment')} onClose={() => setIsModal(false)}>
         <div
           style={{
             display: 'flex',
@@ -76,16 +77,15 @@ export const PaymentMethodOption = () => {
           }}
         >
           <Typography as={'p'} variant={'body1'}>
-            Auto-renewal will be enabled with this payment. You can disable it anytime in your
-            profile settings
+            {t('PaymentInfo')}
           </Typography>
           <div className={s.infoPaymentModal}>
             <Checkbox
-              label={'I Agree'}
+              label={t('IAgree')}
               onCheckedChange={checked => setIsChecked(checked === true)}
             ></Checkbox>
             <Button disabled={!isChecked} onClick={handlePayment}>
-              OK
+              {t('Ok')}
             </Button>
           </div>
         </div>

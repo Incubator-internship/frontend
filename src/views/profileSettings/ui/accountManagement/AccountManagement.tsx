@@ -15,20 +15,27 @@ import Loader from '@/shared/ui/loader/Loader'
 import s from './accountManagement.module.scss'
 type Props = {} & ComponentPropsWithoutRef<'div'>
 export const AccountManagement = ({ className, ...rest }: Props) => {
-  // @ts-ignore
-  const { data: meData, isLoading: isLoadingMeData } = useGetMeQuery<MeData>()
-  const { data: activeSubData } = useActiveSubscription()
-  const isLoadingActiveSub = !activeSubData
+  const {
+    data: meData,
+    isLoading: isLoadingMeData
+  } = useGetMeQuery()
+  const user: MeData | undefined = meData
+  const {
+    hasActiveSub,
+    isLoading: isLoadingSub
+  } = useActiveSubscription()
+
   const [isBusinessAccount, setIsBusinessAccount] = useState<boolean>(
-    meData?.accountType === 'Business'
+      user?.accountType === 'Business' && hasActiveSub
   )
+
   useEffect(() => {
     if (meData) {
-      setIsBusinessAccount(meData.accountType === 'Business')
+      setIsBusinessAccount(user?.accountType === 'Business' && hasActiveSub)
     }
-  }, [meData])
+  }, [meData, hasActiveSub])
 
-  const isLoadingOverall = isLoadingMeData || isLoadingActiveSub
+  const isLoadingOverall = isLoadingMeData || isLoadingSub
 
   if (isLoadingOverall) {
     return (
@@ -37,16 +44,13 @@ export const AccountManagement = ({ className, ...rest }: Props) => {
       </div>
     )
   }
-
   return (
     <div className={clsx(s.profileManagement, className)}>
-      {!isLoadingActiveSub && meData && <CurrentSubscription />}
-      {!isLoadingMeData && (
+      {hasActiveSub && isBusinessAccount && <CurrentSubscription/>}
         <AccountType
           isBusinessAccount={isBusinessAccount}
           setIsBusinessAccount={setIsBusinessAccount}
         />
-      )}
       {isBusinessAccount && (
         <>
           <SubscriptionCosts />

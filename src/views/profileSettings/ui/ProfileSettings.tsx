@@ -10,8 +10,9 @@ import { useTranslations } from 'next-intl'
 
 import s from './profileSettings.module.scss'
 import {AccountManagement} from "@/views/profileSettings/ui/accountManagement";
+import {LOCAL_STORAGE_KEY_ACTIVE_TAB} from "@/shared/constants";
 
-const LOCAL_STORAGE_KEY = 'profile-settings-active-tab'
+
 
 export default function ProfileSettings() {
     const t = useTranslations('ProfileSettingsPage')
@@ -42,13 +43,13 @@ export default function ProfileSettings() {
     const [activeTab, setActiveTab] = useState<string | null>(null)
 
     useEffect(() => {
-        const savedTab = localStorage.getItem(LOCAL_STORAGE_KEY)
+        const savedTab = localStorage.getItem(LOCAL_STORAGE_KEY_ACTIVE_TAB)
         setActiveTab(savedTab ?? '1')
     }, [])
 
     const onTabChange = (value: string) => {
         setActiveTab(value)
-        localStorage.setItem(LOCAL_STORAGE_KEY, value)
+        localStorage.setItem(LOCAL_STORAGE_KEY_ACTIVE_TAB, value)
     }
 
     if (activeTab === null) {

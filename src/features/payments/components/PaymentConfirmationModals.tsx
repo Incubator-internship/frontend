@@ -3,8 +3,10 @@ import { Modal } from '@/shared/ui/modal'
 import { Typography } from '@/shared/ui/typography'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
+import {useTranslations} from 'next-intl'
 
 export const PaymentConfirmationModals = () => {
+  const t = useTranslations('AccountManagements')
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(true)
   const [isErrorModalOpen, setIisErrorModalOpen] = useState(true)
 
@@ -27,7 +29,7 @@ export const PaymentConfirmationModals = () => {
   return (
     <>
       {search === 'true' && (
-        <Modal isOpen={isSuccessModalOpen} title={'Create payments'} onClose={onErrorClose}>
+        <Modal isOpen={isSuccessModalOpen} title={t('TittleSuccess')} onClose={onErrorClose}>
           <div
             style={{
               display: 'flex',
@@ -36,16 +38,16 @@ export const PaymentConfirmationModals = () => {
             }}
           >
             <Typography as={'p'} variant={'body1'}>
-              Payment was successful!
+              {t('PaymentSuccess')}
             </Typography>
             <Button fullWidth={true} onClick={onSuccessClose}>
-              OK
+              {t('Ok')}
             </Button>
           </div>
         </Modal>
       )}
       {search === 'false' && (
-        <Modal isOpen={isErrorModalOpen} title={'Create payments'} onClose={onSuccessClose}>
+        <Modal isOpen={isErrorModalOpen} title={t('TitleError')} onClose={onSuccessClose}>
           <div
             style={{
               display: 'flex',
@@ -54,10 +56,10 @@ export const PaymentConfirmationModals = () => {
             }}
           >
             <Typography as={'p'} variant={'body1'}>
-              Error Transaction failed. Please, write to support Back to payment
+              {t('ErrorPayment')}
             </Typography>
             <Button fullWidth={true} onClick={onErrorClose}>
-              Back to payment
+              {t('BackToPayment')}
             </Button>
           </div>
         </Modal>

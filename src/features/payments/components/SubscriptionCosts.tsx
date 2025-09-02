@@ -1,6 +1,7 @@
 import s from '@/views/profileSettings/ui/accountManagement/accountManagement.module.scss'
 import { FormRadioGroup } from '@/shared/ui/radioGroup'
 import { RadioGroupBlockPayment } from '@/features/payments'
+import { useTranslations } from 'next-intl'
 
 interface RadioOption {
   label: string
@@ -21,10 +22,11 @@ const SUBSCRIPTION_OPTIONS: RadioOption[] = [
   },
 ]
 export const SubscriptionCosts = () => {
+  const t = useTranslations('AccountManagements')
   return (
     <div className={s.block}>
       <RadioGroupBlockPayment
-        title={'Your Subscription Costs:'}
+        title={t('YourSubCosts')}
         options={SUBSCRIPTION_OPTIONS}
         defaultValue={'$10 per 1 Day'}
       />

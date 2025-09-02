@@ -182,6 +182,26 @@
     "Following": "Following",
     "Followers": "Followers",
     "Publications": "Publications"
+  },
+  "AccountManagements": {
+    "CurrentSub": "Current Subscription:",
+    "ExpireAt": "Expire At",
+    "NextPayment": "Next Payment",
+    "AutoRen": "Auto-Renewal",
+    "AccountType": "Account Type:",
+    "Personal": "Personal",
+    "Business": "Business",
+    "YourSubCosts": "Your Subscription Costs:",
+    "Or": "or",
+    "Ok":  "OK",
+    "PaymentSuccess": " Payment was successful!",
+    "ErrorPayment": "Error Transaction failed. Please, write to support Back to payment",
+    "TittleSuccess": "Success",
+    "TitleError": "Error",
+    "BackToPayment": "Back to payment",
+    "CreatePayment": "Create payment",
+    "PaymentInfo": " Auto-renewal will be enabled with this payment. You can disable it anytime in your profile settings",
+    "IAgree": "I Agree"
   }
 }
 

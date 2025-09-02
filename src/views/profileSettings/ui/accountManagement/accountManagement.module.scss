@@ -5,6 +5,9 @@
 }
 
 .block {
+  display: flex;
+  gap: 6px;
+  flex-direction: column;
   &:not(:last-child) {
     margin-bottom: 42px;
   }
@@ -12,7 +15,6 @@
 
 .radioGroupTitle {
   display: block;
-  margin-bottom: 6px;
 }
 
 .radioGroupWrapp {
@@ -52,7 +54,7 @@
 }
 
 .box {
-  padding-top: 19px;
+  padding-top: 12px;
 }
 
 .infoPaymentModal {
