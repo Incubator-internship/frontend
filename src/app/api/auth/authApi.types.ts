@@ -34,4 +34,7 @@ export type MeData = {
   email: string
   login: string
   userId: number
+  accountType?: string,
+  subscriptionTerm?: string,
+  amount?: string
 }

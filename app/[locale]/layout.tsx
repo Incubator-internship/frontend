@@ -21,6 +21,7 @@ import s from './layout.module.scss'
 
 import { Locale, routing } from '../../src/i18n/routing'
 import { MainLoader } from '@/shared/ui/loader/Loader'
+import {PathChecker} from "@/shared/ui/pathChecker";
 
 export const metadata: Metadata = {
   description: 'Inctagram app',
@@ -56,6 +57,7 @@ export default async function RootLayout({
                   <MainLoader />
                 </div>}>
               <Header isAuth={isAuth} />
+              <PathChecker/>
               <div className={s.wrapper}>
                 {isAuth && <Sidebar />}
                 <main className={s.main}>{children}</main>
