@@ -1,0 +1,99 @@
+.addingWindow {
+  position: absolute;
+  right: 10px;
+  bottom: 40px;
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  max-width: 244px;
+  padding: 12px;
+
+  opacity: 0.8;
+  background: var(--color-dark-500);
+  border-radius: 2px;
+}
+
+.addedImages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.addedImage {
+  position: relative;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  width: 80px;
+  height: 82px;
+}
+
+.addedImage img {
+  object-fit: cover;
+}
+
+.addMoreButton {
+  cursor: pointer;
+
+  width: 25px;
+  height: 25px;
+
+  font-size: 16px;
+  color: white;
+
+  background: #007bff;
+  border: none;
+  border-radius: 50%;
+}
+
+.addItem {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+
+.addImageLabel {
+  cursor: pointer;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  display: block;
+
+  width: 36px;
+  height: 36px;
+
+  text-align: center;
+
+  & svg {
+    width: 36px;
+    height: 36px;
+    fill: var(--color-light-100);
+  }
+}
+
+.deleteButton {
+  position: absolute;
+  top: 0;
+  right: 5px;
+
+  width: 12px;
+  height: 12px;
+
+  & svg {
+    width: 12px;
+    height: 12px;
+
+    opacity: 0.8;
+    background: var(--color-dark-500);
+    border-radius: 2px;
+
+    fill: var(--color-light-100);
+  }
+}

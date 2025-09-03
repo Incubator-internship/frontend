@@ -1,0 +1,13 @@
+.modalWrapp {
+  position: relative;
+  min-height: 500px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.items {
+  display: flex;
+  justify-content: space-between;
+}

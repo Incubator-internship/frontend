@@ -111,3 +111,35 @@ export const ModalState: Story = {
     )
   },
 }
+
+export const ModalStepMode: Story = {
+  parameters: {
+    group: 'Modal',
+    title: 'Default',
+  },
+  render: () => {
+    const [state, setState] = useState<boolean>(true)
+
+    return (
+      <div style={{ maxWidth: '380px' }}>
+        <Modal
+          isOpen={state}
+          isStepMode
+          onClose={() => setState(!state)}
+          steps={[
+            <Typography as={'p'} key={1} style={{ marginLeft: '15px' }} variant={'body1'}>
+              Step 1
+            </Typography>,
+            <Typography as={'p'} key={2} style={{ marginLeft: '15px' }} variant={'body1'}>
+              Step 2
+            </Typography>,
+            <Typography as={'p'} key={3} style={{ marginLeft: '15px' }} variant={'body1'}>
+              Step 3
+            </Typography>,
+          ]}
+          title={['Cropping', 'Filters', 'Publication']}
+        ></Modal>
+      </div>
+    )
+  },
+}

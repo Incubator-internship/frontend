@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { ForwardedRef } from 'react'
 
+import { Typography } from '@/shared/ui/typography'
 import * as RadixSelect from '@radix-ui/react-select'
 import clsx from 'clsx'
 
 import sItem from './selectItem.module.scss'
-
-import { Typography } from '../../typography/Typography'
 
 export type SelectItemProps = {
   children: React.ReactNode

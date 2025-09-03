@@ -1,0 +1,31 @@
+.updateModal {
+  display: flex;
+}
+
+.updateContent {
+  width: 480px;
+  margin-left: 25px;
+}
+
+.updateForm {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.updateTextarea {
+  flex: 1 1 auto;
+}
+
+.updateBtn {
+  align-self: flex-end;
+}
+
+.countSymbol {
+  color: var(--color-light-900);
+  text-align: right;
+}
+
+.maxCharacters {
+  color: var(--color-danger-500);
+}

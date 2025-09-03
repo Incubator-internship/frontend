@@ -1,0 +1,26 @@
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: rgba(51, 51, 51, 0.5);
+  background-position: center;
+  background-size: 8px;
+  background-repeat: no-repeat;
+  z-index: 10;
+}
+
+.swiper-button-prev {
+  background-image: url('../../../shared/assets/svg/leftArr.svg');
+}
+
+.swiper-button-next {
+  background-image: url('../../../shared/assets/svg/rightArr.svg');
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+}
+
+.swiper-pagination-bullet {
+  background-color: rgba(57, 125, 246, 1);
+  z-index: 10;
+}

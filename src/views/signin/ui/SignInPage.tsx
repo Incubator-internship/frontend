@@ -1,19 +1,30 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { useLoginMutation } from '@/app/api/auth/authApi'
+import { useGetMeQuery, useLoginMutation } from '@/app/api/auth/authApi'
 import { LoginData } from '@/app/api/auth/authApi.types'
+import { loginStore, logoutStore, selectAuthState } from '@/app/config/store/authSlice'
 import { Schema, SignInForm } from '@/shared/ui/forms/signIn'
 import { clsx } from 'clsx'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import { useLocale } from 'next-intl'
 
 import s from './signInPage.module.scss'
+import { MainLoader } from '@/shared/ui/loader/Loader'
 
 export default function SignInPage() {
   const [login, { data, isError, isLoading, isSuccess }] = useLoginMutation()
+
   const router = useRouter()
+
+  const dispatch = useDispatch()
+  const locale = useLocale()
+
+  const { data: userData, isError: isMeError, isLoading: isMeLoading } = useGetMeQuery()
+  const userId = userData?.userId
 
   const handleSubmit = (data: Schema) => {
     const loginDataForRequest: LoginData = {
@@ -25,18 +36,23 @@ export default function SignInPage() {
   }
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && userId) {
       localStorage.setItem('accessToken', data.accessToken)
-      router.push('/profile')
+
+      router.push(`/${locale}/profile`)
+      // router.refresh()
     }
-  }, [data, isSuccess, router])
+  }, [data, isSuccess, router, locale, dispatch, userId])
 
   const renderContent = () => {
     if (isLoading) {
-      return <div className={clsx(s.loading)}>Loading...</div>
+      return <div className={clsx(s.loading)}>
+        Loading...
+        <MainLoader />
+        </div>
     }
     if (isSuccess) {
-      return <Link href={'/profile'} />
+      return <Link href={`${locale}`} />
     } else {
       return (
         <div className={clsx(s.formWrapper)}>

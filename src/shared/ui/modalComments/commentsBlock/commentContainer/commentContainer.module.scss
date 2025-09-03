@@ -1,0 +1,19 @@
+.commentContainer {
+    width: 100%;
+    font-family: var(--font-family-primary);
+    margin-top: 20px;
+}
+
+.profileDataComment {
+    display: flex;
+    justify-content: left;
+    font-family: var(--font-family-primary);
+}
+
+.viewAnswer {
+    color: var(--color-light-900);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semi-bold);
+    line-height: var(--line-height-s);
+    text-align: left;
+}

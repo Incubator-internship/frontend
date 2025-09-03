@@ -1,0 +1,74 @@
+.imagesSettings {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.imagesSettingsWrapp {
+  display: flex;
+  align-items: center;
+}
+
+.settingsBtn {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  background-color: var(--color-dark-500);
+  border-radius: 2px;
+
+  &:not(:last-child) {
+    margin-right: 24px;
+  }
+}
+
+.settingsScale {
+  position: absolute;
+  bottom: 50px;
+  left: 60px;
+
+  padding: 10px;
+
+  background: rgb(23 23 23 / 80%);
+  border-radius: 2px;
+}
+
+.settingsCrop {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+
+  min-width: 150px;
+  padding: 10px;
+
+  background: rgb(23 23 23 / 80%);
+  border-radius: 4px;
+}
+
+.settingsCropBtn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.BtbBtn {
+  position: absolute;
+  right: 0;
+  bottom: 50px;
+}

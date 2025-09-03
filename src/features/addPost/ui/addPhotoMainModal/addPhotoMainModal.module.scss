@@ -1,0 +1,40 @@
+.modalWrapp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 70px 50px;
+}
+
+.dropzone {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 222px;
+  height: 222px;
+  margin-bottom: 60px;
+
+  background-color: var(--color-dark-500);
+  border-radius: 4px;
+
+  svg {
+    transition: var(--transition);
+  }
+
+  &:hover {
+    svg {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.btn {
+  margin-bottom: 24px;
+}
+
+.btnDraft{
+  color: var(--color-accent-500);
+  border: 1px solid var(--color-accent-500);
+}

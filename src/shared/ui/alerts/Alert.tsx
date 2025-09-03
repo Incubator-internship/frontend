@@ -6,22 +6,25 @@ import clsx from 'clsx'
 import s from './alert.module.scss'
 
 type AlertProps = {
-  children?: React.ReactNode
-  className?: string
-  style?: React.CSSProperties
-  title?: string
-  type?: 'error' | 'success'
+  children: React.ReactNode
+  className: string
+  style: React.CSSProperties
+  title: string
+  type: 'error' | 'success'
+  withBtn: boolean
 }
 
-export const Alert = (props: AlertProps) => {
+export const Alert = (props: Partial<AlertProps>) => {
   const { children, className, type = 'success', ...rest } = props
 
   return (
     <div className={clsx(s.alert, type && s[type], className)} {...rest}>
       <p>{children ? children : rest.title}</p>
-      <button type={'button'}>
-        <Close className={clsx(s.close, className)}></Close>
-      </button>
+      {rest.withBtn ? (
+        <button type={'button'}>
+          <Close className={clsx(s.close, className)}></Close>
+        </button>
+      ) : null}
     </div>
   )
 }

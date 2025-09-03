@@ -1,6 +1,7 @@
 import {
   LoginAnswer,
   LoginData,
+  MeData,
   NewPasswordArgs,
   PasswordRecoveryArgs,
   registrationArgs,
@@ -11,6 +12,9 @@ import { inctagramApi } from '@/app/api/inctagramApi'
 
 const authApi = inctagramApi.injectEndpoints({
   endpoints: builder => ({
+    getMe: builder.query<MeData, void>({
+      query: () => '/v1/auth/me',
+    }),
     login: builder.mutation<LoginAnswer, LoginData>({
       query: loginInfo => ({
         body: loginInfo,
@@ -63,6 +67,7 @@ const authApi = inctagramApi.injectEndpoints({
 })
 
 export const {
+  useGetMeQuery,
   useLoginMutation,
   useLogoutMutation,
   useNewPasswordMutation,

@@ -39,7 +39,7 @@ const ScrollItems: itemsArray[] = [
 const ScrollStories: StoryFn<ScrollProps> = (args: ScrollProps) => (
   <div>
     <Scroll {...args}>
-      {args.items.map((item: itemsArray, index: number) => (
+      {args.items?.map((item: itemsArray, index: number) => (
         <Typography as={'div'} className={s.itemScroll} key={`${item.value}-${index}`}>
           {item.title}
         </Typography>

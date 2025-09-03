@@ -1,0 +1,71 @@
+import type { Metadata } from 'next'
+
+import React, { Suspense } from 'react'
+
+import StoreProvider from '@/app/config/store/storeProvider'
+import { Header } from '@/shared/ui/header'
+import { Sidebar } from '@/shared/ui/sidebar'
+import { checkAuth } from '@/shared/utils/checkAuth'
+import { notFound } from 'next/navigation'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
+
+import '@/shared/styles/index.scss'
+import '@fontsource/inter/300.css'
+import '@fontsource/inter/400.css'
+import '@fontsource/inter/500.css'
+import '@fontsource/inter/600.css'
+import '@fontsource/inter/700.css'
+
+import s from './layout.module.scss'
+
+import { Locale, routing } from '../../src/i18n/routing'
+import { MainLoader } from '@/shared/ui/loader/Loader'
+import {PathChecker} from "@/shared/ui/pathChecker";
+
+export const metadata: Metadata = {
+  description: 'Inctagram app',
+  title: 'Inctagram',
+}
+export default async function RootLayout({
+  children,
+  params,
+}: Readonly<{
+  children: React.ReactNode
+  params: { locale: Locale }
+}>) {
+  const { isAuth } = await checkAuth()
+  const { locale } = await params
+
+  if (!routing.locales.includes(locale as Locale)) {
+    notFound()
+  }
+  const messages = await getMessages()
+
+  return (
+    <html lang={locale}>
+      <head>
+        <title>Inctagram</title>
+      </head>
+      <body>
+        <NextIntlClientProvider messages={messages}>
+          <StoreProvider>
+            <Suspense 
+              fallback={
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', gap: '15px'}}>
+                  Loading...
+                  <MainLoader />
+                </div>}>
+              <Header isAuth={isAuth} />
+              <PathChecker/>
+              <div className={s.wrapper}>
+                {isAuth && <Sidebar />}
+                <main className={s.main}>{children}</main>
+              </div>
+            </Suspense>
+          </StoreProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  )
+}

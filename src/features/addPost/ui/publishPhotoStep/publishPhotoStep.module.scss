@@ -1,0 +1,61 @@
+.wrapper {
+  display: flex;
+}
+
+.carousel {
+  width: 100%;
+  max-width: 492px;
+}
+
+.userPostWrapper {
+  width: 480px;
+  padding: 24px 24px 36px;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.count {
+  color: var(--color-light-900);
+  text-align: right;
+}
+
+.profileTitle {
+  margin-left: 10px;
+}
+
+.userLocation {
+  width: 100%;
+  border-top: 1px solid var(--color-light-900);
+
+  .locationCity {
+    color: var(--color-light-900);
+  }
+
+  .locationDetail {
+    display: block;
+    padding: 10px;
+    border: 1px solid var(--color-light-900);
+  }
+
+  .locationBox {
+    display: block;
+    font-size: var(--font-size-s);
+    font-weight: var(--font-weight-regular);
+
+    .subTitle {
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--line-height-s);
+      color: var(--color-light-900);
+    }
+  }
+}
+
+.maxCharacters {
+  color: var(--color-danger-500);
+}

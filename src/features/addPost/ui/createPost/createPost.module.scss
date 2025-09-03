@@ -1,0 +1,12 @@
+.createPostModal {
+  width: auto;
+  max-width: 972px;
+
+  > div:nth-child(2) {
+    padding: 0;
+  }
+}
+
+.errorModal {
+  max-width: 380px;
+}

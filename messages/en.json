@@ -1,0 +1,207 @@
+{
+  "SelectLanguage": {
+    "English": "English",
+    "Russian": "Russian"
+  },
+  "Header": {
+    "SignUp": "Sign up",
+    "Login": "Log in",
+    "locale": "en"
+  },
+  "Modal": {
+    "NextBtn": "Next",
+    "PublishBtn": "Publish"
+  },
+  "Sidebar": {
+    "Feed": "Feed",
+    "Create": "Create",
+    "My Profile": "My Profile",
+    "Messenger": "Messenger",
+    "Search": "Search",
+    "Statistics": "Statistics",
+    "Favorites": "Favorites",
+    "Logout": "Log Out",
+    "Are you really want to log out of your account": "Are you really want to log out of your account",
+    "Yes": "Yes",
+    "No": "No"
+  },
+  "NewPasswordPage": {
+    "CreateNewPasswordTitle": "Create new password",
+    "NewPassword": "New password",
+    "PasswordConfirmation": "Password confirmation",
+    "CreateNewPasswordHelper": "Your password must be between 6 and 20 characters",
+    "CreateNewPasswordButton": "Create new password",
+    "ErrorRecoveryCode": "Invalid recovery code",
+    "Error429": "More than 5 attempts from one IP-address during 10 seconds"
+  },
+  "ForgotPasswordPage": {
+    "ForgotPassword": "Forgot Password",
+    "Email": "Email",
+    "Enter your email address and we will send you further instructions": "Enter your email address and we will send you further instructions",
+    "Link": "The link has been sent by email. If you don’t receive an email, try again",
+    "Send Link Again": "Send Link Again",
+    "Send Link": "Send Link",
+    "Back to Sign In": "Back to Sign In",
+    "Email verification link expired": "Email verification link expired",
+    "Looks like the verification link has expired; Not to worry, we can send the link again": "Looks like the verification link has expired. Not to worry, we can send the link again",
+    "Resend link": "Resend link",
+    "We have sent a link to confirm your email to": "We have sent a link to confirm your email to",
+    "EmailError": "User with this email doesn't exist",
+    "Error429": "You have exceeded the maximum number of attempts. Please try again later"
+  },
+  "SignUpPage": {
+    "FormTitle": "Sign Up",
+    "UsernameInput": "Username",
+    "EmailInput": "Email",
+    "PasswordInput": "Password",
+    "PasswordConfirmationInput": "Password confirmation",
+    "Agree": "I agree to the <link>Terms of Service</link> and <link2>Privacy Policy</link2>",
+    "FormBtn": "Sign Up",
+    "FormLabel": "Do you have an account?",
+    "FormLink": "Sign In",
+    "ModalTitle": "Email sent",
+    "ModalText": "We have sent a link to confirm your email to",
+    "ModalBtn": "OK",
+    "ErrorUsername": "User with this username is already registered",
+    "ErrorEmail": "User with this email is already registered"
+  },
+  "SignInPage": {
+    "FormTitle": "Sign In",
+    "EmailInput": "Email",
+    "PasswordInput": "Password",
+    "ForgotPasswordLabel": "ForgotPassword",
+    "FormBtn": "Sign In",
+    "FormLabel": "Don’t have an account?",
+    "FormLink": "Sign Up",
+    "ErrorSignIn": "The email or password are incorrect. Try again please"
+  },
+  "ConfirmEmailPage": {
+    "TitleError": "Email verification link expired",
+    "TitleSuccess": "Congratulations!",
+    "TextError": "Looks like the verification link has expired. Not to worry, we can send the link again",
+    "TextSuccess": "Your email has been confirmed",
+    "Btn": "Sign In",
+    "EmailInput": "Email",
+    "FormBtn": "Resend verification link"
+  },
+  "FormsErrors": {
+    "UsernameMin": "Minimum number of characters 6",
+    "UsernameMax": "Maximum number of characters 30",
+    "UsernameRegex": "Username must contain 0-9, a-z, A-Z, _ -",
+    "EmailRegex": "The email must match the format example@example.com",
+    "PasswordMin": "Minimum number of characters 6",
+    "PasswordMax": "Maximum number of characters 20",
+    "PasswordRegex": "Password must contain 0-9, a-z, A-Z, and at least one of the following symbols: ",
+    "PasswordMatch": "Passwords must match",
+    "AgreeMessage": "You must agree to the terms",
+    "Recaptcha": "Required reCAPTCHA",
+    "FirstNameMin": "Minimum number of characters 1",
+    "FirstNameMax": "Maximum number of characters 50",
+    "FirstNameRegex": "First Name must contain A-Z; a-z; А-Я; а-я",
+    "LastNameMin": "Minimum number of characters 1",
+    "LastNameMax": "Maximum number of characters 50",
+    "LastNameRegex": "First Name must contain A-Z; a-z; А-Я; а-я",
+    "AboutMeMax": "Maximum number of characters 200",
+    "AboutMeRegex": "About Me must contain A-Z; a-z; А-Я; а-я + special characters",
+    "InvalidDateFormat": "dd.mm.xxxx - date format",
+    "AgeRestriction": "A user under 13 cannot create a profile. Privacy Policy"
+  },
+  "PublicPage": {
+    "Registered users:": "Registered users:",
+    "Show less": "Show less",
+    "Show more": "Show more",
+    "locale": "en"
+  },
+  "StatisticPage": {
+    "Statistics": "Statistics",
+    "Like": "Like",
+    "Comments": "Comments",
+    "Publication views": "Publication views",
+    "Week": "Week",
+    "Month": "Month",
+    "Registered users:": "Registered users:",
+    "Show less": "Show less",
+    "Show more": "Show more"
+  },
+  "AddPostModal": {
+    "MainModalTitle": "Add Photo",
+    "MainModalBtn1": "Select from Computer",
+    "MainModalBtn2": "Open Draft",
+    "CroppingPhotoTitle": "Cropping",
+    "CroppingPhotoSettingsText": "Original",
+    "FiltersPhotoTitle": "Filters",
+    "PublishPhotoTitle": "Publication",
+    "PublishPhotoLabelTextarea": "Add publication descriptions",
+    "PublishPhotoLabelLocation": "Add location",
+    "AddPhotoErrorTitle": "Error",
+    "AddPhotoErrorText1": "The photo must be less than 2 Mb",
+    "AddPhotoErrorText2": "The photo must be have JPEG or PNG format",
+    "AddPhotoErrorText3": "Number of photos allowed",
+    "AddPhotoErrorBtn": "Ok"
+  },
+  "modalClosePost": {
+    "title": "Сlose",
+    "body": "Do you really want to close the creation of a publication?If you close everything will be deleted",
+    "btnDiscard": "Discard",
+    "btnSavedraft": "Save draft"
+  },
+  "FeedPage": {
+    "View All Comments": "View All Comments",
+    "Publish": "Publish",
+    "locale": "en",
+    "Add a Comment": "Add a Comment..."
+  },
+  "ProfileSettingsPage": {
+    "Tab1": "General information",
+    "Tab2": "Devices",
+    "Tab3": "Account Management",
+    "Tab4": "My payments",
+    "UsernameInput": "Username",
+    "FirstNameInput": "First Name",
+    "LastNameInput": "Last Name",
+    "DateOfBirthInput": "Date of birth",
+    "CountrySelect": "Select your country",
+    "CitySelect": "Select your city",
+    "AboutMeInput": "About Me",
+    "UserInformationFormBtn": "Save Changes",
+    "ErrorUsername": "User with this user name already exist",
+    "ErrorDateOfBirth": "The user`s age cannot be more than 100 or less than 13 years old"
+  },
+  "SelectCountryCity": {
+    "Select your city": "Select your city",
+    "Select your country": "Select your country"
+  },
+  "AvaDeleteModal": {
+    "title": "Delete Photo",
+    "body": "Are you sure you want to delete the photo?",
+    "btnYes": "btnDelete",
+    "btnNo": "btnDiscard"
+  },
+  "UserProfile": {
+    "Profile Settings": "Profile Settings",
+    "Following": "Following",
+    "Followers": "Followers",
+    "Publications": "Publications"
+  },
+  "AccountManagements": {
+    "CurrentSub": "Current Subscription:",
+    "ExpireAt": "Expire At",
+    "NextPayment": "Next Payment",
+    "AutoRen": "Auto-Renewal",
+    "AccountType": "Account Type:",
+    "Personal": "Personal",
+    "Business": "Business",
+    "YourSubCosts": "Your Subscription Costs:",
+    "Or": "or",
+    "Ok":  "OK",
+    "PaymentSuccess": " Payment was successful!",
+    "ErrorPayment": "Error Transaction failed. Please, write to support Back to payment",
+    "TittleSuccess": "Success",
+    "TitleError": "Error",
+    "BackToPayment": "Back to payment",
+    "CreatePayment": "Create payment",
+    "PaymentInfo": " Auto-renewal will be enabled with this payment. You can disable it anytime in your profile settings",
+    "IAgree": "I Agree"
+  }
+}
+

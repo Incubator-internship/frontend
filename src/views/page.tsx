@@ -1,16 +1,18 @@
-'use client'
+import React from 'react'
 
-import React, { Suspense } from 'react'
+import { checkAuth } from '@/shared/utils/checkAuth'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
-import Link from 'next/link'
+import PublicPage from './publicPage/ui/PublicPage'
 
-export default function Home() {
-  return (
-    <div>
-      <Link href={'/signup'}>Signup</Link>
-      <Link href={'/signin'}>Signin</Link>
-      <Link href={'/profile'}>Profile</Link>
-      <Link href={'/forgotpassword'}>ForgotPass</Link>
-    </div>
-  )
+export default async function Home() {
+  const { isAuth, userId } = await checkAuth()
+  const locale = cookies().get('NEXT_LOCALE')?.value || 'en'
+
+  if (isAuth) {
+    redirect(`/${locale}/profile`)
+  }
+
+  return <PublicPage />
 }

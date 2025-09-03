@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 60px);
+}
+
+.main {
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
