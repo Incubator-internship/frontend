@@ -8,8 +8,9 @@ const NEUTRAL_PAGES = [
   '/authentication',
   '/publicPage',
   '/publicPageModal',
+  '/profile'
 ]
-const PROTECTED_PATHS = ['/profile', '/statistics', '/profile-settings', '/feed']
+const PROTECTED_PATHS = ['/statistics', '/profile-settings', '/feed']
 const SUPPORTED_LOCALES = ['en', 'ru']
 
 export function middleware(req: NextRequest) {
